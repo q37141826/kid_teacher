@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_line"
+    android:orientation="vertical"
+    tools:context="cn.dajiahui.kidteacher.ui.homework.CheckHomeworkActivity">
+
+    <include layout="@layout/layout_tool_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/textpadding"
+            android:gravity="center"
+            android:text="单元"
+            android:textSize="@dimen/text18"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/textpadding"
+            android:gravity="center"
+            android:text="截止时间"
+            android:textSize="@dimen/text15"/>
+
+        <TextView
+            android:id="@+id/tv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/textpadding"
+            android:gravity="center"
+            android:text="查看作业情况"
+            android:textSize="@dimen/text13"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_execution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/line"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="@dimen/textpadding"
+            android:gravity="center"
+            android:text="完成情况（1/3）"
+            android:textSize="@dimen/text18"/>
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@color/black"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_accuracy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/line"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/textpadding"
+            android:gravity="center"
+            android:text="正确率30%"
+            android:textSize="@dimen/text18"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:gravity="center"
+            android:text="已完成（）"
+            android:textSize="@dimen/text17"/>
+
+        <TextView
+            android:id="@+id/tv_going"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="进行中（）"
+            android:textSize="@dimen/text17"/>
+
+        <TextView
+            android:id="@+id/tv_nocompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="未完成（）"
+            android:textSize="@dimen/text17"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginBottom="@dimen/textpadding"
+        android:layout_marginLeft="@dimen/textpadding"
+        android:layout_marginRight="@dimen/textpadding"
+        android:layout_marginTop="@dimen/textpadding"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/textpadding">
+
+        <include layout="@layout/child_listview"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:text="检查作业"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

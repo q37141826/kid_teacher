@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/contact_item_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/textline"
+        android:background="@color/blue_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/contact_item_second_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/textmarginleft"
+            android:paddingBottom="@dimen/textpadding"
+            android:paddingTop="@dimen/textpadding"
+            android:text="@string/contact_default_group"
+            android:textColor="@color/color5A"
+            android:textSize="@dimen/text18" />
+
+        <TextView
+            android:id="@+id/contact_item_second_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/textmarginleft"
+            android:drawablePadding="@dimen/textpadding"
+            android:drawableRight="@drawable/ico_to"
+            android:textSize="@dimen/text16"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+</LinearLayout>

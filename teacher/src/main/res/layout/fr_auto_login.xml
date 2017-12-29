@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="58dp"
+        android:src="@drawable/ico_login_im"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/btn_style"
+        android:layout_above="@+id/btn_cancle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:text="@string/mi_login_ok"/>
+
+    <Button
+        android:id="@+id/btn_cancle"
+        style="@style/btn_style"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_gray"
+        android:visibility="gone"
+        android:text="@string/cancle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text18"
+        android:textColor="@color/gray"
+
+        android:id="@+id/tv_msg"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="35dp"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignStart="@+id/imageView2"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignEnd="@+id/imageView2"/>
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_umeng">572b0bca67e58e9c1f001756</string>
+    <string name="api_jpush">4e3c705ca0f437f1a69b0611</string>
+    <string name="api_wx">wxec5fa38c5d5e99b9</string>
+    <string name="api_huanxin">mme#kid</string>
+</resources>

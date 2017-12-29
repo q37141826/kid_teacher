@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whilte_gray"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_Class_ico"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="@color/color5A"
+            android:textSize="@dimen/text18" />
+    </LinearLayout>
+
+    <com.fxtx.framework.widgets.BasicGridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:cacheColorHint="@color/transparent"
+        android:fadingEdge="none"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="3"
+        android:padding="5dp"
+        android:scrollbars="none"
+        android:verticalSpacing="10dp" />
+</LinearLayout>

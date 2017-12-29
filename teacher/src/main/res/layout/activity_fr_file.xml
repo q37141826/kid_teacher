@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zscs="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_tool_text" />
+
+    <com.fxtx.framework.widgets.scrolltitle.ScrollTitleBar
+        android:id="@+id/scrollTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@id/toolbar"
+        android:visibility="visible"
+        zscs:itemCounts="3" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/scrollTitleBar"
+        android:background="@color/gray_line" />
+
+    <com.fxtx.framework.widgets.ViewPagerFixed
+        android:id="@+id/content_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/re_bottom"
+        android:layout_below="@+id/scrollTitleBar"
+        android:layout_marginTop="1dp"/>
+
+    <View
+        android:layout_below="@+id/content_pager"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_line" />
+
+    <RelativeLayout
+        android:layout_marginTop="1dp"
+        android:id="@+id/re_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:gravity="center"
+            android:text="已选0B"/>
+
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/photo_select_btn_selector"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="确定(0)"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+</RelativeLayout>

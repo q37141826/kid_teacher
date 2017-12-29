@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/sex"
+            android:textColor="@color/color5A"
+            android:textSize="@dimen/text18"/>
+
+        <RadioGroup
+            android:id="@+id/radio_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/sex_boy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:button="@null"
+                android:checked="true"
+                android:drawableLeft="@drawable/ico_im_ok"
+                android:drawablePadding="8dp"
+                android:padding="5dp"
+                android:text="男"
+                android:textColor="@color/color5A"/>
+
+            <RadioButton
+                android:id="@+id/sex_girl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableLeft="@drawable/ico_sex_unchecked"
+                android:drawablePadding="8dp"
+                android:padding="5dp"
+                android:text="女"
+                android:textColor="@color/color5A"/>
+        </RadioGroup>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/tv_sex"
+        android:layout_marginTop="5dp"
+        android:background="@color/app_bg_a"/>
+</LinearLayout>

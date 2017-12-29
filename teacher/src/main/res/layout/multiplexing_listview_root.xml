@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/multiplexing_listview"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="@dimen/textpadding"
+          android:layout_marginRight="@dimen/textpadding"
+          android:layout_marginTop="@dimen/textpadding"
+          android:dividerHeight="0px"
+          android:footerDividersEnabled="true"
+          android:headerDividersEnabled="true"
+          android:overScrollMode="never"
+          android:padding="@dimen/textpadding">
+
+
+</ListView>
