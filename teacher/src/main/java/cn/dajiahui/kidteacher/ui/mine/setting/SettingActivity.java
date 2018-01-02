@@ -3,6 +3,7 @@ package cn.dajiahui.kidteacher.ui.mine.setting;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,15 +41,15 @@ public class SettingActivity extends FxActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_setting);
-       /* TextView title = getView(R.id.tool_title);
-        title.setText(R.string.mine_setting);*/
-
         TextView tv_security = getView(R.id.tvSecurity);
         tv_security.setOnClickListener(onClick);
-        TextView tv_about = getView(R.id.tvAbout);
-        tv_about.setOnClickListener(onClick);
+        TextView tvFixpass = getView(R.id.tvFixpass);
+        RelativeLayout tvClean = getView(R.id.tvclean);
+
         Button bt_exit = getView(R.id.btn_Exit);
         bt_exit.setOnClickListener(onClick);
+        tvFixpass.setOnClickListener(onClick);
+        tvClean.setOnClickListener(onClick);
         getView(R.id.toolbar);
     }
 
@@ -58,10 +59,14 @@ public class SettingActivity extends FxActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tvSecurity:
-                    Toast.makeText(SettingActivity.this, "账户安全", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, "修改用户手机号", Toast.LENGTH_SHORT).show();
+                    DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPhoneActivity.class);
                     break;
-                case R.id.tvAbout:
-                    Toast.makeText(SettingActivity.this, "关于摩尔 ", Toast.LENGTH_SHORT).show();
+                case R.id.tvFixpass:
+                    DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPassActivity.class);
+                    break;
+                case R.id.tvclean:
+                    Toast.makeText(context, "清除缓存", Toast.LENGTH_SHORT).show();
 
                     break;
                 case R.id.btn_Exit:

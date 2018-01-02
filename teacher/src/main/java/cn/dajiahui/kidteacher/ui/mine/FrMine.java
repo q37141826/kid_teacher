@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
+import cn.dajiahui.kidteacher.ui.mine.about.AboutActivity;
 import cn.dajiahui.kidteacher.ui.mine.myclass.MyClassActivity;
 import cn.dajiahui.kidteacher.ui.mine.notice.NoticeActivity;
 import cn.dajiahui.kidteacher.ui.mine.personalinformation.UserDetailsActivity;
@@ -85,8 +86,11 @@ public class FrMine extends FxFragment {
                 case R.id.tvNotice:
                     Toast.makeText(activity, "通知", Toast.LENGTH_SHORT).show();
 
-                    DjhJumpUtil.getInstance().startBaseActivity(getContext(),  NoticeActivity.class);
+                    DjhJumpUtil.getInstance().startBaseActivity(getContext(), NoticeActivity.class);
 
+                    break;
+                case R.id.tvAbout:
+                    DjhJumpUtil.getInstance().startBaseActivity(getContext(), AboutActivity.class);
                     break;
                 case R.id.tvSetting:
                     DjhJumpUtil.getInstance().startBaseActivity(getContext(), SettingActivity.class);

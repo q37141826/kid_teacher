@@ -13,6 +13,7 @@ import com.fxtx.framework.util.ActivityUtil;
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.AppSet;
 import cn.dajiahui.kidteacher.http.LoginHttp;
+import cn.dajiahui.kidteacher.ui.MainActivity;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 import cn.dajiahui.kidteacher.util.SpUtil;
 
@@ -42,12 +43,20 @@ public class LoginActivity extends FxActivity {
         getView(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                httpData();
+
+
+//                httpData();
+                //测试
+                DjhJumpUtil.getInstance().startBaseActivity(context, MainActivity.class);
+                SpUtil spUtil = new SpUtil(context);
+                spUtil.setLogin(euser.toString(), edPwd.toString());
+
+
             }
         });
         SpUtil util = new SpUtil(this);
-        euser.setText(util.getKeyLogU());
-        euser.setSelection(euser.getText().length()); // 设置光标在文本末尾
+//        euser.setText(util.getKeyLogU());
+//        euser.setSelection(euser.getText().length()); // 设置光标在文本末尾
     }
 
     @Override

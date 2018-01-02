@@ -29,6 +29,9 @@
     <string name="forget_sure">确认新的登录密码</string>
     <string name="account_login">账户登陆</string>
     <string name="tv_user_birth">年龄</string>
+    <string name="phone_num">手机号</string>
+    <string name="new_user">新帐号</string>
+    <string name="inputnewphonw">请输入新手机号</string>
     <!--登录 end -->
 
 
@@ -39,7 +42,7 @@
     <!--首页文字end-->
 
     <!--作业start-->
-    <string name="send_task">发布作业</string>
+    <string name="send_homework">发布作业</string>
     <string name="task_class">班级</string>
     <string name="task_state">状态</string>
     <string name="task_textbook_assignment">发布课本作业</string>
@@ -74,8 +77,10 @@
     <string name="mine_personal_information">个人信息</string>
     <string name="mine_notice">魔耳通知</string>
     <string name="mine_setting">设置</string>
-    <string name="mine_text_security">账户安全</string>
-    <string name="mine_text_about">关于我们</string>
+    <string name="mine_text_userphone">修改账户手机号</string>
+    <string name="mine_text_about">关于魔耳</string>
+    <string name="mine_text_fixpass">修改密码</string>
+    <string name="mine_text_clean">清除缓存</string>
     <string name="mine_class_info">班级信息</string>
     <string name="mine_class_space">班级空间</string>
     <string name="mine_send_dynamic">发布动态</string>
@@ -113,14 +118,14 @@
 
 
     <!--我的end-->
+
     <string name="mine_teaching_information">教学信息查看</string>
     <string name="ed_user_email">请输入邮箱地址</string>
     <string name="tv_user_name">姓名</string>
     <string name="ed_user_name">请输入姓名</string>
-    <string name="old_phone">原手机号</string>
+
     <string name="tv_user_pwd">密码</string>
-    <string name="new_phone">新手机号</string>
-    <string name="inputnewphonw">请输入新手机号</string>
+
     <string name="hint_inputcode">验证码已发送，请注意查收</string>
     <string name="code">验证码</string>
     <string name="getcode">获取验证码</string>
@@ -130,7 +135,7 @@
     <string name="inputoldpwd">请输入原密码</string>
     <string name="new_pwd">新密码</string>
     <string name="old_user">原帐号</string>
-    <string name="new_user">新帐号</string>
+
     <string name="text_pingjia">评论(%s)</string>
     <string name="not_comment">暂无评论</string>
     <string name="inputnewuser">请输入新帐号</string>
@@ -189,5 +194,6 @@
     <string name="e_class_null">暂无班级信息</string>
     <string name="e_photo_null">暂无照片</string>
     <string name="e_log_null">暂无日志数据</string>
+    <string name="e_homework">暂无作业</string>
 
 </resources>

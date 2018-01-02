@@ -20,7 +20,7 @@ import cn.dajiahui.kidteacher.controller.UserController;
 import cn.dajiahui.kidteacher.http.RequestUtill;
 
 /**
- * Created by wdj on 2016/4/12.
+ * 修改性别
  */
 public class FrSetSex extends FxFragment {
     private RadioGroup radio_sex;

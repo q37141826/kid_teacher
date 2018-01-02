@@ -21,7 +21,6 @@ import cn.dajiahui.kidteacher.ui.chat.constant.PreferenceManager;
 import cn.dajiahui.kidteacher.ui.login.bean.BeNum;
 import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
-import cn.dajiahui.kidteacher.util.Logger;
 import cn.dajiahui.kidteacher.util.SpUtil;
 
 /**
@@ -69,7 +68,6 @@ public class LoginHttp {
 
                     if (UserController.getInstance().getAccess().isMsn) {
                         if (ImHelper.getInstance().isLoggedIn()) {
-                            Logger.d("majin", "注册环信：");
                             setStartActivity();
                             onLogin.successful();
                         } else {

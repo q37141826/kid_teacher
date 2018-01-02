@@ -42,10 +42,10 @@ import cn.dajiahui.kidteacher.ui.chat.constant.ImHelper;
 import cn.dajiahui.kidteacher.ui.chat.constant.PreferenceManager;
 import cn.dajiahui.kidteacher.ui.chat.db.DemoDBManager;
 import cn.dajiahui.kidteacher.ui.chat.db.UserDao;
+import cn.dajiahui.kidteacher.ui.homework.FrHomework;
 import cn.dajiahui.kidteacher.ui.mine.FrMine;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeAccess;
 import cn.dajiahui.kidteacher.ui.mine.personalinformation.UserDetailsActivity;
-import cn.dajiahui.kidteacher.ui.homework.FrHomework;
 
 public class MainActivity extends FxTabActivity {
     private RadioGroup radioGroup;
@@ -110,19 +110,11 @@ public class MainActivity extends FxTabActivity {
         rediobtnId = R.id.rediobtn_task;
         addRadioView(tab, radioGroup);
         BeAccess access = UserController.getInstance().getAccess();
-//        if (access.isNotice) {
-//            BeTab tab1 = new BeTab(R.id.rediobtn_notice, "", getString(R.string.tab_notice), R.drawable.radio_notice, false);
-//            noticeRb = addRadioView(tab1, radioGroup);
+
+//        if (access.isMsn) {
+        BeTab tab3 = new BeTab(R.id.rediobtn_chat, "", getString(R.string.tab_chat), R.drawable.radio_chat, false);
+        chatRb = addRadioView(tab3, radioGroup);
 //        }
-//        BeTab tab2 = new BeTab(R.id.rediobtn_function, "", getString(R.string.tab_function), R.drawable.radio_function, false);
-//        functionRb = addRadioView(tab2, radioGroup);
-//
-
-
-        if (access.isMsn) {
-            BeTab tab3 = new BeTab(R.id.rediobtn_chat, "", getString(R.string.tab_chat), R.drawable.radio_chat, false);
-            chatRb = addRadioView(tab3, radioGroup);
-        }
         BeTab tab4 = new BeTab(R.id.rediobtn_mine, "", getString(R.string.tab_mine), R.drawable.radio_mine, false);
         addRadioView(tab4, radioGroup);
         radioGroup.setOnCheckedChangeListener(this);
@@ -164,14 +156,11 @@ public class MainActivity extends FxTabActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (RESULT_OK == resultCode) {
-            if (requestCode == 2001) {
-//                if (frNotice != null)
-//                    frNotice.indexHttp();
-            } else if (requestCode == 3001) {
+              if (requestCode == 3001) {
                 ArrayList<String> strings = data.getStringArrayListExtra(Constant.bundle_obj);
                 if (strings != null && strings.size() != 0) {
                     if (frMine != null) {
-                        httpUserIcon(new File(strings.get(0)));
+//                        httpUserIcon(new File(strings.get(0)));
                     }
                 }
             }
@@ -253,14 +242,6 @@ public class MainActivity extends FxTabActivity {
         public void onMessageRecalled(List<EMMessage> list) {
 
         }
-
-//        @Override
-//        public void onMessageReadAckReceived(List<EMMessage> messages) {
-//        }
-//
-//        @Override
-//        public void onMessageDeliveryAckReceived(List<EMMessage> message) {
-//        }
 
         @Override
         public void onMessageChanged(EMMessage message, Object change) {

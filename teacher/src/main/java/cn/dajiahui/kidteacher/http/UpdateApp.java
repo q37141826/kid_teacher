@@ -42,7 +42,8 @@ public class UpdateApp extends UpdateManager {
                         } else {
                             isMustUpdate = false;
                         }
-                        doUpdate(update.getDownloadUrl());
+//                        doUpdate(update.getDownloadUrl());
+                        onUpdate.onUpdateCancel(0);
                     } else {
                         onUpdate.onUpdateCancel(0);
                     }

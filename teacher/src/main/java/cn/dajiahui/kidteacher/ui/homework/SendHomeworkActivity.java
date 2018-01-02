@@ -21,9 +21,9 @@ import cn.dajiahui.kidteacher.ui.homework.bean.ChooseUtils;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 
 /**
- * 布置作业
+ * 发布作业
  */
-public class ChooseContentActivity extends FxActivity{
+public class SendHomeworkActivity extends FxActivity {
 
 
     private ImageView mImgSupplementary;
@@ -33,7 +33,7 @@ public class ChooseContentActivity extends FxActivity{
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_assignment);
+        setContentView(R.layout.activity_sendhomework);
         mListview = getView(R.id.listview);
         mImgSupplementary = getView(R.id.img_supplementary);
         mTvSupplementary = getView(R.id.tv_supplementary);
@@ -62,7 +62,7 @@ public class ChooseContentActivity extends FxActivity{
                 //把点击的position传递到adapter里面去
                 apChooseUtils.changeState(position);
                 utlisname = list.get(position).getUtlisname();
-                Toast.makeText(ChooseContentActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SendHomeworkActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -75,19 +75,18 @@ public class ChooseContentActivity extends FxActivity{
     private View.OnClickListener onClick = new View.OnClickListener() {
 
 
-
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tool_right:
 //                    Toast.makeText(getContext(), "教辅设置", Toast.LENGTH_SHORT).show();
                     Bundle bundle = new Bundle();
-                    DjhJumpUtil.getInstance().startBaseActivityForResult(ChooseContentActivity.this, ChooseSupplementaryActivity.class, bundle, 0);
+                    DjhJumpUtil.getInstance().startBaseActivityForResult(SendHomeworkActivity.this, ChooseSupplementaryActivity.class, bundle, 0);
 
 
                     break;
                 case R.id.tool_left:
-                    Toast.makeText(ChooseContentActivity.this, "退出", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendHomeworkActivity.this, "退出", Toast.LENGTH_SHORT).show();
                     finishActivity();
 
                     break;
@@ -95,10 +94,10 @@ public class ChooseContentActivity extends FxActivity{
 
                 case R.id.next:
                     if (!utlisname.equals("")) {
-                        DjhJumpUtil.getInstance().startBaseActivity(ChooseContentActivity.this, ChooseClassActivity.class);
+                        DjhJumpUtil.getInstance().startBaseActivity(SendHomeworkActivity.this, ChooseClassActivity.class);
                         finishActivity();
                     } else {
-                        Toast.makeText(ChooseContentActivity.this, "请选择内容", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SendHomeworkActivity.this, "请选择内容", Toast.LENGTH_SHORT).show();
                     }
 
                     break;
@@ -113,7 +112,7 @@ public class ChooseContentActivity extends FxActivity{
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 0 && requestCode == 0) {
-            Toast.makeText(ChooseContentActivity.this, "教辅设置完成", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SendHomeworkActivity.this, "教辅设置完成", Toast.LENGTH_SHORT).show();
             if (data != null) {
                 ChooseSupplementary supplementaryname = (ChooseSupplementary) data.getSerializableExtra("supplementaryname");
                 mTvSupplementary.setText(supplementaryname.getBookname());

@@ -61,6 +61,7 @@ public class NoticeActivity extends FxActivity {
         if (list.size() == 0) {
             mTvnull.setText(R.string.e_class_null);
             mTvnull.setVisibility(View.VISIBLE);
+            mListview.setEmptyView(mTvnull);
         }
 
         Toast.makeText(context, "清空通知", Toast.LENGTH_SHORT).show();

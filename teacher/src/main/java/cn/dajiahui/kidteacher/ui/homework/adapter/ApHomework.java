@@ -18,11 +18,11 @@ import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
 /**
  * 作业适配器
  */
-public class ApTask extends SectionedBaseAdapter {
+public class ApHomework extends SectionedBaseAdapter {
     private Context context;
     private List<Homework> data;
 
-    public ApTask(Context context, List<Homework> data) {
+    public ApHomework(Context context, List<Homework> data) {
         this.context = context;
         this.data = data;
     }
@@ -77,14 +77,20 @@ public class ApTask extends SectionedBaseAdapter {
         TextView tv_content = holder.getView(R.id.task_second_content);
         TextView tv_status = holder.getView(R.id.test_second_status);
         TextView tv_complete = holder.getView(R.id.task_second_complete);
-
+        TextView task_second_completeTotal = holder.getView(R.id.task_second_completeTotal);
 
         tv_classname.setText(data.get(section).getTask_second_class_name());
         tv_time.setText(data.get(section).getTask_second_time());
         tv_content.setText(data.get(section).getTask_second_content());
-        tv_status.setText(data.get(section).getTest_second_status());
         tv_complete.setText(data.get(section).getTask_second_complete());
 
+        tv_status.setText(data.get(section).getTest_second_status());
+        if ("待检查".equals(data.get(position).getTask_check())) {
+            tv_status.setTextColor(context.getResources().getColor(R.color.red));
+
+        } else {
+            tv_status.setTextColor(context.getResources().getColor(R.color.black));
+        }
 
         return holder.getConvertView();
     }

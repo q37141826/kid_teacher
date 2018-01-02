@@ -27,22 +27,34 @@
             android:id="@+id/tv_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:layout_weight="1"
+            android:drawablePadding="@dimen/textmarginleft"
+            android:drawableRight="@drawable/ico_grsy_down"
             android:gravity="center"
+            android:padding="@dimen/textmarginleft"
             android:text="@string/task_class"
-            android:textSize="@dimen/text20"/>
+            android:textColor="@color/color5A"
+            android:textSize="@dimen/text18"/>
 
         <TextView
             android:id="@+id/tv_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:layout_weight="1"
+            android:drawablePadding="@dimen/textmarginleft"
+            android:drawableRight="@drawable/ico_grsy_down"
             android:gravity="center"
+            android:padding="@dimen/textmarginleft"
             android:text="@string/task_state"
-            android:textSize="@dimen/text20"/>
+            android:textColor="@color/color5A"
+            android:textSize="@dimen/text18"/>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/line_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,26 +62,27 @@
         android:orientation="vertical">
 
         <!--<com.fxtx.framework.widgets.refresh.MaterialRefreshLayout-->
-            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/refresh"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--app:isLoadMore="false"-->
-            <!--app:overlay="false"-->
-            <!--app:wave_color="@color/app_bg_a"-->
-            <!--app:wave_show="false">-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/refresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--app:isLoadMore="false"-->
+        <!--app:overlay="false"-->
+        <!--app:wave_color="@color/app_bg_a"-->
+        <!--app:wave_show="false">-->
 
-            <com.fxtx.framework.widgets.listview.PinnedHeaderListView
-                android:id="@+id/listview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@color/transparent"
-                android:overScrollMode="never"/>
 
-            <TextView
-                style="@style/text_null"/>
+        <com.fxtx.framework.widgets.listview.PinnedHeaderListView
+            android:id="@+id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:divider="@color/transparent"
+            android:overScrollMode="never"/>
 
+        <TextView
+            style="@style/text_null"/>
         <!--</com.fxtx.framework.widgets.refresh.MaterialRefreshLayout>-->
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

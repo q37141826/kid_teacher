@@ -11,4 +11,7 @@
 
     <include layout="@layout/child_listview"/>
 
+    <TextView
+        style="@style/text_null"/>
+
 </LinearLayout>

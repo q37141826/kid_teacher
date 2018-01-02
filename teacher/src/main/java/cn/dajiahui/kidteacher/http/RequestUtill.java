@@ -147,8 +147,8 @@ public class RequestUtill {
         getHttpBuilder(context, "login/sendChangePwdCode.json").params(params).post(callback);
     }
 
-
-    public void getTask(Context context, ResultCallback callback) {
+    //获取作业列表
+    public void getHomework(Context context, ResultCallback callback) {
 
 
     }
@@ -414,6 +414,8 @@ public class RequestUtill {
         params.put("telnum", telnum);
         params.put("password", password);
         getHttpBuilder(context, "user/modifyTelnumSendCode.json").params(params).post(callback);
+
+
     }
 
     public void httpUserSendCode(Context context, ResultCallback callback, String access_token, String telnum) {

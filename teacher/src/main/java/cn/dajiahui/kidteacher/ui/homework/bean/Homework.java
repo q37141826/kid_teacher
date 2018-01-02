@@ -8,6 +8,30 @@ import cn.dajiahui.kidteacher.util.BeanObj;
 
 public class Homework extends BeanObj {
 
+    /*作业列表中是待检查和未检查 start*/
+
+    private String task_check;//是否检查
+    public Homework(String task_check) {
+        this.task_check = task_check;
+    }
+
+    public String getTask_check() {
+        return task_check;
+    }
+
+    public void setTask_check(String task_check) {
+        this.task_check = task_check;
+    }
+    /*作业列表中是待检查和未检查 end*/
+
+    private String test_first_name;
+
+    private String task_second_class_name;//班级名称
+    private String task_second_time;//截止时间
+    private String task_second_content;//内容
+    private String test_second_status;//状态
+    private String task_second_complete;//是否完成
+
     public Homework(String test_first_name, String task_second_class_name, String task_second_time, String task_second_content, String test_second_status, String task_second_complete) {
         this.test_first_name = test_first_name;
         this.task_second_class_name = task_second_class_name;
@@ -16,14 +40,6 @@ public class Homework extends BeanObj {
         this.test_second_status = test_second_status;
         this.task_second_complete = task_second_complete;
     }
-
-    private String test_first_name;
-
-    private String task_second_class_name;
-    private String task_second_time;
-    private String task_second_content;
-    private String test_second_status;
-    private String task_second_complete;
 
 
     public String getTest_first_name() {

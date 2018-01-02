@@ -31,7 +31,7 @@ public abstract class JpushReceiver extends BroadcastReceiver {
         }
         if (isBundle()) {
             String s = printBundle(bundle);
-            Logger.d("majin", "Jpush:" + s);
+            Logger.d("Jpush", "Jpush:" + s);
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class JpushReceiver extends BroadcastReceiver {
     private HeadJson getMessageId(Bundle bundle) {
         HeadJson json = new HeadJson(bundle.getString(JPushInterface.EXTRA_EXTRA));
         String string = bundle.getString(JPushInterface.EXTRA_EXTRA);
-        Logger.d("majin","json:"+string);
+
         return json;
     }
 
