@@ -9,13 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fxtx.framework.http.ErrorCode;
+import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.text.StringUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.dialog.FxDialog;
+import com.squareup.okhttp.Request;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.UserController;
+import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
 
 /*
@@ -146,7 +151,7 @@ public class SetPhoneActivity extends FxActivity {
 //            public void onResponse(String response) {
 //                dismissfxDialog();
 //                HeadJson json = new HeadJson(response);
-//                if (json.getFlag() == 1) {
+//                if (json.getstatus() == 0) {
 //                    setResult(Activity.RESULT_OK);
 //                    UserController.getInstance().getUser().setPhone(newPhone);
 //                    finishActivity();
@@ -171,28 +176,28 @@ public class SetPhoneActivity extends FxActivity {
         showfxDialog(R.string.getcode);
         time.start();
 
-//        RequestUtill.getInstance().httpSendCode(SetPhoneActivity.this, new ResultCallback() {
-//            @Override
-//            public void onError(Request request, Exception e) {
-//                dismissfxDialog();
-//                time.cancel();
-//                time.onFinish();
-//                ToastUtil.showToast(SetPhoneActivity.this, ErrorCode.error(e));
-//            }
-//
-//            @Override
-//            public void onResponse(String response) {
-//                dismissfxDialog();
-//                HeadJson json = new HeadJson(response);
-//                if (json.getFlag() == 1) {
-//                    ToastUtil.showToast(SetPhoneActivity.this, R.string.hint_inputcode);
-//                } else {
-//                    ToastUtil.showToast(SetPhoneActivity.this, json.getMsg());
-//                    time.cancel();
-//                    time.onFinish();
-//                }
-//            }
-//        }, UserController.getInstance().getUserId(), user.getUserName(), newPhone, pwd);
+        RequestUtill.getInstance().sendPhoneCode(SetPhoneActivity.this, new ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                dismissfxDialog();
+                time.cancel();
+                time.onFinish();
+                ToastUtil.showToast(SetPhoneActivity.this, ErrorCode.error(e));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                dismissfxDialog();
+                HeadJson json = new HeadJson(response);
+                if (json.getstatus() == 0) {
+                    ToastUtil.showToast(SetPhoneActivity.this, R.string.hint_inputcode);
+                } else {
+                    ToastUtil.showToast(SetPhoneActivity.this, json.getMsg());
+                    time.cancel();
+                    time.onFinish();
+                }
+            }
+        }, newPhone);
     }
 
     class TimeCount extends CountDownTimer {

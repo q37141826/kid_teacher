@@ -9,7 +9,7 @@ import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 import cn.dajiahui.kidteacher.util.SpUtil;
 
 /**
- * Created by z on 2016/3/16.
+ * 欢迎页
  */
 public class WelComnActivity extends FxWelcomeAvtivity {
 
@@ -40,7 +40,7 @@ public class WelComnActivity extends FxWelcomeAvtivity {
 
     @Override
     protected Integer[] initWelcome() {
-        return new Integer[]{R.drawable.wel1, R.drawable.wel2, R.drawable.wel3,R.drawable.wel4};
+        return new Integer[]{R.drawable.wel1, R.drawable.wel2, R.drawable.wel3, R.drawable.wel4};
     }
 
     @Override

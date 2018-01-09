@@ -92,7 +92,7 @@ public class AboutActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     List<BeHelp> temp = json.parsingListArray(new GsonType<List<BeHelp>>() {
                     });
                     if (temp != null && temp.size() > 0) {

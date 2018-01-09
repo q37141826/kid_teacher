@@ -103,7 +103,7 @@ public class FrSetSex extends FxFragment {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     UserController.getInstance().getUser().setSex(sex);
                     getActivity().setResult(Activity.RESULT_OK);
                     finishActivity();

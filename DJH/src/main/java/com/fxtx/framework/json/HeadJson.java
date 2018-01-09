@@ -10,14 +10,15 @@ import org.json.JSONObject;
  * @description : 头部信息解析
  */
 public class HeadJson {
-    private int flag = -1;// 返回状态
+    private int status = -1;// 返回状态
     private String msg;// 错误消息
     private int isLastPage;// 列表对象时使用
     private JSONObject object;
-    private final String strflag = "flag";
-    private final String strIsLast = "isLastPage";
+    private final String strstatus = "status";
     private final String strMsg = "msg";
-    private final String mObj = "info" ;
+    private final String mObj = "data" ;
+    private final String strIsLast = "isLastPage";
+
 
     public HeadJson(String object) {
         parsing(object);
@@ -36,12 +37,12 @@ public class HeadJson {
      *
      * @return
      */
-    public int getFlag() {
-        return flag;
+    public int getstatus() {
+        return status;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
+    public void setstatus(int status) {
+        this.status = status;
     }
 
     public String getMsg() {
@@ -68,8 +69,8 @@ public class HeadJson {
     private void parsing(String json) {
         try {
             object = new JSONObject(json);
-            if (!object.isNull(strflag)) {
-                flag = object.getInt(strflag);
+            if (!object.isNull(strstatus)) {
+                status = object.getInt(strstatus);
             } else {
                 msg = "数据格式解析错误";
             }
@@ -91,7 +92,7 @@ public class HeadJson {
      */
     public <T> T parsingListArray(String key, GsonType type) {
         String s = "";
-        if (flag != -1 && !object.isNull(key)) {
+        if (status != -1 && !object.isNull(key)) {
             s = object.optJSONArray(key).toString();
             GsonUtil gson = new GsonUtil();
             return gson.getJsonList(s, type);
@@ -108,7 +109,7 @@ public class HeadJson {
      * @return
      */
     public <T> T parsingObject(String objStr, Class<T> classs) {
-        if (flag != -1 && !object.isNull(objStr)) {
+        if (status != -1 && !object.isNull(objStr)) {
             GsonUtil gson = new GsonUtil();
             return gson.getJsonObject(object.optJSONObject(objStr).toString(), classs);
         }
@@ -121,7 +122,7 @@ public class HeadJson {
      * @return
      */
     public <T> T parsingObject( Class<T> classs) {
-        if (flag != -1 && !object.isNull(mObj)) {
+        if (status != -1 && !object.isNull(mObj)) {
             GsonUtil gson = new GsonUtil();
             return gson.getJsonObject(object.optJSONObject(mObj).toString(), classs);
         }

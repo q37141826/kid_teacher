@@ -140,7 +140,7 @@ public class SettingActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     try {
                         JSONObject obj = new JSONObject(response);
                         JSONObject obj2 = obj.getJSONObject("info");

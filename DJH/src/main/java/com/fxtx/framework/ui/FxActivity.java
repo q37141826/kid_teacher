@@ -33,20 +33,21 @@ public abstract class FxActivity extends AppCompatActivity {
     private SparseArray<View> mViews = new SparseArray<View>();
     public int mPageNum = 1; //分页
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityUtil.getInstance().addActivity(this);
         context = this;
         initView();
+        StatusBarCompat.compatMain(this);
         toolbar = getView(R.id.toolbar);
-//        setStatusBar(toolbar);
+        setStatusBar(toolbar);
         titleView = getView(R.id.tool_title);
         if (toolbar != null) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
             toolbar.setOnMenuItemClickListener(onMenuItemClick);
         }
-        StatusBarCompat.compatMain(this);
     }
 
     protected void onCreate(Bundle savedInstanceState, int resId) {
@@ -146,8 +147,9 @@ public abstract class FxActivity extends AppCompatActivity {
         if (this.isFinishing()) {
             return;
         }
-        if (progressDialog != null && progressDialog.isShowing())
+        if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
+        }
     }
 
     public void dismissfxDialog() {
@@ -180,6 +182,7 @@ public abstract class FxActivity extends AppCompatActivity {
             });
         }
     }
+
 
     public void onBackText() {
         if (toolbar != null) {

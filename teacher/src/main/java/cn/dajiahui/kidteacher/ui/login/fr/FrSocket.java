@@ -166,7 +166,7 @@ public class FrSocket extends FxFragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("uuid", uuid);
-            jsonObject.put("access_token", UserController.getInstance().getUser().getAccess_token());
+            jsonObject.put("token", UserController.getInstance().getUser().gettoken());
             jsonObject.put("school_id", UserController.getInstance().getUser().getSchoolId());
         } catch (JSONException e) {
             e.printStackTrace();

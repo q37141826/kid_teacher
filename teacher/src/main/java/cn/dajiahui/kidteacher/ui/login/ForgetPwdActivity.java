@@ -1,5 +1,6 @@
 package cn.dajiahui.kidteacher.ui.login;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -49,20 +50,20 @@ public class ForgetPwdActivity extends FxActivity {
         });
 
         edLoginPhone.addTextChangedListener(new TeacherTextWatcher() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (isBtnCode) {
                     if (edLoginPhone.getText().toString().trim().length() == 11) {
-                        btnCode.setBackgroundResource(R.drawable.select_btn_bg);
+                        btnCode.setBackgroundResource(R.color.white);
                         btnCode.setClickable(true);
                     } else {
-                        btnCode.setBackgroundResource(R.color.whilte_gray);
+                        btnCode.setBackgroundResource(R.color.white);
                         btnCode.setClickable(false);
                     }
                 }
             }
         });
-
 
 
     }
@@ -80,11 +81,10 @@ public class ForgetPwdActivity extends FxActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tv_code:
-                    String phoneNum = edPhoneCode.getText().toString().trim();
-                    String userName = edLoginPhone.getText().toString().trim();
-                    if (!StringUtil.isEmpty(phoneNum) && !StringUtil.isEmpty(userName)) {
+                    String phoneNum = edLoginPhone.getText().toString().trim();
+                    if (!StringUtil.isEmpty(phoneNum)) {
                         showfxDialog("获取验证码");
-                        httpPhoneCode(phoneNum, userName);
+                        httpPhoneCode(phoneNum);
                     } else {
                         ToastUtil.showToast(context, "数据错误");
                     }
@@ -125,7 +125,9 @@ public class ForgetPwdActivity extends FxActivity {
         httpChange(phone, code, newPwd, pwdAgsin);
     }
 
-    private void httpPhoneCode(String phone, String user) {
+    /*获取手机验证码*/
+    private void httpPhoneCode(String phone) {
+
         ResultCallback callback = new ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -139,7 +141,7 @@ public class ForgetPwdActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     time.start();
                     ToastUtil.showToast(context, "验证码获取成功");
                 } else {
@@ -149,7 +151,7 @@ public class ForgetPwdActivity extends FxActivity {
                 }
             }
         };
-        RequestUtill.getInstance().sendPhoneCode(context, callback, phone, user);
+        RequestUtill.getInstance().sendPhoneCode(context, callback, phone);
     }
 
     private void httpChange(String phone, String code, String toChangePwd, String pwdAgain) {
@@ -164,7 +166,7 @@ public class ForgetPwdActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     ToastUtil.showToast(context, "密码修改成功");
                     ActivityUtil.getInstance().finishActivity(ForgetPwdActivity.class);
                 } else {
@@ -180,16 +182,17 @@ public class ForgetPwdActivity extends FxActivity {
             super(millisInFuture, countDownInterval);// 参数依次为总时长,和计时的时间间隔
         }
 
+        @SuppressLint("ResourceAsColor")
         @Override
         public void onFinish() {
             btnCode.setText("再次获取");
             isBtnCode = true;
             if (edLoginPhone.getText().toString().trim().length() == 11) {
                 btnCode.setClickable(true);
-                btnCode.setBackgroundResource(R.drawable.select_btn_bg);
+                btnCode.setBackgroundResource(R.color.white);
             } else {
                 btnCode.setClickable(false);
-                btnCode.setBackgroundResource(R.color.whilte_gray);
+                btnCode.setBackgroundResource(R.color.white);
             }
         }
 

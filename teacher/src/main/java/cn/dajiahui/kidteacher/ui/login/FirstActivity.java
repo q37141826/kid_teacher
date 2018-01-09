@@ -11,7 +11,7 @@ import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 import cn.dajiahui.kidteacher.util.SpUtil;
 
 /**
- * Created by z on 2016/3/16.
+ * 首次登录
  */
 public class FirstActivity extends FxFirstActivity {
     @Override

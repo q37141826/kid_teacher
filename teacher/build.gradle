@@ -41,12 +41,13 @@ android {
     productFlavors {
         dev {
             dimension 'app'
-
+            buildConfigField "String", "httpUrl", '"http://api.k6.dajiahui.cn/"'
+            buildConfigField "String", "httpFileUrl", '"http://api.k6.dajiahui.cn/"'
         }
         online {
             dimension 'app'
-            buildConfigField "String", "httpUrl", '"http://hxx.dajiahui.cn/api/"'
-            buildConfigField "String", "httpFileUrl", '"http://hxx.dajiahui.cn/"'
+            buildConfigField "String", "httpUrl", '"http://api.k6.dajiahui.cn/"'
+            buildConfigField "String", "httpFileUrl", '"http://api.k6.dajiahui.cn/"'
         }
 
     }

@@ -54,7 +54,7 @@ public class AttachmentFileUpdate {
             @Override
             public void onResponse(String response) {
 //                HeadJson json = new HeadJson(response);
-//                if (json.getFlag() == 1) {
+//                if (json.getstatus() == 0) {
 //                    //成功
 //                    successful++;
 //                    BeTeFile beTeFile = json.parsingObject(BeTeFile.class);

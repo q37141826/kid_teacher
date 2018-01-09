@@ -98,7 +98,7 @@ public class ContactListActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson headJson = new HeadJson(response);
-                if (headJson.getFlag() == 1) {
+                if (headJson.getstatus() == 0) {
                     datas.clear();
                     BeContact beContact1 = headJson.parsingObject("info1", BeContact.class);
                     BeContact beContact2 = headJson.parsingObject("info2", BeContact.class);

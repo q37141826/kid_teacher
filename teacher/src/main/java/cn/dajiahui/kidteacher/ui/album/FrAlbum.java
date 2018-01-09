@@ -95,7 +95,7 @@ public class FrAlbum extends FxFragment {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     if (pagNum == 1) {
                         ablums.clear();
                     }

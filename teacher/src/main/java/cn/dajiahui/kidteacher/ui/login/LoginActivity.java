@@ -2,7 +2,6 @@ package cn.dajiahui.kidteacher.ui.login;
 
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.text.MaxLenghtWatcher;
@@ -13,28 +12,26 @@ import com.fxtx.framework.util.ActivityUtil;
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.AppSet;
 import cn.dajiahui.kidteacher.http.LoginHttp;
-import cn.dajiahui.kidteacher.ui.MainActivity;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 import cn.dajiahui.kidteacher.util.SpUtil;
+import cn.dajiahui.kidteacher.util.TeacherUtil;
 
 /**
- * Created by z on 2016/3/17.
+ * 登录
  */
 public class LoginActivity extends FxActivity {
     private EditText euser, edPwd;
-    private TextView mTitle;
+
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_login);
-        mTitle = getView(R.id.tool_title);
-        mTitle.setText(R.string.account_login);
         euser = getView(R.id.edUser);
         euser.addTextChangedListener(new MaxLenghtWatcher(AppSet.login_maxlenght, euser, context));
         edPwd = getView(R.id.edPwd);
         edPwd.addTextChangedListener(new MaxLenghtWatcher(AppSet.login_maxlenght, edPwd, context));
 
-        getView(R.id.tv_forget).setOnClickListener(new View.OnClickListener() {
+        getView(R.id.forgetTv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DjhJumpUtil.getInstance().startBaseActivity(context, ForgetPwdActivity.class);
@@ -43,20 +40,13 @@ public class LoginActivity extends FxActivity {
         getView(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-//                httpData();
-                //测试
-                DjhJumpUtil.getInstance().startBaseActivity(context, MainActivity.class);
-                SpUtil spUtil = new SpUtil(context);
-                spUtil.setLogin(euser.toString(), edPwd.toString());
-
+                httpData();
 
             }
         });
         SpUtil util = new SpUtil(this);
-//        euser.setText(util.getKeyLogU());
-//        euser.setSelection(euser.getText().length()); // 设置光标在文本末尾
+        euser.setText(util.getKeyLogU());
+        euser.setSelection(euser.getText().length()); // 设置光标在文本末尾
     }
 
     @Override
@@ -69,10 +59,10 @@ public class LoginActivity extends FxActivity {
             return;
         }
 
-//        if (TeacherUtil.isMobileNO(user)) {
-//            ToastUtil.showToast(context, R.string.check_user_phone);
-//            return;
-//        }
+        if (TeacherUtil.isMobileNO(user)) {
+            ToastUtil.showToast(context, R.string.check_user_phone);
+            return;
+        }
 
 
         if (StringUtil.isEmpty(pwd)) {

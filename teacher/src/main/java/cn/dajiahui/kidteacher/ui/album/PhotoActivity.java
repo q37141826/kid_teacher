@@ -134,7 +134,7 @@ public class PhotoActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     if (mPageNum == 1) {
                         photos.clear();
                         if (isMyClass == 1)

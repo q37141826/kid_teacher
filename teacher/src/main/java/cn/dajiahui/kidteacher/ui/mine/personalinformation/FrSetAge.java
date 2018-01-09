@@ -84,7 +84,7 @@ public class FrSetAge extends FxFragment {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson headJson = new HeadJson(response);
-                if (headJson.getFlag() == 1) {
+                if (headJson.getstatus() == 0) {
                     UserController.getInstance().getUser().setBirthday(TimeUtil.dateToLong(birth) + "");
                     getActivity().setResult(Activity.RESULT_OK);
                     finishActivity();

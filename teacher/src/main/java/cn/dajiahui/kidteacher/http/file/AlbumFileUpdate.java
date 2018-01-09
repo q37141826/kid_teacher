@@ -94,7 +94,7 @@ public class AlbumFileUpdate {
             @Override
             public void onResponse(String response) {
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     //成功
                     successful.add(path);
                 } else {

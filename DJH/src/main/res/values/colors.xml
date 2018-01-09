@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_bg">#50D2C2</color>
+    <color name="app_bg">#FFFFFF</color>
     <color name="app_bg_a">#A2B4CE</color>
     <color name="transparent">#00000000</color>
     <color name="subtransparent">#30000000</color>
@@ -29,7 +29,7 @@
     <!-- photo-->
     <color name="orange">#CC6600</color>
     <color name="pink">#FFE6E6</color>
-    <color name="blue">#00AED6</color>
+    <color name="blue">#009DE8</color>
     <color name="blue_wk">#C2D7E8</color>
     <color name="red">#D80000</color>
     <!-- actiondialog-->

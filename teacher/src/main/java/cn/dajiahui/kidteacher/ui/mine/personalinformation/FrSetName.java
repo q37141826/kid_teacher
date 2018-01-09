@@ -78,7 +78,7 @@ public class FrSetName extends FxFragment {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson headJson = new HeadJson(response);
-                if (headJson.getFlag() == 1) {
+                if (headJson.getstatus() == 0) {
                     ToastUtil.showToast(getContext(), R.string.save_ok);
                     UserController.getInstance().getUser().setRealName(realName);
                     PreferenceManager.getInstance().setCurrentUserNick(realName);

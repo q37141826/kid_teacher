@@ -5,21 +5,15 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.fxtx.framework.image.SelectPhotoActivity;
-import com.fxtx.framework.log.ToastUtil;
-import com.fxtx.framework.text.StringUtil;
 import com.fxtx.framework.ui.base.WebActivity;
 import com.fxtx.framework.util.JumpUtil;
 
 import java.io.File;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.dajiahui.kidteacher.controller.Constant;
-import cn.dajiahui.kidteacher.controller.UserController;
-import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.album.PhotoActivity;
 import cn.dajiahui.kidteacher.ui.album.PhotoDetailsActivity;
 import cn.dajiahui.kidteacher.ui.album.PhotoPageActivity;
@@ -28,7 +22,6 @@ import cn.dajiahui.kidteacher.ui.chat.ChatActivity;
 import cn.dajiahui.kidteacher.ui.chat.ContactListDetailActivity;
 import cn.dajiahui.kidteacher.ui.chat.bean.BeContactUser;
 import cn.dajiahui.kidteacher.ui.file.FileFrActivity;
-import cn.dajiahui.kidteacher.ui.file.FileWebActivity;
 import cn.dajiahui.kidteacher.ui.login.ScanActivity;
 import cn.dajiahui.kidteacher.ui.mine.personalinformation.UserSetActivity;
 
@@ -95,63 +88,6 @@ public class DjhJumpUtil extends JumpUtil {
         startBaseActivity(context, classs, bundle, 0);
     }
 
-    /**
-     * 附件预览
-     *
-     * @param context
-     * @param title
-     * @param url
-     */
-    public void startFileWebActivity(Context context, String title, String url,String fileType) {
-        if (StringUtil.isFileType("file." + fileType, StringUtil.swfType) || StringUtil.isFileType(url, StringUtil.swfType)) {
-            ToastUtil.showToast(context, "swf文件请登录汇学习pc端进行查看");
-        } else {
-            try {
-                String s = URLEncoder.encode(url, "utf-8");
-                startBaseWebActivity(context, title,
-                        RequestUtill.getInstance().accessoryUrl + s + "&uid=" + UserController.getInstance().getUserId(),
-                        true, FileWebActivity.class);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-                ToastUtil.showToast(context, "格式错误");
-            }
-        }
-    }
-
-    /**
-     * 微课资料访问界面
-     *
-     * @param context
-     * @param title
-     * @param Url
-     * @param type
-     * @param id
-     * @param classs
-     */
-    public void startBaseWebActivity(Context context, String title, String Url, Boolean type, String id, Class classs) {
-        Bundle bundle = new Bundle();
-        bundle.putString(Constant.bundle_title, title);
-        bundle.putString(Constant.bundle_obj, Url);
-        bundle.putBoolean(Constant.bundle_type, type);
-        bundle.putString(Constant.bundle_id, id);
-        startBaseActivity(context, classs, bundle, 0);
-    }
-
-
-    /**
-     * 打开我的班级界面
-     *
-     * @param type:         参考Constant.all
-     * @param itemType:布局样式
-     */
-    public void startClassActivity(Activity activity, int type, int itemType, int ResultId, String userId, String title) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constant.bundle_type, type);
-        bundle.putString(Constant.bundle_id, userId);
-        bundle.putInt(Constant.bundle_obj, itemType);
-        bundle.putString(Constant.bundle_title, title);
-//        startBaseActivityForResult(activity, ClassActivity.class, bundle, ResultId);
-    }
 
     /**
      * 启动根据班级id 打开的界面

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.widget.RadioGroup;
 
@@ -21,7 +20,6 @@ import com.fxtx.framework.ui.FxFragment;
 import com.fxtx.framework.ui.base.FxTabActivity;
 import com.fxtx.framework.ui.bean.BeTab;
 import com.fxtx.framework.util.ActivityUtil;
-import com.fxtx.framework.widgets.StatusBarCompat;
 import com.fxtx.framework.widgets.badge.BadgeRadioButton;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -71,10 +69,7 @@ public class MainActivity extends FxTabActivity {
         }
     };
 
-    @Override
-    public void setStatusBar(Toolbar title) {
-        StatusBarCompat.compatMain(this);
-    }
+
 
     private BroadcastReceiver broadcastReceiver;
     private LocalBroadcastManager broadcastManager;
@@ -188,7 +183,7 @@ public class MainActivity extends FxTabActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson headJson = new HeadJson(response);
-                if (headJson.getFlag() == 1) {
+                if (headJson.getstatus() == 0) {
                     UserController.getInstance().getUser().setAvator(headJson.parsingString("avator"));
                     PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvator());
                     ToastUtil.showToast(context, R.string.save_ok);

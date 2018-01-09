@@ -81,7 +81,7 @@ public class FrAutoLogin extends FxFragment {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     tvMess.setText(R.string.login_eu);
                     cancle.setVisibility(View.GONE);
                     login.setVisibility(View.GONE);

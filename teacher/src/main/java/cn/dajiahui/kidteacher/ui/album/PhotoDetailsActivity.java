@@ -174,7 +174,7 @@ public class PhotoDetailsActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     BePhotoDetails details = json.parsingObject(BePhotoDetails.class);
                     setViewTitile(details);
                 } else {
@@ -204,7 +204,7 @@ public class PhotoDetailsActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     BePhotoEval item = json.parsingObject(BePhotoEval.class);
                     tvNull.setVisibility(View.GONE);
                     if (group == -1) {

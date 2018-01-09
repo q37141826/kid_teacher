@@ -133,7 +133,7 @@ public class BadgeController {
             @Override
             public void onResponse(String response) {
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     BadgeController.getInstance().evelBadge = json.parsingInt("pjxscount");
                     BadgeController.getInstance().callBadge = json.parsingInt("skdmcount");
                     BadgeController.getInstance().paperBadge = json.parsingInt("jczycount");

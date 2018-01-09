@@ -26,7 +26,7 @@
     <string name="sendcode">发送验证码</string>
     <string name="inputnewpwd">输入新的登录密码</string>
     <string name="inputpwdto">再次输入新的登录密码</string>
-    <string name="forget_sure">确认新的登录密码</string>
+    <string name="forget_sure">确定</string>
     <string name="account_login">账户登陆</string>
     <string name="tv_user_birth">年龄</string>
     <string name="phone_num">手机号</string>
@@ -195,5 +195,6 @@
     <string name="e_photo_null">暂无照片</string>
     <string name="e_log_null">暂无日志数据</string>
     <string name="e_homework">暂无作业</string>
+    <string name="title_activity_my_works">MyWorksActivity</string>
 
 </resources>

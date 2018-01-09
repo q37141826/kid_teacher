@@ -212,7 +212,7 @@ public class FrHomework extends FxFragment {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     data.clear();
                     List<Homework> temp = json.parsingListArray(new GsonType<List<Homework>>() {
                     });

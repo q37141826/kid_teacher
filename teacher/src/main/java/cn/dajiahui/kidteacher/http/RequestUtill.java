@@ -26,12 +26,6 @@ import cn.dajiahui.kidteacher.controller.UserController;
 public class RequestUtill {
     private static RequestUtill util;
 
-
-    public final String homeworkUrl = getUrl() + "workAta/myTest?";//作业试卷
-    public final String lessonkUrl = getUrl() + "workAta/paper?";//微课试卷连接
-    public final String accessoryUrl = getUrl() + "material/fileShow?httpFileUrl=";//附件连接
-
-
     public String getUrl() {
         return BuildConfig.httpUrl;
     }
@@ -113,18 +107,7 @@ public class RequestUtill {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("versionType", "0");
         params.put("type", "1");
-        getHttpBuilder(context, "version/update.json").params(params).post(callback);
-    }
-
-    /**
-     * 登录
-     */
-    public void httpLogin(Context context, ResultCallback callback, String userName, String passowrd) {
-        IdentityHashMap params = new IdentityHashMap<>();
-        params.put("username", userName);
-        params.put("password", passowrd);
-        params.put("plat", "android");
-        getHttpBuilder(context, "login/do.json").params(params).post(callback);
+//        getHttpBuilder(context, "version/update.json").params(params).post(callback);
     }
 
 
@@ -406,17 +389,6 @@ public class RequestUtill {
         getHttpBuilder(context, "caseMsg/findList.json").params(params).post(callback);
     }
 
-    //修改绑定手机  获取验证码
-    public void httpSendCode(Context context, ResultCallback callback, String access_token, String username, String telnum, String password) {
-        IdentityHashMap params = new IdentityHashMap<>();
-        params.put("userId", access_token);
-        params.put("username", username);
-        params.put("telnum", telnum);
-        params.put("password", password);
-        getHttpBuilder(context, "user/modifyTelnumSendCode.json").params(params).post(callback);
-
-
-    }
 
     public void httpUserSendCode(Context context, ResultCallback callback, String access_token, String telnum) {
         IdentityHashMap params = new IdentityHashMap<>();
@@ -703,6 +675,26 @@ public class RequestUtill {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("userId", userId);
         getHttpBuilder(context, "/caseMsg/findListforWTEC.json").params(params).post(resultCallback);
+    }
+
+
+    /*888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888*/
+
+    /**
+     * 登录
+     */
+    public void httpLogin(Context context, ResultCallback callback, String userName, String passowrd) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("username", userName);
+        params.put("password", passowrd);
+        getHttpBuilder(context, "site/login").params(params).post(callback);
+    }
+
+    //获取手机获取验证码
+    public void sendPhoneCode(Context context, ResultCallback callback, String phone) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("telnum", phone);
+        getHttpBuilder(context, "site/send-code").params(params).post(callback);
     }
 }
 

@@ -149,7 +149,7 @@ public class AlbumActivity extends FxActivity {
             @Override
             public void onResponse(String response) {
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     List<BeClassAlbum> temp = json.parsingListArray(new GsonType<List<BeClassAlbum>>() {
                     });
                     if (temp != null && temp.size() > 0) {
@@ -225,7 +225,7 @@ public class AlbumActivity extends FxActivity {
             public void onResponse(String response) {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
-                if (json.getFlag() == 1) {
+                if (json.getstatus() == 0) {
                     //创建成功
                     BeAlbum album = json.parsingObject(BeAlbum.class);
                     if (StringUtil.isEmpty(albumId)) {
