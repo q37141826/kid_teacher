@@ -3,12 +3,8 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
-              android:layout_marginLeft="@dimen/textpadding"
-              android:layout_marginRight="@dimen/textpadding"
-              android:layout_marginTop="@dimen/textpadding"
-              android:background="@color/white_line"
+              android:background="@color/gray_line"
               android:orientation="horizontal">
-
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/textpadding"
         android:layout_marginRight="@dimen/textpadding"
-        android:layout_marginTop="@dimen/textpadding"
-        android:textSize="@dimen/text13"
+        android:layout_marginTop="@dimen/textpadding15"
+        android:layout_marginBottom="@dimen/textpadding15"
+        android:textSize="@dimen/text15"
         />
 </LinearLayout>

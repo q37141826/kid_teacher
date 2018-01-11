@@ -22,7 +22,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="true"
-        android:textColor="@color/white"
+        android:textColor="@color/text_deepgray"
         android:textSize="16sp"/>
 
     <TextView
@@ -37,7 +37,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="true"
-        android:textColor="@color/white"
+        android:textColor="@color/text_deepgray"
         android:textSize="16sp"
         android:visibility="visible"/>
 
@@ -56,7 +56,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:singleLine="true"
-            android:textColor="@color/white"
+            android:textColor="@color/text_deepgray"
             android:textSize="20sp"/>
 
     </RelativeLayout>

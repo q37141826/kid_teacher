@@ -9,17 +9,19 @@
     <color name="yellow">#ff7306</color>
     <!--暗灰色  -->
     <color name="gray_light">#999999</color>
-    <color name="gray_line">#e3e3e3</color>
+    <color name="gray_line">#F5F5F5</color>
     <color name="white_line">#FFF9F7F7</color>
     <color name="gray">#777777</color>
     <color name="whilte_gray">#cccccc</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="line_gray">#dedede</color>
+    <color name="line_gray2">#E0E0E0</color>
     <color name="line_gray_wideing">#eeeeec</color>
 
     <color name="text_deepgray">#333333</color>
     <color name="text_gray">#666666</color>
+    <color name="gray_9b">#9b9b9b</color>
 
     <color name="background_gray">#f4f4f4</color>
 
@@ -40,4 +42,5 @@
     <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
     <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
     <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+    <color name="list_divider_color_grav">#E9E9E9</color>
 </resources>

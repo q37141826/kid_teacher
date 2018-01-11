@@ -39,6 +39,10 @@ public class BeclassSpace extends BeanObj {
         this.comment = comment;
     }
 
+    public BeclassSpace(String myclass, Bitmap bitmap) {
+        this.myclass = myclass;
+        this.bitmap = bitmap;
+    }
 
     public BeclassSpace(String myclass, String mytime, String comment, String img1, String img2, String img3) {
         this.myclass = myclass;

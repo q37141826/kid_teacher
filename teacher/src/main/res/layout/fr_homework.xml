@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_gray"/>
+        android:background="@color/line_gray2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:divider="@color/transparent"
+            android:divider="@null"
             android:overScrollMode="never"/>
 
         <TextView

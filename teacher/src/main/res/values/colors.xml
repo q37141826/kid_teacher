@@ -23,4 +23,5 @@
     <color name="mp3_time">#5b6d85</color>
     <color name="black_tv_3">#333333</color>
     <color name="black_tv_6">#666666</color>
+    <color name="text_gray_df">#DFDFDF</color>
 </resources>

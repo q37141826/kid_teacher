@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@color/white_line"
+              android:background="@color/white"
               android:gravity="center_vertical"
               android:orientation="vertical">
 
@@ -16,8 +16,7 @@
         android:layout_marginTop="@dimen/textpadding"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="@dimen/textpadding">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,27 +25,31 @@
 
             <TextView
                 android:id="@+id/task_second_class_name"
-                android:layout_width="wrap_content"
+                android:layout_width="59dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="@dimen/textmarginleft"
                 android:text="二年级7班"
-                android:textSize="@dimen/text18"/>
+                android:textColor="@color/blue"
+                android:textSize="@dimen/text13"/>
 
             <TextView
-                android:id="@+id/task_second_time"
+                android:id="@+id/task_second_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/textmarginleft"
-                android:drawablePadding="@dimen/textmarginleft"
-                android:padding="@dimen/textmarginleft"
-                android:text="截止时间：12月20号 14:00"
+                android:text="完成:0"
+                android:textColor="@color/text_deepgray"
+                android:textSize="@dimen/text13"/>
+
+            <TextView
+                android:id="@+id/task_second_completeTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/3"
+                android:textColor="@color/text_deepgray"
                 android:textSize="@dimen/text13"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -56,10 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 android:text="内容：Unit1 First to school"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text18"/>
+                android:textColor="@color/text_deepgray"
+                android:textSize="@dimen/text15"/>
 
             <TextView
                 android:id="@+id/test_second_status"
@@ -67,35 +69,46 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/textmarginleft"
                 android:drawablePadding="@dimen/textmarginleft"
                 android:drawableRight="@drawable/ico_to"
-                android:textSize="@dimen/text18"/>
+                android:text="待检查"
+                android:textColor="@color/text_deepgray"
+                android:textSize="@dimen/text14"/>
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/task_second_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="完成: 2"
-                android:textColor="@color/black"
+                android:text="截止时间："
+                android:textColor="@color/gray_9b"
                 android:textSize="@dimen/text14"/>
 
             <TextView
-                android:id="@+id/task_second_completeTotal"
+                android:id="@+id/task_second_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/3"
-                android:textColor="@color/black"
+                android:text="2018"
+                android:textColor="@color/gray_9b"
                 android:textSize="@dimen/text14"/>
+
+
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_marginLeft="@dimen/textpadding"
+        android:layout_marginRight="@dimen/textpadding"
+        android:id="@+id/task_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/list_divider_color_grav"
+        android:text=""/>
     <!--<View-->
     <!--android:id="@+id/textline"-->
     <!--android:layout_width="match_parent"-->

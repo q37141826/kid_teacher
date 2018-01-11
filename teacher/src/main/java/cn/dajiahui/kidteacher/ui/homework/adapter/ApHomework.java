@@ -78,6 +78,7 @@ public class ApHomework extends SectionedBaseAdapter {
         TextView tv_status = holder.getView(R.id.test_second_status);
         TextView tv_complete = holder.getView(R.id.task_second_complete);
         TextView task_second_completeTotal = holder.getView(R.id.task_second_completeTotal);
+        TextView bottomLine = holder.getView(R.id.task_bottom_line);
 
         tv_classname.setText(data.get(section).getTask_second_class_name());
         tv_time.setText(data.get(section).getTask_second_time());
@@ -92,6 +93,12 @@ public class ApHomework extends SectionedBaseAdapter {
             tv_status.setTextColor(context.getResources().getColor(R.color.black));
         }
 
+        if (position == (getCountForSection(section) - 1)) {
+            /* 一个section中最后一个item */
+            bottomLine.setVisibility(View.INVISIBLE);
+        } else {
+            bottomLine.setVisibility(View.VISIBLE);
+        }
         return holder.getConvertView();
     }
 

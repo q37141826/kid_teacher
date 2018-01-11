@@ -74,8 +74,6 @@ public class FrHomework extends FxFragment {
 
         tv.setVisibility(View.VISIBLE);
         mTitle.setText(R.string.tab_task);
-        mTitle.setTextColor(R.color.black);
-        tv.setTextColor(R.color.black);
         tv.setText(R.string.send_homework);
         tv.setOnClickListener(onClick);
         mChooseClass.setOnClickListener(onClick);
