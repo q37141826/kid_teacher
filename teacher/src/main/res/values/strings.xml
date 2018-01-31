@@ -72,13 +72,13 @@
 
     <!--我的start-->
     <string name="mine_my_class">我的班级</string>
-    <string name="mine_wait_add_class">待加入班级的学生</string>
+    <string name="mine_wait_add_class">待入班学生</string>
     <string name="mine_audit_student">学员审核</string>
     <string name="mine_personal_information">个人信息</string>
     <string name="mine_notice">魔耳通知</string>
     <string name="mine_setting">设置</string>
     <string name="mine_text_userphone">修改账户手机号</string>
-    <string name="mine_text_about">关于魔耳</string>
+    <string name="mine_text_about">关于我们</string>
     <string name="mine_text_fixpass">修改密码</string>
     <string name="mine_text_clean">清除缓存</string>
     <string name="mine_class_info">班级信息</string>
@@ -90,6 +90,7 @@
     <string name="text_setting">设置</string>
     <string name="text_help">使用帮助</string>
     <string name="prompt_delete">确定要删除么？</string>
+    <string name="class_code">班级码：</string>
 
     <string name="text_version">版本%s</string>
     <string name="btn_exit">退出登录</string>

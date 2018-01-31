@@ -3,6 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/gray_line"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
 
     <include layout="@layout/layout_tool_text"/>
@@ -27,10 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:cursorVisible="true"
-                android:textCursorDrawable="@null"
                 android:gravity="top|left"
                 android:hint="聊聊今天发生了什么"
-                android:minLines="4"/>
+                android:minLines="4"
+                android:textCursorDrawable="@null"/>
         </LinearLayout>
 
 

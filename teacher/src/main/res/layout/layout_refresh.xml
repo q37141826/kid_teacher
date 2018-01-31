@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/white"
-        app:isLoadMore="false"
+        app:isLoadMore="true"
         app:overlay="false"
         app:wave_color="@color/app_bg_a"
         app:wave_show="false">

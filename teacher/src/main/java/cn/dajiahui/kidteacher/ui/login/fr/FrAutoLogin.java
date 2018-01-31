@@ -90,6 +90,6 @@ public class FrAutoLogin extends FxFragment {
                 }
             }
         };
-        RequestUtill.getInstance().httpAutoLogin(getActivity(), callback, qrCode, UserController.getInstance().getUser().getUserName(), UserController.getInstance().getUser().getPwd());
+        RequestUtill.getInstance().httpAutoLogin(getActivity(), callback, qrCode, UserController.getInstance().getUser().getNickname(), UserController.getInstance().getUser().getPwd());
     }
 }

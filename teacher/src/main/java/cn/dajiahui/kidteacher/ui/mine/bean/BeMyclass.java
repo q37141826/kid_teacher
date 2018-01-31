@@ -1,46 +1,30 @@
 package cn.dajiahui.kidteacher.ui.mine.bean;
 
+import java.util.List;
+
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
- * Created by lenovo on 2017/12/27.
+ * Created by wangzhi on 2018/1/30.
  */
 
 public class BeMyclass extends BeanObj {
+    int totalRows;
+    List<BeClass> lists;
 
-    private String myclass;
-    private String classum;
-    private String studentnum;
-
-
-    public BeMyclass(String myclass, String classum, String studentnum) {
-        this.myclass = myclass;
-        this.classum = classum;
-        this.studentnum = studentnum;
+    public int getTotalRows() {
+        return totalRows;
     }
 
-    public String getMyclass() {
-        return myclass;
+    public void setTotalRows(int totalRows) {
+        this.totalRows = totalRows;
     }
 
-    public void setMyclass(String myclass) {
-        this.myclass = myclass;
+    public List<BeClass> getLists() {
+        return lists;
     }
 
-    public String getClassum() {
-        return classum;
+    public void setLists(List<BeClass> lists) {
+        this.lists = lists;
     }
-
-    public void setClassum(String classum) {
-        this.classum = classum;
-    }
-
-    public String getStudentnum() {
-        return studentnum;
-    }
-
-    public void setStudentnum(String studentnum) {
-        this.studentnum = studentnum;
-    }
-
 }

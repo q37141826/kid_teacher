@@ -35,7 +35,7 @@ public class FrSetName extends FxFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvName = getView(R.id.tv_user_name);
-        tvName.setText(UserController.getInstance().getUser().getRealName());
+        tvName.setText(UserController.getInstance().getUser().getNickname());
         tvName.setSelection(tvName.getText().length());
     }
 
@@ -45,7 +45,7 @@ public class FrSetName extends FxFragment {
             ToastUtil.showToast(getContext(), R.string.ed_user_name);
             return;
         }
-        if (UserController.getInstance().getUser().getRealName().equals(tvName.getText().toString().trim())) {
+        if (UserController.getInstance().getUser().getNickname().equals(tvName.getText().toString().trim())) {
             ToastUtil.showToast(getContext(), R.string.nameequel);
             return;
         }
@@ -80,7 +80,7 @@ public class FrSetName extends FxFragment {
                 HeadJson headJson = new HeadJson(response);
                 if (headJson.getstatus() == 0) {
                     ToastUtil.showToast(getContext(), R.string.save_ok);
-                    UserController.getInstance().getUser().setRealName(realName);
+                    UserController.getInstance().getUser().setNickname(realName);
                     PreferenceManager.getInstance().setCurrentUserNick(realName);
                     getActivity().setResult(Activity.RESULT_OK);
                     finishActivity();

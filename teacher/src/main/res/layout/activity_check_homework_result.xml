@@ -27,7 +27,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="·"
-            android:textColor="@color/black"/>
+            android:textColor="@color/text_deepgray"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="·"
-            android:textColor="@color/black"/>
+            android:textColor="@color/text_deepgray"/>
 
         <TextView
             android:layout_width="wrap_content"

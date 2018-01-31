@@ -31,10 +31,10 @@ public class UserController {
     public void savaUser(BeUser user) {
         this.user = user;
         access = new BeAccess();
-        if (user.getAuthList() != null)
-            for (String auth : user.getAuthList()) {
-                saveAccess(auth);
-            }
+//        if (user.getAuthList() != null)
+//            for (String auth : user.getAuthList()) {
+//                saveAccess(auth);
+//            }
     }
 
     public void saveNum(BeNum num) {
@@ -206,10 +206,10 @@ public class UserController {
     public BeAccess getAccess() {
         if (access == null) {
             access = new BeAccess();
-            if (getUser().getAuthList() != null)
-                for (String auth : getUser().getAuthList()) {
-                    saveAccess(auth);
-                }
+//            if (getUser().getAuthList() != null)
+//                for (String auth : getUser().getAuthList()) {
+//                    saveAccess(auth);
+//                }
         }
         return access;
     }

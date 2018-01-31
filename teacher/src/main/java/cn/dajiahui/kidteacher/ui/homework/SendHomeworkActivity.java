@@ -45,7 +45,7 @@ public class SendHomeworkActivity extends FxActivity {
         TextView mNext = getView(R.id.next);
         mTitle.setText(R.string.task_textbook_assignment);
         mRight.setText(R.string.task_supplementary);
-        mLeft.setText(R.string.sign_out);
+        mLeft.setText(R.string.cancle);
         final List<ChooseUtils> list = new ArrayList<>();
 
         for (int a = 0; a < 20; a++) {

@@ -13,7 +13,7 @@
         android:gravity="center_horizontal"
         android:maxLength="20"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_deepgray"
         android:textSize="18sp" />
 
     <ScrollView

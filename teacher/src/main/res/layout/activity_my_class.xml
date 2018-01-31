@@ -6,20 +6,8 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <include layout="@layout/layout_tool_text"/>
 
-    <include
-        layout="@layout/layout_tool_text"/>
+    <include layout="@layout/layout_refresh"/>
 
-    <LinearLayout
-        android:id="@+id/line_task"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white_line"
-        android:orientation="vertical">
-
-        <include layout="@layout/child_listview"/>
-
-        <TextView style="@style/text_null"/>
-
-    </LinearLayout>
 </LinearLayout>

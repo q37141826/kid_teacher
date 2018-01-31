@@ -16,27 +16,83 @@
         <include layout="@layout/layout_tool_text"/>
 
         <TextView
-            android:id="@+id/tvSecurity"
-            style="@style/mine_view"
-
-            android:text="@string/mine_text_userphone"
-            />
-
-        <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line_gray"/>
+            android:layout_height="1dp"
+            android:background="@color/list_divider_color_grav"
+            android:text=""/>
+
+        <RelativeLayout
+            android:id="@+id/setttin_security"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvSecurity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/textmarginleft"
+                android:text="@string/mine_text_userphone"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text18"/>
+
+            <TextView
+                android:id="@+id/tv_user_telephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/textmarginleft"
+                android:drawablePadding="10dp"
+                android:drawableRight="@drawable/ico_to"
+                android:text="12345678901"
+                android:textColor="@color/black_tv_6"
+                android:textSize="@dimen/text18"/>
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/tvFixpass"
-            style="@style/mine_view"
-
-            android:text="@string/mine_text_fixpass"/>
-
-        <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/line_gray"/>
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/textpadding"
+            android:layout_marginRight="@dimen/textpadding"
+            android:background="@color/list_divider_color_grav"
+            android:text=""/>
+
+        <RelativeLayout
+            android:id="@+id/setttin_fixpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvFixpass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/textmarginleft"
+                android:text="@string/mine_text_fixpass"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text18"/>
+
+            <TextView
+                android:id="@+id/tv_user_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/textmarginleft"
+                android:drawablePadding="10dp"
+                android:drawableRight="@drawable/ico_to"
+                android:text=""
+                android:textColor="@color/black_tv_6"
+                android:textSize="@dimen/text18"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/textpadding"
+            android:layout_marginRight="@dimen/textpadding"
+            android:background="@color/list_divider_color_grav"
+            android:text=""/>
 
         <RelativeLayout
             android:id="@+id/tvclean"
@@ -44,11 +100,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:padding="@dimen/textmarginleft"
                 android:text="@string/mine_text_clean"
+                android:textColor="@color/black_tv_3"
                 android:textSize="@dimen/text18"/>
 
             <TextView
@@ -62,12 +118,17 @@
                 android:drawableRight="@drawable/ico_to"
                 android:text="110M"
                 android:textSize="@dimen/text16"/>
-
         </RelativeLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/textpadding"
+            android:layout_marginRight="@dimen/textpadding"
+            android:background="@color/list_divider_color_grav"
+            android:text=""/>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +148,5 @@
             android:text="@string/btn_exit"
             android:textColor="@color/gray_line"/>
     </LinearLayout>
-
-
 
 </LinearLayout>

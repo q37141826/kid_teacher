@@ -7,12 +7,14 @@
     <color name="transparent1">#bb000000</color>
     <color name="tr_black">#70000000</color>
     <color name="yellow">#ff7306</color>
+    <color name="yellow_light">#FECD33</color>
     <!--暗灰色  -->
     <color name="gray_light">#999999</color>
     <color name="gray_line">#F5F5F5</color>
     <color name="white_line">#FFF9F7F7</color>
     <color name="gray">#777777</color>
     <color name="whilte_gray">#cccccc</color>
+    <color name="whilte_gray2">#AAC1f7</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="line_gray">#dedede</color>
@@ -33,6 +35,7 @@
     <color name="pink">#FFE6E6</color>
     <color name="blue">#009DE8</color>
     <color name="blue_wk">#C2D7E8</color>
+    <color name="blue_dark">#1F6DED</color>
     <color name="red">#D80000</color>
     <!-- actiondialog-->
 

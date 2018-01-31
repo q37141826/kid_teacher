@@ -28,7 +28,7 @@
                 android:layout_width="59dp"
                 android:layout_height="wrap_content"
                 android:text="二年级7班"
-                android:textColor="@color/blue"
+                android:textColor="@color/blue_dark"
                 android:textSize="@dimen/text13"/>
 
             <TextView

@@ -64,6 +64,7 @@ public class FrMine extends FxFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.img_edit:
+                case R.id.topView:
                     Toast.makeText(activity, "编辑", Toast.LENGTH_SHORT).show();
                     //设置
                     DjhJumpUtil.getInstance().startBaseActivityForResult(getActivity(), UserDetailsActivity.class, null, PICFPRRESULT);
@@ -140,6 +141,8 @@ public class FrMine extends FxFragment {
         imSet = getView(R.id.img_edit);
         imUser.setOnClickListener(onClick);
         imSet.setOnClickListener(onClick);
+        getView(R.id.topView).setOnClickListener(onClick);
+        getView(R.id.iv_user).setOnClickListener(onClick);
 
         tv_userName = getView(R.id.tv_user_name);
         tv_campusName = getView(R.id.tv_campus_name);

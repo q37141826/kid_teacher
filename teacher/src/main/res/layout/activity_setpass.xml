@@ -138,6 +138,6 @@
             android:layout_marginTop="40dp"
             android:background="@color/white"
             android:text="@string/sure"
-            android:textColor="@color/black"/>
+            android:textColor="@color/text_deepgray"/>
     </LinearLayout>
 </LinearLayout>

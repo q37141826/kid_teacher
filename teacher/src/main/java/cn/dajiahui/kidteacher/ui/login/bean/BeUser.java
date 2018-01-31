@@ -13,58 +13,37 @@ public class BeUser extends BeanObj {
     private String token;
     private String user_id;
     private String user_type;//用户类型
-
-
     private String avator;
-    private String email;
-
-    private String phone;
-    private String realName;
-    private String receiveMsgTel;
-    private String sex;
-    private String userName;
-
-    private String hxId;
-    private String hxPwd;
+    private String telnum;
+    private String nickname;
+    private String gender;
     private String birthday;
-    private String signature;
     private String pwd;
-    private String schoolId;//学校id
-    private List<String> authList;
-    private String loadUrl;
-    private String logoUrl;
-    private String cname;
 
-    public String getPwd() {
-        return pwd;
+    private BeUserThrid third;//解析第三方注册登录信息
+
+    public String getToken() {
+        return token;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setSignature(String signature) {
-        this.signature = signature;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getUser_type() {
+        return user_type;
     }
 
-    public String getSignature() {
-        return "";//将签名值设置为空，这样永远都不会显示出签名了
-    }
-
-    public String getHxId() {
-        return hxId;
-    }
-
-    public String getHxPwd() {
-        return hxPwd;
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 
     public String getAvator() {
@@ -75,89 +54,51 @@ public class BeUser extends BeanObj {
         this.avator = avator;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTelnum() {
+        return telnum;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTelnum(String telnum) {
+        this.telnum = telnum;
     }
 
-    public String getuser_id() {
-        return user_id;
+    public String getNickname() {
+        return nickname;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getGender() {
+        return gender;
     }
 
-    public String getRealName() {
-        if (StringUtil.isEmpty(realName))
-            realName = getUserName();
-        return realName;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public String getReceiveMsgTel() {
-        return receiveMsgTel;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public String getSex() {
-        return sex;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
-    public String getUserName() {
-        if (StringUtil.isEmpty(userName))
-            userName = "";
-        return userName;
+    public BeUserThrid getThird() {
+        return third;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getuser_type() {
-        return user_type;
-    }
-
-    public String gettoken() {
-        return token;
-    }
-
-    public void setId(String objectId) {
-        setObjectId(objectId);
-    }
-
-    public String getSchoolId() {
-        return schoolId;
-    }
-
-    public List<String> getAuthList() {
-        return authList;
-    }
-
-    public String getLoadUrl() {
-        return loadUrl;
-    }
-
-    public String getLogoUrl() {
-//        return "http://img03.sogoucdn.com/app/a/100520024/6cabb1c8dc0ef86dbff3e87e2269d6a5";
-        return logoUrl;
-    }
-
-    public String getOrglName() {
-//        return  "dksdka";
-        return cname;
+    public void setThird(BeUserThrid third) {
+        this.third = third;
     }
 }

@@ -81,7 +81,7 @@
             android:layout_gravity="center"
             android:background="@color/white"
             android:text="@string/task_next"
-            android:textColor="@color/black"/>
+            android:textColor="@color/text_deepgray"/>
     </LinearLayout>
 </LinearLayout>
 

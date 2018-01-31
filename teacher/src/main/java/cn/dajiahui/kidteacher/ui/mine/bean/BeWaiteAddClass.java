@@ -1,47 +1,31 @@
 package cn.dajiahui.kidteacher.ui.mine.bean;
 
+import java.util.List;
+
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
- * 待加入班级的学生
+ * 待加入班级学生列表
+ * Created by wangzhi on 2018/1/31.
  */
 
 public class BeWaiteAddClass extends BeanObj {
+    int totalRows;
+    List<BeWaiteAddStudent> lists;
 
-    private String classname;
-    private String studentname;
-    private String studentpic;
-
-    public BeWaiteAddClass(String classname, String studentname) {
-        this.classname = classname;
-        this.studentname = studentname;
+    public int getTotalRows() {
+        return totalRows;
     }
 
-
-
-
-    public String getClassname() {
-        return classname;
+    public void setTotalRows(int totalRows) {
+        this.totalRows = totalRows;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname;
+    public List<BeWaiteAddStudent> getLists() {
+        return lists;
     }
 
-    public String getStudentname() {
-        return studentname;
+    public void setLists(List<BeWaiteAddStudent> lists) {
+        this.lists = lists;
     }
-
-    public void setStudentname(String studentname) {
-        this.studentname = studentname;
-    }
-
-    public String getStudentpic() {
-        return studentpic;
-    }
-
-    public void setStudentpic(String studentpic) {
-        this.studentpic = studentpic;
-    }
-
 }

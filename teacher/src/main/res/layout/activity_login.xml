@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bglogin1"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/login_title"
-        layout="@layout/layout_tool_text"/>
+    <!--<include-->
+        <!--android:id="@+id/login_title"-->
+        <!--layout="@layout/layout_tool_text"/>-->
 
     <ImageView
         android:id="@+id/img_icon"
@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="99dp"
         android:gravity="center"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@drawable/logo"/>
 
 
     <ImageView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:src="@drawable/smalltitle"
         android:textSize="22sp"/>
@@ -39,7 +39,7 @@
         android:layout_below="@+id/apptitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="@drawable/bglogin1">
+        >
 
         <ImageView
             android:id="@+id/image1"
@@ -50,7 +50,7 @@
             android:layout_below="@id/image"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="47dp"
-            android:src="@drawable/ico_user"/>
+            android:src="@drawable/ico_phone"/>
 
         <EditText
             android:id="@+id/edUser"
@@ -64,8 +64,9 @@
             android:hint="@string/input_user"
             android:lineSpacingExtra="8dp"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
+            android:textColorHint="@color/whilte_gray2"
+            android:cursorVisible="true"
             android:textCursorDrawable="@drawable/sp_while"
             android:textSize="@dimen/text18"/>
 
@@ -100,9 +101,11 @@
             android:lineSpacingExtra="8dp"
             android:password="true"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray"
-            android:textCursorDrawable="@drawable/sp_while"
+            android:textColor="@color/white"
+            android:textColorHint="@color/whilte_gray2"
+            android:cursorVisible="true"
+
+            android:textCursorDrawable="@null"
             android:textSize="@dimen/text18"/>
 
         <TextView
@@ -125,7 +128,7 @@
             android:layout_marginRight="17dp"
             android:layout_marginTop="15dp"
             android:text="@string/forget_pwd"
-            android:textColor="@color/blue"
+            android:textColor="@color/white"
             android:textSize="9dp"/>
 
 

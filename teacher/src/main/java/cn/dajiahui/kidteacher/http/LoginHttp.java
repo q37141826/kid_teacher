@@ -75,7 +75,7 @@ public class LoginHttp {
                             setStartActivity();
                             onLogin.successful();
                         } else {
-                            huanxLogin(temp.getHxId(), temp.getHxPwd());
+                            huanxLogin(temp.getThird().getEasemob_username(), temp.getThird().getEasemob_passwd());
                         }
                     } else {
                         if (ImHelper.getInstance().isLoggedIn()) {
@@ -84,14 +84,14 @@ public class LoginHttp {
                         setStartActivity();
                         onLogin.successful();
                     }
-                    JpushUtil.statJpushAlias(context, temp.getObjectId());
+                    JpushUtil.statJpushAlias(context, temp.getThird().getJpush_alias());
 
                 } else {
                     ToastUtil.showToast(context, json.getMsg());
                     onLogin.error();
                 }
             }
-        }, "sysmoer", "123123");
+        }, user, pwd);
     }
 
 
@@ -107,7 +107,7 @@ public class LoginHttp {
             return;
         }
 //        user, pwd,
-        EMClient.getInstance().login("user1", "t123", new EMCallBack() {
+        EMClient.getInstance().login(user, pwd, new EMCallBack() {
 
             @Override
             public void onSuccess() {
@@ -116,7 +116,7 @@ public class LoginHttp {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
                 // 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
-                String nickName = UserController.getInstance().getUser().getRealName();
+                String nickName = UserController.getInstance().getUser().getNickname();
                 //异步获取当前用户的昵称和头像(从自己服务器获取，demo使用的一个第三方服务)
                 PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvator());
                 PreferenceManager.getInstance().setCurrentUserNick(nickName);

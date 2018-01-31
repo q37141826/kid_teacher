@@ -41,14 +41,16 @@ public class SettingActivity extends FxActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_setting);
-        TextView tv_security = getView(R.id.tvSecurity);
-        tv_security.setOnClickListener(onClick);
-        TextView tvFixpass = getView(R.id.tvFixpass);
-        RelativeLayout tvClean = getView(R.id.tvclean);
+//        TextView tv_security = getView(R.id.tvSecurity);
+//        tv_security.setOnClickListener(onClick);
+//        TextView tvFixpass = getView(R.id.tvFixpass);
 
         Button bt_exit = getView(R.id.btn_Exit);
         bt_exit.setOnClickListener(onClick);
-        tvFixpass.setOnClickListener(onClick);
+//        tvFixpass.setOnClickListener(onClick);
+        getView(R.id.setttin_security).setOnClickListener(onClick);
+        getView(R.id.setttin_fixpass).setOnClickListener(onClick);
+        RelativeLayout tvClean = getView(R.id.tvclean);
         tvClean.setOnClickListener(onClick);
         getView(R.id.toolbar);
     }
@@ -58,11 +60,11 @@ public class SettingActivity extends FxActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.tvSecurity:
+                case R.id.setttin_security:
                     Toast.makeText(SettingActivity.this, "修改用户手机号", Toast.LENGTH_SHORT).show();
                     DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPhoneActivity.class);
                     break;
-                case R.id.tvFixpass:
+                case R.id.setttin_fixpass:
                     DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPassActivity.class);
                     break;
                 case R.id.tvclean:

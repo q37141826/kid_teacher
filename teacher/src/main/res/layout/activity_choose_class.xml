@@ -80,7 +80,7 @@
             android:layout_gravity="center"
             android:background="@color/white"
             android:text="@string/task_choose_confirm"
-            android:textColor="@color/black"/>
+            android:textColor="@color/text_deepgray"/>
     </LinearLayout>
 </LinearLayout>
 

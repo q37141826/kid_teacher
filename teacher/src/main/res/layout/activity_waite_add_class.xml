@@ -9,6 +9,6 @@
 
     <include layout="@layout/layout_tool_text"/>
 
-    <include layout="@layout/child_listview"/>
+    <include layout="@layout/layout_refresh"/>
 
 </LinearLayout>

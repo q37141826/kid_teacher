@@ -32,6 +32,7 @@ public abstract class FxActivity extends AppCompatActivity {
     public Activity context;
     private SparseArray<View> mViews = new SparseArray<View>();
     public int mPageNum = 1; //分页
+    public int mPageSize = 10; //默认一页10个条目
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +189,6 @@ public abstract class FxActivity extends AppCompatActivity {
         if (toolbar != null) {
             TextView tv = getView(R.id.tool_left);
             tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ico_back, 0, 0, 0);
-            tv.setText(R.string.back_text);
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

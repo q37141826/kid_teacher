@@ -17,7 +17,7 @@
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:text="@string/cancle"
-            android:textColor="@color/black"
+            android:textColor="@color/text_deepgray"
             android:textSize="16sp" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/title"
-            android:textColor="@color/black"
+            android:textColor="@color/text_deepgray"
             android:textSize="20sp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_centerVertical="true"
             android:padding="10dp"
             android:text="@string/commit"
-            android:textColor="@color/black"
+            android:textColor="@color/text_deepgray"
             android:textSize="16sp" />
 
     </RelativeLayout>
@@ -74,7 +74,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/year"
-                android:textColor="@color/black"
+                android:textColor="@color/text_deepgray"
                 android:textSize="18sp" />
 
             <cn.dajiahui.kidteacher.ui.homework.view.DatePickerView
@@ -89,7 +89,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/month"
-                android:textColor="@color/black"
+                android:textColor="@color/text_deepgray"
                 android:textSize="18sp" />
 
             <cn.dajiahui.kidteacher.ui.homework.view.DatePickerView
@@ -104,7 +104,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/day"
-                android:textColor="@color/black"
+                android:textColor="@color/text_deepgray"
                 android:textSize="18sp" />
 
             <cn.dajiahui.kidteacher.ui.homework.view.DatePickerView
@@ -120,7 +120,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/hour"
-                android:textColor="@color/black"
+                android:textColor="@color/text_deepgray"
                 android:textSize="18sp" />
 
             <cn.dajiahui.kidteacher.ui.homework.view.DatePickerView
@@ -136,7 +136,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/minute"
-                android:textColor="@color/black"
+                android:textColor="@color/text_deepgray"
                 android:textSize="18sp" />
 
         </LinearLayout>

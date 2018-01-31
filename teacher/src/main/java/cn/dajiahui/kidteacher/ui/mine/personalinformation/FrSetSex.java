@@ -37,7 +37,7 @@ public class FrSetSex extends FxFragment {
         radio_sex = getView(R.id.radio_sex);
         radio_boy = getView(R.id.sex_boy);
         radio_girl = getView(R.id.sex_girl);
-        if ("M".equals(UserController.getInstance().getUser().getSex())) {
+        if ("M".equals(UserController.getInstance().getUser().getGender())) {
             radio_boy.setChecked(true);
             radio_girl.setChecked(false);
             radio_boy.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ico_im_ok, 0, 0, 0);
@@ -69,7 +69,7 @@ public class FrSetSex extends FxFragment {
 
     @Override
     public void httpData() {
-        if (UserController.getInstance().getUser().getSex().equals(radio_boy.isChecked() ? "M" : "W")) {
+        if (UserController.getInstance().getUser().getGender().equals(radio_boy.isChecked() ? "M" : "W")) {
             ToastUtil.showToast(getContext(), "请求错误");
             return;
         }
@@ -104,7 +104,7 @@ public class FrSetSex extends FxFragment {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
-                    UserController.getInstance().getUser().setSex(sex);
+                    UserController.getInstance().getUser().setGender(sex);
                     getActivity().setResult(Activity.RESULT_OK);
                     finishActivity();
                     ToastUtil.showToast(getContext(), R.string.save_ok);

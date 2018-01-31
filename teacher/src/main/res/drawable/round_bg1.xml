@@ -4,11 +4,11 @@
     android:color="@color/white_line"
     android:shape="rectangle">
     <corners
-        android:radius="10dip"
+        android:radius="20dip"
         />
     <stroke
         android:width="0dp"
-        android:color="@color/blue"/>
+        android:color="@color/yellow_light"/>
     <solid
-        android:color="@color/blue"/>
+        android:color="@color/yellow_light"/>
 </shape>
