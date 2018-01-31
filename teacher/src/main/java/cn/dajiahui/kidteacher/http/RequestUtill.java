@@ -417,6 +417,35 @@ public class RequestUtill {
     }
 
     /**
+     * 取得班级详情
+     * @param context
+     * @param callback
+     * @param classId
+     */
+    public void httpGetClassInfo(Context context, ResultCallback callback, String classId) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("class_id", classId);
+        getHttpBuilder(context, "teacher/classroom/detail").params(params).post(callback);
+    }
+
+    /**
+     * 移除学生
+     * @param context
+     * @param callback
+     * @param classId
+     * @param userId
+     */
+    public void httpRemoveStudent(Context context, ResultCallback callback, String classId, String userId) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("class_id", classId);
+        params.put("user_id", userId);
+        getHttpBuilder(context, "teacher/classroom/remove").params(params).post(callback);
+    }
+
+
+    /**
      * 测试json
      * @param context
      * @param callback

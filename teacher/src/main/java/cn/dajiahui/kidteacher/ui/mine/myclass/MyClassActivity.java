@@ -59,7 +59,10 @@ public class MyClassActivity extends FxActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DjhJumpUtil.getInstance().startBaseActivity(MyClassActivity.this, ClassInfoActivity.class);
+                String classId = classInfoList.get(position).getId();
+                Bundle bundle = new Bundle();
+                bundle.putString("classId", classId);
+                DjhJumpUtil.getInstance().startBaseActivity(MyClassActivity.this, ClassInfoActivity.class, bundle, 0);
             }
         });
 

@@ -53,9 +53,11 @@ public class WaiteAddClassActivity extends FxActivity {
                 case MSG_SHOW_FXDIALOG: // 显示dialog
                     showfxDialog();
                     break;
+
                 case MSG_DISMISS_FXDIALOG: // 关闭dialog
                     dismissfxDialog();
                     break;
+
                 default:
                     dismissfxDialog();
                     break;

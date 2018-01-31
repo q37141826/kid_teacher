@@ -84,7 +84,6 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
         }
     }
 
-    // 刷新有问题
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
