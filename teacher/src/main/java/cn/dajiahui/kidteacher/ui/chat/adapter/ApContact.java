@@ -3,34 +3,35 @@ package cn.dajiahui.kidteacher.ui.chat.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fxtx.framework.adapter.ViewHolder;
+import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.widgets.listview.SectionedBaseAdapter;
 
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.ui.chat.bean.BeContact;
+import cn.dajiahui.kidteacher.ui.chat.bean.BeGroupListUsers;
 
 /**
  * Created by Administrator on 2016/3/17.
  */
 public class ApContact extends SectionedBaseAdapter {
     private Context context;
-    private List<BeContact> datas;
+    private List<BeGroupListUsers> datas;
 
-    public ApContact(Context context, List<BeContact> datas) {
+    public ApContact(Context context, List<BeGroupListUsers> datas) {
         this.context = context;
         this.datas = datas;
     }
 
     @Override
     public Object getItem(int section, int position) {
-        if (datas.get(section).getGroupList() != null && datas.get(section).getGroupList().size() > 0)
-            return datas.get(section).getGroupList().get(position);
-        if (datas.get(section).getClassList() != null && datas.get(section).getClassList().size() > 0)
-            return datas.get(section).getClassList().get(position);
+        if (datas.get(section).getStudent_list()!= null && datas.get(section).getStudent_list().size() > 0)
+            return datas.get(section).getStudent_list().get(position);
         return null;
     }
 
@@ -46,10 +47,8 @@ public class ApContact extends SectionedBaseAdapter {
 
     @Override
     public int getCountForSection(int section) {
-        if (datas.get(section).getGroupList() != null && datas.get(section).getGroupList().size() > 0)
-            return datas.get(section).getGroupList().size();
-        if (datas.get(section).getClassList() != null && datas.get(section).getClassList().size() > 0)
-            return datas.get(section).getClassList().size();
+        if (datas.get(section).getStudent_list() != null && datas.get(section).getStudent_list().size() > 0)
+            return datas.get(section).getStudent_list().size();
         return 0;
     }
 
@@ -64,19 +63,24 @@ public class ApContact extends SectionedBaseAdapter {
      */
     @Override
     public View getItemView(int section, int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = ViewHolder.getHolder(context, convertView, parent, R.layout.contact_item_second, 1);
-        TextView tvName = holder.getView(R.id.contact_item_second_name);
-        TextView tvNum = holder.getView(R.id.contact_item_second_num);
-        TextView tvLine = holder.getView(R.id.contact_item_line);
-       if (datas.get(section).getGroupList()!=null&&datas.get(section).getGroupList().size()>0)
-       {
-           tvName.setText(datas.get(section).getGroupList().get(position).getName());
-           tvNum.setText(datas.get(section).getGroupList().get(position).getUserCount()+"人");
-       }
-        if (datas.get(section).getClassList()!=null&&datas.get(section).getClassList().size()>0){
-            tvName.setText(datas.get(section).getClassList().get(position).getClassName());
-            tvNum.setText(datas.get(section).getClassList().get(position).getUserCount()+"人");
+        ViewHolder holder = ViewHolder.getHolder(context, convertView, parent, R.layout.contact_item_detail_child, 1);
+//        TextView tvName = holder.getView(R.id.contact_item_second_name);
+//        TextView tvNum = holder.getView(R.id.contact_item_second_num);
+//        TextView tvLine = holder.getView(R.id.contact_item_line);
+//       if (datas.get(section).getStudent_list()!=null&&datas.get(section).getStudent_list().size()>0)
+//       {
+//           tvName.setText(datas.get(section).getStudent_list().get(position).getNickname());
+//       }
+
+        ImageView userAvtor = holder.getView(R.id.round_imge_child);
+        TextView userName =holder.getView(R.id.text_child_name);
+
+        if (datas.get(section).getStudent_list().get(position).getAvatar()!=null) {
+            GlideUtil.showRoundImage(context, datas.get(section).getStudent_list().get(position).getAvatar(), userAvtor, R.drawable.ico_default_user, true);
         }
+
+        userName.setText(datas.get(section).getStudent_list().get(position).getNickname());
+
         return holder.getConvertView();
     }
 
@@ -84,7 +88,7 @@ public class ApContact extends SectionedBaseAdapter {
     public View getSectionHeaderView(int section, View convertView, ViewGroup parent) {
         ViewHolder holder = ViewHolder.getHolder(context, convertView, parent, R.layout.contact_item_first, 0);
         TextView tvName = holder.getView(R.id.contact_item_first);
-        tvName.setText(datas.get(section).getName());
+        tvName.setText(datas.get(section).getClass_name());
         return holder.getConvertView();
     }
 }

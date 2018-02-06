@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,13 +14,12 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fxtx.framework.http.ErrorCode;
 import com.fxtx.framework.http.callback.ResultCallback;
-import com.fxtx.framework.json.GsonType;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxFragment;
 import com.fxtx.framework.widgets.listview.PinnedHeaderListView;
+import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
 import com.squareup.okhttp.Request;
 
 import java.util.ArrayList;
@@ -28,30 +27,52 @@ import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
-import cn.dajiahui.kidteacher.ui.homework.adapter.ApClassState;
+import cn.dajiahui.kidteacher.ui.homework.adapter.ApClassStatus;
 import cn.dajiahui.kidteacher.ui.homework.adapter.ApClasssify;
 import cn.dajiahui.kidteacher.ui.homework.adapter.ApHomework;
+import cn.dajiahui.kidteacher.ui.homework.bean.BeClassAndStatus;
+import cn.dajiahui.kidteacher.ui.homework.bean.BeHomeworkList;
+import cn.dajiahui.kidteacher.ui.homework.bean.BeHomeworkStatus;
 import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeClass;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
- * 作业
+ * 作业(首页面)
  */
 public class FrHomework extends FxFragment {
+    private final static int HTTP_TYPE_GET_HOMEWORK_LIST= 1;  // 获取作业列表
+    private final static int HTTP_TYPE_GET_CLASS_STATUS = 2;  // 获取班级和状态列表
+
+    private int httpType = HTTP_TYPE_GET_CLASS_STATUS;
+
     private TextView mTitle;
     private TextView mTvnull;
-    private PinnedHeaderListView listview;
-    private ApHomework adapter_homework;
-    private List<Homework> data;//作业列表数据源
+
+    private PinnedHeaderListView listview; // 作业列表
+    private ApHomework adapterHomework; // 作业列表的Adapter
+    private List<BeHomeworkList> homeworkList;//作业列表数据源
+    private MaterialRefreshLayout refresh;
+    private int itemNumber = 0; // 作业总的数据数
+
     private PopupWindow popupWindow;
-    private ApClasssify adapter_apclass;//选择班级列表
-    private ApClassState adapter_apcheckState;//选择状态列表
+    private ApClasssify apClass;//选择班级列表的adapter
+    private ApClassStatus apCheckState;//选择状态列表的adapter
+    private List<BeClass> classList = new ArrayList<BeClass>();  // 班级列表
+    private List<BeHomeworkStatus> statusList = new ArrayList<BeHomeworkStatus>();// 作业状态的列表
+    private int choosetag = 0;//choosetag=1 选择班级 choosetag=2 选择状态
+    private String mClassId;
+    private String mStatusId;
     private TextView mChooseClass;//选择班级
-    private TextView mChooseState;//选择状态
+    private TextView mChooseStatus;//选择状态
+
     private int position = 0;
     private String type = "";
-    private int choosetag = 0;//choosetag=1 选择班级 choosetag=2 选择状态
-    private List<Homework> datasstate;//选择状态的数据源
+
+    private Fragment mFragement;
+
 
     /*
     * 作业
@@ -70,25 +91,42 @@ public class FrHomework extends FxFragment {
         mTvnull = getView(R.id.tv_null);
         listview = getView(R.id.listview);
         mChooseClass = getView(R.id.tv_class);
-        mChooseState = getView(R.id.tv_state);
+        mChooseStatus = getView(R.id.tv_state);
+
+        refresh = getView(R.id.refresh);
+        initRefresh(refresh);
+//        mPageSize = 2;
 
         tv.setVisibility(View.VISIBLE);
         mTitle.setText(R.string.tab_task);
         tv.setText(R.string.send_homework);
         tv.setOnClickListener(onClick);
         mChooseClass.setOnClickListener(onClick);
-        mChooseState.setOnClickListener(onClick);
+        mChooseStatus.setOnClickListener(onClick);
 
-        data = new ArrayList<>();
-        adapter_homework = new ApHomework(getActivity(), data);
-        listview.setAdapter(adapter_homework);
+        homeworkList = new ArrayList<>();
+        adapterHomework = new ApHomework(getActivity(), homeworkList);
+        listview.setAdapter(adapterHomework);
         listview.setOnItemClickListener(onItemClick);
+
+        //初始化班级列表
+        BeClass classifno = new BeClass();
+        classifno.setClass_name(getResources().getString(R.string.all_options));
+        classList.add(classifno);
+        apClass = new ApClasssify(getActivity(), classList);
+
+        // 初始化状态列表
+        BeHomeworkStatus statusInfo= new BeHomeworkStatus();
+        statusInfo.setLabel(getResources().getString(R.string.all_options));
+        statusList.add(statusInfo);
+        apCheckState = new ApClassStatus(getActivity(), statusList);
 
         listview.setEmptyView(mTvnull);
         mTvnull.setText(R.string.e_homework);
-//        showfxDialog();
-
-        httpData();
+        showfxDialog();
+        httpType = HTTP_TYPE_GET_CLASS_STATUS;
+        httpData(); // 获取班级和状态列表
+        mFragement = this;
 
     }
 
@@ -99,11 +137,11 @@ public class FrHomework extends FxFragment {
             switch (v.getId()) {
                 case R.id.tool_right:
                     Toast.makeText(activity, R.string.send_homework, Toast.LENGTH_SHORT).show();
-                    DjhJumpUtil.getInstance().startBaseActivity(getContext(), SendHomeworkActivity.class);
+                    DjhJumpUtil.getInstance().fragmentStartBaseActivityForResult(getActivity(), SendHomeworkActivity.class, mFragement,null, DjhJumpUtil.getInstance().activtiy_SendHomework);
                     break;
 
                 case R.id.tv_class:
-                    Toast.makeText(activity, "选择班级", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "选择班级", Toast.LENGTH_SHORT).show();
                     choosetag = 1;
                     if (popupWindow != null && popupWindow.isShowing()) {
                         popupWindow.dismiss();
@@ -117,24 +155,17 @@ public class FrHomework extends FxFragment {
 
                     break;
                 case R.id.tv_state:
-                    if (mChooseClass.getText().equals("班级")) {
-                        Toast toast = Toast.makeText(getActivity(), "请先选择班级", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        return;
-                    }
-                    Toast.makeText(activity, "选择检查状态", Toast.LENGTH_SHORT).show();
                     choosetag = 2;
                     //点击选项列表
                     if (popupWindow != null && popupWindow.isShowing()) {
                         popupWindow.dismiss();
-
                         return;
                     }
-                    if (popupWindow != null) {
+                    popupWindow = null;
+                    if (popupWindow == null) {
                         initPopup();
                     }
-                    popupWindow.showAsDropDown(mChooseState, 20, -10);
+                    popupWindow.showAsDropDown(mChooseStatus, 20, -10);
 
 
                     break;
@@ -149,10 +180,10 @@ public class FrHomework extends FxFragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
 
-            Toast.makeText(activity, "跳作业报告", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity, "跳作业报告", Toast.LENGTH_SHORT).show();
             Bundle b = new Bundle();
-            b.putString("unit", data.get(position).getTask_second_class_name());
-
+            b.putString("className", homeworkList.get(section).getHome_list().get(position).getClass_name());
+            b.putString("homeworkId", homeworkList.get(section).getHome_list().get(position).getId());
             DjhJumpUtil.getInstance().startBaseActivity(getActivity(), CheckHomeworkActivity.class, b, 0);
         }
 
@@ -166,64 +197,103 @@ public class FrHomework extends FxFragment {
     @Override
     protected void dismissfxDialog(int flag) {
         super.dismissfxDialog(flag);
-        mTvnull.setText(R.string.e_homework);
-        mTvnull.setVisibility(View.VISIBLE);
-        mTvnull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showfxDialog();
-                httpData();
-            }
-        });
+//        mTvnull.setText(R.string.e_homework);
+//        mTvnull.setVisibility(View.VISIBLE);
+//        mTvnull.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showfxDialog();
+//                httpData();
+//            }
+//        });
     }
 
-    /*请求数据*/
-    @Override
     public void httpData() {
-        super.httpData();
+        //网络请求
+        switch (httpType) {
+            case HTTP_TYPE_GET_HOMEWORK_LIST:
+                RequestUtill.getInstance().httpGetHomeworkList(getActivity(), callGetClassList, mClassId, mStatusId, mPageSize, mPageNum); // 获取作业列表
+                break;
 
-        for (int i = 0; i < 10; i++) {
-            data.add(new Homework("周一", "二年" + i + "班",
-                    "2018年01月02日 13:57:0" + i,
-                    "Until" + i + " frist to school",
-                    "待检查", "0/3"));
+            case HTTP_TYPE_GET_CLASS_STATUS:
+                RequestUtill.getInstance().httpGetClassAndStatus(getActivity(), callGetClassAndStatus); // 获取班级和状态
+                break;
         }
-        adapter_apclass = new ApClasssify(getActivity(), data);
-        //模拟数据
-        datasstate = new ArrayList<>();
-        datasstate.add(new Homework("待检查"));
-        datasstate.add(new Homework("已检查"));
-        adapter_apcheckState = new ApClassState(getActivity(), datasstate);
 
-        adapter_homework.notifyDataSetChanged();
+    }
 
-        RequestUtill.getInstance().getHomework(getActivity(), new ResultCallback() {
+    /**
+     * 获取班级和状态列表的callback函数
+     */
+    ResultCallback callGetClassAndStatus = new ResultCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            dismissfxDialog();
+        }
 
-            @Override
-            public void onError(Request request, Exception e) {
-                dismissfxDialog();
-                ToastUtil.showToast(getActivity(), ErrorCode.error(e));
+        @Override
+        public void onResponse(String response) {
+            dismissfxDialog();
+            httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
+            httpData(); // 获取班级和状态列表
+            HeadJson json = new HeadJson(response);
+            if (json.getstatus() == 0) {
+                /* 解析班级和状态列表信息 */
+                BeClassAndStatus temp = json.parsingObject(BeClassAndStatus.class);
+                if (temp != null) {
+                    if (temp.getClass_list().size() > 0) {
+                        classList.addAll(temp.getClass_list());
+                    }
 
-            }
-
-            @Override
-            public void onResponse(String response) {
-                dismissfxDialog();
-                HeadJson json = new HeadJson(response);
-                if (json.getstatus() == 0) {
-                    data.clear();
-                    List<Homework> temp = json.parsingListArray(new GsonType<List<Homework>>() {
-                    });
-                    if (temp != null)
-                        data.addAll(temp);
-                    adapter_homework.notifyDataSetChanged();
-                } else {
-                    ToastUtil.showToast(getActivity(), json.getMsg());
+                    if (temp.getHomework_status().size() > 0) {
+                        statusList.addAll(temp.getHomework_status());
+                    }
                 }
 
+                apClass.notifyDataSetChanged();
+                apCheckState.notifyDataSetChanged();
+
+            } else {
+                ToastUtil.showToast(getActivity(), json.getMsg());
             }
-        });
-    }
+        }
+    };
+
+    /**
+     * 获取作业列表的callback函数
+     */
+    ResultCallback callGetClassList = new ResultCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            dismissfxDialog();
+            finishRefreshAndLoadMoer(refresh, 0);
+        }
+
+        @Override
+        public void onResponse(String response) {
+            dismissfxDialog();
+            HeadJson json = new HeadJson(response);
+            if (json.getstatus() == 0) {
+                    /* 解析作业列表信息 */
+                if (mPageNum == 1) {
+                    homeworkList.clear();
+                }
+
+                Homework temp = json.parsingObject(Homework.class);
+                itemNumber = temp.getTotalRows();
+                if (temp != null && temp.getLists().size() > 0) {
+                    mPageNum++;
+                    addList(temp.getLists());
+                }
+
+                adapterHomework.notifyDataSetChanged();
+
+            } else {
+                ToastUtil.showToast(getActivity(), json.getMsg());
+            }
+            finishRefreshAndLoadMoer(refresh, isLastPage()); // 要自己判断是否为最后一页
+        }
+    };
 
     /*选择班级和状态*/
     private void initPopup() {
@@ -234,7 +304,7 @@ public class FrHomework extends FxFragment {
         if (choosetag == 1) {
             popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, metrics.heightPixels / 2);
         } else {
-            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, mChooseState.getHeight() * 2);
+            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, mChooseStatus.getHeight() * 2);
         }
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
@@ -243,11 +313,9 @@ public class FrHomework extends FxFragment {
         ListView listView = (ListView) contentView.findViewById(R.id.listview);
 
         if (choosetag == 1) {
-            listView.setAdapter(adapter_apclass);
-//            adapter_apclass.reFreshItem(position);
-
+            listView.setAdapter(apClass);
         } else {
-            listView.setAdapter(adapter_apcheckState);
+            listView.setAdapter(apCheckState);
         }
         listView.setOnItemClickListener(onitemclick);
     }
@@ -259,18 +327,20 @@ public class FrHomework extends FxFragment {
 //            mPageNum = 1;
 
             if (choosetag == 1) {
-                mChooseClass.setText(data.get(position).getTask_second_class_name());
+//                mChooseClass.setText(homeworkList.get(position).getTask_second_class_name());
                 // mChooseClass.setTag(data.get(position).getCode());
                 // type = data.get(position).getCode();
+                mChooseClass.setText(classList.get(position).getClass_name());
+                mClassId = classList.get(position).getId();
+                httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
+                mPageNum = 1;
                 httpData();
             } else {
-                mChooseState.setText(datasstate.get(position).getTask_check());
-                if (datasstate.get(position).getTask_check().equals("待检查")) {
-                    mChooseState.setTextColor(getResources().getColor(R.color.red));
-
-                } else {
-                    mChooseState.setTextColor(getResources().getColor(R.color.black));
-                }
+                mChooseStatus.setText(statusList.get(position).getLabel());
+                mStatusId = statusList.get(position).getValue();
+                httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
+                mPageNum = 1;
+                httpData();
             }
             if (popupWindow != null) popupWindow.dismiss();
         }
@@ -286,8 +356,45 @@ public class FrHomework extends FxFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // ity
-        if (resultCode == -1) {
+        if (requestCode == DjhJumpUtil.getInstance().activtiy_SendHomework && resultCode == RESULT_OK) { // 布置作业成功返回
+            httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
+            mPageNum = 1;
+            httpData();
+            // TODO 刷新列表
         }
+    }
+
+    /**
+     * 把发布时间同样的作业放到同一个Section中去
+     * @param list
+     */
+    private void addList(List<BeHomeworkList> list) {
+        if (homeworkList.size() > 0) {
+//            homeworkList.addAll(list);
+            if (homeworkList.get(homeworkList.size() - 1).getPubdate().equals(list.get(0).getPubdate())) {
+                homeworkList.get(homeworkList.size() - 1).getHome_list().addAll(list.get(0).getHome_list());
+                list.remove(0);
+//                if (list.size() <= 0) {
+//                    homeworkList.remove(homeworkList.size() - 1);
+//                }
+            }
+            homeworkList.addAll(list);
+        } else {
+            homeworkList.addAll(list);
+        }
+    }
+
+    /**
+     * 判断是否为最后一页
+     * @return 0 不是最后一页 1 是最后一页
+     */
+    private int isLastPage() {
+        int result = 0;
+
+        if ((mPageNum - 1) * mPageSize >= itemNumber) {
+            result = 1;
+        }
+
+        return result;
     }
 }

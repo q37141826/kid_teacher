@@ -1,51 +1,30 @@
 package cn.dajiahui.kidteacher.ui.homework.bean;
 
+import java.util.List;
+
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
- * 选择教辅
+ * 教辅Bean
  */
 
 public class ChooseSupplementary extends BeanObj {
-    public ChooseSupplementary(String imgbook, String bookname, int imgreous) {
-        this.imgreous = imgreous;
-        this.imgbook = imgbook;
-        this.bookname = bookname;
+    int totalRows;
+    List<BeWorkBook> lists;
+
+    public int getTotalRows() {
+        return totalRows;
     }
 
-    private int imgreous;
-
-    public ChooseSupplementary(String imgbook, String bookname) {
-        this.imgbook = imgbook;
-        this.bookname = bookname;
+    public void setTotalRows(int totalRows) {
+        this.totalRows = totalRows;
     }
 
-    private String imgbook;
-    private String bookname;
-
-    public int getImgreous() {
-        return imgreous;
+    public List<BeWorkBook> getLists() {
+        return lists;
     }
 
-    public void setImgreous(int imgreous) {
-        this.imgreous = imgreous;
+    public void setLists(List<BeWorkBook> lists) {
+        this.lists = lists;
     }
-
-    public String getBookname() {
-        return bookname;
-    }
-
-    public void setBookname(String bookname) {
-        this.bookname = bookname;
-    }
-
-    public String getImgbook() {
-        return imgbook;
-    }
-
-    public void setImgbook(String imgbook) {
-        this.imgbook = imgbook;
-    }
-
-
 }

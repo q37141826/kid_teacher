@@ -7,37 +7,62 @@
               android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="141dp">
 
         <ImageView
             android:id="@+id/img_supplementary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="106dp"
+            android:layout_height="141dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_launcher"/>
+
+        <RelativeLayout
+            android:visibility="invisible"
+            android:id="@+id/img_mask"
+            android:layout_width="106dp"
+            android:layout_height="141dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/mask"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ico_img_select"/>
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/id_item_select"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_toLeftOf="@+id/tv_supplementary"
-            android:background="@null"
-            android:src="@drawable/ico_im_not"/>
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
 
-        <TextView
-            android:id="@+id/tv_supplementary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Move up 1"/>
+            <TextView
+                android:id="@+id/tv_supplementary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text14"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Move up 1"/>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 

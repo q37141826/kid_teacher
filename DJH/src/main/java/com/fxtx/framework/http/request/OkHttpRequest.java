@@ -1,5 +1,6 @@
 package com.fxtx.framework.http.request;
 
+import android.util.Log;
 import android.util.Pair;
 
 import com.fxtx.framework.http.OkHttpClientManager;
@@ -207,6 +208,12 @@ public abstract class OkHttpRequest
         {
             OkHttpRequest request = new OkHttpPostRequest(url, tag, params, headers, mediaType, content, bytes, file,json);
             request.invokeAsyn(callback);
+            Log.d("log", "post url = " + url);
+            Log.d("log", "parames start ************ ");
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                Log.d("log", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            }
+            Log.d("log", "parames end ************ ");
             return request;
         }
 

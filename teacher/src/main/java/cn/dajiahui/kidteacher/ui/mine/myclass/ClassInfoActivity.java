@@ -51,7 +51,7 @@ public class ClassInfoActivity extends FxActivity {
                     dismissfxDialog();
                     break;
 
-                case MSG_REFRESH_LIST: // 刷新列表S
+                case MSG_REFRESH_LIST: // 刷新列表
                     apMyClassInfo.notifyDataSetChanged();
                     break;
 
@@ -150,5 +150,11 @@ public class ClassInfoActivity extends FxActivity {
         };
 
         RequestUtill.getInstance().httpGetClassInfo(context, call, classId);
+    }
+
+    @Override
+    protected void onDestroy() {
+        handler.removeCallbacksAndMessages(null);
+        super.onDestroy();
     }
 }

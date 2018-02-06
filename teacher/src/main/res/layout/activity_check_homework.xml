@@ -4,100 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_line"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="cn.dajiahui.kidteacher.ui.homework.CheckHomeworkActivity">
-
-    <include layout="@layout/layout_tool_text"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:gravity="center"
+        android:background="@drawable/sp_blue_progressive"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/textpadding"
-            android:gravity="center"
-            android:text="单元"
-            android:textSize="@dimen/text18"/>
+        <include layout="@layout/layout_tool_text"/>
 
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/textpadding"
             android:gravity="center"
-            android:text="截止时间"
-            android:textSize="@dimen/text15"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_check"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/textpadding"
+                android:gravity="center"
+                android:text="单元"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text18"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/textpadding"
+                android:gravity="center"
+                android:text="截止至："
+                android:textColor="@color/white"
+                android:textSize="@dimen/text15"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/textpadding"
-            android:gravity="center"
-            android:text="查看作业情况"
-            android:textSize="@dimen/text13"/>
+            android:layout_marginTop="10dp"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_execution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/line"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/textpadding"
+                android:gravity="center"
+                android:text="完成情况："
+                android:textColor="@color/white"
+                android:textSize="@dimen/text18"/>
+
+            <TextView
+                android:id="@+id/line"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:background="@color/white"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tv_accuracy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/line"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="@dimen/textpadding"
+                android:gravity="center"
+                android:text="正确率："
+                android:textColor="@color/white"
+                android:textSize="@dimen/text18"/>
+        </RelativeLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_execution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/line"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="@dimen/textpadding"
-            android:gravity="center"
-            android:text="完成情况（1/3）"
-            android:textSize="@dimen/text18"/>
-
-        <TextView
-            android:id="@+id/line"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:background="@color/text_deepgray"
-            android:gravity="center"
-            />
-
-        <TextView
-            android:id="@+id/tv_accuracy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/line"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="@dimen/textpadding"
-            android:gravity="center"
-            android:text="正确率30%"
-            android:textSize="@dimen/text18"/>
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
+
         android:orientation="horizontal">
 
         <TextView
@@ -108,16 +110,18 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="30dp"
             android:gravity="center"
-            android:text="已完成（）"
+            android:text="已完成：0"
+            android:textColor="@color/blue"
             android:textSize="@dimen/text17"/>
 
         <TextView
-            android:id="@+id/tv_going"
+            android:id="@+id/tv_doing"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="进行中（）"
+            android:text="进行中：0"
+            android:textColor="@color/black_tv_6"
             android:textSize="@dimen/text17"/>
 
         <TextView
@@ -126,26 +130,63 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_marginRight="30dp"
             android:gravity="center"
-            android:text="未完成（）"
+            android:text="未完成：0"
+            android:textColor="@color/black_tv_6"
             android:textSize="@dimen/text17"/>
     </RelativeLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_marginBottom="@dimen/textpadding"
-        android:layout_marginLeft="@dimen/textpadding"
-        android:layout_marginRight="@dimen/textpadding"
-        android:layout_marginTop="@dimen/textpadding"
-        android:layout_weight="1"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="@dimen/textpadding">
+        android:layout_height="1dp"
+        android:background="@color/line_gray2"
+        android:text=""/>
 
-        <include layout="@layout/child_listview"/>
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <!--<include layout="@layout/child_listview"/>-->
+        <ListView
+            android:id="@+id/listview_finish"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/textpadding"
+            android:divider="@color/transparent"
+            android:dividerHeight="0px"
+            android:fadeScrollbars="false"
+            android:overScrollMode="never"
+            android:scrollbars="none"></ListView>
+
+        <ListView
+            android:visibility="invisible"
+            android:id="@+id/listview_doing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/textpadding"
+            android:divider="@color/transparent"
+            android:dividerHeight="0px"
+            android:fadeScrollbars="false"
+            android:overScrollMode="never"
+            android:scrollbars="none"></ListView>
+
+        <ListView
+            android:visibility="invisible"
+            android:id="@+id/listview_not_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/textpadding"
+            android:divider="@color/transparent"
+            android:dividerHeight="0px"
+            android:fadeScrollbars="false"
+            android:overScrollMode="never"
+            android:scrollbars="none"></ListView>
+
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -159,8 +200,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/white"
-            android:text="检查作业"/>
+            android:background="@color/blue_dark"
+            android:text="检查作业"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

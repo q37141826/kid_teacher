@@ -25,18 +25,27 @@
 
             <TextView
                 android:id="@+id/task_second_class_name"
-                android:layout_width="59dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="二年级7班"
                 android:textColor="@color/blue_dark"
                 android:textSize="@dimen/text13"/>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="完成:"
+                android:textColor="@color/text_deepgray"
+                android:textSize="@dimen/text13"/>
+
+            <TextView
                 android:id="@+id/task_second_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="完成:0"
-                android:textColor="@color/text_deepgray"
+                android:layout_marginLeft="3dp"
+                android:text="0"
+                android:textColor="@color/red_F1311D"
                 android:textSize="@dimen/text13"/>
 
             <TextView
@@ -90,7 +99,7 @@
                 android:textSize="@dimen/text14"/>
 
             <TextView
-                android:id="@+id/task_second_time"
+                android:id="@+id/task_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2018"
@@ -107,7 +116,7 @@
         android:id="@+id/task_bottom_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/list_divider_color_grav"
+        android:background="@color/list_divider_color_gravy"
         android:text=""/>
     <!--<View-->
     <!--android:id="@+id/textline"-->

@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeClass;
 
 
 /**
@@ -19,11 +20,11 @@ import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
  */
 public class ApClasssify extends BaseAdapter {
     private Context context;
-    private List<Homework> datas;
+    private List<BeClass> datas;
     private int position = 0;
 
 
-    public ApClasssify(Context context, List<Homework> datas) {
+    public ApClasssify(Context context, List<BeClass> datas) {
         this.context = context;
         this.datas = datas;
 
@@ -40,7 +41,7 @@ public class ApClasssify extends BaseAdapter {
     }
 
     @Override
-    public Homework getItem(int position) {
+    public BeClass getItem(int position) {
         return datas.get(position);
     }
 
@@ -59,9 +60,12 @@ public class ApClasssify extends BaseAdapter {
 //            tv.setBackgroundColor(Color.WHITE);
 //        }
 
-        tv.setText(datas.get(position).getTask_second_class_name());
+//        if (position == 0) {
+//            tv.setText(R.string.all_options);
+//        } else {
+            tv.setText(datas.get(position).getClass_name());
+//        }
 
-//        Log.d("majin", "tv:" + tv.getTextSize());
         return holder.getConvertView();
     }
 }

@@ -96,13 +96,13 @@ public class FrAlbum extends FxFragment {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
-                    if (pagNum == 1) {
+                    if (mPageNum == 1) {
                         ablums.clear();
                     }
                     List<BeAlbum> temp = json.parsingListArray(new GsonType<List<BeAlbum>>() {
                     });
                     if (temp != null && temp.size() > 0) {
-                        pagNum++;
+                        mPageNum++;
                         ablums.addAll(temp);
                     }
                     adapter.notifyDataSetChanged();
@@ -111,6 +111,6 @@ public class FrAlbum extends FxFragment {
                 }
                 finishRefreshAndLoadMoer(refresh,1);
             }
-        }, classId, pagNum, "30");
+        }, classId, mPageNum, "30");
     }
 }

@@ -1,5 +1,7 @@
 package cn.dajiahui.kidteacher.ui.homework.bean;
 
+import java.util.List;
+
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
@@ -8,20 +10,23 @@ import cn.dajiahui.kidteacher.util.BeanObj;
 
 public class ChooseClass extends BeanObj {
 
-    private String classname;
+    int totalRows;
+    List<BeHomewrokClass> lists;
 
-    public ChooseClass(String classname) {
-        this.classname = classname;
+
+    public int getTotalRows() {
+        return totalRows;
     }
 
-
-    public String getClassname() {
-        return classname;
+    public void setTotalRows(int totalRows) {
+        this.totalRows = totalRows;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname;
+    public List<BeHomewrokClass> getLists() {
+        return lists;
     }
 
-
+    public void setLists(List<BeHomewrokClass> lists) {
+        this.lists = lists;
+    }
 }

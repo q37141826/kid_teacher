@@ -8,7 +8,7 @@ public class BeAccess {
     public boolean isClass = false;//班级权限
     public boolean isNotice = false;//消息权限
     public boolean isJob = false;//作业权限
-    public boolean isMsn = false;//消息权限
+    public boolean isMsn = true;//消息权限
     public boolean isAttend = false;//点名
     public boolean isStuEval = false;//评价学生
     public boolean isAlbum = false;//相册

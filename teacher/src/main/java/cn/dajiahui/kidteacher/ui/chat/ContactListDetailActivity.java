@@ -67,19 +67,19 @@ public class ContactListDetailActivity extends FxActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             BeContactUser beContactUser = data.get(position);
-            if (StringUtil.isEmpty(beContactUser.getHxId())) {
-                ToastUtil.showToast(ContactListDetailActivity.this, "数据错误，无法聊天");
-                return;
-            }
+//            if (StringUtil.isEmpty(beContactUser.getHxId())) {
+//                ToastUtil.showToast(ContactListDetailActivity.this, "数据错误，无法聊天");
+//                return;
+//            }
             if (beContactUser.getObjectId().equals(UserController.getInstance().getUserId())) {
                 ToastUtil.showToast(ContactListDetailActivity.this, R.string.Cant_chat_with_yourself);
                 return;
             }
-            EaseUser user = new EaseUser(beContactUser.getHxId());
-            user.setAvatar(beContactUser.getAvator());
-            user.setNick(beContactUser.getRealName());
-            DemoDBManager.getInstance().saveContact(user);
-            DjhJumpUtil.getInstance().startChatActivity(ContactListDetailActivity.this, data.get(position).getHxId(), data.get(position).getPhone());
+//            EaseUser user = new EaseUser(beContactUser.getHxId());
+//            user.setAvatar(beContactUser.getAvator());
+//            user.setNick(beContactUser.getRealName());
+//            DemoDBManager.getInstance().saveContact(user);
+//            DjhJumpUtil.getInstance().startChatActivity(ContactListDetailActivity.this, data.get(position).getHxId(), data.get(position).getPhone());
 
         }
     };

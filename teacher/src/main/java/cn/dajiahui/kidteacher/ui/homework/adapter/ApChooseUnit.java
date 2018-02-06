@@ -10,34 +10,35 @@ import com.fxtx.framework.adapter.ViewHolder;
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
-import cn.dajiahui.kidteacher.ui.homework.bean.ChooseUtils;
+import cn.dajiahui.kidteacher.ui.homework.bean.BeUnit;
 
 /**
- * 发布课本作业的Utils适配器
+ * 发布课本作业的Unit适配器
  */
-public class ApChooseUtils extends CommonAdapter<ChooseUtils> {
+public class ApChooseUnit extends CommonAdapter<BeUnit> {
 
-    int selectorPosition = -1;
+    private int selectorPosition = -1;
+    private Context context;
 
-    public ApChooseUtils(Context context, List<ChooseUtils> mDatas) {
+    public ApChooseUnit(Context context, List<BeUnit> mDatas) {
         super(context, mDatas, R.layout.item_chooseutils);
+        this.context = context;
     }
 
     @Override
-    public void convert(ViewHolder viewHolder, int position, ChooseUtils item) {
+    public void convert(ViewHolder viewHolder, int position, BeUnit item) {
         TextView tvUtilsname = viewHolder.getView(R.id.tv_utilName);
-        TextView tvUtilscontent = viewHolder.getView(R.id.tv_utilcomtent);
         ImageView isSureImg = viewHolder.getView(R.id.id_item_select);
 
-        tvUtilsname.setText(item.getUtlisname());
-        tvUtilscontent.setText(item.getComnent());
-
+        tvUtilsname.setText(item.getName());
         //如果当前的position等于传过来点击的position,就去改变他的状态
         if (selectorPosition == position) {
             isSureImg.setImageResource(R.drawable.ico_im_ok);
+            tvUtilsname.setTextColor(context.getResources().getColor(R.color.blue_dark));
         } else {
             //其他的恢复原来的状态
             isSureImg.setImageResource(R.drawable.ico_im_not);
+            tvUtilsname.setTextColor(context.getResources().getColor(R.color.black_tv_6));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.fxtx.framework.util;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class JumpUtil {
     }
 
     public void startBaseActivityForResult(Activity activity, Class classs,
-                                              Bundle extras, int requestCode) {
+                                                Bundle extras, int requestCode) {
         Intent intent = new Intent(activity.getApplicationContext(), classs);
         if (extras != null) {
             intent.putExtras(extras);
@@ -33,4 +34,12 @@ public class JumpUtil {
         activity.startActivityForResult(intent, requestCode);
     }
 
+    public void fragmentStartBaseActivityForResult(Activity activity, Class classs, Fragment fragment,
+                                                   Bundle extras, int requestCode) {
+        Intent intent = new Intent(activity.getApplicationContext(), classs);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
+        fragment.startActivityForResult(intent, requestCode);
+    }
 }

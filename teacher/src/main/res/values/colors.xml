@@ -8,6 +8,8 @@
     <color name="red_light">#EA5B5C</color>
     <color name="blue_bg">#F2F9FF</color>
     <color name="blue_line">#DDE8F2</color>
+    <color name="blue_69">#699FF7</color>
+    <color name="red_F1311D">#F1311D</color>
     <!-- 点名的四种状态-->
     <color name="call_blue">#70738EB5</color>
     <color name="call_red">#70E32425</color>
@@ -24,4 +26,6 @@
     <color name="black_tv_3">#333333</color>
     <color name="black_tv_6">#666666</color>
     <color name="text_gray_df">#DFDFDF</color>
+    <color name="black_tv_cd">#CDCDCD</color>
+
 </resources>

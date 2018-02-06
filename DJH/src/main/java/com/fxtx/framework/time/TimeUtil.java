@@ -206,4 +206,37 @@ public class TimeUtil {
         }
         return 0;
     }
+
+    /**
+     * 判断是否为同一天
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static boolean isSameDay(Date date1, Date date2) {
+        Calendar calDateA = Calendar.getInstance();
+        calDateA.setTime(date1);
+
+        Calendar calDateB = Calendar.getInstance();
+        calDateB.setTime(date2);
+
+        return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
+                && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH)
+                && calDateA.get(Calendar.DAY_OF_MONTH) == calDateB
+                .get(Calendar.DAY_OF_MONTH);
+    }
+
+    /**
+     * 时间戳转时间字符串
+     * @param stamp
+     * @return
+     */
+    public static String stampToString(String stamp) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        long lt = new Long(stamp);
+        Date date = new Date(lt * 1000);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
 }

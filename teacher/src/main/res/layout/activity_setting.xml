@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/list_divider_color_grav"
+            android:background="@color/list_divider_color_gravy"
             android:text=""/>
 
         <RelativeLayout
@@ -54,7 +54,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/textpadding"
             android:layout_marginRight="@dimen/textpadding"
-            android:background="@color/list_divider_color_grav"
+            android:background="@color/list_divider_color_gravy"
             android:text=""/>
 
         <RelativeLayout
@@ -91,7 +91,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/textpadding"
             android:layout_marginRight="@dimen/textpadding"
-            android:background="@color/list_divider_color_grav"
+            android:background="@color/list_divider_color_gravy"
             android:text=""/>
 
         <RelativeLayout
@@ -125,7 +125,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/textpadding"
             android:layout_marginRight="@dimen/textpadding"
-            android:background="@color/list_divider_color_grav"
+            android:background="@color/list_divider_color_gravy"
             android:text=""/>
 
     </LinearLayout>

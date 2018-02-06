@@ -444,6 +444,124 @@ public class RequestUtill {
         getHttpBuilder(context, "teacher/classroom/remove").params(params).post(callback);
     }
 
+    /**
+     * 取得教辅列表
+     * @param context
+     * @param callback
+     * @param pageSize
+     * @param pageNum
+     */
+    public void httpGetWorkBookList(Context context, ResultCallback callback, int pageSize, int pageNum) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("pageSize", String.valueOf(pageSize));
+        params.put("page", String.valueOf(pageNum));
+        getHttpBuilder(context, "teacher/book/index").params(params).post(callback);
+    }
+
+    /**
+     * 选择教辅
+     * @param context
+     * @param callback
+     * @param bookId
+     */
+    public void httpSelectWorkBook(Context context, ResultCallback callback, String bookId) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("book_id", bookId);
+        getHttpBuilder(context, "teacher/book/select").params(params).post(callback);
+    }
+
+    /**
+     * 取得常用教辅
+     * @param context
+     * @param callback
+     */
+    public void httpGetWorkBook(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        getHttpBuilder(context, "teacher/book/history").params(params).post(callback);
+    }
+
+
+    /**
+     * 取得单元列表
+     */
+    public void httpGetUnitList(Context context, ResultCallback callback, String bookId) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("book_id", bookId);
+        getHttpBuilder(context, "teacher/book/choose").params(params).post(callback);
+    }
+
+    /**
+     * 发布作业时取得的班级列表
+     * @param context
+     * @param callback
+     * @param bookId
+     * @param unitId
+     * @param pageSize
+     * @param pageNum
+     */
+    public void httpGetHomeWorkClassList(Context context, ResultCallback callback, String bookId, String unitId, int pageSize, int pageNum) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("book_id", bookId);
+        params.put("unit_id", unitId);
+        params.put("pageSize", String.valueOf(pageSize));
+        params.put("page", String.valueOf(pageNum));
+        getHttpBuilder(context, "teacher/homework/next").params(params).post(callback);
+    }
+
+    /**
+     * 发布作业
+     * @param context
+     * @param callback
+     * @param classId
+     * @param bookId
+     * @param unitId
+     * @param endTime
+     */
+    public void httpPublishHomework(Context context, ResultCallback callback, String classId, String bookId, String unitId, String endTime) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("class_id", classId);
+        params.put("book_id", bookId);
+        params.put("unit_id", unitId);
+        params.put("end_time", endTime);
+        getHttpBuilder(context, "teacher/homework/pub").params(params).post(callback);
+
+    }
+
+    /**
+     * 获取作业列表
+     * @param context
+     * @param callback
+     * @param classId
+     * @param isChecked
+     * @param pageSize
+     * @param pageNum
+     */
+    public void httpGetHomeworkList(Context context, ResultCallback callback, String classId, String isChecked, int pageSize, int pageNum ) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("class_id", classId);
+        params.put("is_checked", isChecked);
+        params.put("pageSize", String.valueOf(pageSize));
+        params.put("page", String.valueOf(pageNum));
+        getHttpBuilder(context, "teacher/homework/list").params(params).post(callback);
+    }
+
+    /**
+     * 获取班级和状态列表（作业（首页）页面）
+     * @param context
+     * @param callback
+     */
+    public void httpGetClassAndStatus(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        getHttpBuilder(context, "teacher/homework/basic").params(params).post(callback);
+    }
 
     /**
      * 测试json
@@ -456,6 +574,31 @@ public class RequestUtill {
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("json", json);
         getHttpBuilder(context, "teacher/setting/test").params(params).post(callback);
+    }
+
+    /**
+     * 教师端通讯录
+     *
+     * @param context
+     * @param callback
+     */
+    public void httpGetContactList(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        getHttpBuilder(context, "teacher/classroom/contact").params(params).post(callback);
+    }
+
+    /**
+     * 取得作业报告
+     * @param context
+     * @param callback
+     * @param homeworkId
+     */
+    public void httpHomeworkReport(Context context, ResultCallback callback, String homeworkId) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("homework_id", homeworkId);
+        getHttpBuilder(context, "teacher/homework/detail").params(params).post(callback);
     }
 }
 

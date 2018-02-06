@@ -44,6 +44,10 @@ public class DjhJumpUtil extends JumpUtil {
     public final int activity_notice_class = 7001; //添加班级请求吗
     public final int activity_mp3 = 8001; //录音回调
 
+    public final int activtiy_SendHomework = 1002; // 发布作业
+    public final int activtiy_ChooseSupplementary = 1003; //发布作业.教辅选择
+    public final int activtiy_ChooseClass = 1004; //发布课本作业（选择班级，截止时间)
+
     private DjhJumpUtil() {
     }
 

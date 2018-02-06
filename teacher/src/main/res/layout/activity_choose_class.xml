@@ -5,52 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_line"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/layout_tool_text"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/list_divider_color_gravy"
+        android:text=""/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_marginBottom="@dimen/textpadding"
-        android:layout_marginLeft="@dimen/textpadding"
-        android:layout_marginRight="@dimen/textpadding"
-        android:layout_marginTop="@dimen/textpadding"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="@dimen/textpadding">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/task_choose_Deadline"/>
+            android:text="@string/task_choose_Deadline"
+            android:textColor="@color/text_deepgray"
+            android:textSize="@dimen/text15"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/textpadding"
+            android:background="@drawable/border_gray"
             android:orientation="horizontal"
             android:padding="@dimen/textpadding"
             android:weightSum="1">
 
             <TextView
                 android:id="@+id/tv_choosetime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="2017"/>
+                android:textColor="@color/black_tv_6"
+                android:hint="请选择截止时间"/>
 
             <TextView
                 android:id="@+id/tv_cleartime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="清空"/>
+                android:textColor="@color/black_tv_6"
+                android:text="@string/mine_clear"/>
 
         </LinearLayout>
 
@@ -58,14 +63,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/task_choose_class"
-            android:textSize="@dimen/text14"/>
+            android:textColor="@color/text_deepgray"
+            android:textSize="@dimen/text15"/>
 
-        <include layout="@layout/child_listview"/>
+        <include layout="@layout/layout_refresh"/>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,9 +83,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/white"
+            android:background="@color/blue_dark"
             android:text="@string/task_choose_confirm"
-            android:textColor="@color/text_deepgray"/>
+            android:textColor="@color/white"/>
     </LinearLayout>
 </LinearLayout>
 

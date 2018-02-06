@@ -56,7 +56,12 @@
     <string name="task_next">下一步</string>
     <string name="task_homeworkdetails">作业详情</string>
     <string name="task_checkhomeworkresult">检查作业结果</string>
-
+    <string name="task_book_empty">这里空空的</string>
+    <string name="task_click_first">请先点击右上角的“教辅设置”</string>
+    <string name="task_published">已布置</string>
+    <string name="task_unexamined">待审查</string>
+    <string name="task_examined">已审查</string>
+    <string name="all_options">全部</string>
     <!--作业end-->
 
 
@@ -115,6 +120,7 @@
     <string name="current_date">当前日期</string>
     <string name="select_time">选择时间</string>
     <string name="current_time">当前时间</string>
+    <string name="select_end_time">请选择截止时间</string>
     <!--时间选择器end-->
 
 

@@ -198,12 +198,59 @@ public abstract class FxActivity extends AppCompatActivity {
         }
     }
 
+    public void onBackText(int resourceId) {
+        if (toolbar != null) {
+            TextView tv = getView(R.id.tool_left);
+            tv.setCompoundDrawablesWithIntrinsicBounds(resourceId, 0, 0, 0);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        }
+    }
+
     public void onRightBtn(int drawableId, int textId) {
         if (toolbar != null) {
             TextView tv = getView(R.id.tool_right);
             tv.setText(textId);
             tv.setVisibility(View.VISIBLE);
             tv.setCompoundDrawablesWithIntrinsicBounds(drawableId, 0, 0, 0);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRightBtnClick(v);
+                }
+            });
+        }
+    }
+
+    public void onRightText(int textId) {
+        if (toolbar != null) {
+            TextView tv = getView(R.id.tool_right);
+            tv.setText(textId);
+            tv.setVisibility(View.VISIBLE);
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRightBtnClick(v);
+                }
+            });
+        }
+    }
+
+    /**
+     * 设置右侧按钮的文字及颜色
+     * @param textId
+     * @param textColor
+     */
+    public void onRightText(int textId, int textColor) {
+        if (toolbar != null) {
+            TextView tv = getView(R.id.tool_right);
+            tv.setTextColor(textColor);
+            tv.setText(textId);
+            tv.setVisibility(View.VISIBLE);
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -247,6 +294,12 @@ public abstract class FxActivity extends AppCompatActivity {
 
     protected void setfxTtitle(String title) {
         if (titleView != null)
+            titleView.setText(title);
+    }
+
+    protected void setfxTtitle(String title, int color) {
+        if (titleView != null)
+            titleView.setTextColor(color);
             titleView.setText(title);
     }
 

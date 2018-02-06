@@ -18,7 +18,9 @@ import com.squareup.okhttp.Request;
 import org.json.JSONObject;
 
 import cn.dajiahui.kidteacher.R;
+import cn.dajiahui.kidteacher.controller.UserController;
 import cn.dajiahui.kidteacher.http.RequestUtill;
+import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
 import cn.dajiahui.kidteacher.ui.mine.about.AboutActivity;
 import cn.dajiahui.kidteacher.ui.mine.myclass.MyClassActivity;
 import cn.dajiahui.kidteacher.ui.mine.notice.NoticeActivity;
@@ -49,7 +51,7 @@ public class FrMine extends FxFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         init();
-        tv_userName.setText("张三");
+        tv_userName.setText(UserController.getInstance().getUser().getNickname());
         tv_campusName.setText("北京");
     }
 

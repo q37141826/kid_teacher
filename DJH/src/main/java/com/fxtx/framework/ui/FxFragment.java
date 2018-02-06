@@ -30,8 +30,9 @@ public abstract class FxFragment extends Fragment {
     protected boolean isCreateView = false;
     private SparseArray<View> mViews = new SparseArray<View>();
     protected View rootView;
-    protected int pagNum = 1;
     public FxActivity activity;
+    public int mPageNum = 1; //分页
+    public int mPageSize = 10; //默认一页10个条目
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public abstract class FxFragment extends Fragment {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
                 mRefresh.setLoadMore(true);
-                pagNum = 1;
+                mPageNum = 1;
                 httpData();
             }
 

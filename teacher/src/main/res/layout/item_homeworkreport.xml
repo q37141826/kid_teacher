@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white_line"
+    android:background="@color/white"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/re_task_second"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/textpadding"
-        android:layout_marginLeft="@dimen/textpadding"
-        android:layout_marginRight="@dimen/textpadding"
-        android:layout_marginTop="@dimen/textpadding"
+
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -25,40 +22,54 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <cn.dajiahui.kidteacher.ui.homework.view.CricleTextView
+            <!--<cn.dajiahui.kidteacher.ui.homework.view.CricleTextView-->
+                <!--android:id="@+id/number"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text="数目"/>-->
+            <TextView
                 android:id="@+id/number"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="数目"/>
+                android:textColor="@color/black_tv_3"
+                android:text="1"/>
 
+            <!-- 头像 -->
             <ImageView
                 android:id="@+id/img_pic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ico_default_user"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <!-- 学生姓名 -->
             <TextView
                 android:id="@+id/tv_studentname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="张三"/>
+                android:layout_marginLeft="2dp"
+                android:text=""/>
 
+            <!-- 截止时间 -->
             <TextView
                 android:id="@+id/tv_submittime"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_studentname"
                 android:layout_marginTop="5dp"
-                android:text="2017-12-28"
+                android:layout_marginLeft="2dp"
+                android:text=""
                 android:textSize="12dp"/>
         </LinearLayout>
 
@@ -66,8 +77,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- 正确率 -->
             <TextView
                 android:id="@+id/tv_accuracy"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -75,7 +88,18 @@
                 android:layout_marginRight="20dp"
                 android:drawableRight="@drawable/ico_to"
                 android:gravity="center"
-                android:text="正确率"/>
+                android:textSize="@dimen/text15"
+                android:text=""/>
         </RelativeLayout>
+
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/textpadding"
+        android:layout_marginRight="@dimen/textpadding"
+        android:background="@color/list_divider_color_gravy"
+        android:text=""/>
+
 </LinearLayout>

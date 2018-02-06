@@ -26,8 +26,8 @@ public class ApContactDetail extends CommonAdapter<BeContactUser> {
     public void convert(ViewHolder viewHolder, int position, BeContactUser item) {
         ImageView userAvtor = viewHolder.getView(R.id.round_imge_child);
         TextView userName =viewHolder.getView(R.id.text_child_name);
-        if (item.getAvator()!=null)
-            GlideUtil.showRoundImage(mContext, item.getAvator(), userAvtor, R.drawable.ico_default_user, true);
-        userName.setText(item.getRealName());
+//        if (item.getAvator()!=null)
+//            GlideUtil.showRoundImage(mContext, item.getAvator(), userAvtor, R.drawable.ico_default_user, true);
+//        userName.setText(item.getRealName());
     }
 }

@@ -197,4 +197,10 @@ public class WaiteAddClassActivity extends FxActivity {
 
         return result;
     }
+
+    @Override
+    protected void onDestroy() {
+        handler.removeCallbacksAndMessages(null);
+        super.onDestroy();
+    }
 }

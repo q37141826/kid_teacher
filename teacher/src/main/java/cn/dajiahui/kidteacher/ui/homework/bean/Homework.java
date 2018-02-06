@@ -1,14 +1,35 @@
 package cn.dajiahui.kidteacher.ui.homework.bean;
 
+import java.util.List;
+
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
- * 作业
+ * 作业（首页）
  */
 
 public class Homework extends BeanObj {
 
-    /*作业列表中是待检查和未检查 start*/
+    private int totalRows;
+    private List<BeHomeworkList> lists;
+
+    public int getTotalRows() {
+        return totalRows;
+    }
+
+    public void setTotalRows(int totalRows) {
+        this.totalRows = totalRows;
+    }
+
+    public List<BeHomeworkList> getLists() {
+        return lists;
+    }
+
+    public void setLists(List<BeHomeworkList> lists) {
+        this.lists = lists;
+    }
+
+/*作业列表中是待检查和未检查 start*/
 
     private String task_check;//是否检查
     public Homework(String task_check) {

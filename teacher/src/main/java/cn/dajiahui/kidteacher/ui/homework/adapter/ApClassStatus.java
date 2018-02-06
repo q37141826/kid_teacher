@@ -11,19 +11,20 @@ import com.fxtx.framework.adapter.ViewHolder;
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
+import cn.dajiahui.kidteacher.ui.homework.bean.BeHomeworkStatus;
 import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
 
 
 /**
  * 选择状态
  */
-public class ApClassState extends BaseAdapter {
+public class ApClassStatus extends BaseAdapter {
     private Context context;
-    private List<Homework> datas ;
+    private List<BeHomeworkStatus> datas ;
     private int position = 0;
 
 
-    public ApClassState(Context context,List<Homework> datas) {
+    public ApClassStatus(Context context, List<BeHomeworkStatus> datas) {
         this.context = context;
         this.datas=datas;
 
@@ -40,7 +41,7 @@ public class ApClassState extends BaseAdapter {
     }
 
     @Override
-    public Homework getItem(int position) {
+    public BeHomeworkStatus getItem(int position) {
         return datas.get(position);
     }
 
@@ -53,11 +54,12 @@ public class ApClassState extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = ViewHolder.getHolder(context, convertView, parent, R.layout.simple_spinner_item, 0);
         TextView tv = holder.getView(R.id.tv_classify_item);
-        if (this.position == position) {
-            tv.setTextColor(context.getResources().getColor(R.color.red));
-        }
+//        if (this.position == position) {
+//            tv.setTextColor(context.getResources().getColor(R.color.red));
+//        }
+//
 
-        tv.setText(datas.get(position).getTask_check());
+        tv.setText(datas.get(position).getLabel());
 
         return holder.getConvertView();
     }
