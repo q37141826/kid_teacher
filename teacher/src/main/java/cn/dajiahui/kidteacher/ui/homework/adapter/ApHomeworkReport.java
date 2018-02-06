@@ -24,6 +24,7 @@ public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
 
     public ApHomeworkReport(Context context, List<BeHomewrokStudent> mDatas, boolean isShowAccuracy) {
         super(context, mDatas, R.layout.item_homeworkreport);
+        this.isShowAccuracy = isShowAccuracy;
     }
 
     @Override

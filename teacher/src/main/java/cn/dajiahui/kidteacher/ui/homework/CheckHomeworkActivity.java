@@ -363,7 +363,7 @@ public class CheckHomeworkActivity extends FxActivity {
                                 apDoing.notifyDataSetChanged();
                             } else if (item.getStatus_key() != null && item.getStatus_key().equals("not_start")) {
 //                                mNocompleted = getView(R.id.tv_nocompleted);
-                                mNocompleted.setText("进行中：" + item.getTotal());
+                                mNocompleted.setText("未完成：" + item.getTotal());
 
                                 listNotStart.clear();
                                 listNotStart.addAll(item.getLists());
@@ -373,13 +373,6 @@ public class CheckHomeworkActivity extends FxActivity {
                     }
 
                 }
-//                ChooseClass temp = json.parsingObject(ChooseClass.class);
-//                if (temp != null && temp.getLists().size() > 0) {
-//                    mPageNum++;
-//                    classInfoList.addAll(temp.getLists());
-//                }
-//
-//                apchooseClass.notifyDataSetChanged();
 
             } else {
                 ToastUtil.showToast(context, json.getMsg());
