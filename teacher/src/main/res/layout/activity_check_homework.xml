@@ -186,6 +186,8 @@
             android:overScrollMode="never"
             android:scrollbars="none"></ListView>
 
+        <TextView style="@style/text_null" />
+
     </RelativeLayout>
 
 

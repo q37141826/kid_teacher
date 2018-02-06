@@ -194,6 +194,8 @@ public class CheckHomeworkActivity extends FxActivity {
     private Button mBtnCheck;
     private String homeworkId;
 
+    private TextView tv_null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -238,6 +240,12 @@ public class CheckHomeworkActivity extends FxActivity {
                     mListviewFinish.setVisibility(View.VISIBLE);
                     mCompleted.setTextColor(getResources().getColor(R.color.blue));
 
+                    tv_null.setVisibility(View.GONE);
+                    if (listFinish != null && listFinish.size() <= 0) {
+                        tv_null.setText(R.string.not_data);
+                        mListviewFinish.setEmptyView(tv_null);
+                    }
+
                     mListviewDoing.setVisibility(View.INVISIBLE);
                     mDoing.setTextColor(getResources().getColor(R.color.black_tv_6));
 
@@ -253,6 +261,12 @@ public class CheckHomeworkActivity extends FxActivity {
                     mListviewDoing.setVisibility(View.VISIBLE);
                     mDoing.setTextColor(getResources().getColor(R.color.blue));
 
+                    tv_null.setVisibility(View.GONE);
+                    if (listDoing != null && listDoing.size() <= 0) {
+                        tv_null.setText(R.string.not_data);
+                        mListviewDoing.setEmptyView(tv_null);
+                    }
+
                     mListviewNotStart.setVisibility(View.INVISIBLE);
                     mNocompleted.setTextColor(getResources().getColor(R.color.black_tv_6));
 
@@ -267,6 +281,12 @@ public class CheckHomeworkActivity extends FxActivity {
 
                     mListviewNotStart.setVisibility(View.VISIBLE);
                     mNocompleted.setTextColor(getResources().getColor(R.color.blue));
+
+                    tv_null.setVisibility(View.GONE);
+                    if (listNotStart != null && listNotStart.size() <= 0) {
+                        tv_null.setText(R.string.not_data);
+                        mListviewNotStart.setEmptyView(tv_null);
+                    }
 
                     break;
 
@@ -290,6 +310,8 @@ public class CheckHomeworkActivity extends FxActivity {
         mCompleted = getView(R.id.tv_completed);
         mDoing = getView(R.id.tv_doing);
         mNocompleted = getView(R.id.tv_nocompleted);
+
+        tv_null = getView(com.hyphenate.easeui.R.id.tv_null);
 
         registrationevent();
     }
@@ -354,6 +376,13 @@ public class CheckHomeworkActivity extends FxActivity {
                                 listFinish.clear();
                                 listFinish.addAll(item.getLists());
                                 apFinish.notifyDataSetChanged();
+
+                                tv_null.setVisibility(View.GONE);
+                                if (listFinish.size() <= 0) {
+                                    tv_null.setText(R.string.not_data);
+                                    mListviewFinish.setEmptyView(tv_null);
+                                }
+
                             } else if (item.getStatus_key() != null && item.getStatus_key().equals("starting")) {
 //                                mDoing = getView(R.id.tv_doing);
                                 mDoing.setText("进行中：" + item.getTotal());

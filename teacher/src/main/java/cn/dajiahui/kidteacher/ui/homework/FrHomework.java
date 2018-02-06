@@ -136,7 +136,6 @@ public class FrHomework extends FxFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.tool_right:
-                    Toast.makeText(activity, R.string.send_homework, Toast.LENGTH_SHORT).show();
                     DjhJumpUtil.getInstance().fragmentStartBaseActivityForResult(getActivity(), SendHomeworkActivity.class, mFragement,null, DjhJumpUtil.getInstance().activtiy_SendHomework);
                     break;
 
