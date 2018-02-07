@@ -31,7 +31,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:visibility">gone</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray_dc</item>
         <item name="android:drawablePadding">10dp</item>
         <item name="android:drawableTop">@drawable/ico_null</item>
         <item name="android:layout_centerInParent">true</item>

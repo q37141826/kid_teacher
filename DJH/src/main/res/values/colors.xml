@@ -20,6 +20,7 @@
     <color name="line_gray">#dedede</color>
     <color name="line_gray2">#E0E0E0</color>
     <color name="line_gray_wideing">#eeeeec</color>
+    <color name="gray_dc">#dcdcdc</color>
 
     <color name="text_deepgray">#333333</color>
     <color name="text_gray">#666666</color>

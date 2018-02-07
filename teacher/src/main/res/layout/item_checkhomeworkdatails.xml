@@ -8,43 +8,48 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <cn.dajiahui.kidteacher.ui.homework.view.CricleTextView
-                android:id="@+id/subject"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="题目"/>
-        </RelativeLayout>
-
-
         <TextView
-            android:id="@+id/accuracy"
-            android:layout_width="wrap_content"
+            android:id="@+id/number"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/black_tv_3"
+            android:textSize="@dimen/text15"
+            android:text="1"/>
+
+        <TextView
+            android:id="@+id/accuracy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black_tv_3"
+            android:textSize="@dimen/text15"
             android:text="正确率"/>
 
         <TextView
             android:id="@+id/complete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/black_tv_3"
+            android:textSize="@dimen/text15"
             android:text="完成"/>
 
     </LinearLayout>
 
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/textpadding"
+        android:layout_marginRight="@dimen/textpadding"
+        android:background="@color/list_divider_color_gravy"
+        android:text=""/>
 
 </RelativeLayout>

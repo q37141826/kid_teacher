@@ -564,19 +564,6 @@ public class RequestUtill {
     }
 
     /**
-     * 测试json
-     * @param context
-     * @param callback
-     * @param json
-     */
-    public void httpTestJson(Context context, ResultCallback callback, String json) {
-        IdentityHashMap params = new IdentityHashMap<>();
-        params.put("token", UserController.getInstance().getUser().getToken());
-        params.put("json", json);
-        getHttpBuilder(context, "teacher/setting/test").params(params).post(callback);
-    }
-
-    /**
      * 教师端通讯录
      *
      * @param context
@@ -599,6 +586,48 @@ public class RequestUtill {
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("homework_id", homeworkId);
         getHttpBuilder(context, "teacher/homework/detail").params(params).post(callback);
+    }
+
+    /**
+     * 通知后台检查作业
+     * @param context
+     * @param callback
+     * @param homeworkId
+     * @param flag 0：数据不从后台取 1：数据从后台取
+     */
+    public void httpCheckHomework(Context context, ResultCallback callback, String homeworkId, int flag) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("homework_id", homeworkId);
+        params.put("flag", String.valueOf(flag));
+        getHttpBuilder(context, "teacher/homework/check").params(params).post(callback);
+    }
+
+    /**
+     * 作业详情
+     * @param context
+     * @param callback
+     * @param homeworkId
+     */
+    public void httpGetCheckHomeworkDetails(Context context, ResultCallback callback, String homeworkId) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("homework_id", homeworkId);
+        getHttpBuilder(context, "teacher/homework/detail-next").params(params).post(callback);
+    }
+
+
+    /**
+     * 测试json
+     * @param context
+     * @param callback
+     * @param json
+     */
+    public void httpTestJson(Context context, ResultCallback callback, String json) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("json", json);
+        getHttpBuilder(context, "teacher/setting/test").params(params).post(callback);
     }
 }
 

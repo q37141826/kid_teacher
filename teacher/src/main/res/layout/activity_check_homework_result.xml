@@ -4,102 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_line"
+    android:background="@color/gray_line"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="cn.dajiahui.kidteacher.ui.homework.CheckHomeworkResultActivity">
 
     <include layout="@layout/layout_tool_text"/>
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:padding="10dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/textpadding"
+        android:divider="@color/gray_line"
+        android:dividerHeight="@dimen/textpadding"
+        android:fadeScrollbars="false"
+        android:overScrollMode="never"
+        android:scrollbars="none"></ListView>
 
-        <TextView
-            android:id="@+id/point"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="·"
-            android:textColor="@color/text_deepgray"/>
+    <TextView style="@style/text_null" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/point"
-            android:gravity="center"
-            android:text="已经完成"/>
-
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/point"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="2个学生按时完成学习情况"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="张三  张三"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/point1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="·"
-            android:textColor="@color/text_deepgray"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/point1"
-            android:gravity="center"
-            android:text="作业未完成"/>
-
-        <TextView
-            android:id="@+id/content1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/point1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="1个学生没有按时完成学习情况"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/content1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="李四"/>
-    </RelativeLayout>
 
 </LinearLayout>

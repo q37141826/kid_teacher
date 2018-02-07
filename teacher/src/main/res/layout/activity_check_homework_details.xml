@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_line"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="cn.dajiahui.kidteacher.ui.homework.CheckHomeworkDetailsActivity">
 
     <include layout="@layout/layout_tool_text"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,39 +28,62 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text16"
                 android:text="题目"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text16"
                 android:text="正确率"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text16"
                 android:text="完成"/>
 
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
+            android:layout_height="1dp"
+            android:background="@color/list_divider_color_gravy"/>
 
-            <include layout="@layout/child_listview"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        </LinearLayout>
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:divider="@color/transparent"
+                android:dividerHeight="0px"
+                android:fadeScrollbars="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"></ListView>
+
+            <TextView
+                style="@style/text_null"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
 

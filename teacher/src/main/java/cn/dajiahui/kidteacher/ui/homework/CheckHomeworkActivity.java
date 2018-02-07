@@ -3,6 +3,7 @@ package cn.dajiahui.kidteacher.ui.homework;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,8 +13,11 @@ import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.time.TimeUtil;
 import com.fxtx.framework.ui.FxActivity;
+import com.fxtx.framework.widgets.listview.PinnedHeaderListView;
 import com.squareup.okhttp.Request;
 
+import java.io.Serializable;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,8 @@ import cn.dajiahui.kidteacher.ui.homework.adapter.ApHomeworkReport;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokReportInfo;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokStudent;
 import cn.dajiahui.kidteacher.ui.homework.bean.HomeworkReport;
+import cn.dajiahui.kidteacher.ui.mine.myclass.ClassInfoActivity;
+import cn.dajiahui.kidteacher.ui.mine.myclass.MyClassActivity;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 
 /**
@@ -215,6 +221,17 @@ public class CheckHomeworkActivity extends FxActivity {
 
         apFinish = new ApHomeworkReport(this, listFinish, true);
         mListviewFinish.setAdapter(apFinish);
+        mListviewFinish.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ToastUtil.showToast(context, "跳转到个人作业详情页面");
+//                String classId = listFinish.get(position).getId();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("classId", classId);
+//                DjhJumpUtil.getInstance().startBaseActivity(MyClassActivity.this, ClassInfoActivity.class, bundle, 0); // 跳转到个人作业详情页面
+            }
+        });
+
 
         apDoing = new ApHomeworkReport(this, listDoing, false);
         mListviewDoing.setAdapter(apDoing);
@@ -226,17 +243,17 @@ public class CheckHomeworkActivity extends FxActivity {
 
     @Override
     public void onRightBtnClick(View view) {
-        DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, CheckHomeworkDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("homeworkId", homeworkId);
+        DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, CheckHomeworkDetailsActivity.class, bundle, 0);  // 作业详情
     }
 
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-//                case R.id.tv_check:
-//                    DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, CheckHomeworkDetailsActivity.class);
-//                    break;
                 case R.id.tv_completed:
+                    /* 已完成 */
                     mListviewFinish.setVisibility(View.VISIBLE);
                     mCompleted.setTextColor(getResources().getColor(R.color.blue));
 
@@ -255,6 +272,7 @@ public class CheckHomeworkActivity extends FxActivity {
                     break;
 
                 case R.id.tv_doing:
+                    /* 进行中 */
                     mListviewFinish.setVisibility(View.INVISIBLE);
                     mCompleted.setTextColor(getResources().getColor(R.color.black_tv_6));
 
@@ -273,6 +291,7 @@ public class CheckHomeworkActivity extends FxActivity {
                     break;
 
                 case R.id.tv_nocompleted:
+                    /* 未开始 */
                     mListviewFinish.setVisibility(View.INVISIBLE);
                     mCompleted.setTextColor(getResources().getColor(R.color.black_tv_6));
 
@@ -291,7 +310,13 @@ public class CheckHomeworkActivity extends FxActivity {
                     break;
 
                 case R.id.btn_check:
-                    DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, CheckHomeworkResultActivity.class);
+                    /* 检查作业 */
+                    Bundle checkBundle = new Bundle();
+                    checkBundle.putString("homeworkId", homeworkId);
+                    checkBundle.putSerializable("listFinish",(Serializable) listFinish);
+                    checkBundle.putSerializable("listDoing",(Serializable) listDoing);
+                    checkBundle.putSerializable("listNotStart",(Serializable) listNotStart);
+                    DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, CheckHomeworkResultActivity.class, checkBundle, 0);
                     break;
 
                 default:
@@ -311,7 +336,7 @@ public class CheckHomeworkActivity extends FxActivity {
         mDoing = getView(R.id.tv_doing);
         mNocompleted = getView(R.id.tv_nocompleted);
 
-        tv_null = getView(com.hyphenate.easeui.R.id.tv_null);
+        tv_null = getView(R.id.tv_null);
 
         registrationevent();
     }
@@ -346,7 +371,7 @@ public class CheckHomeworkActivity extends FxActivity {
             HeadJson json = new HeadJson(response);
 //            HeadJson json = new HeadJson(testString);
             if (json.getstatus() == 0) {
-                /* 解析班级列表信息 */
+                /* 解析列表信息 */
                 HomeworkReport temp = json.parsingObject(HomeworkReport.class);
                 if (temp != null) {
                     mUnit = getView(R.id.tv_unit);
@@ -359,18 +384,15 @@ public class CheckHomeworkActivity extends FxActivity {
                     mExecution.setText("完成情况：" + temp.getComplete_students() + "/" + temp.getAll_students()); // 完成情况
 
                     mAccuracy = getView(R.id.tv_accuracy);
-                    Float correctRateF = Float.parseFloat(temp.getCorrect_rate()) * 100;
-                    DecimalFormat df = new DecimalFormat("#.00");
+                    Float correctRateF = Float.parseFloat(temp.getCorrect_rate());
+                    DecimalFormat df = new DecimalFormat("0.00%");
+                    df.setRoundingMode(RoundingMode.HALF_UP); // 四舍五入
                     String correctRateStr = df.format(correctRateF);
-                    if (correctRateStr.equals(".00")) {
-                        correctRateStr = "0.00";
-                    }
-                    mAccuracy.setText("正确率：" + correctRateStr + "%");
+                    mAccuracy.setText("正确率：" + correctRateStr);
 
                     if (temp.getStudent_list() != null && temp.getStudent_list().size() > 0) {
                         for (BeHomewrokReportInfo item : temp.getStudent_list()) {
                             if (item.getStatus_key() != null && item.getStatus_key().equals("finish")) {
-//                                mCompleted = getView(R.id.tv_completed);
                                 mCompleted.setText("已完成：" + item.getTotal());
 
                                 listFinish.clear();
@@ -384,15 +406,13 @@ public class CheckHomeworkActivity extends FxActivity {
                                 }
 
                             } else if (item.getStatus_key() != null && item.getStatus_key().equals("starting")) {
-//                                mDoing = getView(R.id.tv_doing);
                                 mDoing.setText("进行中：" + item.getTotal());
 
                                 listDoing.clear();
                                 listDoing.addAll(item.getLists());
                                 apDoing.notifyDataSetChanged();
                             } else if (item.getStatus_key() != null && item.getStatus_key().equals("not_start")) {
-//                                mNocompleted = getView(R.id.tv_nocompleted);
-                                mNocompleted.setText("未完成：" + item.getTotal());
+                                mNocompleted.setText("未开始：" + item.getTotal());
 
                                 listNotStart.clear();
                                 listNotStart.addAll(item.getLists());

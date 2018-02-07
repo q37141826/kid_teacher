@@ -59,8 +59,8 @@
     <string name="task_book_empty">这里空空的</string>
     <string name="task_click_first">请先点击右上角的“教辅设置”</string>
     <string name="task_published">已布置</string>
-    <string name="task_unexamined">待审查</string>
-    <string name="task_examined">已审查</string>
+    <string name="task_unexamined">待检查</string>
+    <string name="task_examined">已检查</string>
     <string name="all_options">全部</string>
     <!--作业end-->
 

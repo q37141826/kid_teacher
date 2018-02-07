@@ -1,5 +1,9 @@
 package cn.dajiahui.kidteacher.ui.homework.bean;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
@@ -7,7 +11,7 @@ import cn.dajiahui.kidteacher.util.BeanObj;
  * Created by wangzhi on 2018/2/6.
  */
 
-public class BeHomewrokStudent extends BeanObj {
+public class BeHomewrokStudent extends BeanObj implements Serializable {
     private String id;
     private String nickname;
     private String avatar;

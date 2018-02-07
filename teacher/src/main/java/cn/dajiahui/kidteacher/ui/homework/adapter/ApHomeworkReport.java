@@ -9,6 +9,7 @@ import com.fxtx.framework.adapter.ViewHolder;
 import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.time.TimeUtil;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
 import cn.dajiahui.kidteacher.R;
@@ -45,13 +46,11 @@ public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
             tv_submittime.setText(TimeUtil.stampToString(item.getUpdated_at())); // 截止时间
             tv_submittime.setVisibility(View.VISIBLE);
 
-            Float correctRateF = Float.parseFloat(item.getCorrect_rate()) * 100;
-            DecimalFormat df = new DecimalFormat("#.00");
+            Float correctRateF = Float.parseFloat(item.getCorrect_rate());
+            DecimalFormat df = new DecimalFormat("0.00%");
+            df.setRoundingMode(RoundingMode.HALF_UP); // 四舍五入
             String correctRateStr = df.format(correctRateF);
-            if (correctRateStr.equals(".00")) {
-                correctRateStr = "0.00";
-            }
-            tv_accuracy.setText("正确率：" + correctRateStr + "% ");   // 正确率
+            tv_accuracy.setText("正确率：" + correctRateStr + " ");   // 正确率
             tv_accuracy.setVisibility(View.VISIBLE);
         }
 
