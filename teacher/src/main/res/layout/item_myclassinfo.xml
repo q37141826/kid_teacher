@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -19,23 +18,24 @@
 
             <ImageView
                 android:id="@+id/img_head"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ico_default_user"/>
 
             <TextView
                 android:id="@+id/tv_studentname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img_head"
-                android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/img_head"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:text="张三"
-                android:textSize="@dimen/text15"/>
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text15"
+                android:text="张三"/>
 
         </RelativeLayout>
 
@@ -53,16 +53,26 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:text="移除学员"
-                android:textSize="@dimen/text18"/>
+                android:textColor="@color/black_tv_6"
+                android:textSize="@dimen/text16"
+                android:text="移除学员"/>
         </RelativeLayout>
 
     </LinearLayout>
 
-    <View
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="1px"
         android:layout_below="@+id/lin"
-        android:background="@color/gray_line"/>
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/textmarginleft"
+        android:layout_marginRight="@dimen/textmarginleft"
+        android:background="@color/line_gray2"
+        android:text=""/>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1px"-->
+        <!--android:layout_below="@+id/lin"-->
+        <!--android:background="@color/gray_line"/>-->
 
 </RelativeLayout>

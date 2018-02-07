@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
 import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.squareup.okhttp.Request;
@@ -52,6 +53,11 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
         itemInfo.viewHolder = viewHolder;
 
         ImageView img_head = viewHolder.getView(R.id.img_head);
+
+        if (item.getAvatar() != null && !item.getAvatar().equals("")) {
+            GlideUtil.showRoundImage(mContext, item.getAvatar(), img_head, R.drawable.ico_default_user, true); // 头像
+        }
+
         TextView tv_studentname = viewHolder.getView(R.id.tv_studentname);
         TextView tv_delete = viewHolder.getView(R.id.tv_delete);
         tv_delete.setTag(itemInfo);

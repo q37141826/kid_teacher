@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_line"
+    android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -11,10 +11,6 @@
         android:id="@+id/re_task_second"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/textpadding"
-        android:layout_marginLeft="@dimen/textpadding"
-        android:layout_marginRight="@dimen/textpadding"
-        android:layout_marginTop="@dimen/textpadding"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -26,9 +22,9 @@
 
             <ImageView
                 android:id="@+id/img_pic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ico_default_user"/>
         </LinearLayout>
 
         <LinearLayout
@@ -40,7 +36,7 @@
                 android:id="@+id/tv_studentname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="张三"/>
+                android:text="学生"/>
 
             <TextView
                 android:id="@+id/tv_applyaddclass"
@@ -83,12 +79,12 @@
                 android:id="@+id/tv_already"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tv_delete"
-                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:text="已删除"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
 
         </RelativeLayout>

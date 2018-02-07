@@ -9,6 +9,22 @@
 
     <include layout="@layout/layout_tool_text"/>
 
-    <include layout="@layout/layout_refresh"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray2"
+        android:text=""/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingRight="@dimen/textpadding"
+        android:paddingLeft="@dimen/textpadding">
+
+        <include layout="@layout/layout_refresh"/>
+    </LinearLayout>
 
 </LinearLayout>

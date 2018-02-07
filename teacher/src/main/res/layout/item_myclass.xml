@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_line"
+    android:background="@color/gray_line"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
@@ -11,9 +11,6 @@
         android:id="@+id/re_task_second"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/textpadding"
-        android:layout_marginLeft="@dimen/textpadding"
-        android:layout_marginRight="@dimen/textpadding"
         android:layout_marginTop="@dimen/textpadding"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -30,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue_dark"
-                android:text="二年级7班"
+                android:text="班级"
                 android:textSize="@dimen/text18"/>
 
             <TextView
@@ -48,21 +45,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-
             <TextView
                 android:id="@+id/myclass_tv_student_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/textmarginleft"
-                android:text="10人"
+                android:text="0人"
                 android:textColor="@color/black_tv_3"
                 android:textSize="@dimen/text18"/>
 
         </RelativeLayout>
 
-
     </LinearLayout>
-
 
 </LinearLayout>

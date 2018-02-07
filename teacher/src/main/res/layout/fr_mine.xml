@@ -108,6 +108,7 @@
             android:textSize="@dimen/text18"/>
 
         <TextView
+            android:visibility="invisible"
             android:id="@+id/tv_waitaddclassconut"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
@@ -153,6 +154,7 @@
             android:textSize="@dimen/text18"/>
 
         <TextView
+            android:visibility="invisible"
             android:id="@+id/tv_noticecount"
             android:layout_width="30dp"
             android:layout_height="wrap_content"

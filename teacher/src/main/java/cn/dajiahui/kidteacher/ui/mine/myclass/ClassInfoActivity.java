@@ -38,6 +38,7 @@ public class ClassInfoActivity extends FxActivity {
     private ListView mListView;
     private ApMyClassInfo apMyClassInfo;   // 班级详情的Adapter
     private List<BeStudents> studentInfoList = new ArrayList<BeStudents>();
+    private TextView tv_null;
 
     Handler handler = new Handler() {
         @Override
@@ -65,10 +66,13 @@ public class ClassInfoActivity extends FxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setfxTtitle(R.string.mine_class_info);
-        onBackText();
 
         classId = getIntent().getStringExtra("classId");
+        String className = getIntent().getStringExtra("className");
+
+        setfxTtitle(className);
+        onRightText(R.string.mine_class_space);
+        onBackText();
 
         apMyClassInfo = new ApMyClassInfo(this, studentInfoList, handler, classId);
         mListView.setAdapter(apMyClassInfo);
@@ -85,22 +89,28 @@ public class ClassInfoActivity extends FxActivity {
 //        TextView mCode = getView(R.id.tv_code);
 //        TextView mCount = getView(R.id.tv_count);
 //        ImageView mHead = getView(R.id.img_head);
-        TextView mClassspace = getView(R.id.tv_classspace);
+//        TextView mClassspace = getView(R.id.tv_classspace);
         Button mInvitation = getView(R.id.btn_invitation);
-        mClassspace.setOnClickListener(onClick);
+//        mClassspace.setOnClickListener(onClick);
         mInvitation.setOnClickListener(onClick);
         mListView = getView(R.id.listview);
 
+        tv_null = getView(R.id.tv_null);
+
     }
 
+    @Override
+    public void onRightBtnClick(View view) {
+        DjhJumpUtil.getInstance().startBaseActivity(ClassInfoActivity.this, ClassSpaceActivity.class); // 跳转到班级空间
+    }
 
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.tv_classspace:
-                    DjhJumpUtil.getInstance().startBaseActivity(ClassInfoActivity.this, ClassSpaceActivity.class);
-                    break;
+//                case R.id.tv_classspace:
+//                    DjhJumpUtil.getInstance().startBaseActivity(ClassInfoActivity.this, ClassSpaceActivity.class);
+//                    break;
 
                 case R.id.btn_invitation:
                     Toast.makeText(context, "邀请学员", Toast.LENGTH_SHORT).show();
@@ -126,22 +136,22 @@ public class ClassInfoActivity extends FxActivity {
                 dismissfxDialog();
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
-                    /* 解析班级列表信息 */
+                    /* 解析班级信息 */
                     BeMyclassInfo temp = json.parsingObject(BeMyclassInfo.class);
 
                     TextView clssCode = getView(R.id.tv_code);
-                    clssCode.setText(temp.getCode());
-
-                    TextView className = getView(R.id.tv_class);
-                    className.setText(temp.getClass_name());
+                    clssCode.setText("班级码：" + temp.getCode());
 
                     TextView studentNumber = getView(R.id.tv_count);
-                    studentNumber.setText(temp.getStudents_num() + "/" + temp.getMax_students_num());
+                    studentNumber.setText("人数：" + temp.getStudents_num() + "/" + temp.getMax_students_num());
 
-                    studentInfoList.addAll(temp.getStudent_list());
-
-                    apMyClassInfo.notifyDataSetChanged();
-
+                    if (temp.getStudent_list() != null && temp.getStudent_list().size() > 0) {
+                        studentInfoList.addAll(temp.getStudent_list());
+                        apMyClassInfo.notifyDataSetChanged();
+                    } else {
+                        tv_null.setText(R.string.not_data);
+                        mListView.setEmptyView(tv_null);
+                    }
 
                 } else {
                     ToastUtil.showToast(context, json.getMsg());

@@ -62,6 +62,7 @@ public class MyClassActivity extends FxActivity {
                 String classId = classInfoList.get(position).getId();
                 Bundle bundle = new Bundle();
                 bundle.putString("classId", classId);
+                bundle.putString("className", classInfoList.get(position).getClass_name());
                 DjhJumpUtil.getInstance().startBaseActivity(MyClassActivity.this, ClassInfoActivity.class, bundle, 0);
             }
         });

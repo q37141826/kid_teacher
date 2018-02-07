@@ -67,27 +67,27 @@ public class FrMine extends FxFragment {
             switch (v.getId()) {
                 case R.id.img_edit:
                 case R.id.topView:
-                    Toast.makeText(activity, "编辑", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "编辑", Toast.LENGTH_SHORT).show();
                     //设置
                     DjhJumpUtil.getInstance().startBaseActivityForResult(getActivity(), UserDetailsActivity.class, null, PICFPRRESULT);
                     break;
                 case R.id.iv_user:
 
-                    Toast.makeText(activity, "头像", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "头像", Toast.LENGTH_SHORT).show();
 
                     break;
 
                 case R.id.tvMyclass:
 
-                    Toast.makeText(activity, "我的班级", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "我的班级", Toast.LENGTH_SHORT).show();
                     DjhJumpUtil.getInstance().startBaseActivity(getContext(), MyClassActivity.class);
                     break;
                 case R.id.tvWaitaddclass:
-                    Toast.makeText(activity, "等待加入班级", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "等待加入班级", Toast.LENGTH_SHORT).show();
                     DjhJumpUtil.getInstance().startBaseActivity(getContext(), WaiteAddClassActivity.class);
                     break;
                 case R.id.tvNotice:
-                    Toast.makeText(activity, "通知", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity, "通知", Toast.LENGTH_SHORT).show();
 
                     DjhJumpUtil.getInstance().startBaseActivity(getContext(), NoticeActivity.class);
 

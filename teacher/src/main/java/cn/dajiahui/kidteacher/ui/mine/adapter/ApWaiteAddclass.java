@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
 import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.squareup.okhttp.Request;
@@ -66,7 +67,7 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
         tv_disagree.setOnClickListener(onClick);
 
         tv_studentname.setText(item.getNickname());
-        tv_applyaddclass.setText(item.getClass_name());
+        tv_applyaddclass.setText("申请加入" + item.getClass_name());
 
         if (item.getStatus().equals("0")) {
             // 已同意
@@ -82,6 +83,11 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
             re_choose_root.setVisibility(View.VISIBLE);
             tv_already.setVisibility(View.GONE);
         }
+
+        if (item.getAvatar() != null && !item.getAvatar().equals("")) {
+            GlideUtil.showRoundImage(mContext, item.getAvatar(), img_pic, R.drawable.ico_default_user, true); // 头像
+        }
+
     }
 
     private View.OnClickListener onClick = new View.OnClickListener() {
