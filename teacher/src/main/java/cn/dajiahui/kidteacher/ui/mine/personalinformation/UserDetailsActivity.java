@@ -8,9 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fxtx.framework.http.ErrorCode;
+import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.image.util.ImageUtil;
+import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.dialog.BottomDialog;
+import com.squareup.okhttp.Request;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,8 +24,12 @@ import java.util.ArrayList;
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.Constant;
 import cn.dajiahui.kidteacher.controller.UserController;
+import cn.dajiahui.kidteacher.http.RequestUtill;
+import cn.dajiahui.kidteacher.ui.chat.constant.PreferenceManager;
 import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeUpUserIcon;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
+import cn.dajiahui.kidteacher.util.Logger;
 
 /*
  个人信息
@@ -143,14 +153,12 @@ public class UserDetailsActivity extends FxActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            //用户信息修改
-            if (requestCode == DjhJumpUtil.getInstance().activtiy_UserSet)
-//                initData();
+                //用户信息修改
                 if (requestCode == DjhJumpUtil.getInstance().activtiy_SelectPhoto) {
                     //上传选择的照片
                     ArrayList<String> strings = data.getStringArrayListExtra(Constant.bundle_obj);
                     File file = new File(strings.get(0));
-//                httpUserIcon(file);
+                    httpUserIcon(file);
                 }
             if (requestCode == TAKE_CAMERA_PICTURE) {
                 Bitmap map = ImageUtil.uriToBitmap(Uri.fromFile(new File(path + imagename)), context);
@@ -160,7 +168,7 @@ public class UserDetailsActivity extends FxActivity {
                 }
                 ImageUtil.bitmapToFile(map, path + imagename, 4096);
                 File file = new File(path + imagename);
-//                httpUserIcon(file);
+                httpUserIcon(file);
             }
         }
     }
@@ -171,30 +179,34 @@ public class UserDetailsActivity extends FxActivity {
         return imageName;
     }
 
-//    public void httpUserIcon(File file) {
-//        showfxDialog(R.string.submiting);
-//        RequestUtill.getInstance().uploadUserIcon(context, new ResultCallback() {
-//            @Override
-//            public void onError(Request request, Exception e) {
-//                dismissfxDialog();
-//                ToastUtil.showToast(context, ErrorCode.error(e));
-//            }
-//
-//            @Override
-//            public void onResponse(String response) {
-//                dismissfxDialog();
-//                HeadJson headJson = new HeadJson(response);
-//                if (headJson.getFlag() == 1) {
-//                    UserController.getInstance().getUser().setAvator(headJson.parsingString("avator"));
-//                    PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvator());
-//                    GlideUtil.showNoneImage(UserDetailsActivity.this, UserController.getInstance().getUser().getAvator(), userIcon, R.drawable.ico_default_user, true);
-////                    initData();
-//                    ToastUtil.showToast(context, R.string.save_ok);
-//                    setResult(PICSETSULT);
-//                } else {
-//                    ToastUtil.showToast(context, headJson.getMsg());
-//                }
-//            }
-//        }, file, UserController.getInstance().getUserId());
-//    }
+    /*修改头像*/
+    public void httpUserIcon(File file) {
+        showfxDialog(R.string.submiting);
+        RequestUtill.getInstance().uploadUserIcon(context, new ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                Logger.d("头像上传失败！");
+                dialog.dismiss();
+                dismissfxDialog();
+                ToastUtil.showToast(context, ErrorCode.error(e));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Logger.d("头像上传成功！");
+                dismissfxDialog();
+                dialog.dismiss();
+                HeadJson headJson = new HeadJson(response);
+                if (headJson.getstatus() == 0) {
+                    UserController.getInstance().getUser().setAvator(headJson.parsingObject(BeUpUserIcon.class).getUrl());
+                    PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvator());
+                    GlideUtil.showRoundImage(UserDetailsActivity.this, UserController.getInstance().getUser().getAvator(), userIcon, R.drawable.ico_default_user, true);
+                    ToastUtil.showToast(context, R.string.save_ok);
+                    setResult(PICSETSULT);
+                } else {
+                    ToastUtil.showToast(context, headJson.getMsg());
+                }
+            }
+        }, file);
+    }
 }

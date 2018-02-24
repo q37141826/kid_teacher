@@ -11,20 +11,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.fxtx.framework.http.ErrorCode;
+import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
+import com.squareup.okhttp.Request;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.Constant;
+import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.mine.adapter.ApClassSpacePhoneDynamic;
-import cn.dajiahui.kidteacher.ui.mine.bean.BeclassSpace;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeClassSpace;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeUpUserIcon;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
+import cn.dajiahui.kidteacher.util.Logger;
 
 /*
 * 发布动态
@@ -33,19 +40,23 @@ public class SendDynamicActivity extends FxActivity {
 
     private GridView grildview;
     private EditText mInput;
-    private List<BeclassSpace> listphoto;
+    private List<BeClassSpace> listphoto;
     private TextView tvNUll;
     private ApClassSpacePhoneDynamic apClassSpacePhoneDynamic;
     private Boolean showDefaultImg = true;
     private Boolean haveText = false;
     private Boolean havePhoto = false;
-    TextView publishBtn;
+    private TextView publishBtn;
+    private ArrayList<String> mPhotolist;//图片集合
+    private ArrayList<String> mPhotoUrl = new ArrayList<>();
+    private String classId;
+    private String mInpuText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setfxTtitle(R.string.mine_dynamic);
         onBack();
-//        onRightBtn(R.drawable.ic_launcher, R.string.mine_send);
         if (toolbar != null) {
             publishBtn = getView(com.fxtx.framework.R.id.tool_right);
             publishBtn.setText(R.string.mine_send);
@@ -63,20 +74,19 @@ public class SendDynamicActivity extends FxActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_send_dynamic);
+        classId = getIntent().getStringExtra("classId");
         mInput = getView(R.id.ed_input);
         mInput.addTextChangedListener(textWatcher);
-//        mInput.requestFocus();
-//        mInput.setCursorVisible(true);
         grildview = getView(R.id.grildview);
-        listphoto = new ArrayList<BeclassSpace>();
-        BeclassSpace addBitmap = new BeclassSpace("0", BitmapFactory.decodeResource(getResources(),R.drawable.ico_c_album));
+        listphoto = new ArrayList<BeClassSpace>();
+        BeClassSpace addBitmap = new BeClassSpace(BitmapFactory.decodeResource(getResources(), R.drawable.ico_c_album));
         listphoto.add(addBitmap);
         apClassSpacePhoneDynamic = new ApClassSpacePhoneDynamic(SendDynamicActivity.this, listphoto);
         grildview.setAdapter(apClassSpacePhoneDynamic);
         grildview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position==0 && showDefaultImg){
+                if (position == 0 && showDefaultImg) {
                     DjhJumpUtil.getInstance().startSelectPhotoActivity(SendDynamicActivity.this, Constant.Alum_send_dynamic - listphoto.size());
                 }
             }
@@ -87,20 +97,66 @@ public class SendDynamicActivity extends FxActivity {
 
     @Override
     public void onRightBtnClick(View view) {
-        Toast.makeText(context, "发布", Toast.LENGTH_SHORT).show();
+
+        mInpuText = mInput.getText().toString();
+
+        Logger.d("mPhotoUrl.toArray().toString():" + mPhotoUrl.toArray().toString());
+        httpSendDynamic();
+
     }
+
+    /*发布动态*/
+    private void httpSendDynamic() {
+
+        RequestUtill.getInstance().httpSendDynamic(SendDynamicActivity.this, callSendDynamic, classId, mInpuText, mPhotoUrl);
+
+
+    }
+
+    /*班级空间*/
+    ResultCallback callSendDynamic = new ResultCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            dismissfxDialog();
+            Logger.d("发布动态失败返回 ：" + e.toString());
+        }
+
+        @Override
+        public void onResponse(String response) {
+
+            Logger.d("发布动态成功返回 ：" + response);
+
+            dismissfxDialog();
+            HeadJson json = new HeadJson(response);
+            if (json.getstatus() == 0) {
+                setResult(1);
+                finishActivity();
+//                classSpacesList.clear();
+//                classSpacesList.add();
+
+//                apClassSpace.notifyDataSetChanged();
+
+            } else {
+                ToastUtil.showToast(SendDynamicActivity.this, json.getMsg());
+            }
+
+        }
+
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             if (requestCode == 3001) {
-                ArrayList<String> list = data.getStringArrayListExtra("_object");
-                if (list.size() > 0) {
-                    for (int i = 0; i < list.size(); i++) {
-                        String path = list.get(i).toString();
+                mPhotolist = data.getStringArrayListExtra("_object");
+                if (mPhotolist.size() > 0) {
+                    for (int i = 0; i < mPhotolist.size(); i++) {
+                        String path = mPhotolist.get(i).toString();
                         Bitmap bmp = getImageThumbnail(path, 100, 100);
-                        listphoto.add(new BeclassSpace(bmp));
+                        listphoto.add(new BeClassSpace(bmp));
+                        File file = new File(path);
+                        httpUserIcon(file);
                     }
                     if (listphoto.size() >= Constant.Alum_send_dynamic) {
                         listphoto.remove(0);
@@ -111,7 +167,7 @@ public class SendDynamicActivity extends FxActivity {
                 }
             }
 
-            if(showDefaultImg && listphoto.size() < 2) {
+            if (showDefaultImg && listphoto.size() < 2) {
                 havePhoto = false;
             } else {
                 havePhoto = true;
@@ -152,6 +208,7 @@ public class SendDynamicActivity extends FxActivity {
 
     /**
      * 获取缩略图
+     *
      * @param imagePath:文件路径
      * @param width:缩略图宽度
      * @param height:缩略图高度
@@ -179,8 +236,36 @@ public class SendDynamicActivity extends FxActivity {
         options.inJustDecodeBounds = false;
         bitmap = BitmapFactory.decodeFile(imagePath, options);
         // 利用ThumbnailUtils来创建缩略图，这里要指定要缩放哪个Bitmap对象
-        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height, ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
         return bitmap;
     }
 
+
+    /*修改头像*/
+    public void httpUserIcon(File file) {
+        showfxDialog(R.string.submiting);
+        RequestUtill.getInstance().uploadUserIcon(context, new ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                Logger.d("图片上传失败！");
+
+                dismissfxDialog();
+                ToastUtil.showToast(context, ErrorCode.error(e));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Logger.d("图片上传成功！");
+                dismissfxDialog();
+
+                HeadJson headJson = new HeadJson(response);
+                if (headJson.getstatus() == 0) {
+                    String url = headJson.parsingObject(BeUpUserIcon.class).getUrl();
+                    mPhotoUrl.add(url);
+                } else {
+                    ToastUtil.showToast(context, headJson.getMsg());
+                }
+            }
+        }, file);
+    }
 }

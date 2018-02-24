@@ -131,7 +131,7 @@ public class ApHomework extends SectionedBaseAdapter {
             String pubDataStr = data.get(section).getPubdate();
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date pubData = df.parse(pubDataStr);
-            String day = Day[dayOfWeek(pubData)];
+            String day = Day[dayOfWeek(pubData)-1];
             Date today = new Date();
             if (isSameDay(today, pubData)) {
                 tv_first_name.setText("今天 " + day);

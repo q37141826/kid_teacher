@@ -9,20 +9,20 @@ import com.fxtx.framework.adapter.ViewHolder;
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
-import cn.dajiahui.kidteacher.ui.mine.bean.BeclassSpace;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeClassSpace;
 
 /**
  * 我的班级动态
  */
-public class ApClassSpacePhoneDynamic extends CommonAdapter<BeclassSpace> {
+public class ApClassSpacePhoneDynamic extends CommonAdapter<BeClassSpace> {
     public Boolean showDefaultImg = true;
-    public ApClassSpacePhoneDynamic(Context context, List<BeclassSpace> mDatas) {
+    public ApClassSpacePhoneDynamic(Context context, List<BeClassSpace> mDatas) {
         super(context, mDatas, R.layout.item_classspace_photodynamic);
     }
 
 
     @Override
-    public void convert(ViewHolder viewHolder, final int position, BeclassSpace item) {
+    public void convert(ViewHolder viewHolder, final int position, BeClassSpace item) {
 
         ImageView view = viewHolder.getView(R.id.img_classphotodynamic);
         if (position == 0 && showDefaultImg) {

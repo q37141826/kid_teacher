@@ -12,12 +12,13 @@
         android:id="@+id/dialog_iv_progress"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        zed:barColor="@color/app_bg"
+        zed:barColor="@color/blue"
         zed:progressIndeterminate="true"/>
 
     <TextView
         android:id="@+id/tv_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"/>
 </LinearLayout>

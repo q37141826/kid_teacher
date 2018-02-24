@@ -26,17 +26,18 @@
                 android:id="@+id/myclass_tv_class_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blue_dark"
                 android:text="班级"
-                android:textSize="@dimen/text18"/>
+                android:textColor="@color/blue_dark"
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/myclass_tv_class_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:text="班级码"
                 android:textColor="@color/black_tv_6"
-                android:textSize="@dimen/text15"/>
+                android:textSize="13sp"/>
 
         </LinearLayout>
 
@@ -53,7 +54,7 @@
                 android:layout_marginLeft="@dimen/textmarginleft"
                 android:text="0人"
                 android:textColor="@color/black_tv_3"
-                android:textSize="@dimen/text18"/>
+                android:textSize="15sp"/>
 
         </RelativeLayout>
 

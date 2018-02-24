@@ -226,6 +226,22 @@ public abstract class FxActivity extends AppCompatActivity {
         }
     }
 
+    /*右上角 不加图片*/
+    public void onRightBtn(int textId) {
+        if (toolbar != null) {
+            TextView tv = getView(R.id.tool_right);
+            tv.setText(textId);
+            tv.setVisibility(View.VISIBLE);
+
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRightBtnClick(v);
+                }
+            });
+        }
+    }
+
     public void onRightText(int textId) {
         if (toolbar != null) {
             TextView tv = getView(R.id.tool_right);
@@ -242,6 +258,7 @@ public abstract class FxActivity extends AppCompatActivity {
 
     /**
      * 设置右侧按钮的文字及颜色
+     *
      * @param textId
      * @param textColor
      */
@@ -300,7 +317,7 @@ public abstract class FxActivity extends AppCompatActivity {
     protected void setfxTtitle(String title, int color) {
         if (titleView != null)
             titleView.setTextColor(color);
-            titleView.setText(title);
+        titleView.setText(title);
     }
 
     protected void setfxTitleOnclick(View.OnClickListener listener) {

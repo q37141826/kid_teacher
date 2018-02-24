@@ -48,13 +48,12 @@ public class MyClassActivity extends FxActivity {
         setContentView(R.layout.activity_my_class);
 
         refresh = getView(R.id.refresh);
-//        mPageSize = 2;
         initRefresh(refresh);
-
         mListView = getView(R.id.listview);
         apMyClass = new ApMyClass(MyClassActivity.this, classInfoList);
 
         mListView.setAdapter(apMyClass);
+
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

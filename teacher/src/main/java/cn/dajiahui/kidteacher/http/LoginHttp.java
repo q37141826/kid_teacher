@@ -46,12 +46,12 @@ public class LoginHttp {
             public void onError(Request request, Exception e) {
                 onLogin.error();
                 ToastUtil.showToast(context, ErrorCode.error(e));
-                Logger.d("majin", "登錄失敗" + e);
+                Logger.d(  "登錄失敗" + e);
             }
 
             @Override
             public void onResponse(String response) {
-                Logger.d("majin", "登錄response" + response);
+                Logger.d(  "登錄response" + response);
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
                     JpushUtil.infoJpush(context);

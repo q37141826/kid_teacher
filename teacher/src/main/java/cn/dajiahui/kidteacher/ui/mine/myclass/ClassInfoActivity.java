@@ -84,34 +84,25 @@ public class ClassInfoActivity extends FxActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_class_info);
-
-//        TextView mClass = getView(R.id.tv_class);
-//        TextView mCode = getView(R.id.tv_code);
-//        TextView mCount = getView(R.id.tv_count);
-//        ImageView mHead = getView(R.id.img_head);
-//        TextView mClassspace = getView(R.id.tv_classspace);
         Button mInvitation = getView(R.id.btn_invitation);
-//        mClassspace.setOnClickListener(onClick);
         mInvitation.setOnClickListener(onClick);
         mListView = getView(R.id.listview);
-
         tv_null = getView(R.id.tv_null);
 
     }
 
+    /*班级空间点击事件*/
     @Override
     public void onRightBtnClick(View view) {
-        DjhJumpUtil.getInstance().startBaseActivity(ClassInfoActivity.this, ClassSpaceActivity.class); // 跳转到班级空间
+        Bundle bundle = new Bundle();
+        bundle.putString("classId", classId);
+        DjhJumpUtil.getInstance().startBaseActivity(ClassInfoActivity.this, ClassSpaceActivity.class, bundle, 0);
     }
 
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-//                case R.id.tv_classspace:
-//                    DjhJumpUtil.getInstance().startBaseActivity(ClassInfoActivity.this, ClassSpaceActivity.class);
-//                    break;
-
                 case R.id.btn_invitation:
                     Toast.makeText(context, "邀请学员", Toast.LENGTH_SHORT).show();
                     break;

@@ -11,9 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.widget.RadioGroup;
 
-import com.fxtx.framework.http.ErrorCode;
 import com.fxtx.framework.http.callback.ResultCallback;
-import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.text.StringUtil;
 import com.fxtx.framework.ui.FxFragment;
@@ -27,7 +25,6 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.squareup.okhttp.Request;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +34,6 @@ import cn.dajiahui.kidteacher.controller.UserController;
 import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.chat.FrChat;
 import cn.dajiahui.kidteacher.ui.chat.constant.ImHelper;
-import cn.dajiahui.kidteacher.ui.chat.constant.PreferenceManager;
 import cn.dajiahui.kidteacher.ui.chat.db.DemoDBManager;
 import cn.dajiahui.kidteacher.ui.chat.db.UserDao;
 import cn.dajiahui.kidteacher.ui.homework.FrHomework;
@@ -68,7 +64,6 @@ public class MainActivity extends FxTabActivity {
             }
         }
     };
-
 
 
     private BroadcastReceiver broadcastReceiver;
@@ -151,7 +146,7 @@ public class MainActivity extends FxTabActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (RESULT_OK == resultCode) {
-              if (requestCode == 3001) {
+            if (requestCode == 3001) {
                 ArrayList<String> strings = data.getStringArrayListExtra(Constant.bundle_obj);
                 if (strings != null && strings.size() != 0) {
                     if (frMine != null) {
@@ -170,35 +165,6 @@ public class MainActivity extends FxTabActivity {
         }
     }
 
-    public void httpUserIcon(File file) {
-        showfxDialog(R.string.submiting);
-        RequestUtill.getInstance().uploadUserIcon(context, new ResultCallback() {
-            @Override
-            public void onError(Request request, Exception e) {
-                dismissfxDialog();
-                ToastUtil.showToast(context, ErrorCode.error(e));
-            }
-
-            @Override
-            public void onResponse(String response) {
-                dismissfxDialog();
-                HeadJson headJson = new HeadJson(response);
-                if (headJson.getstatus() == 0) {
-                    UserController.getInstance().getUser().setAvator(headJson.parsingString("avator"));
-                    PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvator());
-                    ToastUtil.showToast(context, R.string.save_ok);
-                    if (frHomework != null) {
-//                        GlideUtil.showRoundImage(MainActivity.this, UserController.getInstance().getUser().getAvator(), frHomework.imUer, R.drawable.ico_default_user, true);
-                    }
-                    if (frMine != null) {
-//                        GlideUtil.showRoundImage(MainActivity.this, UserController.getInstance().getUser().getAvator(), frMine.imUser, R.drawable.ico_default_user, true);
-                    }
-                } else {
-                    ToastUtil.showToast(context, headJson.getMsg());
-                }
-            }
-        }, file, UserController.getInstance().getUserId());
-    }
 
     EMMessageListener messageListener = new EMMessageListener() {
 

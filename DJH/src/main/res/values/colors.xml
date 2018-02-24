@@ -47,4 +47,10 @@
     <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
     <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
     <color name="list_divider_color_gravy">#E9E9E9</color>
+
+    <color name="gray_F5F5F5">#F5F5F5</color>
+    <color name="gray_666666">#666666</color>
+    <color name="blue_1F6DED">#1F6DED</color>
+
+
 </resources>

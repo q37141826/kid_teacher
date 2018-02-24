@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:cursorVisible="true"
                 android:gravity="top|left"
-                android:hint="聊聊今天发生了什么"
+                android:hint="聊聊今天发生了什么..."
                 android:minLines="4"
                 android:textCursorDrawable="@null"/>
         </LinearLayout>
@@ -44,14 +44,17 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <GridView
             android:id="@+id/grildview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="4"
-            android:overScrollMode="never"/>
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
+            android:numColumns="3"
+            android:overScrollMode="never"
+           />
     </RelativeLayout>
 
 

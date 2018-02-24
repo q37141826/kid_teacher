@@ -9,13 +9,14 @@ import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.http.request.OkHttpDownloadRequest;
 import com.fxtx.framework.http.request.OkHttpRequest;
 import com.fxtx.framework.image.util.ImageUtil;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.IdentityHashMap;
 
 import cn.dajiahui.kidteacher.BuildConfig;
-import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.UserController;
 
 
@@ -214,7 +215,6 @@ public class RequestUtill {
     }
 
 
-
     public void httpModifyPwd(Context context, ResultCallback callback, String access_token, String username, String oldPassword, String xinPassword, String confirmPassword) {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("userId", access_token);
@@ -265,29 +265,8 @@ public class RequestUtill {
         getHttpBuilder(context, "user/updateUserInfo.json").params(params).post(callback);
     }
 
-    /**
-     * 上传头像
-     *
-     * @param context
-     * @param callback
-     * @param files
-     * @param userId
-     */
-    public void uploadUserIcon(Context context, ResultCallback callback, File files, String userId) {
-        Bitmap map = ImageUtil.uriToBitmap(Uri.fromFile(files), context);
-        map = ImageUtil.centerSquareScaleBitmap(map, 400);
-        File file = ImageUtil.bitmapToFile(map, UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg", -1);
-        if (file == null) {
-            ToastUtil.showToast(context, "文件错误无法提交");
-            callback.onError(null, null);
-        } else {
-            IdentityHashMap params = new IdentityHashMap<>();
-            params.put("userId", userId);
-            new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "user/uploadAvator.json").files(new Pair<String, File>("file", file)).params(params).upload(callback);
-        }
-    }
 
-       public void httpUserSex(Context context, ResultCallback callback, String userId, String sex) {
+    public void httpUserSex(Context context, ResultCallback callback, String userId, String sex) {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("userId", userId);
         params.put("sex", sex);
@@ -354,6 +333,7 @@ public class RequestUtill {
 
     /**
      * 获取手机获取验证码
+     *
      * @param context
      * @param callback
      * @param phone
@@ -377,6 +357,7 @@ public class RequestUtill {
 
     /**
      * 取得申请入班学生列表
+     *
      * @param context
      * @param callback
      */
@@ -388,6 +369,7 @@ public class RequestUtill {
 
     /**
      * 批准学生入班
+     *
      * @param context
      * @param callback
      * @param classId
@@ -403,6 +385,7 @@ public class RequestUtill {
 
     /**
      * 拒绝学生入班
+     *
      * @param context
      * @param callback
      * @param classId
@@ -418,6 +401,7 @@ public class RequestUtill {
 
     /**
      * 取得班级详情
+     *
      * @param context
      * @param callback
      * @param classId
@@ -431,6 +415,7 @@ public class RequestUtill {
 
     /**
      * 移除学生
+     *
      * @param context
      * @param callback
      * @param classId
@@ -446,6 +431,7 @@ public class RequestUtill {
 
     /**
      * 取得教辅列表
+     *
      * @param context
      * @param callback
      * @param pageSize
@@ -461,6 +447,7 @@ public class RequestUtill {
 
     /**
      * 选择教辅
+     *
      * @param context
      * @param callback
      * @param bookId
@@ -474,6 +461,7 @@ public class RequestUtill {
 
     /**
      * 取得常用教辅
+     *
      * @param context
      * @param callback
      */
@@ -496,6 +484,7 @@ public class RequestUtill {
 
     /**
      * 发布作业时取得的班级列表
+     *
      * @param context
      * @param callback
      * @param bookId
@@ -515,6 +504,7 @@ public class RequestUtill {
 
     /**
      * 发布作业
+     *
      * @param context
      * @param callback
      * @param classId
@@ -535,6 +525,7 @@ public class RequestUtill {
 
     /**
      * 获取作业列表
+     *
      * @param context
      * @param callback
      * @param classId
@@ -542,7 +533,7 @@ public class RequestUtill {
      * @param pageSize
      * @param pageNum
      */
-    public void httpGetHomeworkList(Context context, ResultCallback callback, String classId, String isChecked, int pageSize, int pageNum ) {
+    public void httpGetHomeworkList(Context context, ResultCallback callback, String classId, String isChecked, int pageSize, int pageNum) {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
@@ -554,6 +545,7 @@ public class RequestUtill {
 
     /**
      * 获取班级和状态列表（作业（首页）页面）
+     *
      * @param context
      * @param callback
      */
@@ -577,6 +569,7 @@ public class RequestUtill {
 
     /**
      * 取得作业报告
+     *
      * @param context
      * @param callback
      * @param homeworkId
@@ -590,10 +583,11 @@ public class RequestUtill {
 
     /**
      * 通知后台检查作业
+     *
      * @param context
      * @param callback
      * @param homeworkId
-     * @param flag 0：数据不从后台取 1：数据从后台取
+     * @param flag       0：数据不从后台取 1：数据从后台取
      */
     public void httpCheckHomework(Context context, ResultCallback callback, String homeworkId, int flag) {
         IdentityHashMap params = new IdentityHashMap<>();
@@ -605,6 +599,7 @@ public class RequestUtill {
 
     /**
      * 作业详情
+     *
      * @param context
      * @param callback
      * @param homeworkId
@@ -616,9 +611,55 @@ public class RequestUtill {
         getHttpBuilder(context, "teacher/homework/detail-next").params(params).post(callback);
     }
 
+    /*班级空间*/
+    public void httpClassSpace(Context context, ResultCallback callback, String class_id, String pageSize, String page) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("class_id", class_id);
+        params.put("pageSize", pageSize);
+        params.put("page", page);
+
+        getHttpBuilder(context, "teacher/classroom/dynamic").params(params).post(callback);
+    }
+
+    /*发布动态*/
+    public void httpSendDynamic(Context context, ResultCallback callback, String class_id, String content, ArrayList<String> img_url) {
+        Logger.d("" + UserController.getInstance().getUser().getToken());
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("class_id", class_id);
+        params.put("content", content);
+        for (int i = 0; i < img_url.size(); i++) {
+            params.put("img_url[" + i + "]", img_url.get(i));
+        }
+        getHttpBuilder(context, "teacher/classroom/add-dynamic").params(params).post(callback);
+    }
+
+
+    /**
+     * 上传头像
+     *
+     * @param context
+     * @param callback
+     * @param files
+     */
+    public void uploadUserIcon(Context context, ResultCallback callback, File files) {
+        Bitmap map = ImageUtil.uriToBitmap(Uri.fromFile(files), context);
+        map = ImageUtil.centerSquareScaleBitmap(map, 400);
+        File file = ImageUtil.bitmapToFile(map, UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg", -1);
+        if (file == null) {
+            ToastUtil.showToast(context, "文件错误无法提交");
+            callback.onError(null, null);
+        } else {
+            IdentityHashMap params = new IdentityHashMap<>();
+            params.put("token", UserController.getInstance().getUser().getToken());
+            new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "uploader/image").files(new Pair<String, File>("file", file)).params(params).upload(callback);
+        }
+    }
 
     /**
      * 测试json
+     *
      * @param context
      * @param callback
      * @param json

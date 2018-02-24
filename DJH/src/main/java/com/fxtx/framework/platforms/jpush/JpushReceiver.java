@@ -31,7 +31,7 @@ public abstract class JpushReceiver extends BroadcastReceiver {
         }
         if (isBundle()) {
             String s = printBundle(bundle);
-            Logger.d("Jpush", "Jpush:" + s);
+            Logger.d("Jpush:" + s);
         }
     }
 
