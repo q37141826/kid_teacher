@@ -65,7 +65,7 @@
             android:background="@null"
             android:text="@string/cancle"
             android:gravity="center"
-            android:textColor="@color/color_app"
+            android:textColor="@color/black"
             android:textSize="16sp"
             />
 
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:text="@string/sure"
-            android:textColor="@color/color_app"
+            android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>
 

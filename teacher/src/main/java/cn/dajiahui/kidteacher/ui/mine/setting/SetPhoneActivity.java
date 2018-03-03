@@ -71,10 +71,10 @@ public class SetPhoneActivity extends FxActivity {
                 //输入中
                 if (isBtnCode) {
                     if (mPhonenum.getText().toString().length() == 11) {
-                        btnCode.setBackgroundResource(R.drawable.select_btn_bg);
+                        btnCode.setBackgroundResource(R.color.white);
                         btnCode.setClickable(true);
                     } else {
-                        btnCode.setBackgroundResource(R.color.whilte_gray);
+                        btnCode.setBackgroundResource(R.color.white);
                         btnCode.setClickable(false);
                     }
                 }
@@ -212,10 +212,10 @@ public class SetPhoneActivity extends FxActivity {
             isBtnCode = true;
             if (mPhonenum.getText().toString().length() == 11) {
                 btnCode.setClickable(true);
-                btnCode.setBackgroundResource(R.drawable.select_btn_bg);
+                btnCode.setBackgroundResource(R.color.white);
             } else {
                 btnCode.setClickable(false);
-                btnCode.setBackgroundResource(R.color.whilte_gray);
+                btnCode.setBackgroundResource(R.color.white);
             }
         }
 
@@ -224,7 +224,7 @@ public class SetPhoneActivity extends FxActivity {
             // TODO Auto-generated method stub
             isBtnCode = false;
             btnCode.setClickable(false);
-            btnCode.setBackgroundResource(R.color.whilte_gray);
+            btnCode.setBackgroundResource(R.color.white);
             btnCode.setText(millisUntilFinished / 1000 + "秒");
         }
     }

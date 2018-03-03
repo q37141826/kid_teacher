@@ -1,9 +1,5 @@
 package cn.dajiahui.kidteacher.ui.login.bean;
 
-import com.fxtx.framework.text.StringUtil;
-
-import java.util.List;
-
 import cn.dajiahui.kidteacher.util.BeanObj;
 
 /**
@@ -13,7 +9,7 @@ public class BeUser extends BeanObj {
     private String token;
     private String user_id;
     private String user_type;//用户类型
-    private String avator;
+    private String avatar;
     private String telnum;
     private String nickname;
     private String gender;
@@ -46,12 +42,12 @@ public class BeUser extends BeanObj {
         this.user_type = user_type;
     }
 
-    public String getAvator() {
-        return avator;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvator(String avator) {
-        this.avator = avator;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getTelnum() {

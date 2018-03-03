@@ -46,12 +46,12 @@ public class LoginHttp {
             public void onError(Request request, Exception e) {
                 onLogin.error();
                 ToastUtil.showToast(context, ErrorCode.error(e));
-                Logger.d(  "登錄失敗" + e);
+                Logger.d("登錄失敗" + e);
             }
 
             @Override
             public void onResponse(String response) {
-                Logger.d(  "登錄response" + response);
+                Logger.d("teacher登录成功" + response);
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
                     JpushUtil.infoJpush(context);
@@ -63,6 +63,7 @@ public class LoginHttp {
                         onLogin.error();
                         return;
                     }
+                    Logger.d("teacher登录token" + temp.getToken());
                     UserController.getInstance().savaUser(temp);
                     UserController.getInstance().saveNum(num);
                     UserController.getInstance().getUser().setPwd(pwd);
@@ -118,7 +119,7 @@ public class LoginHttp {
                 // 更新当前用户的nickname 此方法的作用是在ios离线推送时能够显示用户nick
                 String nickName = UserController.getInstance().getUser().getNickname();
                 //异步获取当前用户的昵称和头像(从自己服务器获取，demo使用的一个第三方服务)
-                PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvator());
+                PreferenceManager.getInstance().setCurrentUserAvatar(UserController.getInstance().getUser().getAvatar());
                 PreferenceManager.getInstance().setCurrentUserNick(nickName);
                 PreferenceManager.getInstance().setCurrentUserName(user);
                 setStartActivity();

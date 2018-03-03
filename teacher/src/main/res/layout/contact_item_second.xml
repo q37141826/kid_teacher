@@ -36,7 +36,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/textmarginleft"
             android:drawablePadding="@dimen/textpadding"
-            android:drawableRight="@drawable/ico_to"
+            android:drawableRight="@drawable/go_right"
             android:textSize="@dimen/text16"
             android:textStyle="normal" />
     </RelativeLayout>

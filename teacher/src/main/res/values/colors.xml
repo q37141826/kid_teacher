@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="all_bg">#FFFFFF</color>
-    <color name="transparent">#ffffff</color>
     <color name="color5A">#5A5A5A</color>
     <color name="color79">#797979</color>
     <color name="red">#E32425</color>
@@ -27,5 +26,6 @@
     <color name="black_tv_6">#666666</color>
     <color name="text_gray_df">#DFDFDF</color>
     <color name="black_tv_cd">#CDCDCD</color>
+    <color name="gray_333333">#333333</color>
 
 </resources>

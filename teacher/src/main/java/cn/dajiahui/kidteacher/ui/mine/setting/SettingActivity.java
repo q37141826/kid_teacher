@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fxtx.framework.http.ErrorCode;
@@ -41,15 +40,10 @@ public class SettingActivity extends FxActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_setting);
-//        TextView tv_security = getView(R.id.tvSecurity);
-//        tv_security.setOnClickListener(onClick);
-//        TextView tvFixpass = getView(R.id.tvFixpass);
-
         Button bt_exit = getView(R.id.btn_Exit);
         bt_exit.setOnClickListener(onClick);
-//        tvFixpass.setOnClickListener(onClick);
-        getView(R.id.setttin_security).setOnClickListener(onClick);
-        getView(R.id.setttin_fixpass).setOnClickListener(onClick);
+        getView(R.id.tvSecurity).setOnClickListener(onClick);
+        getView(R.id.tvFixpass).setOnClickListener(onClick);
         RelativeLayout tvClean = getView(R.id.tvclean);
         tvClean.setOnClickListener(onClick);
         getView(R.id.toolbar);
@@ -60,11 +54,11 @@ public class SettingActivity extends FxActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.setttin_security:
-                    Toast.makeText(SettingActivity.this, "修改用户手机号", Toast.LENGTH_SHORT).show();
+                case R.id.tvSecurity:
+
                     DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPhoneActivity.class);
                     break;
-                case R.id.setttin_fixpass:
+                case R.id.tvFixpass:
                     DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPassActivity.class);
                     break;
                 case R.id.tvclean:

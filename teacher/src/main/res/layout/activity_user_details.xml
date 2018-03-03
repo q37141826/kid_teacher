@@ -47,7 +47,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/textmarginleft"
-                    android:background="@drawable/ico_to"/>
+                    android:background="@drawable/go_right"/>
 
                 <ImageView
                     android:id="@+id/img_user_icon"
@@ -55,7 +55,7 @@
                     android:layout_height="65dp"
                     android:layout_toLeftOf="@+id/img_user_icon_to"
                     android:padding="10dp"
-                    android:src="@drawable/logo"/>
+                    android:src="@drawable/ico_default_user"/>
 
             </RelativeLayout>
 
@@ -81,17 +81,26 @@
                     android:textColor="@color/black_tv_3"
                     android:textSize="@dimen/text18"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_user_name_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/ico_to"
+                    android:layout_alignTop="@id/image1"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toEndOf="@id/image1"
+                    android:layout_toRightOf="@id/image1"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:lineSpacingExtra="8dp"
+                    android:lines="1"
+                    android:maxLines="1"
                     android:padding="@dimen/textmarginleft"
-                    android:textColor="@color/black_tv_6"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/sp_while"
                     android:textSize="@dimen/text16"/>
             </RelativeLayout>
 
@@ -125,7 +134,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/textmarginleft"
                     android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/ico_to"
+                    android:drawableRight="@drawable/go_right"
                     android:textColor="@color/black_tv_6"
                     android:textSize="@dimen/text16"/>
 
@@ -140,7 +149,7 @@
                 android:text=""/>
 
             <RelativeLayout
-                android:id="@+id/re_user_age"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -149,20 +158,20 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="@dimen/textmarginleft"
-                    android:text="@string/tv_user_birth"
+                    android:text="生日"
                     android:textColor="@color/black_tv_3"
                     android:textSize="@dimen/text18"/>
 
 
                 <TextView
-                    android:id="@+id/tv_user_age_right"
+                    android:id="@+id/tv_user_birthday_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/textmarginleft"
                     android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/ico_to"
+                    android:drawableRight="@drawable/go_right"
                     android:textColor="@color/black_tv_6"
                     android:textSize="@dimen/text16"/>
             </RelativeLayout>

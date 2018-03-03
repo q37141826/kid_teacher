@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_line"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_line"
+              android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/topView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+    <RelativeLayout
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="4dp"
             android:padding="10dp"
-            android:background="@color/white">
+            android:src="@drawable/ico_default_user"/>
 
-            <ImageView
-                android:id="@+id/iv_user"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ico_portrait"
-                android:src="@drawable/logo"/>
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_edit"
+            android:layout_toEndOf="@+id/iv_user"
+            android:text="@string/user_name"
+            android:textColor="@color/gray_333333"
+            android:textSize="15sp"/>
 
-            <TextView
-                android:id="@+id/tv_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_user"
-                android:layout_marginTop="8dp"
-                android:text="Shirley"
-                android:textColor="@color/black_tv_3"
-                android:textSize="@dimen/text18"/>
+        <TextView
+            android:id="@+id/tv_campus_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_edit"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@id/iv_user"
+            android:text="魔耳英语国贸校区"
+            android:textColor="@color/black_tv_6"
+            android:textSize="@dimen/text15"/>
 
-            <TextView
-                android:id="@+id/tv_campus_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/iv_user"
-                android:layout_below="@id/tv_user_name"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/black_tv_6"
-                android:text="魔耳英语国贸校区"
-                android:textSize="@dimen/text15" />
-
-            <ImageView
-                android:id="@+id/img_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ico_to"/>
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:src="@drawable/go_right"/>
 
 
-        </RelativeLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/tvMyclass"
@@ -68,17 +69,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_my_class"
-            android:textColor="@color/black_tv_3"
             android:text="@string/mine_my_class"
+            android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
 
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ico_to" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/go_right"/>
     </RelativeLayout>
 
     <TextView
@@ -103,12 +104,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_pending_student"
-            android:textColor="@color/black_tv_3"
             android:text="@string/mine_wait_add_class"
+            android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
 
         <TextView
-            android:visibility="invisible"
             android:id="@+id/tv_waitaddclassconut"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
@@ -117,15 +117,16 @@
             android:background="@drawable/shape"
             android:gravity="center"
             android:text="1"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/nextmyclass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ico_to" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/go_right"/>
     </RelativeLayout>
 
     <TextView
@@ -149,12 +150,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_notice"
-            android:textColor="@color/black_tv_3"
             android:text="@string/mine_notice"
+            android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
 
         <TextView
-            android:visibility="invisible"
             android:id="@+id/tv_noticecount"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
@@ -163,15 +163,16 @@
             android:background="@drawable/shape"
             android:gravity="center"
             android:text="1"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/nextnotice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ico_to"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/go_right"/>
     </RelativeLayout>
 
     <TextView
@@ -194,17 +195,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_about"
-            android:textColor="@color/black_tv_3"
             android:text="@string/mine_text_about"
+            android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
 
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ico_to"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/go_right"/>
     </RelativeLayout>
 
     <TextView
@@ -227,17 +228,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_setting"
-            android:textColor="@color/black_tv_3"
             android:text="@string/mine_setting"
+            android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
 
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ico_to"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/go_right"/>
     </RelativeLayout>
 
     <TextView

@@ -86,7 +86,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@drawable/ico_to"
+                android:drawableRight="@drawable/go_right"
                 android:gravity="center"
                 android:textSize="@dimen/text15"
                 android:text=""/>

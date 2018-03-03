@@ -39,7 +39,7 @@
             android:id="@+id/img_undone_item_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ico_to"
+            android:background="@drawable/go_right"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_centerVertical="true"

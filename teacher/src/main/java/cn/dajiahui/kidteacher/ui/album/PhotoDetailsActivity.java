@@ -212,7 +212,7 @@ public class PhotoDetailsActivity extends FxActivity {
                         tvEval.setText(getString(R.string.text_pingjia, num + ""));
                     }
                     if (item != null) {
-                        item.setAvator(UserController.getInstance().getUser().getAvator());
+                        item.setAvator(UserController.getInstance().getUser().getAvatar());
                         if (group > -1) {
                             BePhotoEval eval = evalList.get(group);
                             eval.getList().add(item);

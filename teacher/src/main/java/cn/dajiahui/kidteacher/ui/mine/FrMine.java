@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fxtx.framework.http.ErrorCode;
 import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxFragment;
@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.UserController;
 import cn.dajiahui.kidteacher.http.RequestUtill;
-import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
 import cn.dajiahui.kidteacher.ui.mine.about.AboutActivity;
 import cn.dajiahui.kidteacher.ui.mine.myclass.MyClassActivity;
 import cn.dajiahui.kidteacher.ui.mine.notice.NoticeActivity;
@@ -40,7 +39,10 @@ public class FrMine extends FxFragment {
     private Button btnEdit;
 
     private String url = "";
-    public TextView tv_userName, tv_campusName; // 用户名和个性签名
+    public TextView tv_userName, tv_campusName;
+    private TextView mWaitaddclassconut;
+    private TextView mNoticecount;
+
 
     @Override
     protected View initinitLayout(LayoutInflater inflater) {
@@ -50,9 +52,54 @@ public class FrMine extends FxFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init();
+        initialize();
+        /*获取网络数据*/
+        mineHttp();
+        initData();
+
+    }
+
+    private void mineHttp() {
+        httpData();
+    }
+
+    @Override
+    public void httpData() {
+        super.httpData();
+        RequestUtill.getInstance().httpMine(getActivity(), callMine);
+    }
+
+    ResultCallback callMine = new ResultCallback() {
+
+
+        @Override
+        public void onError(Request request, Exception e) {
+            dismissfxDialog();
+
+        }
+
+        @Override
+        public void onResponse(String response) {
+            dismissfxDialog();
+            HeadJson json = new HeadJson(response);
+            if (json.getstatus() == 0) {
+
+
+            } else {
+                ToastUtil.showToast(getContext(), json.getMsg());
+            }
+
+        }
+
+    };
+
+    private void initData() {
+
         tv_userName.setText(UserController.getInstance().getUser().getNickname());
         tv_campusName.setText("北京");
+
+        GlideUtil.showRoundImage(getActivity(), UserController.getInstance().getUser().getAvatar(), imUser, R.drawable.ico_default_user, true);
+
     }
 
 
@@ -65,9 +112,8 @@ public class FrMine extends FxFragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.img_edit:
+                case R.id.iv_edit:
                 case R.id.topView:
-//                    Toast.makeText(activity, "编辑", Toast.LENGTH_SHORT).show();
                     //设置
                     DjhJumpUtil.getInstance().startBaseActivityForResult(getActivity(), UserDetailsActivity.class, null, PICFPRRESULT);
                     break;
@@ -137,24 +183,20 @@ public class FrMine extends FxFragment {
     }
 
     /*初始化*/
-    private void init() {
-        //        imBg = getView(R.id.ib_bg);
+    private void initialize() {
         imUser = getView(R.id.iv_user);
-        imSet = getView(R.id.img_edit);
+        imSet = getView(R.id.iv_edit);
         imUser.setOnClickListener(onClick);
         imSet.setOnClickListener(onClick);
         getView(R.id.topView).setOnClickListener(onClick);
-        getView(R.id.iv_user).setOnClickListener(onClick);
-
+        imUser = getView(R.id.iv_user);
         tv_userName = getView(R.id.tv_user_name);
         tv_campusName = getView(R.id.tv_campus_name);
-
-
         getView(R.id.tvMyclass).setOnClickListener(onClick);
         getView(R.id.tvWaitaddclass).setOnClickListener(onClick);
-        TextView mWaitaddclassconut = getView(R.id.tv_waitaddclassconut);
+        mWaitaddclassconut = getView(R.id.tv_waitaddclassconut);
         getView(R.id.tvNotice).setOnClickListener(onClick);
-        TextView mNoticecount = getView(R.id.tv_noticecount);
+        mNoticecount = getView(R.id.tv_noticecount);
         getView(R.id.tvAbout).setOnClickListener(onClick);
         getView(R.id.tvSetting).setOnClickListener(onClick);
     }

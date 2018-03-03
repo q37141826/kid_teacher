@@ -635,6 +635,20 @@ public class RequestUtill {
         getHttpBuilder(context, "teacher/classroom/add-dynamic").params(params).post(callback);
     }
 
+    /*我的*/
+    public void httpMine(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+
+        getHttpBuilder(context, "student/").params(params).post(callback);
+    }
+
+    /*展示用户信息*/
+    public void httpShowUserProfileInfo(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        getHttpBuilder(context, "teacher/member/index").params(params).post(callback);
+    }
 
     /**
      * 上传头像
@@ -655,6 +669,28 @@ public class RequestUtill {
             params.put("token", UserController.getInstance().getUser().getToken());
             new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "uploader/image").files(new Pair<String, File>("file", file)).params(params).upload(callback);
         }
+    }
+
+    /*真正修改头像*/
+    public void httpChangeUserInfo(Context context, ResultCallback callback, int type, String info) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        switch (type) {
+            case 0://修改头像
+                params.put("avatar", info);
+                break;
+            case 1://修改姓名
+                params.put("nickname", info);
+                break;
+            case 2://修改性别
+                params.put("gender", info);
+                break;
+            case 3://生日
+                params.put("birthday", info);
+                break;
+
+        }
+        getHttpBuilder(context, "teacher/member/update").params(params).post(callback);
     }
 
     /**
