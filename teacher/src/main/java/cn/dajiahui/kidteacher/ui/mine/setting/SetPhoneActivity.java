@@ -1,5 +1,6 @@
 package cn.dajiahui.kidteacher.ui.mine.setting;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -98,8 +99,8 @@ public class SetPhoneActivity extends FxActivity {
     @Override
     public void httpData() {
         //弹出对话框
-        final String pwd = mPhonenum.getText().toString().trim();
-        if (StringUtil.isEmpty(pwd)) {
+        final String Phonenum = mPhonenum.getText().toString().trim();
+        if (StringUtil.isEmpty(Phonenum)) {
             ToastUtil.showToast(SetPhoneActivity.this, R.string.inputnewphonw);
             return;
         }
@@ -109,19 +110,19 @@ public class SetPhoneActivity extends FxActivity {
             return;
         }
 
-        if (pwd.length() < 6 || pwd.length() > 16) {
-            ToastUtil.showToast(SetPhoneActivity.this, R.string.correct_pwd);
+        if (Phonenum.length() < 0 || Phonenum.length() >= 12) {
+            ToastUtil.showToast(SetPhoneActivity.this, R.string.correct_phne);
             return;
         }
-        if (!StringUtil.sameStr(pwd, user.getPwd())) {
-            ToastUtil.showToast(SetPhoneActivity.this, R.string.pwderror);
-            return;
-        }
+//        if (!StringUtil.sameStr(Phonenum, user.getPwd())) {
+//            ToastUtil.showToast(SetPhoneActivity.this, R.string.pwderror);
+//            return;
+//        }
 
         FxDialog dialg = new FxDialog(SetPhoneActivity.this) {
             @Override
             public void onRightBtn(int flag) {
-//                httpPhone(newPhone, code);
+                httpPhone(Phonenum, code);
             }
 
             @Override
@@ -138,30 +139,30 @@ public class SetPhoneActivity extends FxActivity {
     /**
      * 修改手机号
      */
-//    private void httpPhone(final String newPhone, String captcha) {
-//        showfxDialog(R.string.submiting);
-//        RequestUtill.getInstance().httpboundPhone(SetPhoneActivity.this, new ResultCallback() {
-//            @Override
-//            public void onError(Request request, Exception e) {
-//                dismissfxDialog();
-//                ToastUtil.showToast(SetPhoneActivity.this, ErrorCode.error(e));
-//            }
-//
-//            @Override
-//            public void onResponse(String response) {
-//                dismissfxDialog();
-//                HeadJson json = new HeadJson(response);
-//                if (json.getstatus() == 0) {
-//                    setResult(Activity.RESULT_OK);
-//                    UserController.getInstance().getUser().setPhone(newPhone);
-//                    finishActivity();
-//                    ToastUtil.showToast(SetPhoneActivity.this, R.string.save_ok);
-//                } else {
-//                    ToastUtil.showToast(SetPhoneActivity.this, json.getMsg());
-//                }
-//            }
-//        }, UserController.getInstance().getUserId(), newPhone, captcha);
-//    }
+    private void httpPhone(final String newPhone, String code) {
+        showfxDialog(R.string.submiting);
+        RequestUtill.getInstance().httpModifyPhone(SetPhoneActivity.this, new ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+                dismissfxDialog();
+                ToastUtil.showToast(SetPhoneActivity.this, ErrorCode.error(e));
+            }
+
+            @Override
+            public void onResponse(String response) {
+                dismissfxDialog();
+                HeadJson json = new HeadJson(response);
+                if (json.getstatus() == 0) {
+                    setResult(Activity.RESULT_OK);
+                    UserController.getInstance().getUser().setTelnum(newPhone);
+                    finishActivity();
+                    ToastUtil.showToast(SetPhoneActivity.this, R.string.save_ok);
+                } else {
+                    ToastUtil.showToast(SetPhoneActivity.this, json.getMsg());
+                }
+            }
+        },   newPhone, code);
+    }
 
     /**
      * 验证码

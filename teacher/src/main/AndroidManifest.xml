@@ -404,6 +404,8 @@
         </activity>
         <activity android:name=".ui.mine.setting.SetPhoneActivity">
         </activity>
+        <activity android:name=".ui.mine.notice.NoticeDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

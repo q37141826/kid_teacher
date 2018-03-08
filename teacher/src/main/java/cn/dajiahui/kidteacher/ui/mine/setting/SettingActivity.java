@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fxtx.framework.http.ErrorCode;
@@ -47,6 +48,8 @@ public class SettingActivity extends FxActivity {
         RelativeLayout tvClean = getView(R.id.tvclean);
         tvClean.setOnClickListener(onClick);
         getView(R.id.toolbar);
+        TextView defealt_tel = getView(R.id.defealt_tel);
+        defealt_tel.setText(UserController.getInstance().getUser().getTelnum());
     }
 
 

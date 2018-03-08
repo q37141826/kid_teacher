@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
@@ -104,7 +103,7 @@ public class ClassInfoActivity extends FxActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_invitation:
-                    Toast.makeText(context, "邀请学员", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "邀请学员", Toast.LENGTH_SHORT).show();
                     break;
 
                 default:

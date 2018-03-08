@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
@@ -323,12 +322,7 @@ public class FrHomework extends FxFragment {
     private AdapterView.OnItemClickListener onitemclick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            mPageNum = 1;
-
             if (choosetag == 1) {
-//                mChooseClass.setText(homeworkList.get(position).getTask_second_class_name());
-                // mChooseClass.setTag(data.get(position).getCode());
-                // type = data.get(position).getCode();
                 mChooseClass.setText(classList.get(position).getClass_name());
                 mClassId = classList.get(position).getId();
                 httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
@@ -369,13 +363,9 @@ public class FrHomework extends FxFragment {
      */
     private void addList(List<BeHomeworkList> list) {
         if (homeworkList.size() > 0) {
-//            homeworkList.addAll(list);
             if (homeworkList.get(homeworkList.size() - 1).getPubdate().equals(list.get(0).getPubdate())) {
                 homeworkList.get(homeworkList.size() - 1).getHome_list().addAll(list.get(0).getHome_list());
                 list.remove(0);
-//                if (list.size() <= 0) {
-//                    homeworkList.remove(homeworkList.size() - 1);
-//                }
             }
             homeworkList.addAll(list);
         } else {

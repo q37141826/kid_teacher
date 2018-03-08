@@ -81,6 +81,7 @@
     <string name="mine_audit_student">学员审核</string>
     <string name="mine_personal_information">个人信息</string>
     <string name="mine_notice">魔耳通知</string>
+    <string name="clean_notice">清空通知</string>
     <string name="mine_setting">设置</string>
     <string name="mine_text_userphone">修改账户手机号</string>
     <string name="mine_text_about">关于我们</string>
@@ -180,6 +181,7 @@
     <string name="ed_user_copyemail">和历史邮箱一致，请重新输入邮箱</string>
     <string name="nameequel">和历史姓名一致，请重新输入姓名</string>
     <string name="correct_pwd">密码长度只能为6-20位</string>
+    <string name="correct_phne">手机号输入错误</string>
     <string name="pwderror">密码输错</string>
     <string name="text_oldnewpwd">新手机号和原手机号相同，无法修改</string>
     <string name="no_chinese">密码不允许含有中文</string>

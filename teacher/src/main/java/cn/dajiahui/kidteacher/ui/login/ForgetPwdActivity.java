@@ -174,7 +174,7 @@ public class ForgetPwdActivity extends FxActivity {
                 }
             }
         };
-        RequestUtill.getInstance().changePwd(context, callback, phone, code, toChangePwd, pwdAgain);
+        RequestUtill.getInstance().changePwd(context, callback, phone, toChangePwd, pwdAgain, code);
     }
 
     class TimeCount extends CountDownTimer {

@@ -37,7 +37,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="25dp"
-                    android:src="@drawable/ico_phone"/>
+                    android:src="@drawable/ico_regist_phone"/>
 
                 <EditText
                     android:id="@+id/ed_phone"
@@ -137,8 +137,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="25dp"
-
-                    android:src="@drawable/ico_pwd"/>
+                    android:src="@drawable/ico_regist_lock"
+                    />
 
 
                 <EditText
@@ -178,8 +178,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="25dp"
-
-                    android:src="@drawable/ico_pwd"/>
+                    android:src="@drawable/ico_regist_lock"
+                    />
 
                 <EditText
                     android:id="@+id/edPwdOk"

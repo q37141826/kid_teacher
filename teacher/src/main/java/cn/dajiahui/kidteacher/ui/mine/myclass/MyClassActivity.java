@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
@@ -32,6 +33,7 @@ public class MyClassActivity extends FxActivity {
     private ApMyClass apMyClass;   // 班级列表的Adapter
     private List<BeClass> classInfoList = new ArrayList<BeClass>();
     private int itemNumber = 0; // 总的数据数
+    private TextView tvNUll;
 
 
     @Override
@@ -50,8 +52,10 @@ public class MyClassActivity extends FxActivity {
         refresh = getView(R.id.refresh);
         initRefresh(refresh);
         mListView = getView(R.id.listview);
+        tvNUll = getView(R.id.tv_null);
+        tvNUll.setText("暂无班级");
         apMyClass = new ApMyClass(MyClassActivity.this, classInfoList);
-
+        mListView.setEmptyView(tvNUll);
         mListView.setAdapter(apMyClass);
 
 
@@ -104,7 +108,7 @@ public class MyClassActivity extends FxActivity {
             }
         };
 
-        RequestUtill.getInstance().httpLessonClass(context, call, mPageSize, mPageNum );
+        RequestUtill.getInstance().httpLessonClass(context, call, mPageSize, mPageNum);
     }
 
     @Override
@@ -114,6 +118,7 @@ public class MyClassActivity extends FxActivity {
 
     /**
      * 判断是否为最后一页
+     *
      * @return 0 不是最后一页 1 是最后一页
      */
     private int isLastPage() {

@@ -1,10 +1,10 @@
 package com.fxtx.framework.http.request;
 
-import android.util.Log;
 import android.util.Pair;
 
 import com.fxtx.framework.http.OkHttpClientManager;
 import com.fxtx.framework.http.callback.ResultCallback;
+import com.fxtx.framework.log.Logger;
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -208,12 +208,12 @@ public abstract class OkHttpRequest
         {
             OkHttpRequest request = new OkHttpPostRequest(url, tag, params, headers, mediaType, content, bytes, file,json);
             request.invokeAsyn(callback);
-            Log.d("log", "post url = " + url);
-            Log.d("log", "parames start ************ ");
+            Logger.d( "post url = " + url);
+            Logger.d(  "parames start ************ ");
             for (Map.Entry<String, String> entry : params.entrySet()) {
-                Log.d("log", "Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                Logger.d(  "Key = " + entry.getKey() + ", Value = " + entry.getValue());
             }
-            Log.d("log", "parames end ************ ");
+            Logger.d( "parames end ************ ");
             return request;
         }
 

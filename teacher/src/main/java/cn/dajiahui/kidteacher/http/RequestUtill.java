@@ -112,32 +112,6 @@ public class RequestUtill {
     }
 
 
-    //忘记密码  提交信息接口
-    public void changePwd(Context context, ResultCallback callback, String phone, String code,
-                          String toChangePwd, String pwdAgain) {
-        IdentityHashMap params = new IdentityHashMap<>();
-//        params.put("phone", phone);
-//        params.put("code", code);
-//        params.put("toChangePwd", toChangePwd);
-//        params.put("pwdAgain", pwdAgain);
-        getHttpBuilder(context, "login/changePwdCode.json").params(params).post(callback);
-    }
-
-    //忘记密码  获取验证码
-    public void sendPhoneCode(Context context, ResultCallback callback, String phone, String userName) {
-        IdentityHashMap params = new IdentityHashMap<>();
-        params.put("phone", phone);
-        params.put("userName", userName);
-        getHttpBuilder(context, "login/sendChangePwdCode.json").params(params).post(callback);
-    }
-
-    //获取作业列表
-    public void getHomework(Context context, ResultCallback callback) {
-
-
-    }
-
-
     /**
      * 获取班级相册
      *
@@ -215,15 +189,15 @@ public class RequestUtill {
     }
 
 
-    public void httpModifyPwd(Context context, ResultCallback callback, String access_token, String username, String oldPassword, String xinPassword, String confirmPassword) {
-        IdentityHashMap params = new IdentityHashMap<>();
-        params.put("userId", access_token);
-        params.put("username", username);
-        params.put("oldPassword", oldPassword);
-        params.put("xinPassword", xinPassword);
-        params.put("confirmPassword", confirmPassword);
-        getHttpBuilder(context, "user/modifyPassword.json").params(params).post(callback);
-    }
+//    public void httpModifyPwd(Context context, ResultCallback callback, String access_token, String username, String oldPassword, String xinPassword, String confirmPassword) {
+//        IdentityHashMap params = new IdentityHashMap<>();
+//        params.put("userId", access_token);
+//        params.put("username", username);
+//        params.put("oldPassword", oldPassword);
+//        params.put("xinPassword", xinPassword);
+//        params.put("confirmPassword", confirmPassword);
+//        getHttpBuilder(context, "user/modifyPassword.json").params(params).post(callback);
+//    }
 
     /**
      * 使用帮助
@@ -328,7 +302,7 @@ public class RequestUtill {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("username", userName);
         params.put("password", passowrd);
-        getHttpBuilder(context, "site/login").params(params).post(callback);
+        getHttpBuilder(context, "teacher/public/login").params(params).post(callback);
     }
 
     /**
@@ -341,8 +315,9 @@ public class RequestUtill {
     public void sendPhoneCode(Context context, ResultCallback callback, String phone) {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("telnum", phone);
-        getHttpBuilder(context, "site/send-code").params(params).post(callback);
+        getHttpBuilder(context, "teacher/public/send-code").params(params).post(callback);
     }
+
 
     /**
      * 获取教师班级列表
@@ -691,6 +666,76 @@ public class RequestUtill {
 
         }
         getHttpBuilder(context, "teacher/member/update").params(params).post(callback);
+    }
+
+    /*修改手机号*/
+    public void httpModifyPhone(Context context, ResultCallback callback, String telnum, String telcode) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("telnum", telnum);
+        params.put("telcode", telcode);
+        getHttpBuilder(context, "teacher/setting/telnum").params(params).post(callback);
+    }
+
+    /*修改密码*/
+    public void httpModifyPwd(Context context, ResultCallback callback, String oldPassword, String new_password, String re_password) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("password", oldPassword);
+        params.put("new_password", new_password);
+        params.put("re_password", re_password);
+
+        getHttpBuilder(context, "teacher/setting/password").params(params).post(callback);
+
+    }
+
+    //忘记密码  提交信息接口
+    public void changePwd(Context context, ResultCallback callback, String phone, String password, String pwdAgain, String telcode) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("telnum", phone);
+        params.put("password", password);
+        params.put("repassword", pwdAgain);
+        params.put("telcode", telcode);
+        Logger.d("params:" + params);
+        getHttpBuilder(context, "site/find-passwd").params(params).post(callback);
+    }
+
+
+    /*摩尔通知*/
+    public void httpNotice(Context context, ResultCallback callback, int pageSize, int page) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("pageSize", pageSize + "");
+        params.put("page", page + "");
+
+        getHttpBuilder(context, "teacher/notice/index").params(params).post(callback);
+    }
+
+    /*已读通知*/
+    public void httpNoticeRead(Context context, ResultCallback callback, String notice_id) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("notice_id", notice_id);
+        getHttpBuilder(context, "teacher/notice/read").params(params).post(callback);
+    }
+
+    /*清空通知*/
+    public void httpCleanNotice(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+
+        getHttpBuilder(context, "teacher/notice/clear").params(params).post(callback);
+    }
+
+
+    /*批量删除学员*/
+    public void httpDeleteStudents(Context context, ResultCallback callback, String json) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+
+        params.put("json", json);
+
+        getHttpBuilder(context, "teacher/classroom/delete-batch-show").params(params).post(callback);
     }
 
     /**

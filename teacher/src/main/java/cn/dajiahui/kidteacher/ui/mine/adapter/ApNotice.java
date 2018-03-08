@@ -2,10 +2,7 @@ package cn.dajiahui.kidteacher.ui.mine.adapter;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
@@ -13,30 +10,38 @@ import com.fxtx.framework.adapter.ViewHolder;
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
-import cn.dajiahui.kidteacher.ui.mine.bean.BeNotice;
+import cn.dajiahui.kidteacher.ui.mine.bean.BeNoticeLists;
+import cn.dajiahui.kidteacher.util.DateUtils;
 
 /**
- * 等待加入班级
+ * 通知
  */
-public class ApNotice extends CommonAdapter<BeNotice> {
+public class ApNotice extends CommonAdapter<BeNoticeLists> {
 
 
-    public ApNotice(Context context, List<BeNotice> mDatas) {
+    public ApNotice(Context context, List<BeNoticeLists> mDatas) {
         super(context, mDatas, R.layout.item_notice);
     }
 
 
     @Override
-    public void convert(ViewHolder viewHolder, int position, BeNotice item) {
+    public void convert(ViewHolder viewHolder, int position, BeNoticeLists item) {
 
         TextView tv_updatecontent = viewHolder.getView(R.id.tv_updatecontent);
         TextView tv_deadline = viewHolder.getView(R.id.tv_deadline);
+        TextView tv_redpoint = viewHolder.getView(R.id.tv_redpoint);
 
-        tv_updatecontent.setText(item.getUpdateContent());
-        tv_deadline.setText(item.getDeadline());
+        if (mDatas.get(position).getIs_read().equals("0")) {
+            tv_redpoint.setVisibility(View.VISIBLE);
+        } else {
+            tv_redpoint.setVisibility(View.INVISIBLE);
+        }
+
+        tv_updatecontent.setText(item.getTitle());
+        tv_deadline.setText(DateUtils.time(item.getCreated_at()));
 
 
     }
 
-
 }
+

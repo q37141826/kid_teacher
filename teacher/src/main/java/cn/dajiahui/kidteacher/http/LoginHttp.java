@@ -63,7 +63,7 @@ public class LoginHttp {
                         onLogin.error();
                         return;
                     }
-                    Logger.d("teacher登录token" + temp.getToken());
+                    Logger.d("teacher登录token-----" + temp.getToken());
                     UserController.getInstance().savaUser(temp);
                     UserController.getInstance().saveNum(num);
                     UserController.getInstance().getUser().setPwd(pwd);
@@ -107,7 +107,6 @@ public class LoginHttp {
             onLogin.successful();
             return;
         }
-//        user, pwd,
         EMClient.getInstance().login(user, pwd, new EMCallBack() {
 
             @Override

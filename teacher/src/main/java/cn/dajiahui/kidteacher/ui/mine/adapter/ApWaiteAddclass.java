@@ -1,8 +1,9 @@
 package cn.dajiahui.kidteacher.ui.mine.adapter;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
+import android.os.Handler;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,12 +16,11 @@ import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.squareup.okhttp.Request;
-import android.os.Handler;
+
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
-import cn.dajiahui.kidteacher.ui.mine.bean.BeWaiteAddClass;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeWaiteAddStudent;
 
 /**
@@ -34,6 +34,7 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
     private final static int MSG_DISMISS_FXDIALOG = 2;  // 关闭dialog
     private Handler activityHandler;
     private ItemInfo selectItem;
+    int selectorPosition = -3;
 
     public ApWaiteAddclass(Context context, List<BeWaiteAddStudent> mDatas, Handler handler) {
         super(context, mDatas, R.layout.item_waiteaddclass);
@@ -55,7 +56,16 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
         TextView tv_agree = viewHolder.getView(R.id.tv_agree);
         TextView tv_disagree = viewHolder.getView(R.id.tv_disagree);
         TextView tv_already = viewHolder.getView(R.id.tv_already);
+        CheckBox checkBox = viewHolder.getView(R.id.checkbox);
+        checkBox.setChecked(mDatas.get(position).getBo());
 
+
+        //如果当前的position等于传过来点击的position,就去改变他的状态
+        if (selectorPosition == -1) {
+            checkBox.setVisibility(View.VISIBLE);
+        } else if (selectorPosition == -2) {
+            checkBox.setVisibility(View.GONE);
+        }
         ItemInfo itemInfo = new ItemInfo();
         itemInfo.item = item;
         itemInfo.position = position;
@@ -93,7 +103,7 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ItemInfo itemInfo = (ItemInfo)v.getTag();
+            ItemInfo itemInfo = (ItemInfo) v.getTag();
             selectItem = itemInfo;
             switch (v.getId()) {
 
@@ -186,4 +196,11 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
             }
         }
     };
+
+
+    public void changeState(int pos) {
+        selectorPosition = pos;
+        notifyDataSetChanged();
+    }
+
 }

@@ -18,7 +18,15 @@ public class BeWaiteAddStudent extends BeanObj {
     private String user_type;
     private String class_name;
 
+    private boolean bo;//是否 选中
 
+    public boolean getBo() {
+        return bo;
+    }
+
+    public void setBo(boolean bo) {
+        this.bo = bo;
+    }
     public String getUser_id() {
         return user_id;
     }
