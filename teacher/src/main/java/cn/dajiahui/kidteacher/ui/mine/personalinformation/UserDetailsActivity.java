@@ -47,6 +47,7 @@ public class UserDetailsActivity extends FxActivity {
     private EditText ed_name;
     private BottomDialog dialog;
     private CustomDatePickerFixbirthday customDatePicker;
+    private BeUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class UserDetailsActivity extends FxActivity {
         getView(R.id.re_user_name).setOnClickListener(onclick);
         getView(R.id.tv_user_birthday_right).setOnClickListener(onclick);
         getView(R.id.re_user_sex).setOnClickListener(onclick);
-
+        user = UserController.getInstance().getUser();
         // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker = new CustomDatePickerFixbirthday(this, new CustomDatePickerFixbirthday.ResultHandler() {
             @Override
@@ -80,7 +81,7 @@ public class UserDetailsActivity extends FxActivity {
         tvSchool = getView(R.id.tv_user_school);
         tvBirthay = getView(R.id.tv_user_birthday_right);
         tvSex = getView(R.id.tv_user_sex_right);
-
+        tvSchool.setText(UserController.getInstance().getUser().getSchool_name());
       /*监听姓名输入框*/
         ed_name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -88,6 +89,7 @@ public class UserDetailsActivity extends FxActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     /*修改姓名*/
                     changeUserIcon(1, ed_name.getText().toString());
+                    user.setNickname(ed_name.getText().toString());
                     /*隐藏软键盘*/
                     BaseUtil.hideSoftInput(UserDetailsActivity.this);
                     return true;

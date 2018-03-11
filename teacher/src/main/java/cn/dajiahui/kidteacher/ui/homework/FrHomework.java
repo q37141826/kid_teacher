@@ -2,13 +2,13 @@ package cn.dajiahui.kidteacher.ui.homework;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -17,6 +17,7 @@ import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxFragment;
+import com.fxtx.framework.util.BaseUtil;
 import com.fxtx.framework.widgets.listview.PinnedHeaderListView;
 import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
 import com.squareup.okhttp.Request;
@@ -33,8 +34,10 @@ import cn.dajiahui.kidteacher.ui.homework.bean.BeClassAndStatus;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomeworkList;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomeworkStatus;
 import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
+import cn.dajiahui.kidteacher.ui.homework.view.ArbitrarilyDialog;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClass;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
+import cn.dajiahui.kidteacher.util.Logger;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -42,7 +45,7 @@ import static android.app.Activity.RESULT_OK;
  * 作业(首页面)
  */
 public class FrHomework extends FxFragment {
-    private final static int HTTP_TYPE_GET_HOMEWORK_LIST= 1;  // 获取作业列表
+    private final static int HTTP_TYPE_GET_HOMEWORK_LIST = 1;  // 获取作业列表
     private final static int HTTP_TYPE_GET_CLASS_STATUS = 2;  // 获取班级和状态列表
 
     private int httpType = HTTP_TYPE_GET_CLASS_STATUS;
@@ -67,16 +70,14 @@ public class FrHomework extends FxFragment {
     private TextView mChooseClass;//选择班级
     private TextView mChooseStatus;//选择状态
 
-    private int position = 0;
-    private String type = "";
-
     private Fragment mFragement;
+    private LinearLayout line_task, fr_root;
+    private ArbitrarilyDialog arbitrarilyDialog;
+    private ListView mChoiceClassListView;
+    private int selectClassPosition = 0;//选中班级的position
 
-
-    /*
-    * 作业
-    * */
     @Override
+
     protected View initinitLayout(LayoutInflater inflater) {
         return inflater.inflate(R.layout.fr_homework, null);
     }
@@ -91,10 +92,11 @@ public class FrHomework extends FxFragment {
         listview = getView(R.id.listview);
         mChooseClass = getView(R.id.tv_class);
         mChooseStatus = getView(R.id.tv_state);
+        fr_root = getView(R.id.fr_root);
+        line_task = getView(R.id.line_task);
 
         refresh = getView(R.id.refresh);
         initRefresh(refresh);
-//        mPageSize = 2;
 
         tv.setVisibility(View.VISIBLE);
         mTitle.setText(R.string.tab_task);
@@ -115,7 +117,7 @@ public class FrHomework extends FxFragment {
         apClass = new ApClasssify(getActivity(), classList);
 
         // 初始化状态列表
-        BeHomeworkStatus statusInfo= new BeHomeworkStatus();
+        BeHomeworkStatus statusInfo = new BeHomeworkStatus();
         statusInfo.setLabel(getResources().getString(R.string.all_options));
         statusList.add(statusInfo);
         apCheckState = new ApClassStatus(getActivity(), statusList);
@@ -129,49 +131,151 @@ public class FrHomework extends FxFragment {
 
     }
 
+
     /*作业、班级、发布作业点击事件*/
     private View.OnClickListener onClick = new View.OnClickListener() {
+
+
         @Override
         public void onClick(View v) {
+            /*选择状态栏*/
+            int line_taskHeight = (int) line_task.getY();
+            /*手机高度*/
+            int phoneHeight = BaseUtil.getPhoneHeight(getActivity());
+            boolean navigationBarShow = BaseUtil.isNavigationBarShow(getActivity());
+
             switch (v.getId()) {
                 case R.id.tool_right:
-                    DjhJumpUtil.getInstance().fragmentStartBaseActivityForResult(getActivity(), SendHomeworkActivity.class, mFragement,null, DjhJumpUtil.getInstance().activtiy_SendHomework);
+                    DjhJumpUtil.getInstance().fragmentStartBaseActivityForResult(getActivity(), SendHomeworkActivity.class, mFragement, null, DjhJumpUtil.getInstance().activtiy_SendHomework);
                     break;
 
                 case R.id.tv_class:
-//                    Toast.makeText(activity, "选择班级", Toast.LENGTH_SHORT).show();
+                    /*动态设置textview右边 向上 1.向上 2.向下*/
+                    setPictureDirection(R.drawable.up, 1);
+
+                    setPictureDirection(R.drawable.down, 2);
                     choosetag = 1;
-                    if (popupWindow != null && popupWindow.isShowing()) {
-                        popupWindow.dismiss();
-                        return;
+                    int mClassDialogHeight = 0;
+
+                    /*显示 虚拟按键*/
+                    if (navigationBarShow) {
+                        /*显示虚拟按键*/
+                        BaseUtil.getDaoHangHeight(getActivity());
+                        mClassDialogHeight = phoneHeight - line_taskHeight;
+                    } else {
+                        /*不显示虚拟按键*/
+                        mClassDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity());
                     }
-                    popupWindow = null;
-                    if (popupWindow == null) {
-                        initPopup();
-                    }
-                    popupWindow.showAsDropDown(mChooseClass, 20, -10);
+
+                    /*弹出Dialog*/
+                    arbitrarilyDialog = new ArbitrarilyDialog(getActivity(), R.layout.view_arbitrarily_dialog_layout, mClassDialogHeight) {
+
+
+                        @Override
+                        public void initView() {
+
+                            mChoiceClassListView = (ListView) rootView.findViewById(R.id.listview);
+//                            if (choosetag == 1) {
+                            mChoiceClassListView.setAdapter(apClass);
+                            apClass.reFreshItem(selectClassPosition);
+//                            }
+
+//                            else {
+//                                mChoiceClassListView.setAdapter(apCheckState);
+//                            }
+                            mChoiceClassListView.setOnItemClickListener(onitemclick);
+
+                        }
+                    };
+                    arbitrarilyDialog.show();
+//                    if (popupWindow != null && popupWindow.isShowing()) {
+//                        popupWindow.dismiss();
+//                        return;
+//                    }
+//                    popupWindow = null;
+//                    if (popupWindow == null) {
+//                        initPopup();
+//                    }
+//                    popupWindow.showAsDropDown(mChooseClass, 20, -10);
+
 
                     break;
                 case R.id.tv_state:
+                     /*动态设置textview右边 向上 1.向上 2.向下*/
+                    setPictureDirection(R.drawable.up, 2);
+
+                    setPictureDirection(R.drawable.down, 1);
                     choosetag = 2;
-                    //点击选项列表
-                    if (popupWindow != null && popupWindow.isShowing()) {
-                        popupWindow.dismiss();
-                        return;
-                    }
-                    popupWindow = null;
-                    if (popupWindow == null) {
-                        initPopup();
-                    }
-                    popupWindow.showAsDropDown(mChooseStatus, 20, -10);
+
+                    int mStateDialogHeight = 0;
 
 
+                    /*显示 虚拟按键*/
+                    if (navigationBarShow) {
+                        /*显示虚拟按键*/
+                        BaseUtil.getDaoHangHeight(getActivity());
+                        mStateDialogHeight = phoneHeight - line_taskHeight;
+                    } else {
+                        /*不显示虚拟按键*/
+                        mStateDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity());
+                    }
+
+                    /*弹出Dialog*/
+                    arbitrarilyDialog = new ArbitrarilyDialog(getActivity(), R.layout.view_arbitrarily_dialog_layout, mStateDialogHeight) {
+
+
+                        @Override
+                        public void initView() {
+
+                            mChoiceClassListView = (ListView) rootView.findViewById(R.id.listview);
+//                            if (choosetag == 1) {
+//                                mChoiceClassListView.setAdapter(apClass);
+//                                apClass.reFreshItem(selectClassPosition);
+//                            } else {
+                            mChoiceClassListView.setAdapter(apCheckState);
+                            apCheckState.reFreshItem(selectClassPosition);
+//                            }
+                            mChoiceClassListView.setOnItemClickListener(onitemclick);
+
+                        }
+                    };
+                    arbitrarilyDialog.show();
+//                    //点击选项列表
+//                    if (popupWindow != null && popupWindow.isShowing()) {
+//                        popupWindow.dismiss();
+//                        return;
+//                    }
+//                    popupWindow = null;
+//                    if (popupWindow == null) {
+//                        initPopup();
+//                    }
+//                    popupWindow.showAsDropDown(mChooseStatus, 20, -10);
                     break;
                 default:
                     break;
             }
         }
     };
+
+    /*上设置图片方向 1向上 2.向下*/
+    private void setPictureDirection(int picture, int dir) {
+        switch (dir) {
+            case 1:
+                Drawable drawableUp = getActivity().getResources().getDrawable(picture);
+                drawableUp.setBounds(0, 0, drawableUp.getMinimumWidth(), drawableUp.getMinimumHeight());
+                mChooseClass.setCompoundDrawables(null, null, drawableUp, null);
+                break;
+            case 2:
+                Drawable drawableDown = getActivity().getResources().getDrawable(picture);
+                drawableDown.setBounds(0, 0, drawableDown.getMinimumWidth(), drawableDown.getMinimumHeight());
+                mChooseStatus.setCompoundDrawables(null, null, drawableDown, null);
+                break;
+            default:
+                break;
+
+        }
+
+    }
 
     /*item点击事件*/
     private PinnedHeaderListView.OnItemClickListener onItemClick = new PinnedHeaderListView.OnItemClickListener() {
@@ -231,6 +335,7 @@ public class FrHomework extends FxFragment {
 
         @Override
         public void onResponse(String response) {
+            Logger.d("作业返回数据：" + response);
             dismissfxDialog();
             httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
             httpData(); // 获取班级和状态列表
@@ -293,42 +398,52 @@ public class FrHomework extends FxFragment {
         }
     };
 
-    /*选择班级和状态*/
-    private void initPopup() {
+//    /*选择班级和状态*/
+//    private void initPopup() {
+//
+//        DisplayMetrics metrics = new DisplayMetrics();
+//
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        View contentView = View.inflate(getActivity(), R.layout.view_popup_layout, null);
+//        if (choosetag == 1) {
+//            popupWindow = new PopupWindow(contentView, BaseUtil.getPhoneWidth(getActivity()), metrics.heightPixels / 2);
+////            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, metrics.heightPixels / 2);
+//        } else {
+//            popupWindow = new PopupWindow(contentView, BaseUtil.getPhoneWidth(getActivity()), mChooseStatus.getHeight() * 2);
+////            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, mChooseStatus.getHeight() * 2);
+//        }
+//        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+//        popupWindow.setOutsideTouchable(true);
+//        popupWindow.update();
+//        popupWindow.setFocusable(true);
+//        ListView listView = (ListView) contentView.findViewById(R.id.listview);
+//
+//        if (choosetag == 1) {
+//            listView.setAdapter(apClass);
+//        } else {
+//            listView.setAdapter(apCheckState);
+//        }
+//        listView.setOnItemClickListener(onitemclick);
+//    }
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        View contentView = View.inflate(getActivity(), R.layout.view_popup_layout, null);
-        if (choosetag == 1) {
-            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, metrics.heightPixels / 2);
-        } else {
-            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, mChooseStatus.getHeight() * 2);
-        }
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.update();
-        popupWindow.setFocusable(true);
-        ListView listView = (ListView) contentView.findViewById(R.id.listview);
-
-        if (choosetag == 1) {
-            listView.setAdapter(apClass);
-        } else {
-            listView.setAdapter(apCheckState);
-        }
-        listView.setOnItemClickListener(onitemclick);
-    }
 
     /*选择列表事件监听*/
     private AdapterView.OnItemClickListener onitemclick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
             if (choosetag == 1) {
+                selectClassPosition = position;
+                apClass.reFreshItem(selectClassPosition);
                 mChooseClass.setText(classList.get(position).getClass_name());
                 mClassId = classList.get(position).getId();
                 httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
                 mPageNum = 1;
                 httpData();
             } else {
+                selectClassPosition = position;
+                apCheckState.reFreshItem(selectClassPosition);
                 mChooseStatus.setText(statusList.get(position).getLabel());
                 mStatusId = statusList.get(position).getValue();
                 httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
@@ -336,6 +451,15 @@ public class FrHomework extends FxFragment {
                 httpData();
             }
             if (popupWindow != null) popupWindow.dismiss();
+
+
+            if (arbitrarilyDialog != null) {
+                arbitrarilyDialog.dismiss();
+                /*动态设置textview右边 向上 1.向上 2.向下*/
+                setPictureDirection(R.drawable.down, 1);
+                setPictureDirection(R.drawable.down, 2);
+            }
+
         }
     };
 
@@ -359,6 +483,7 @@ public class FrHomework extends FxFragment {
 
     /**
      * 把发布时间同样的作业放到同一个Section中去
+     *
      * @param list
      */
     private void addList(List<BeHomeworkList> list) {
@@ -375,6 +500,7 @@ public class FrHomework extends FxFragment {
 
     /**
      * 判断是否为最后一页
+     *
      * @return 0 不是最后一页 1 是最后一页
      */
     private int isLastPage() {

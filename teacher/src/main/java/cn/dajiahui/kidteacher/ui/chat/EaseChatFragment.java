@@ -546,14 +546,14 @@ public class EaseChatFragment extends EaseBaseFragment {
             @Override
             public void onChatRoomDestroyed(String roomId, String roomName) {
                 if (roomId.equals(toChatUsername)) {
-                    showChatroomToast(" room : " + roomId + " with room name : " + roomName + " was destroyed");
+//                    showChatroomToast(" room : " + roomId + " with room name : " + roomName + " was destroyed");
                     getActivity().finish();
                 }
             }
 
             @Override
             public void onMemberJoined(String roomId, String participant) {
-                showChatroomToast("member : " + participant + " join the room : " + roomId);
+//                showChatroomToast("member : " + participant + " join the room : " + roomId);
             }
 
             @Override
@@ -599,7 +599,7 @@ public class EaseChatFragment extends EaseBaseFragment {
                         EMClient.getInstance().chatroomManager().leaveChatRoom(toChatUsername);
                         getActivity().finish();
                     } else {
-                        showChatroomToast("member : " + participant + " was kicked from the room : " + roomId + " room name : " + roomName);
+//                        showChatroomToast("member : " + participant + " was kicked from the room : " + roomId + " room name : " + roomName);
                     }
                 }
             }
