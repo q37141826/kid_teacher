@@ -277,7 +277,7 @@ public class BadgeViewHelper {
         }
 
         // 计算角标背景左右的值
-        mBadgeRectF.right = mBadgeable.getWidth() - mBadgeHorizontalMargin;
+        mBadgeRectF.right = mBadgeable.getWidth() * 4 / 5 ;
         mBadgeRectF.left = mBadgeRectF.right - badgeWidth;
 
         // 设置角标背景色
