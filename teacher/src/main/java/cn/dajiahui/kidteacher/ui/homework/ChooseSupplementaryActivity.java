@@ -77,7 +77,7 @@ public class ChooseSupplementaryActivity extends FxActivity {
             httpType = HTTP_TYPE_SELECT_WORKBOOK;
             httpData(); //确认教辅
         } else {
-            Toast.makeText(ChooseSupplementaryActivity.this, "请选择教辅", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ChooseSupplementaryActivity.this, "请选择教辅", Toast.LENGTH_SHORT).show();
         }
 
     }

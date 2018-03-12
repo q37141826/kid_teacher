@@ -15,6 +15,15 @@ public class BeUser extends BeanObj {
     private String gender;
     private String birthday;
     private String pwd;
+    private String school_name;
+
+    public String getSchool_name() {
+        return school_name;
+    }
+
+    public void setSchool_name(String school_name) {
+        this.school_name = school_name;
+    }
 
     private BeUserThrid third;//解析第三方注册登录信息
 

@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fxtx.framework.http.callback.ResultCallback;
@@ -17,8 +16,6 @@ import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.squareup.okhttp.Request;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +104,7 @@ public class SendHomeworkActivity extends FxActivity {
                         bundle.putString("unitId", selectUnit.getId());
                         DjhJumpUtil.getInstance().startBaseActivityForResult(SendHomeworkActivity.this, ChooseClassActivity.class, bundle, DjhJumpUtil.getInstance().activtiy_ChooseClass); // 跳转到发布课本作业页面
                     } else {
-                        Toast.makeText(SendHomeworkActivity.this, "请选择内容", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SendHomeworkActivity.this, "请选择内容", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 default:

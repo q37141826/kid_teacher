@@ -13,7 +13,6 @@ import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.text.StringUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.listview.PinnedHeaderListView;
-import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.squareup.okhttp.Request;
 
@@ -57,7 +56,7 @@ public class ContactListActivity extends FxActivity {
                 //子Item点击进入下一界面
                 BeContactUser contactUser = userList.get(section).getStudent_list().get(position);
                 if (StringUtil.isEmpty(contactUser.getEasemob_username())) {
-                    ToastUtil.showToast(ContactListActivity.this, "数据错误，无法聊天");
+//                    ToastUtil.showToast(ContactListActivity.this, "数据错误，无法聊天");
                     return;
                 }
                 if (contactUser.getId().equals(UserController.getInstance().getUserId())) {

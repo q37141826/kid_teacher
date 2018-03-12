@@ -53,9 +53,9 @@ public class FrMine extends FxFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialize();
-        /*获取网络数据*/
-        mineHttp();
-        initData();
+       /* *//*获取网络数据*//*
+        mineHttp();*/
+
 
     }
 
@@ -66,46 +66,44 @@ public class FrMine extends FxFragment {
     @Override
     public void httpData() {
         super.httpData();
-        RequestUtill.getInstance().httpMine(getActivity(), callMine);
+//        RequestUtill.getInstance().httpMine(getActivity(), callMine);
     }
 
-    ResultCallback callMine = new ResultCallback() {
-
-
-        @Override
-        public void onError(Request request, Exception e) {
-            dismissfxDialog();
-
-        }
-
-        @Override
-        public void onResponse(String response) {
-            dismissfxDialog();
-            HeadJson json = new HeadJson(response);
-            if (json.getstatus() == 0) {
-
-
-            } else {
-                ToastUtil.showToast(getContext(), json.getMsg());
-            }
-
-        }
-
-    };
+//    ResultCallback callMine = new ResultCallback() {
+//        @Override
+//        public void onError(Request request, Exception e) {
+//            dismissfxDialog();
+//
+//        }
+//
+//        @Override
+//        public void onResponse(String response) {
+//            dismissfxDialog();
+//            HeadJson json = new HeadJson(response);
+//            if (json.getstatus() == 0) {
+//
+//
+//            } else {
+//                ToastUtil.showToast(getContext(), json.getMsg());
+//            }
+//
+//        }
+//
+//    };
 
     private void initData() {
 
         tv_userName.setText(UserController.getInstance().getUser().getNickname());
-        tv_campusName.setText("北京");
+        tv_campusName.setText(UserController.getInstance().getUser().getSchool_name());
 
         GlideUtil.showRoundImage(getActivity(), UserController.getInstance().getUser().getAvatar(), imUser, R.drawable.ico_default_user, true);
 
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
+        initData();
     }
 
     private View.OnClickListener onClick = new View.OnClickListener() {
