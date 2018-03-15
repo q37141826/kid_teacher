@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.Logger;
@@ -24,7 +25,11 @@ public abstract class JpushReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         this.context = context;
 //        Logger.d("majin", "JpushReceiver:");
-        if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
+        int notificationID = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+        if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+            //收到推送消息
+            sendToActivity(getMessageId(bundle), notificationID);
+        } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent
                 .getAction())) {
             //点击推送消息
             openActiviy(getMessageId(bundle));
@@ -51,7 +56,7 @@ public abstract class JpushReceiver extends BroadcastReceiver {
         return json;
     }
 
-
+    protected abstract void sendToActivity(HeadJson json, int notificationID);
     protected abstract void openActiviy(HeadJson json);
 
     // 打印所有的 intent extra 数据

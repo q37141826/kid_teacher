@@ -66,7 +66,6 @@ public class MainActivity extends FxTabActivity {
     };
 
 
-    private BroadcastReceiver broadcastReceiver;
     private LocalBroadcastManager broadcastManager;
 
     @Override
@@ -225,28 +224,31 @@ public class MainActivity extends FxTabActivity {
     }
 
     private void registerBroadcastReceiver() {
-        broadcastManager = LocalBroadcastManager.getInstance(this);
+
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Constant.broad_badge_count_action);
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                //收到广播了
-//                TeacherUtil.setBadge(functionRb, BadgeController.getInstance().getBadgeFunction());
-//                if (UserController.getInstance().getAccess().isNotice) {
-//                    TeacherUtil.setBadge(noticeRb, BadgeController.getInstance().noticeBadge);
-//                }
-////                if (rediobtnId == R.id.rediobtn_function) {
-//////                    if (frFunction != null)
-//////                        frFunction.notifyAdapter();
-////                }
-            }
-        };
-//        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+        intentFilter.addAction(Constant.broad_notice_action); // 收到通知（魔耳通知）
+        registerReceiver(broadcastReceiver, intentFilter);
     }
 
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals(Constant.broad_notice_action)) { // 收到通知 （魔耳通知）
+//                if (mineRb != null) {
+////                    mineRb.setTextColor(Color.RED);
+////                    mineRb.showTextBadge("2");
+////                    StudentUtil.setBadge(mineRb, 22);
+//                    mineRb.showCirclePointBadge();
+//                }
+
+            }
+
+        }
+    };
+
     private void unregisterBroadcastReceiver() {
-        broadcastManager.unregisterReceiver(broadcastReceiver);
+        unregisterReceiver(broadcastReceiver);
+//        broadcastManager.unregisterReceiver(broadcastReceiver);
     }
 
     @Override

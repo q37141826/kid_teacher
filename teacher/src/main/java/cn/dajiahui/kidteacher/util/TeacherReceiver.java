@@ -11,6 +11,7 @@ import com.fxtx.framework.platforms.jpush.JpushReceiver;
 import com.fxtx.framework.text.StringUtil;
 
 import cn.dajiahui.kidteacher.controller.Constant;
+import cn.dajiahui.kidteacher.ui.MainActivity;
 
 
 /**
@@ -19,6 +20,46 @@ import cn.dajiahui.kidteacher.controller.Constant;
 public class TeacherReceiver extends JpushReceiver {
 
     private BeJpush jpush;
+
+    @Override
+    protected void sendToActivity(HeadJson json, int notificationID) {
+
+        jpush = new GsonUtil().getJsonObject(json.getObject().toString(), BeJpush.class);
+        Logger.d("摩尔jpush:"+jpush.toString()) ;
+        if (jpush != null) {
+            //处理逻辑
+            String str = jpush.getType();
+            if (!StringUtil.isEmpty(str)) {
+                jpushSendAct(str, notificationID);
+            }
+        } else {
+            ToastUtil.showToast(context, "数据非法");
+        }
+    }
+
+    /**
+     * 根据Notification的种类向相应的activity发送通知
+     *
+     * @param str
+     */
+    private void jpushSendAct(String str, int notificationID) {
+        Intent intent = new Intent();
+        switch (str) {
+            case Constant.type_xygl:
+                // 班级审批
+                intent.putExtra("notificationID", notificationID);
+                intent.setAction(Constant.broad_notice_action); // 通知（魔耳通知）
+                context.sendBroadcast(intent);
+                break;
+            case Constant.type_zybz:
+                intent.putExtra("notificationID", notificationID);
+                intent.setAction(Constant.broad_notice_action); // 通知（魔耳通知）
+                context.sendBroadcast(intent);
+            default:
+                break;
+        }
+    }
+
 
     @Override
     protected void openActiviy(HeadJson json) {
@@ -81,6 +122,7 @@ public class TeacherReceiver extends JpushReceiver {
 //                startClassAct(context, ClassActivity.class);
                 break;
         }
+        startAct(context, MainActivity.class,jpush.getForeignId());
     }
 
     private void startAct(Context context, Class classs, String string) {

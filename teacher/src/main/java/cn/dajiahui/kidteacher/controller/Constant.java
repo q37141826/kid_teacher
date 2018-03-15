@@ -8,6 +8,7 @@ public class Constant {
 
     public static final int PG_QUEST_CODE = 10001; //批改请求吗
     public static final String broad_badge_count_action = "broad_badeg_count_action_ata_teacher";//角标广播发送
+    public static final String broad_notice_action = "broad_notice_student";//通知
 
     public static final String socket_scan = "/scanner/server/login/scan/";//扫码
     public static final String socket_submit = "/scanner/server/login/submit/";//登陆
