@@ -5,6 +5,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fxtx.framework.ui.FxActivity;
+import com.fxtx.framework.util.BaseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import cn.dajiahui.kidteacher.ui.mine.bean.BeHelp;
  */
 public class AboutActivity extends FxActivity {
 
-    protected TextView tvNull;
+    protected TextView tv_code;
     protected ListView listView;
     protected List<BeHelp> helpList = new ArrayList<BeHelp>();
     protected ApHelp adapter;
@@ -26,7 +27,8 @@ public class AboutActivity extends FxActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_about);
-//        tvNull = getView(R.id.tv_null);
+        tv_code = getView(R.id.tv_code);
+        tv_code.setText("当前版本：" + BaseUtil.getVersionName(AboutActivity.this));
 //        listView = getView(R.id.help_listview);
 //        listView.setEmptyView(tvNull);
 //        adapter = new ApHelp(context, helpList);
@@ -56,7 +58,7 @@ public class AboutActivity extends FxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setfxTtitle("关于魔耳");
+        setfxTtitle("关于我们");
         onBackText();
     }
 

@@ -33,7 +33,7 @@ import cn.dajiahui.kidteacher.ui.homework.view.CustomDatePicker;
  */
 public class ChooseClassActivity extends FxActivity {
 
-    private final static int HTTP_TYPE_GET_CLASSES= 1;  // 取得班级
+    private final static int HTTP_TYPE_GET_CLASSES = 1;  // 取得班级
     private final static int HTTP_TYPE_PUBLISH = 2;  // 确认布置
 
     private int httpType = HTTP_TYPE_GET_CLASSES;
@@ -47,6 +47,7 @@ public class ChooseClassActivity extends FxActivity {
     private String unitId;
     private int itemNumber = 0; // 总的数据数
     private BeHomewrokClass selectClass;
+    private Button mConfirm;
 
 
     @Override
@@ -67,7 +68,8 @@ public class ChooseClassActivity extends FxActivity {
 
         TextView mCleartime = getView(R.id.tv_cleartime);
         mChoosetime = getView(R.id.tv_choosetime);
-        Button mConfirm = getView(R.id.btn_confirm);  // 确认布置按钮
+        // 确认布置按钮
+        mConfirm = getView(R.id.btn_confirm);
         mListview = getView(R.id.listview);
         mConfirm.setOnClickListener(onClick);
         mCleartime.setOnClickListener(onClick);
@@ -92,6 +94,10 @@ public class ChooseClassActivity extends FxActivity {
                 } else {
                     selectClass = classInfoList.get(position);
                     apchooseClass.changeState(position);
+                    /*设置底部按钮颜色*/
+                    if (!mChoosetime.getText().equals("")) {
+                        mConfirm.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+                    }
                 }
             }
         });
@@ -115,7 +121,7 @@ public class ChooseClassActivity extends FxActivity {
                     break;
 
                 case R.id.tv_choosetime:
-                    Toast.makeText(ChooseClassActivity.this, "时间选择器", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ChooseClassActivity.this, "时间选择器", Toast.LENGTH_SHORT).show();
                     // 日期格式为yyyy-MM-dd HH:mm
                     if (mChoosetime.getText().toString().equals("")) {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
@@ -151,7 +157,7 @@ public class ChooseClassActivity extends FxActivity {
                 mChoosetime.setText(time);
                 mChoosetime.setTextColor((context.getResources().getColor(R.color.black_tv_6)));
             }
-        }, now,"2200-12-31 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        }, now, "2200-12-31 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(true); // 显示时和分
         customDatePicker.setIsLoop(false); // 不允许循环滚动
     }
@@ -232,6 +238,7 @@ public class ChooseClassActivity extends FxActivity {
 
     /**
      * 判断是否为最后一页
+     *
      * @return 0 不是最后一页 1 是最后一页
      */
     private int isLastPage() {

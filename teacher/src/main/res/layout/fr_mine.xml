@@ -9,7 +9,6 @@
         android:id="@+id/topView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:background="@color/white"
         android:padding="10dp">
 
@@ -59,16 +58,16 @@
         android:id="@+id/tvMyclass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20px"
         android:background="@color/white"
         android:padding="10dp">
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_my_class"
+            android:drawablePadding="10dp"
             android:text="@string/mine_my_class"
             android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
@@ -104,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_pending_student"
+            android:drawablePadding="10dp"
             android:text="@string/mine_wait_add_class"
             android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
@@ -150,6 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_notice"
+            android:drawablePadding="10dp"
             android:text="@string/mine_notice"
             android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
@@ -195,6 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_about"
+            android:drawablePadding="10dp"
             android:text="@string/mine_text_about"
             android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
@@ -228,6 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/ico_setting"
+            android:drawablePadding="10dp"
             android:text="@string/mine_setting"
             android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text18"/>
@@ -238,16 +241,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:drawablePadding="10dp"
             android:src="@drawable/go_right"/>
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/textpadding"
-        android:layout_marginRight="@dimen/textpadding"
-        android:background="@color/list_divider_color_gravy"
-        android:text=""/>
 
 
 </LinearLayout>

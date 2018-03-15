@@ -7,30 +7,35 @@
               android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="141dp">
+        android:layout_height="141dp"
+        android:layout_marginTop="5dp">
 
         <ImageView
             android:id="@+id/img_supplementary"
             android:layout_width="106dp"
             android:layout_height="141dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_launcher"/>
+            android:background="@drawable/round_bg_gray"
+            android:padding="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ico_null"/>
 
         <RelativeLayout
-            android:visibility="invisible"
             android:id="@+id/img_mask"
             android:layout_width="106dp"
             android:layout_height="141dp"
             android:layout_centerInParent="true"
             android:background="@drawable/mask"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ico_img_select"/>
 
         </RelativeLayout>
@@ -45,20 +50,20 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_supplementary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:textColor="@color/black_tv_3"
-                android:textSize="@dimen/text14"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:singleLine="true"
-                android:text="Move up 1"/>
+                android:text="Move up 1"
+                android:textColor="@color/black_tv_3"
+                android:textSize="@dimen/text14"/>
 
         </LinearLayout>
 

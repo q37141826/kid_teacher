@@ -21,8 +21,9 @@
         android:id="@+id/empty_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center" >
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -35,22 +36,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_book_empty"
-            android:textSize="@dimen/text18"
-            android:textColor="@color/black_tv_cd"/>
+            android:textColor="@color/black_tv_cd"
+            android:textSize="@dimen/text18"/>
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_click_first"
-            android:textSize="@dimen/text18"
-            android:textColor="@color/black_tv_cd"/>
+            android:textColor="@color/black_tv_cd"
+            android:textSize="@dimen/text18"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/data_layout"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -63,11 +63,14 @@
             android:orientation="vertical"
             android:padding="@dimen/textpadding">
 
+
             <ImageView
                 android:id="@+id/img_supplementary"
                 android:layout_width="70dp"
                 android:layout_height="94dp"
-                android:layout_marginLeft="@dimen/textpadding"/>
+                android:background="@drawable/round_bg_gray"
+                android:padding="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:id="@+id/tv_supplementary"
@@ -76,6 +79,7 @@
                 android:layout_below="@+id/img_supplementary"
                 android:layout_marginLeft="@dimen/textpadding"
                 android:layout_marginRight="@dimen/textpadding"
+                android:gravity="center"
                 android:singleLine="true"
                 android:textColor="@color/black_tv_6"
                 android:textSize="@dimen/text14"/>
@@ -91,8 +95,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/textpadding"
             android:layout_marginLeft="@dimen/textpadding"
+            android:layout_marginTop="@dimen/textpadding"
             android:text="@string/task_choose_content"
             android:textColor="@color/black_tv_3"
             android:textSize="@dimen/text16"/>
@@ -129,9 +133,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/white"
+                android:background="@color/blue_dark"
                 android:text="@string/task_next"
-                android:textColor="@color/text_deepgray"/>
+                android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

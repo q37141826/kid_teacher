@@ -115,6 +115,7 @@ public class SendHomeworkActivity extends FxActivity {
 
     /**
      * 从别的页面返回
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -130,7 +131,7 @@ public class SendHomeworkActivity extends FxActivity {
                 apChooseUnit.changeState(-1);
                 selectWorkBook = (BeWorkBook) data.getSerializableExtra("workBook");
                 mTvSupplementary.setText(selectWorkBook.getName());
-                Glide.with(this).load(selectWorkBook.getLogo()).into(mImgSupplementary);
+                Glide.with(this).load(selectWorkBook.getLogo()).fitCenter().into(mImgSupplementary);
                 httpData(HTTP_TYPE_GET_UNIT); // 请求取得单元
 
                 dataLayout.setVisibility(View.VISIBLE);

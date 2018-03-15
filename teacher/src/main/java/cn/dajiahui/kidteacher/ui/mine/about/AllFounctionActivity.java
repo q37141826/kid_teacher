@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
-import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.controller.Constant;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeHelp;
 
@@ -26,6 +25,6 @@ public class AllFounctionActivity extends AboutActivity {
         if (BeHelp != null)
             helpList.addAll(BeHelp);
         adapter.notifyDataSetChanged();
-        tvNull.setText(R.string.not_data);
+//        tvNull.setText(R.string.not_data);
     }
 }

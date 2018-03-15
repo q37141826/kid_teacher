@@ -22,7 +22,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="true"
-        android:textColor="@color/text_deepgray"
+        android:textColor="@color/white"
         android:textSize="15sp" />
     <TextView
         android:id="@id/tool_right"
@@ -35,7 +35,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:singleLine="true"
-        android:textColor="@color/text_deepgray"
+        android:textColor="@color/white"
         android:textSize="15sp" />
     <TextView
         android:id="@id/tool_title"
@@ -45,6 +45,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
-        android:textColor="@color/text_deepgray"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 </android.support.v7.widget.Toolbar>

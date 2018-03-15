@@ -40,7 +40,7 @@ public abstract class FxActivity extends AppCompatActivity {
         ActivityUtil.getInstance().addActivity(this);
         context = this;
         initView();
-        StatusBarCompat.compatMain(this);
+
         toolbar = getView(R.id.toolbar);
         setStatusBar(toolbar);
         titleView = getView(R.id.tool_title);

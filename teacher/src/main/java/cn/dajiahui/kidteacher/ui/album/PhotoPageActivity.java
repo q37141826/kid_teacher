@@ -286,7 +286,7 @@ public class PhotoPageActivity extends FxActivity {
 
     @Override
     public void setStatusBar(Toolbar title) {
-        StatusBarCompat.compat(this, title, getResources().getColor(R.color.color5A));
+        StatusBarCompat.compat(this, title, getResources().getColor(R.color.app_bg));
     }
 
 

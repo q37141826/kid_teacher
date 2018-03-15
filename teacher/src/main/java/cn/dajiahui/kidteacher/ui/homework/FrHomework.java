@@ -37,7 +37,6 @@ import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
 import cn.dajiahui.kidteacher.ui.homework.view.ArbitrarilyDialog;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClass;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
-import cn.dajiahui.kidteacher.util.Logger;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -161,10 +160,10 @@ public class FrHomework extends FxFragment {
                     if (navigationBarShow) {
                         /*显示虚拟按键*/
                         BaseUtil.getDaoHangHeight(getActivity());
-                        mClassDialogHeight = phoneHeight - line_taskHeight;
+                        mClassDialogHeight = phoneHeight - line_taskHeight- BaseUtil.getStatusBarHeight(getActivity());
                     } else {
                         /*不显示虚拟按键*/
-                        mClassDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity());
+                        mClassDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity())- BaseUtil.getStatusBarHeight(getActivity());
                     }
 
                     /*弹出Dialog*/
@@ -178,12 +177,12 @@ public class FrHomework extends FxFragment {
 //                            if (choosetag == 1) {
                             mChoiceClassListView.setAdapter(apClass);
                             apClass.reFreshItem(selectClassPosition);
+                            mChoiceClassListView.setOnItemClickListener(onitemclick);
 //                            }
 
 //                            else {
 //                                mChoiceClassListView.setAdapter(apCheckState);
 //                            }
-                            mChoiceClassListView.setOnItemClickListener(onitemclick);
 
                         }
                     };
@@ -214,10 +213,10 @@ public class FrHomework extends FxFragment {
                     if (navigationBarShow) {
                         /*显示虚拟按键*/
                         BaseUtil.getDaoHangHeight(getActivity());
-                        mStateDialogHeight = phoneHeight - line_taskHeight;
+                        mStateDialogHeight = phoneHeight - line_taskHeight- BaseUtil.getStatusBarHeight(getActivity());
                     } else {
                         /*不显示虚拟按键*/
-                        mStateDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity());
+                        mStateDialogHeight =  phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity())- BaseUtil.getStatusBarHeight(getActivity());
                     }
 
                     /*弹出Dialog*/
@@ -282,7 +281,6 @@ public class FrHomework extends FxFragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int section, int position, long id) {
 
-//            Toast.makeText(activity, "跳作业报告", Toast.LENGTH_SHORT).show();
             Bundle b = new Bundle();
             b.putString("className", homeworkList.get(section).getHome_list().get(position).getClass_name());
             b.putString("homeworkId", homeworkList.get(section).getHome_list().get(position).getId());
@@ -335,7 +333,7 @@ public class FrHomework extends FxFragment {
 
         @Override
         public void onResponse(String response) {
-            Logger.d("作业返回数据：" + response);
+//            Logger.d("作业返回数据：" + response);
             dismissfxDialog();
             httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
             httpData(); // 获取班级和状态列表
@@ -431,7 +429,6 @@ public class FrHomework extends FxFragment {
     private AdapterView.OnItemClickListener onitemclick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
             if (choosetag == 1) {
                 selectClassPosition = position;

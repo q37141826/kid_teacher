@@ -69,7 +69,10 @@
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20dp"
                 android:layout_toLeftOf="@+id/tv_disagree"
-                android:text="同意"/>
+                android:background="@drawable/round_bg_blue_addclass"
+                android:padding="5dp"
+                android:text="同意"
+                android:textColor="@color/blue_dark"/>
 
             <TextView
                 android:id="@+id/tv_disagree"
@@ -78,6 +81,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/round_bg_gray_addclass"
+                android:padding="5dp"
                 android:text="拒绝"/>
 
         </RelativeLayout>
@@ -91,9 +96,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
+                android:padding="5dp"
                 android:text="已删除"
                 android:visibility="visible"/>
 

@@ -112,7 +112,7 @@
                     android:paddingRight="12dp"
                     android:paddingTop="8dp"
                     android:text="@string/sendcode"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/gray_666666"
                     android:textSize="@dimen/text13"/>
             </LinearLayout>
 
@@ -132,8 +132,8 @@
 
                 <ImageView
                     android:id="@+id/image3"
-                    android:layout_width="12dp"
-                    android:layout_height="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="25dp"
@@ -173,8 +173,8 @@
 
                 <ImageView
                     android:id="@+id/image4"
-                    android:layout_width="12dp"
-                    android:layout_height="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="25dp"
@@ -218,9 +218,9 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/select_btn_whilebg"
+                    android:background="@drawable/select_btn_blue_bg"
                     android:text="@string/forget_sure"
-                    android:textColor="@color/white_line"/>
+                    android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>
 

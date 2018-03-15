@@ -107,6 +107,38 @@ public class GlideUtil {
                 .into(imageView);
     }
 
+    //不变形
+    public static void showNoneImage(Context context, String url, int placeholder, final ImageView imageView) {
+        Glide.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                .listener(new RequestListener<String, GlideDrawable>() {
+//                    @Override
+//                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                        if (imageView == null) {
+//                            return false;
+//                        }
+//                        if (imageView.getScaleType() != ImageView.ScaleType.FIT_XY) {
+//                            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//                        }
+//                        ViewGroup.LayoutParams params = imageView.getLayoutParams();
+//                        int vw = imageView.getWidth() - imageView.getPaddingLeft() - imageView.getPaddingRight();
+//                        float scale = (float) vw / (float) resource.getIntrinsicWidth();
+//                        int vh = Math.round(resource.getIntrinsicHeight() * scale);
+//                        params.height = vh + imageView.getPaddingTop() + imageView.getPaddingBottom();
+//                        imageView.setLayoutParams(params);
+//                        return false;
+//                    }
+//                })
+//                .override(600, 1000)
+                .placeholder(placeholder)
+                .error(placeholder)
+                .into(imageView);
+    }
+
     //显示本地图片
     public static void showImageFile(Context context, String filePath, ImageView imageView, int placeholder) {
         if (!showNullImage(context, filePath, imageView, placeholder)) return;

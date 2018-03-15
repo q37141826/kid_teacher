@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def BuildVersion = 'b180307'
+def BuildVersion = 'b180312'
 android {
     signingConfigs {
         config {
@@ -54,7 +54,7 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "KidTeacher_${variant.productFlavors[0].name}_v${variant.versionName}_c${variant.versionCode}-${BuildVersion}.apk"
+            outputFileName = "MogicEarsTeacher_${variant.productFlavors[0].name}_v${variant.versionName}_c${variant.versionCode}-${BuildVersion}.apk"
         }
     }
 

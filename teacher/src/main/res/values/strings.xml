@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--系统通用文字-->
-    <string name="app_name">魔耳教师端</string>
+    <string name="app_name">魔耳英语教师</string>
     <string name="search">搜索</string>
     <string name="select">选择</string>
     <string name="tv_submit">提交</string>
@@ -24,8 +24,8 @@
     <string name="forget_user">输入手机号码</string>
     <string name="inputcode">短信验证码</string>
     <string name="sendcode">发送验证码</string>
-    <string name="inputnewpwd">输入新的登录密码</string>
-    <string name="inputpwdto">再次输入新的登录密码</string>
+    <string name="inputnewpwd">设置新密码</string>
+    <string name="inputpwdto">确定新密码</string>
     <string name="forget_sure">确定</string>
     <string name="account_login">账户登陆</string>
     <string name="tv_user_birth">年龄</string>

@@ -56,9 +56,11 @@ public class ForgetPwdActivity extends FxActivity {
                 if (isBtnCode) {
                     if (edLoginPhone.getText().toString().trim().length() == 11) {
                         btnCode.setBackgroundResource(R.color.white);
+                        btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
                         btnCode.setClickable(true);
                     } else {
                         btnCode.setBackgroundResource(R.color.white);
+                        btnCode.setTextColor(getResources().getColor(R.color.gray_666666));
                         btnCode.setClickable(false);
                     }
                 }
@@ -190,9 +192,11 @@ public class ForgetPwdActivity extends FxActivity {
             if (edLoginPhone.getText().toString().trim().length() == 11) {
                 btnCode.setClickable(true);
                 btnCode.setBackgroundResource(R.color.white);
+                btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
             } else {
                 btnCode.setClickable(false);
                 btnCode.setBackgroundResource(R.color.white);
+                btnCode.setTextColor(getResources().getColor(R.color.gray_666666));
             }
         }
 

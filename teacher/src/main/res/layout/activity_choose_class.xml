@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/blue_dark"
+            android:background="@color/gray_DCDCDC"
             android:text="@string/task_choose_confirm"
             android:textColor="@color/white"/>
     </LinearLayout>
