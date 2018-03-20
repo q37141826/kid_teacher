@@ -96,6 +96,7 @@ public class Constant {
     public static final String type_xc = "xc";//相册
     public static final String type_xcpl = "xcpl";//相册评论
     public static final String type_xchf = "xchf";//相册回复
+    public static final String type_bjdt = "bjdt";//班级动态
 
     public static final String type_tz = "tz";//通知
     public static final String type_tzpl = "tzpl";//通知评论
@@ -106,6 +107,9 @@ public class Constant {
     public static final String type_sktx = "sktx";//上课提醒
     public static final String type_zb = "zb";//转班
     public static final String type_jk = "jk";//结课
+
+    public static final String type_jrbj = "jrbj";//同意加入班级
+    public static final String type_mrtz = "mrtz";//摩尔通知
 
     //权限
     public static final String ac_class = "class";
