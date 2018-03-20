@@ -7,7 +7,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
@@ -84,8 +83,9 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
             re_choose_root.setVisibility(View.GONE);
             tv_already.setVisibility(View.VISIBLE);
             tv_already.setText("已同意");
-            tv_already.setBackgroundResource(R.drawable.round_bg_blue_addclass);
-            tv_already.setTextColor(mContext.getResources().getColor(R.color.blue_dark));
+            tv_already.setBackgroundResource(R.drawable.round_bg_gray_addclass);
+            tv_already.setTextColor(mContext.getResources().getColor(R.color.gray_DCDCDC));
+
         } else if (item.getStatus().equals("3")) {
             // 已拒绝
             re_choose_root.setVisibility(View.GONE);
@@ -93,6 +93,7 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
             tv_already.setText("已拒绝");
             tv_already.setBackgroundResource(R.drawable.round_bg_gray_addclass);
             tv_already.setTextColor(mContext.getResources().getColor(R.color.gray_DCDCDC));
+
         } else {
             re_choose_root.setVisibility(View.VISIBLE);
             tv_already.setVisibility(View.GONE);
@@ -163,6 +164,8 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
                     re_choose_root.setVisibility(View.GONE);
                     tv_already.setVisibility(View.VISIBLE);
                     tv_already.setText("已同意");
+                    tv_already.setBackgroundResource(R.drawable.round_bg_gray_addclass);
+                    tv_already.setTextColor(mContext.getResources().getColor(R.color.gray_DCDCDC));
 //                    Toast.makeText(mContext, "同意", Toast.LENGTH_SHORT).show();
                 }
 
@@ -193,7 +196,9 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
                 re_choose_root.setVisibility(View.GONE);
                 tv_already.setVisibility(View.VISIBLE);
                 tv_already.setText("已拒绝");
-                Toast.makeText(mContext, "拒绝", Toast.LENGTH_SHORT).show();
+                tv_already.setBackgroundResource(R.drawable.round_bg_gray_addclass);
+                tv_already.setTextColor(mContext.getResources().getColor(R.color.gray_DCDCDC));
+//                Toast.makeText(mContext, "拒绝", Toast.LENGTH_SHORT).show();
 
             } else {
                 ToastUtil.showToast(mContext, json.getMsg());

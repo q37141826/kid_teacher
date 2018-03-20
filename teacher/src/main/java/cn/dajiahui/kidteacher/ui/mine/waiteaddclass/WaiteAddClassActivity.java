@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.GsonUtil;
@@ -71,6 +72,7 @@ public class WaiteAddClassActivity extends FxActivity {
             }
         }
     };
+    private TextView mTvnull;
 
 
     @Override
@@ -90,8 +92,10 @@ public class WaiteAddClassActivity extends FxActivity {
 
         refresh = getView(R.id.refresh);
         initRefresh(refresh);
-
+        mTvnull = getView(R.id.tv_null);
         mListview = getView(R.id.listview);
+        mListview.setEmptyView(mTvnull);
+        mTvnull.setText(R.string.e_waitaddclass);
         delete_view = getView(R.id.delete_view);
         allCheck = getView(R.id.allCheck);
         btn_delete = getView(R.id.btn_delete);
@@ -237,6 +241,7 @@ public class WaiteAddClassActivity extends FxActivity {
 
         @Override
         public void onResponse(String response) {
+            Logger.d("待加入班级学生：response:" + response);
             dismissfxDialog();
             HeadJson json = new HeadJson(response);
             if (json.getstatus() == 0) {
@@ -249,8 +254,9 @@ public class WaiteAddClassActivity extends FxActivity {
                 if (temp != null && temp.getLists().size() > 0) {
                     mPageNum++;
                     applyStudentInfoList.addAll(temp.getLists());
+                    apWaiteAddclass.notifyDataSetChanged();
                 }
-                apWaiteAddclass.notifyDataSetChanged();
+
 
             } else {
                 ToastUtil.showToast(context, json.getMsg());
@@ -286,23 +292,26 @@ public class WaiteAddClassActivity extends FxActivity {
     public void onRightBtnClick(View view) {
 
         if (!isShowCheckbox) {
-//            mIdMap.clear();
-            mIdList.clear();
-            delete_view.setVisibility(View.VISIBLE);
+            if (applyStudentInfoList.size() > 0) {
+                tv_right.setText("取消");
+                mIdList.clear();
+                delete_view.setVisibility(View.VISIBLE);
 
               /*刷新整个Addapter*/
-            for (int i = 0; i < applyStudentInfoList.size(); i++) {
-                // 改变boolean
-                applyStudentInfoList.get(i).setBo(false);
+                for (int i = 0; i < applyStudentInfoList.size(); i++) {
+                    // 改变boolean
+                    applyStudentInfoList.get(i).setBo(false);
 
-            }
+                }
             /*设置非选择状态*/
-            allCheck.setChecked(false);
-            apWaiteAddclass.changeState(-1);
-            isShowCheckbox = !isShowCheckbox;
-               /*设置删除按钮颜色*/
-            btn_delete.setBackgroundResource(R.color.gray);
+                allCheck.setChecked(false);
+                apWaiteAddclass.changeState(-1);
+                isShowCheckbox = !isShowCheckbox;
+            /*设置删除按钮颜色*/
+                btn_delete.setBackgroundResource(R.color.gray);
+            }
         } else {
+            tv_right.setText("编辑");
             delete_view.setVisibility(View.GONE);
             apWaiteAddclass.changeState(-2);
             isShowCheckbox = !isShowCheckbox;

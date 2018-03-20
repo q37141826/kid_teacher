@@ -3,9 +3,11 @@ package cn.dajiahui.kidteacher.ui.mine.myclass;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
@@ -38,6 +40,8 @@ public class ClassInfoActivity extends FxActivity {
     private ApMyClassInfo apMyClassInfo;   // 班级详情的Adapter
     private List<BeStudents> studentInfoList = new ArrayList<BeStudents>();
     private TextView tv_null;
+    private BeMyclassInfo mClassInfotemp;
+    private TextView studentNumber;
 
     Handler handler = new Handler() {
         @Override
@@ -52,6 +56,11 @@ public class ClassInfoActivity extends FxActivity {
                     break;
 
                 case MSG_REFRESH_LIST: // 刷新列表
+                       /*移除学生后刷新页面 无学生就隐藏 班级学生字样*/
+                    if (studentInfoList.size() == 0) {
+                        mClassStudent.setVisibility(View.GONE);
+                    }
+                    studentNumber.setText("人数：" + studentInfoList.size() + "/" + mClassInfotemp.getMax_students_num());
                     apMyClassInfo.notifyDataSetChanged();
                     break;
 
@@ -61,6 +70,7 @@ public class ClassInfoActivity extends FxActivity {
             }
         }
     };
+    private RelativeLayout mClassStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +94,7 @@ public class ClassInfoActivity extends FxActivity {
     protected void initView() {
         setContentView(R.layout.activity_class_info);
         Button mInvitation = getView(R.id.btn_invitation);
+        mClassStudent = getView(R.id.class_student);
         mInvitation.setOnClickListener(onClick);
         mListView = getView(R.id.listview);
         tv_null = getView(R.id.tv_null);
@@ -116,6 +127,9 @@ public class ClassInfoActivity extends FxActivity {
     public void httpData() {
         //网络请求
         ResultCallback call = new ResultCallback() {
+
+
+
             @Override
             public void onError(Request request, Exception e) {
                 dismissfxDialog();
@@ -127,17 +141,19 @@ public class ClassInfoActivity extends FxActivity {
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
                     /* 解析班级信息 */
-                    BeMyclassInfo temp = json.parsingObject(BeMyclassInfo.class);
+                    mClassInfotemp = json.parsingObject(BeMyclassInfo.class);
 
                     TextView clssCode = getView(R.id.tv_code);
-                    clssCode.setText("班级码：" + temp.getCode());
+                    clssCode.setText("班级码：" + mClassInfotemp.getCode());
 
-                    TextView studentNumber = getView(R.id.tv_count);
-                    studentNumber.setText("人数：" + temp.getStudents_num() + "/" + temp.getMax_students_num());
+                    studentNumber = getView(R.id.tv_count);
+                    studentNumber.setText("人数：" + mClassInfotemp.getStudents_num() + "/" + mClassInfotemp.getMax_students_num());
 
-                    if (temp.getStudent_list() != null && temp.getStudent_list().size() > 0) {
-                        studentInfoList.addAll(temp.getStudent_list());
+                    if (mClassInfotemp.getStudent_list() != null && mClassInfotemp.getStudent_list().size() > 0) {
+                        studentInfoList.addAll(mClassInfotemp.getStudent_list());
                         apMyClassInfo.notifyDataSetChanged();
+                        mClassStudent.setVisibility(View.VISIBLE);
+
                     } else {
                         tv_null.setText(R.string.not_data);
                         mListView.setEmptyView(tv_null);
@@ -156,5 +172,24 @@ public class ClassInfoActivity extends FxActivity {
     protected void onDestroy() {
         handler.removeCallbacksAndMessages(null);
         super.onDestroy();
+    }
+
+    /*监听返回键*/
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { //监控/拦截/屏蔽返回键
+            setResult(RESULT_OK);
+            finishActivity();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    /*左上角返回*/
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finishActivity();
     }
 }

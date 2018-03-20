@@ -81,6 +81,7 @@
     <string name="mine_audit_student">学员审核</string>
     <string name="mine_personal_information">个人信息</string>
     <string name="mine_notice">魔耳通知</string>
+    <string name="mine_notice_detial">通知详情</string>
     <string name="clean_notice">清空通知</string>
     <string name="mine_setting">设置</string>
     <string name="mine_text_userphone">修改账户手机号</string>
@@ -204,6 +205,7 @@
     <string name="e_photo_null">暂无照片</string>
     <string name="e_log_null">暂无日志数据</string>
     <string name="e_homework">暂无作业</string>
+    <string name="e_waitaddclass">暂无学生加入班级</string>
     <string name="title_activity_my_works">MyWorksActivity</string>
 
 </resources>

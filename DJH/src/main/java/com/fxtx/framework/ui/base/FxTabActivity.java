@@ -55,6 +55,7 @@ public abstract class FxTabActivity extends FxActivity implements RadioGroup.OnC
         buttton.setId(tab.getRedid());
         buttton.setChecked(tab.isChecked());
         buttton.setCompoundDrawablesWithIntrinsicBounds(0, tab.getRadioBtn(), 0, 0);
+//        buttton.setCompoundDrawablePadding(20);
         group.addView(buttton);
         radio.put(tab.getRedid(), buttton);
         return buttton;

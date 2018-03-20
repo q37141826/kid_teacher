@@ -48,6 +48,12 @@ public class DjhJumpUtil extends JumpUtil {
     public final int activtiy_ChooseSupplementary = 1003; //发布作业.教辅选择
     public final int activtiy_ChooseClass = 1004; //发布课本作业（选择班级，截止时间)
 
+    public  final  int activtiy_ChoiceHomework=1005;
+    public  final  int activtiy_ChoiceHomeworkResult=1006;//检查作业结果请求码
+
+    public  final  int activtiy_myclassDetail=1007;//我的班级详情请求码
+
+
     private DjhJumpUtil() {
     }
 

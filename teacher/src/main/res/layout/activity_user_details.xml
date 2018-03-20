@@ -76,6 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+
                     android:padding="@dimen/textmarginleft"
                     android:text="@string/tv_user_name"
                     android:textColor="@color/black_tv_3"
@@ -88,12 +89,11 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:layout_alignTop="@id/image1"
                     android:layout_marginLeft="8dp"
-                    android:layout_toEndOf="@id/image1"
-                    android:layout_toRightOf="@id/image1"
                     android:background="@null"
                     android:cursorVisible="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/go_right"
                     android:lineSpacingExtra="8dp"
                     android:lines="1"
                     android:maxLines="1"
@@ -102,15 +102,24 @@
                     android:textColor="@color/black"
                     android:textCursorDrawable="@drawable/sp_while"
                     android:textSize="@dimen/text16"/>
-            </RelativeLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="@dimen/textpadding"
-                android:layout_marginRight="@dimen/textpadding"
-                android:background="@color/list_divider_color_gravy"
-                android:text=""/>
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/textmarginleft"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv_user_name_right"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/list_divider_color_gravy"
+                    android:text=""/>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/re_user_sex"
@@ -190,7 +199,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:padding="@dimen/textmarginleft"
@@ -203,9 +212,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/go_right"
                     android:padding="@dimen/textmarginleft"
                     android:text="魔耳学校"
                     android:textColor="@color/black_tv_6"

@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
 import com.fxtx.framework.http.callback.ResultCallback;
@@ -14,9 +16,9 @@ import com.fxtx.framework.log.ToastUtil;
 import com.squareup.okhttp.Request;
 
 import java.util.List;
+
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
-import cn.dajiahui.kidteacher.ui.mine.bean.BeMyclassInfo;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeStudents;
 
 /**
@@ -31,6 +33,7 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
     private Handler activityHandler;
     private ItemInfo selectItem;
     private String classId;
+    private List<BeStudents> studentInfoList;
 
     private class ItemInfo {
         ViewHolder viewHolder;
@@ -42,6 +45,7 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
         super(context, mDatas, R.layout.item_myclassinfo);
         this.activityHandler = handler;
         this.classId = classId;
+        this.studentInfoList = mDatas;
     }
 
 
@@ -67,11 +71,10 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
     }
 
 
-    // 刷新有问题
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ItemInfo itemInfo = (ItemInfo)v.getTag();
+            ItemInfo itemInfo = (ItemInfo) v.getTag();
             selectItem = itemInfo;
             activityHandler.sendEmptyMessage(MSG_SHOW_FXDIALOG);
             httpData(itemInfo.item.getId());
@@ -92,8 +95,11 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
                 HeadJson json = new HeadJson(response);
                 if (json.getstatus() == 0) {
                     /* 解析班级列表信息 */
-                    mDatas.remove(selectItem.position);
+                    studentInfoList.remove(selectItem.position);
                     activityHandler.sendEmptyMessage(MSG_REFRESH_LIST);
+
+                    Toast.makeText(mContext, "移除成功!", Toast.LENGTH_SHORT).show();
+
                 } else {
                     ToastUtil.showToast(mContext, json.getMsg());
                 }

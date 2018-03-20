@@ -21,27 +21,29 @@
         android:layout_weight="1"
         android:background="@color/white"
         android:orientation="vertical"
-        android:paddingRight="@dimen/textpadding"
-        android:paddingLeft="@dimen/textpadding">
+        >
 
         <include layout="@layout/layout_refresh"/>
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/delete_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <CheckBox
             android:id="@+id/allCheck"
+            style="@style/My_CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="11dp"
             android:text="全选"
-            android:textSize="15sp"
-            android:theme="@style/My_CheckBox"/>
+            android:textSize="15sp"/>
 
         <Button
             android:id="@+id/btn_delete"
@@ -49,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_horizontal"
-            android:background="@color/gray"
+            android:background="@color/gray_DBDBDB"
             android:text="@string/delete"
             android:textColor="@color/white"
             />

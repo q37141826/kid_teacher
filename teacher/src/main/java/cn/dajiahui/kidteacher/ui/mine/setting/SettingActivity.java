@@ -3,9 +3,7 @@ package cn.dajiahui.kidteacher.ui.mine.setting;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fxtx.framework.http.ErrorCode;
 import com.fxtx.framework.http.callback.ResultCallback;
@@ -45,8 +43,8 @@ public class SettingActivity extends FxActivity {
         bt_exit.setOnClickListener(onClick);
         getView(R.id.tvSecurity).setOnClickListener(onClick);
         getView(R.id.tvFixpass).setOnClickListener(onClick);
-        RelativeLayout tvClean = getView(R.id.tvclean);
-        tvClean.setOnClickListener(onClick);
+//        RelativeLayout tvClean = getView(R.id.tvclean);
+//        tvClean.setOnClickListener(onClick);
         getView(R.id.toolbar);
         TextView defealt_tel = getView(R.id.defealt_tel);
         defealt_tel.setText(UserController.getInstance().getUser().getTelnum());
@@ -64,10 +62,10 @@ public class SettingActivity extends FxActivity {
                 case R.id.tvFixpass:
                     DjhJumpUtil.getInstance().startBaseActivity(SettingActivity.this, SetPassActivity.class);
                     break;
-                case R.id.tvclean:
-                    Toast.makeText(context, "清除缓存", Toast.LENGTH_SHORT).show();
-
-                    break;
+//                case R.id.tvclean:
+////                    Toast.makeText(context, "清除缓存", Toast.LENGTH_SHORT).show();
+//
+//                    break;
                 case R.id.btn_Exit:
                     //退出登录
                     FxDialog dialog = new FxDialog(SettingActivity.this) {

@@ -17,6 +17,7 @@ public class HomeworkReport extends BeanObj {
     private String correct_rate;
     private String all_students;
     private String complete_students;
+    private String is_checked;//0未检查 1已检查
     private List<BeHomewrokReportInfo> student_list;
 
 
@@ -90,5 +91,9 @@ public class HomeworkReport extends BeanObj {
 
     public void setStudent_list(List<BeHomewrokReportInfo> student_list) {
         this.student_list = student_list;
+    }
+
+    public String getIs_checked() {
+        return is_checked;
     }
 }

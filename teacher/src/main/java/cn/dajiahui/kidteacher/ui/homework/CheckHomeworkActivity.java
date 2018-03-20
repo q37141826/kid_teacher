@@ -3,6 +3,7 @@ package cn.dajiahui.kidteacher.ui.homework;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokReportInfo;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokStudent;
 import cn.dajiahui.kidteacher.ui.homework.bean.HomeworkReport;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
+import cn.dajiahui.kidteacher.util.Logger;
 
 /**
  * 检查作业
@@ -60,6 +62,7 @@ public class CheckHomeworkActivity extends FxActivity {
 
     private TextView tv_null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,9 +79,16 @@ public class CheckHomeworkActivity extends FxActivity {
     protected void initView() {
         setContentView(R.layout.activity_check_homework);
         init();
-
+        /*已完成*/
         apFinish = new ApHomeworkReport(this, listFinish, true);
         mListviewFinish.setAdapter(apFinish);
+       /*进行中*/
+        apDoing = new ApHomeworkReport(this, listDoing, false);
+        mListviewDoing.setAdapter(apDoing);
+        /*未开始*/
+        apNotStart = new ApHomeworkReport(this, listNotStart, false);
+        mListviewNotStart.setAdapter(apNotStart);
+
         mListviewFinish.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,14 +99,6 @@ public class CheckHomeworkActivity extends FxActivity {
 //                DjhJumpUtil.getInstance().startBaseActivity(MyClassActivity.this, ClassInfoActivity.class, bundle, 0); // 跳转到个人作业详情页面
             }
         });
-
-
-        apDoing = new ApHomeworkReport(this, listDoing, false);
-        mListviewDoing.setAdapter(apDoing);
-
-        apNotStart = new ApHomeworkReport(this, listNotStart, false);
-        mListviewNotStart.setAdapter(apNotStart);
-
     }
 
     @Override
@@ -120,7 +122,9 @@ public class CheckHomeworkActivity extends FxActivity {
                     if (listFinish != null && listFinish.size() <= 0) {
                         tv_null.setText(R.string.not_data);
                         mListviewFinish.setEmptyView(tv_null);
+
                     }
+
 
                     mListviewDoing.setVisibility(View.INVISIBLE);
                     mDoing.setTextColor(getResources().getColor(R.color.black_tv_6));
@@ -142,6 +146,7 @@ public class CheckHomeworkActivity extends FxActivity {
                     if (listDoing != null && listDoing.size() <= 0) {
                         tv_null.setText(R.string.not_data);
                         mListviewDoing.setEmptyView(tv_null);
+
                     }
 
                     mListviewNotStart.setVisibility(View.INVISIBLE);
@@ -164,19 +169,22 @@ public class CheckHomeworkActivity extends FxActivity {
                     if (listNotStart != null && listNotStart.size() <= 0) {
                         tv_null.setText(R.string.not_data);
                         mListviewNotStart.setEmptyView(tv_null);
+
                     }
 
                     break;
 
                 case R.id.btn_check:
+                    mBtnCheck.setText("已检查");
                     /* 检查作业 */
                     Bundle checkBundle = new Bundle();
                     checkBundle.putString("homeworkId", homeworkId);
                     checkBundle.putSerializable("listFinish", (Serializable) listFinish);
                     checkBundle.putSerializable("listDoing", (Serializable) listDoing);
                     checkBundle.putSerializable("listNotStart", (Serializable) listNotStart);
-                    if (listFinish.size() > 0)
-                        DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, CheckHomeworkResultActivity.class, checkBundle, 0);
+
+                    DjhJumpUtil.getInstance().startBaseActivityForResult(CheckHomeworkActivity.this, CheckHomeworkResultActivity.class, checkBundle, DjhJumpUtil.getInstance().activtiy_ChoiceHomeworkResult);
+
                     break;
 
                 default:
@@ -228,9 +236,10 @@ public class CheckHomeworkActivity extends FxActivity {
         @SuppressLint("ResourceType")
         @Override
         public void onResponse(String response) {
+            Logger.d("response:" + response);
             dismissfxDialog();
             HeadJson json = new HeadJson(response);
-//            HeadJson json = new HeadJson(testString);
+
             if (json.getstatus() == 0) {
                 /* 解析列表信息 */
                 HomeworkReport temp = json.parsingObject(HomeworkReport.class);
@@ -264,9 +273,7 @@ public class CheckHomeworkActivity extends FxActivity {
                                 if (listFinish.size() <= 0) {
                                     tv_null.setText(R.string.not_data);
                                     mListviewFinish.setEmptyView(tv_null);
-                                    mBtnCheck.setBackgroundColor(getResources().getColor(R.color.gray_DCDCDC));
-                                } else {
-                                    mBtnCheck.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+
                                 }
 
                             } else if (item.getStatus_key() != null && item.getStatus_key().equals("starting")) {
@@ -277,12 +284,17 @@ public class CheckHomeworkActivity extends FxActivity {
                                 apDoing.notifyDataSetChanged();
                             } else if (item.getStatus_key() != null && item.getStatus_key().equals("not_start")) {
                                 mNocompleted.setText("未开始：" + item.getTotal());
-
                                 listNotStart.clear();
                                 listNotStart.addAll(item.getLists());
                                 apNotStart.notifyDataSetChanged();
                             }
                         }
+                    }
+
+                    if (temp.getIs_checked().equals("0")) {
+                        mBtnCheck.setText("检查作业");
+                    } else {
+                        mBtnCheck.setText("已检查");
                     }
 
                 }
@@ -292,4 +304,24 @@ public class CheckHomeworkActivity extends FxActivity {
             }
         }
     };
+
+
+
+    /*监听返回键*/
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { //监控/拦截/屏蔽返回键
+            setResult(RESULT_OK);
+            finishActivity();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finishActivity();
+    }
 }

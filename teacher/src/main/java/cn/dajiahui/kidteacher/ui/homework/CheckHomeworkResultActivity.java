@@ -1,20 +1,22 @@
 package cn.dajiahui.kidteacher.ui.homework;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
+
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.squareup.okhttp.Request;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.homework.adapter.ApCheckResult;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokStudent;
-import cn.dajiahui.kidteacher.ui.homework.bean.HomeworkReport;
 
 /**
  * 检查作业结果
@@ -40,9 +42,9 @@ public class CheckHomeworkResultActivity extends FxActivity {
 
         homeworkId = getIntent().getExtras().getString("homeworkId");
 
-        listFinish = (List<BeHomewrokStudent>)getIntent().getSerializableExtra("listFinish");
-        listDoing = (List<BeHomewrokStudent>)getIntent().getSerializableExtra("listDoing");
-        listNotStart = (List<BeHomewrokStudent>)getIntent().getSerializableExtra("listNotStart");
+        listFinish = (List<BeHomewrokStudent>) getIntent().getSerializableExtra("listFinish");
+        listDoing = (List<BeHomewrokStudent>) getIntent().getSerializableExtra("listDoing");
+        listNotStart = (List<BeHomewrokStudent>) getIntent().getSerializableExtra("listNotStart");
 
         resultList.add(listFinish);
         listNotFinish.addAll(listDoing);
@@ -79,6 +81,8 @@ public class CheckHomeworkResultActivity extends FxActivity {
 
         @Override
         public void onResponse(String response) {
+            Logger.d("檢查作业完成：" + response);
+
             dismissfxDialog();
             HeadJson json = new HeadJson(response);
             if (json.getstatus() == 0) {
@@ -90,13 +94,4 @@ public class CheckHomeworkResultActivity extends FxActivity {
         }
     };
 
-    private View.OnClickListener onClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                default:
-                    break;
-            }
-        }
-    };
 }

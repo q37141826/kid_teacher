@@ -37,6 +37,7 @@ import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
 import cn.dajiahui.kidteacher.ui.homework.view.ArbitrarilyDialog;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClass;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
+import cn.dajiahui.kidteacher.util.Logger;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -160,10 +161,10 @@ public class FrHomework extends FxFragment {
                     if (navigationBarShow) {
                         /*显示虚拟按键*/
                         BaseUtil.getDaoHangHeight(getActivity());
-                        mClassDialogHeight = phoneHeight - line_taskHeight- BaseUtil.getStatusBarHeight(getActivity());
+                        mClassDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getStatusBarHeight(getActivity());
                     } else {
                         /*不显示虚拟按键*/
-                        mClassDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity())- BaseUtil.getStatusBarHeight(getActivity());
+                        mClassDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity()) - BaseUtil.getStatusBarHeight(getActivity());
                     }
 
                     /*弹出Dialog*/
@@ -174,29 +175,21 @@ public class FrHomework extends FxFragment {
                         public void initView() {
 
                             mChoiceClassListView = (ListView) rootView.findViewById(R.id.listview);
-//                            if (choosetag == 1) {
                             mChoiceClassListView.setAdapter(apClass);
                             apClass.reFreshItem(selectClassPosition);
                             mChoiceClassListView.setOnItemClickListener(onitemclick);
-//                            }
+                        }
 
-//                            else {
-//                                mChoiceClassListView.setAdapter(apCheckState);
-//                            }
+                        @Override
+                        protected void onTouchOutside() {
+//                            Logger.d("外部关闭弹框1：");
+                               /*动态设置textview右边 向上 1.向上 2.向下*/
+                            setPictureDirection(R.drawable.down, 1);
 
+                            setPictureDirection(R.drawable.down, 2);
                         }
                     };
                     arbitrarilyDialog.show();
-//                    if (popupWindow != null && popupWindow.isShowing()) {
-//                        popupWindow.dismiss();
-//                        return;
-//                    }
-//                    popupWindow = null;
-//                    if (popupWindow == null) {
-//                        initPopup();
-//                    }
-//                    popupWindow.showAsDropDown(mChooseClass, 20, -10);
-
 
                     break;
                 case R.id.tv_state:
@@ -213,10 +206,10 @@ public class FrHomework extends FxFragment {
                     if (navigationBarShow) {
                         /*显示虚拟按键*/
                         BaseUtil.getDaoHangHeight(getActivity());
-                        mStateDialogHeight = phoneHeight - line_taskHeight- BaseUtil.getStatusBarHeight(getActivity());
+                        mStateDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getStatusBarHeight(getActivity());
                     } else {
                         /*不显示虚拟按键*/
-                        mStateDialogHeight =  phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity())- BaseUtil.getStatusBarHeight(getActivity());
+                        mStateDialogHeight = phoneHeight - line_taskHeight - BaseUtil.getDaoHangHeight(getActivity()) - BaseUtil.getStatusBarHeight(getActivity());
                     }
 
                     /*弹出Dialog*/
@@ -227,28 +220,18 @@ public class FrHomework extends FxFragment {
                         public void initView() {
 
                             mChoiceClassListView = (ListView) rootView.findViewById(R.id.listview);
-//                            if (choosetag == 1) {
-//                                mChoiceClassListView.setAdapter(apClass);
-//                                apClass.reFreshItem(selectClassPosition);
-//                            } else {
                             mChoiceClassListView.setAdapter(apCheckState);
                             apCheckState.reFreshItem(selectClassPosition);
-//                            }
                             mChoiceClassListView.setOnItemClickListener(onitemclick);
+                        }
 
+                        @Override
+                        protected void onTouchOutside() {
+                            setPictureDirection(R.drawable.down, 1);
+                            setPictureDirection(R.drawable.down, 2);
                         }
                     };
                     arbitrarilyDialog.show();
-//                    //点击选项列表
-//                    if (popupWindow != null && popupWindow.isShowing()) {
-//                        popupWindow.dismiss();
-//                        return;
-//                    }
-//                    popupWindow = null;
-//                    if (popupWindow == null) {
-//                        initPopup();
-//                    }
-//                    popupWindow.showAsDropDown(mChooseStatus, 20, -10);
                     break;
                 default:
                     break;
@@ -284,7 +267,10 @@ public class FrHomework extends FxFragment {
             Bundle b = new Bundle();
             b.putString("className", homeworkList.get(section).getHome_list().get(position).getClass_name());
             b.putString("homeworkId", homeworkList.get(section).getHome_list().get(position).getId());
-            DjhJumpUtil.getInstance().startBaseActivity(getActivity(), CheckHomeworkActivity.class, b, 0);
+
+            DjhJumpUtil.getInstance().fragmentStartBaseActivityForResult(getActivity(), CheckHomeworkActivity.class, mFragement, b, DjhJumpUtil.getInstance().activtiy_ChoiceHomework);
+
+//            DjhJumpUtil.getInstance().fragmentStartBaseActivityForResult(getActivity(), CheckHomeworkActivity.class, b, 0);
         }
 
         @Override
@@ -293,20 +279,6 @@ public class FrHomework extends FxFragment {
         }
     };
 
-
-    @Override
-    protected void dismissfxDialog(int flag) {
-        super.dismissfxDialog(flag);
-//        mTvnull.setText(R.string.e_homework);
-//        mTvnull.setVisibility(View.VISIBLE);
-//        mTvnull.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showfxDialog();
-//                httpData();
-//            }
-//        });
-    }
 
     public void httpData() {
         //网络请求
@@ -379,50 +351,21 @@ public class FrHomework extends FxFragment {
                 if (mPageNum == 1) {
                     homeworkList.clear();
                 }
-
                 Homework temp = json.parsingObject(Homework.class);
                 itemNumber = temp.getTotalRows();
                 if (temp != null && temp.getLists().size() > 0) {
                     mPageNum++;
                     addList(temp.getLists());
+
                 }
 
                 adapterHomework.notifyDataSetChanged();
-
             } else {
                 ToastUtil.showToast(getActivity(), json.getMsg());
             }
             finishRefreshAndLoadMoer(refresh, isLastPage()); // 要自己判断是否为最后一页
         }
     };
-
-//    /*选择班级和状态*/
-//    private void initPopup() {
-//
-//        DisplayMetrics metrics = new DisplayMetrics();
-//
-//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-//        View contentView = View.inflate(getActivity(), R.layout.view_popup_layout, null);
-//        if (choosetag == 1) {
-//            popupWindow = new PopupWindow(contentView, BaseUtil.getPhoneWidth(getActivity()), metrics.heightPixels / 2);
-////            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, metrics.heightPixels / 2);
-//        } else {
-//            popupWindow = new PopupWindow(contentView, BaseUtil.getPhoneWidth(getActivity()), mChooseStatus.getHeight() * 2);
-////            popupWindow = new PopupWindow(contentView, metrics.widthPixels * 3 / 10, mChooseStatus.getHeight() * 2);
-//        }
-//        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-//        popupWindow.setOutsideTouchable(true);
-//        popupWindow.update();
-//        popupWindow.setFocusable(true);
-//        ListView listView = (ListView) contentView.findViewById(R.id.listview);
-//
-//        if (choosetag == 1) {
-//            listView.setAdapter(apClass);
-//        } else {
-//            listView.setAdapter(apCheckState);
-//        }
-//        listView.setOnItemClickListener(onitemclick);
-//    }
 
 
     /*选择列表事件监听*/
@@ -434,6 +377,7 @@ public class FrHomework extends FxFragment {
                 selectClassPosition = position;
                 apClass.reFreshItem(selectClassPosition);
                 mChooseClass.setText(classList.get(position).getClass_name());
+                mChooseClass.setTextColor(getResources().getColor(R.color.blue_1F6DED));
                 mClassId = classList.get(position).getId();
                 httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
                 mPageNum = 1;
@@ -442,6 +386,7 @@ public class FrHomework extends FxFragment {
                 selectClassPosition = position;
                 apCheckState.reFreshItem(selectClassPosition);
                 mChooseStatus.setText(statusList.get(position).getLabel());
+                mChooseStatus.setTextColor(getResources().getColor(R.color.blue_1F6DED));
                 mStatusId = statusList.get(position).getValue();
                 httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
                 mPageNum = 1;
@@ -464,6 +409,8 @@ public class FrHomework extends FxFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Logger.d("FrHomework    onResume ");
+
     }
 
 
@@ -471,6 +418,13 @@ public class FrHomework extends FxFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == DjhJumpUtil.getInstance().activtiy_SendHomework && resultCode == RESULT_OK) { // 布置作业成功返回
+            httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
+            mPageNum = 1;
+            httpData();
+            // TODO 刷新列表
+        }
+        if (requestCode == DjhJumpUtil.getInstance().activtiy_ChoiceHomework && resultCode == RESULT_OK) {//检查作业成功
+            Logger.d("检查作业返回结果1111111111111111");
             httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
             mPageNum = 1;
             httpData();

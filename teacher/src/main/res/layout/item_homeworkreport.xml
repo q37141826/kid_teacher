@@ -23,13 +23,13 @@
             android:orientation="horizontal">
 
             <!--<cn.dajiahui.kidteacher.ui.homework.view.CricleTextView-->
-                <!--android:id="@+id/number"-->
-                <!--android:layout_width="20dp"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:text="数目"/>-->
+            <!--android:id="@+id/number"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="数目"/>-->
             <TextView
                 android:id="@+id/number"
                 android:layout_width="20dp"
@@ -37,8 +37,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/black_tv_3"
-                android:text="1"/>
+                android:text="1"
+                android:textColor="@color/black_tv_3"/>
 
             <!-- 头像 -->
             <ImageView
@@ -63,14 +63,14 @@
             <!-- 截止时间 -->
             <TextView
                 android:id="@+id/tv_submittime"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_studentname"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
                 android:text=""
-                android:textSize="12dp"/>
+                android:textSize="12dp"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -80,16 +80,17 @@
             <!-- 正确率 -->
             <TextView
                 android:id="@+id/tv_accuracy"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
-                android:drawableRight="@drawable/go_right"
                 android:gravity="center"
+
+                android:text=""
                 android:textSize="@dimen/text15"
-                android:text=""/>
+                android:visibility="invisible"/>
+            <!--android:drawableRight="@drawable/go_right"-->
         </RelativeLayout>
 
     </LinearLayout>

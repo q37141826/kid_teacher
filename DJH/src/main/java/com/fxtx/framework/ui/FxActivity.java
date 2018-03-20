@@ -33,6 +33,7 @@ public abstract class FxActivity extends AppCompatActivity {
     private SparseArray<View> mViews = new SparseArray<View>();
     public int mPageNum = 1; //分页
     public int mPageSize = 10; //默认一页10个条目
+    public TextView tv_right;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,11 +230,11 @@ public abstract class FxActivity extends AppCompatActivity {
     /*右上角 不加图片*/
     public void onRightBtn(int textId) {
         if (toolbar != null) {
-            TextView tv = getView(R.id.tool_right);
-            tv.setText(textId);
-            tv.setVisibility(View.VISIBLE);
+            tv_right = getView(R.id.tool_right);
+            tv_right.setText(textId);
+            tv_right.setVisibility(View.VISIBLE);
 
-            tv.setOnClickListener(new View.OnClickListener() {
+            tv_right.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onRightBtnClick(v);
@@ -355,6 +356,13 @@ public abstract class FxActivity extends AppCompatActivity {
     public void onBackPressed() {
         finishActivity();
     }
+
+
+
+
+//    public void onReturKey(int keyCode, KeyEvent event) {
+//
+//    }
 
     @Override
     public void startActivity(Intent intent) {

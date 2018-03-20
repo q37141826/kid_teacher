@@ -26,9 +26,7 @@ public class FirstActivity extends FxFirstActivity {
         SpUtil util = new SpUtil(this);
         if (util.getWelcomeNum() < AppSet.welcome) {
             util.setWelcomeNum(AppSet.welcome);
-//            DjhJumpUtil.getInstance().startBaseActivity(context, WelComnActivity.class);
-            /*暂无引导页 直接跳转登录页*/
-            DjhJumpUtil.getInstance().startBaseActivity(context, LoginActivity.class);
+            DjhJumpUtil.getInstance().startBaseActivity(context, WelComnActivity.class);
             finishActivity();
         } else {
             String u = util.getKeyLogU();

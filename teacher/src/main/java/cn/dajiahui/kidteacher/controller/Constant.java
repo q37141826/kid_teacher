@@ -51,7 +51,7 @@ public class Constant {
 
     public static final int Album_Photo_Max = 20;//相册可选择上传图片最大值
     public static final int Alum_phone_UserIcon = 1;//相册选择用户头像时只能选一张
-    public static final int Alum_send_dynamic = 9;//相册选择动态图时只能选5张
+    public static final int Alum_send_dynamic = 10;//相册选择动态图时只能选9张
     public static final int classNotice = 3;//班级 通知 也叫 教师通知
     public static final int schoolNotice = 2;
     public static final int systemNotice = 1;

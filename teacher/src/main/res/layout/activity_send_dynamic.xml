@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/textpadding"
-        android:background="@color/white"
+
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -21,6 +21,7 @@
             android:id="@+id/talk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/round_bg_white_classspace"
             android:orientation="horizontal">
 
             <EditText
@@ -51,10 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:horizontalSpacing="5dp"
-            android:verticalSpacing="5dp"
             android:numColumns="3"
             android:overScrollMode="never"
-           />
+            android:verticalSpacing="5dp"
+            />
     </RelativeLayout>
 
 

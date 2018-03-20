@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
 import com.fxtx.framework.image.util.GlideUtil;
@@ -12,16 +13,16 @@ import com.fxtx.framework.time.TimeUtil;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
+
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokStudent;
-import cn.dajiahui.kidteacher.ui.homework.view.CricleTextView;
 
 /**
  * 作业报告首页学生列表adapter
  */
 public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
 
-    private boolean isShowAccuracy = true; // 是否显示争取率
+    private boolean isShowAccuracy = true; // 是否显示争取率与显示数字用同一个标志位
 
     public ApHomeworkReport(Context context, List<BeHomewrokStudent> mDatas, boolean isShowAccuracy) {
         super(context, mDatas, R.layout.item_homeworkreport);
@@ -42,7 +43,7 @@ public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
             GlideUtil.showRoundImage(mContext, item.getAvatar(), userAvtar, R.drawable.ico_default_user, true); // 头像
         }
 
-        if(isShowAccuracy) {
+        if (isShowAccuracy) {
             tv_submittime.setText(TimeUtil.stampToString(item.getUpdated_at())); // 截止时间
             tv_submittime.setVisibility(View.VISIBLE);
 
@@ -52,6 +53,8 @@ public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
             String correctRateStr = df.format(correctRateF);
             tv_accuracy.setText("正确率：" + correctRateStr + " ");   // 正确率
             tv_accuracy.setVisibility(View.VISIBLE);
+        } else {
+            tv_number.setVisibility(View.INVISIBLE);
         }
 
         tv_number.setText(String.valueOf(position + 1));
