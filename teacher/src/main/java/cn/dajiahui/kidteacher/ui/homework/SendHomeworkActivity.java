@@ -38,6 +38,7 @@ public class SendHomeworkActivity extends FxActivity {
     private ImageView mImgSupplementary;
     private TextView mTvSupplementary;
     private ListView mListview; // 单元列表
+    private TextView mNext; // 下一步按钮
 
     private ApChooseUnit apChooseUnit; // 单元列表的Adapter
     private BeWorkBook selectWorkBook; // 教辅
@@ -66,6 +67,8 @@ public class SendHomeworkActivity extends FxActivity {
         mImgSupplementary = getView(R.id.img_supplementary);
         mTvSupplementary = getView(R.id.tv_supplementary);
 
+        mNext = getView(R.id.next);
+        mNext.setOnClickListener(onClick);
 
         apChooseUnit = new ApChooseUnit(this, unitInfoList);
         mListview.setAdapter(apChooseUnit);
@@ -76,12 +79,12 @@ public class SendHomeworkActivity extends FxActivity {
                 //把点击的position传递到adapter里面去
                 apChooseUnit.changeState(position);
                 selectUnit = unitInfoList.get(position);
+                mNext.setBackgroundResource(R.color.blue_dark); // 修改下一步按钮背景色
 //                Toast.makeText(SendHomeworkActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
 
-        TextView mNext = getView(R.id.next);
-        mNext.setOnClickListener(onClick);
+
 
     }
 
@@ -136,6 +139,8 @@ public class SendHomeworkActivity extends FxActivity {
 
                 dataLayout.setVisibility(View.VISIBLE);
                 emptyLayout.setVisibility(View.GONE);
+
+                mNext.setBackgroundResource(R.color.gray_DBDBDB);  // 修改下一步按钮背景色
             }
         }
 

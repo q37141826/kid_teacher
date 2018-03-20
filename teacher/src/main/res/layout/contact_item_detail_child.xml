@@ -3,13 +3,18 @@
     xmlns:roundimage="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/textmarginleft"
-    android:background="@color/white"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/textpadding"
-    android:paddingTop="@dimen/textpadding">
+    android:orientation="vertical"
+    android:background="@color/transparent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/textmarginleft"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/textpadding"
+        android:paddingTop="@dimen/textpadding">
 
     <ImageView
         android:id="@+id/round_imge_child"
@@ -25,5 +30,16 @@
         android:layout_marginRight="10dp"
         android:drawableRight="@drawable/ico_chat"
         android:textColor="@color/color5A"
-        android:textSize="@dimen/text22" />
+        android:textSize="@dimen/text18" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/textpadding"
+        android:layout_marginRight="@dimen/textpadding"
+        android:background="@color/list_divider_color_gravy"
+        android:text=""/>
+
 </LinearLayout>
+

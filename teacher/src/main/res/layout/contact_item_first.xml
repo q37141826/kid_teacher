@@ -10,5 +10,5 @@
     android:paddingLeft="@dimen/textmarginleft"
     android:paddingTop="@dimen/textpadding"
     android:paddingBottom="@dimen/textpadding"
-    android:background="@color/blue_line"/>
+    android:background="@color/gray_F5F5F5"/>
 </LinearLayout>

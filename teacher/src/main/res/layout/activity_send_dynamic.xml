@@ -32,6 +32,7 @@
                 android:gravity="top|left"
                 android:hint="聊聊今天发生了什么..."
                 android:minLines="4"
+                android:background="@null"
                 android:textCursorDrawable="@null"/>
         </LinearLayout>
 
