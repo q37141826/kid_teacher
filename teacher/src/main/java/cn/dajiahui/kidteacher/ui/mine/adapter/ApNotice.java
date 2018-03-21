@@ -1,17 +1,18 @@
 package cn.dajiahui.kidteacher.ui.mine.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.fxtx.framework.adapter.CommonAdapter;
 import com.fxtx.framework.adapter.ViewHolder;
+import com.fxtx.framework.time.TimeUtil;
 
 import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeNoticeLists;
-import cn.dajiahui.kidteacher.util.DateUtils;
 
 /**
  * 通知
@@ -24,6 +25,7 @@ public class ApNotice extends CommonAdapter<BeNoticeLists> {
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void convert(ViewHolder viewHolder, int position, BeNoticeLists item) {
 
@@ -35,10 +37,12 @@ public class ApNotice extends CommonAdapter<BeNoticeLists> {
             tv_redpoint.setVisibility(View.VISIBLE);
         } else {
             tv_redpoint.setVisibility(View.INVISIBLE);
+            tv_updatecontent.setTextColor(mContext.getResources().getColor(R.color.gray_666666));
+            tv_deadline.setTextColor(mContext.getResources().getColor(R.color.gray_666666));
         }
 
         tv_updatecontent.setText(item.getTitle());
-        tv_deadline.setText(DateUtils.time(item.getCreated_at()));
+        tv_deadline.setText(TimeUtil.stampToString(item.getCreated_at(), TimeUtil.YYYYMD));
 
 
     }

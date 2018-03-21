@@ -82,6 +82,7 @@ public class UserDetailsActivity extends FxActivity {
         tvBirthay = getView(R.id.tv_user_birthday_right);
         tvSex = getView(R.id.tv_user_sex_right);
         tvSchool.setText(UserController.getInstance().getUser().getSchool_name());
+
       /*监听姓名输入框*/
         ed_name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -336,5 +337,12 @@ public class UserDetailsActivity extends FxActivity {
 
             }
         }, type, info);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+           /*隐藏软键盘*/
+        BaseUtil.hideSoftInput(UserDetailsActivity.this);
     }
 }

@@ -64,10 +64,12 @@ public class SendHomeworkActivity extends FxActivity {
         dataLayout = getView(R.id.data_layout);
         emptyLayout = getView(R.id.empty_layout);
         mListview = getView(R.id.listview);
+        final TextView mNext = getView(R.id.next);
+        mNext.setOnClickListener(onClick);
         mImgSupplementary = getView(R.id.img_supplementary);
         mTvSupplementary = getView(R.id.tv_supplementary);
 
-        mNext = getView(R.id.next);
+
         mNext.setOnClickListener(onClick);
 
         apChooseUnit = new ApChooseUnit(this, unitInfoList);
@@ -79,10 +81,17 @@ public class SendHomeworkActivity extends FxActivity {
                 //把点击的position传递到adapter里面去
                 apChooseUnit.changeState(position);
                 selectUnit = unitInfoList.get(position);
+
                 mNext.setBackgroundResource(R.color.blue_dark); // 修改下一步按钮背景色
+
+                mNext.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+
 //                Toast.makeText(SendHomeworkActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
 
 

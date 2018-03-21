@@ -23,6 +23,7 @@ import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 import cn.dajiahui.kidteacher.util.Logger;
 import cn.dajiahui.kidteacher.util.SpUtil;
+import util.KidConfig;
 
 /**
  * 登录
@@ -70,7 +71,8 @@ public class LoginHttp {
                     SpUtil spUtil = new SpUtil(context);
                     spUtil.setLogin(user, pwd);
                     spUtil.setUser(temp);
-
+                    KidConfig.getInstance().init();//初始化文件夹
+                    KidConfig.getInstance().initUserConfig(user);
                     if (UserController.getInstance().getAccess().isMsn) {
                         if (ImHelper.getInstance().isLoggedIn()) {
                             setStartActivity();

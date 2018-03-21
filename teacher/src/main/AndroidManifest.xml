@@ -406,6 +406,8 @@
         </activity>
         <activity android:name=".ui.mine.notice.NoticeDetailsActivity">
         </activity>
+        <activity android:name=".ui.mine.myclass.ShowPictureActivity">
+        </activity>
     </application>
 
 </manifest>

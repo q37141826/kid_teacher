@@ -14,10 +14,13 @@ import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.text.StringUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.util.ActivityUtil;
+import com.fxtx.framework.util.BaseUtil;
 import com.squareup.okhttp.Request;
 
 import cn.dajiahui.kidteacher.R;
+import cn.dajiahui.kidteacher.controller.UserController;
 import cn.dajiahui.kidteacher.http.RequestUtill;
+import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
 import cn.dajiahui.kidteacher.util.TeacherTextWatcher;
 
 
@@ -41,6 +44,9 @@ public class ForgetPwdActivity extends FxActivity {
         edNewPwd = getView(R.id.edNewPwd);
         edPwdOk = getView(R.id.edPwdOk);
         btnCode.setClickable(false);
+        BeUser beUser = UserController.getInstance().getUser();
+        edLoginPhone.setText(beUser.getTelnum());
+        edPhoneCode.requestFocus();
 
         getView(R.id.btn_forget).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,8 +210,19 @@ public class ForgetPwdActivity extends FxActivity {
         public void onTick(long millisUntilFinished) {
             isBtnCode = false;
             btnCode.setClickable(false);
-            btnCode.setBackgroundResource(R.color.whilte_gray);
+//            btnCode.setBackgroundResource(R.drawable.select_btn_gray_bg);
+            btnCode.setBackgroundResource(R.color.white);
             btnCode.setText(millisUntilFinished / 1000 + "秒");
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+             /*隐藏软键盘*/
+        BaseUtil.hideSoftInput(ForgetPwdActivity.this);
+        finishActivity();
+    }
+
+
 }

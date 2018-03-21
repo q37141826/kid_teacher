@@ -209,6 +209,7 @@ public class TimeUtil {
 
     /**
      * 判断是否为同一天
+     *
      * @param date1
      * @param date2
      * @return
@@ -228,12 +229,28 @@ public class TimeUtil {
 
     /**
      * 时间戳转时间字符串
+     *
      * @param stamp
      * @return
      */
     public static String stampToString(String stamp) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        long lt = new Long(stamp);
+        Date date = new Date(lt * 1000);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+    /**
+     * 时间戳转时间字符串
+     *
+     * @param stamp
+     * @return
+     */
+    public static String stampToString(String stamp, String YYYYMD) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(YYYYMD);
         long lt = new Long(stamp);
         Date date = new Date(lt * 1000);
         res = simpleDateFormat.format(date);
