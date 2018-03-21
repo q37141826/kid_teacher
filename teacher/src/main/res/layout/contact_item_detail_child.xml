@@ -4,12 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/transparent">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/textmarginleft"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -29,11 +28,12 @@
         android:layout_marginLeft="@dimen/textmarginleft"
         android:layout_marginRight="10dp"
         android:drawableRight="@drawable/ico_chat"
-        android:textColor="@color/color5A"
+        android:textColor="@color/black_tv_3"
         android:textSize="@dimen/text18" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/fill"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/textpadding"
