@@ -48,10 +48,11 @@ public class DjhJumpUtil extends JumpUtil {
     public final int activtiy_ChooseSupplementary = 1003; //发布作业.教辅选择
     public final int activtiy_ChooseClass = 1004; //发布课本作业（选择班级，截止时间)
 
-    public  final  int activtiy_ChoiceHomework=1005;
-    public  final  int activtiy_ChoiceHomeworkResult=1006;//检查作业结果请求码
+    public final int activtiy_ChoiceHomework = 1005;
+    public final int activtiy_ChoiceHomeworkResult = 1006;//检查作业结果请求码
 
-    public  final  int activtiy_myclassDetail=1007;//我的班级详情请求码
+    public final int activtiy_myclassDetail = 1007;//我的班级详情请求码
+    public final int activtiy_Notice= 1008;//我的通知
 
 
     private DjhJumpUtil() {
@@ -127,7 +128,6 @@ public class DjhJumpUtil extends JumpUtil {
         }
         startBaseActivity(context, classs, bundle, 0);
     }
-
 
 
     // 班级码
@@ -207,17 +207,11 @@ public class DjhJumpUtil extends JumpUtil {
     }
 
 
-
-
     public void startUserSetActivity(Activity activity, int type) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.bundle_type, type);
         startBaseActivityForResult(activity, UserSetActivity.class, bundle, activtiy_UserSet);
     }
-
-
-
-
 
 
     public void startChatActivity(Context context, String imId, String phone) {
@@ -228,13 +222,12 @@ public class DjhJumpUtil extends JumpUtil {
     }
 
     public void startContactListDetailActivity(Context context, List<BeContactUser> data, String title) {
-         Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.bundle_obj, (Serializable) data);
         bundle.putString(Constant.bundle_title, title);
         startBaseActivity(context, ContactListDetailActivity.class, bundle, 0);
 
     }
-
 
 
     //扫描结果
@@ -243,8 +236,6 @@ public class DjhJumpUtil extends JumpUtil {
         bundle.putString(Constant.bundle_obj, result);
         startBaseActivity(activity, ScanActivity.class, bundle, 0);
     }
-
-
 
 
     /**

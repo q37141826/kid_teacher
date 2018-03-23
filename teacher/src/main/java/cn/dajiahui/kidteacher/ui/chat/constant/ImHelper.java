@@ -268,7 +268,7 @@ public class ImHelper {
                 if (error == EMError.USER_REMOVED) {
                     onCurrentAccountRemoved();
                 } else if (error == EMError.USER_LOGIN_ANOTHER_DEVICE) {
-                    onConnectionConflict();
+//                    onConnectionConflict();
                 }
             }
 

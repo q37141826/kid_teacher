@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
@@ -218,13 +219,14 @@ public class ChooseClassActivity extends FxActivity {
     ResultCallback callGetUnitList = new ResultCallback() {
         @Override
         public void onError(Request request, Exception e) {
+            Logger.d("布置作业失败：" + e.toString());
             dismissfxDialog();
         }
 
         @Override
         public void onResponse(String response) {
             dismissfxDialog();
-
+            Logger.d("布置作业response" + response);
             HeadJson json = new HeadJson(response);
             if (json.getstatus() == 0) {
                 // 布置成功，返回首页作业页面
@@ -232,6 +234,7 @@ public class ChooseClassActivity extends FxActivity {
                 finishActivity();
             } else {
                 ToastUtil.showToast(context, json.getMsg());
+                Logger.d("布置作业失败 json.getMsg()：" + json.getMsg());
             }
         }
     };

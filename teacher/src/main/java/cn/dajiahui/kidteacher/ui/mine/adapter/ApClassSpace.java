@@ -1,6 +1,9 @@
 package cn.dajiahui.kidteacher.ui.mine.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.fxtx.framework.adapter.CommonAdapter;
@@ -10,7 +13,9 @@ import java.util.List;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClassSpaceList;
+import cn.dajiahui.kidteacher.ui.mine.myclass.ShowPictureActivity;
 import cn.dajiahui.kidteacher.util.DateUtils;
+import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 
 /**
  * 我的班级
@@ -25,7 +30,7 @@ public class ApClassSpace extends CommonAdapter<BeClassSpaceList> {
 
 
     @Override
-    public void convert(ViewHolder viewHolder, final int position, BeClassSpaceList item) {
+    public void convert(ViewHolder viewHolder, final int position, final BeClassSpaceList item) {
 
         TextView tv_classname = viewHolder.getView(R.id.tv_classname);
         TextView tv_endtime = viewHolder.getView(R.id.tv_endtime);
@@ -35,8 +40,18 @@ public class ApClassSpace extends CommonAdapter<BeClassSpaceList> {
 
         ApClassSpacepicture apClassSpacepicture = new ApClassSpacepicture(this.context, item.getImg_url());
         grildview.setAdapter(apClassSpacepicture);
+     /*图片item的点击事件*/
+        grildview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putString("IMG_URL", item.getImg_url().get(position));
 
-        tv_classname.setText(item.getClass_name()+"班动态");
+                /*先跳转 在网络请请求获取数据*/
+                DjhJumpUtil.getInstance().startBaseActivity(context, ShowPictureActivity.class, bundle, 0);
+            }
+        });
+        tv_classname.setText(item.getClass_name() + "班动态");
         tv_endtime.setText("发表于：" + DateUtils.timeHour(item.getCreated_at()));
         tv_content.setText(item.getContent());
     }

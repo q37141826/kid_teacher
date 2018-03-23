@@ -1,6 +1,7 @@
 package cn.dajiahui.kidteacher.ui.mine.notice;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
@@ -88,4 +89,23 @@ public class NoticeDetailsActivity extends FxActivity {
             }
         }
     };
+
+    /*监听返回键*/
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) { //监控/拦截/屏蔽返回键
+            setResult(RESULT_OK);
+            finishActivity();
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    /*左上角返回*/
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_OK);
+        finishActivity();
+    }
 }

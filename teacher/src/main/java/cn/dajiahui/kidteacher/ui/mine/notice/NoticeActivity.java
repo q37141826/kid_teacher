@@ -1,5 +1,6 @@
 package cn.dajiahui.kidteacher.ui.mine.notice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
@@ -60,7 +62,7 @@ public class NoticeActivity extends FxActivity {
         initRefresh(refresh);
         mTvnull.setVisibility(View.VISIBLE);
         mListview.setEmptyView(mTvnull);
-
+        noticekHttp();
         apNotice = new ApNotice(this, noticeList);
         mListview.setAdapter(apNotice);
 
@@ -74,7 +76,7 @@ public class NoticeActivity extends FxActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("NOTICE_ITEM", beNoticeItem);
 
-                DjhJumpUtil.getInstance().startBaseActivity(NoticeActivity.this, NoticeDetailsActivity.class, bundle, 0);
+                DjhJumpUtil.getInstance().startBaseActivityForResult(NoticeActivity.this, NoticeDetailsActivity.class, bundle, DjhJumpUtil.getInstance().activtiy_Notice);
             }
         });
     }
@@ -104,7 +106,6 @@ public class NoticeActivity extends FxActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        noticekHttp();
     }
 
     /**
@@ -121,7 +122,7 @@ public class NoticeActivity extends FxActivity {
 
         @Override
         public void onResponse(String response) {
-//            Logger.d("摩尔通知：" + response);
+            Logger.d("摩尔通知：" + response);
             dismissfxDialog();
             HeadJson json = new HeadJson(response);
             if (json.getstatus() == 0) {
@@ -184,5 +185,16 @@ public class NoticeActivity extends FxActivity {
         }
 
         return result;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /*移除学生有返回本页面刷新页面*/
+        if (requestCode == DjhJumpUtil.getInstance().activtiy_Notice && resultCode == RESULT_OK) {
+            mPageNum = 1;
+            httpData();
+        }
+
     }
 }

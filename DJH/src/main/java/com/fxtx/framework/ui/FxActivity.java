@@ -360,10 +360,6 @@ public abstract class FxActivity extends AppCompatActivity {
 
 
 
-//    public void onReturKey(int keyCode, KeyEvent event) {
-//
-//    }
-
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
