@@ -37,7 +37,7 @@
 
     <!--首页文字start-->
     <string name="tab_task">作业</string>
-    <string name="tab_chat">消息</string>
+    <string name="tab_chat">沟通</string>
     <string name="tab_mine">我的</string>
     <!--首页文字end-->
 
@@ -62,6 +62,7 @@
     <string name="task_unexamined">待检查</string>
     <string name="task_examined">已检查</string>
     <string name="all_options">全部</string>
+    <string name="AnswerCard">答题卡</string>
     <!--作业end-->
 
 

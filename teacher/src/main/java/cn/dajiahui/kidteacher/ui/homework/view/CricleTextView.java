@@ -8,8 +8,11 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import cn.dajiahui.kidteacher.R;
+
+
 /**
- * Created by lenovo on 2017/12/27.
+ * 自定义圆形中间带字
  */
 
 @SuppressLint("AppCompatCustomView")
@@ -17,9 +20,12 @@ public class CricleTextView extends TextView {
 
 
     private Paint mPaint;
+    private int color = (getResources().getColor(R.color.black));//defeal color
 
     public CricleTextView(Context context) {
         super(context);
+        init();
+        setcolor(color);
         // TODO Auto-generated constructor stub
     }
 
@@ -43,6 +49,15 @@ public class CricleTextView extends TextView {
         mPaint = new Paint();
     }
 
+    /*设置画笔颜色*/
+    public void setcolor(int color) {
+        mPaint.setColor(color);
+    }
+
+    public void refreshPonitColor() {
+       invalidate();
+    }
+
     /**
      * 调用onDraw绘制边框
      */
@@ -53,7 +68,7 @@ public class CricleTextView extends TextView {
         //创建一个RectF，用来限定绘制圆弧的范围
         RectF rectf = new RectF();
         //设置画笔的颜色
-        mPaint.setColor(getPaint().getColor());
+//        mPaint.setColor(getPaint().getColor());
         //设置画笔的样式，空心
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         //设置抗锯齿

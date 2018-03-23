@@ -408,6 +408,12 @@
         </activity>
         <activity android:name=".ui.mine.myclass.ShowPictureActivity">
         </activity>
+        <activity android:name=".ui.homework.homeworksdetails.HomeWorkDetailsActivity">
+        </activity>
+        <activity android:name=".ui.homework.homeworksdetails.DoHomeworkActivity">
+        </activity>
+        <activity android:name=".ui.homework.homeworksdetails.AnswerCardCompleteActivity">
+        </activity>
     </application>
 
 </manifest>

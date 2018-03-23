@@ -1,6 +1,8 @@
 package cn.dajiahui.kidteacher.controller;
 
 
+import cn.dajiahui.kidteacher.ui.homework.bean.Point;
+
 /**
  * Created by z on 2016/2/25.
  */
@@ -126,5 +128,16 @@ public class Constant {
     public static final String ac_stuVerify = "stuVerify";
     public static final String ac_urlFavorites = "urlFavorites";
     public static final String ac_Lesson = "lesson";
+
+
+    /* 魔耳 检查作业*/
+    public static final String Judje = "1";
+    public static final String Choice = "2";
+    public static final String Sort = "3";
+    public static final String Line = "4";
+    public static final String Completion = "5";
+
+    /*画线路径*/
+    public static final cn.dajiahui.kidteacher.ui.homework.bean.Point PointZero = new Point(0, 0);
 
 }

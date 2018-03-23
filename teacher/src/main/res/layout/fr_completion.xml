@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.dajiahui.kidteacher.ui.homework.view.ScrollViewExtend
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fadingEdge="none"
+    android:fitsSystemWindows="true"
+    android:overScrollMode="never"
+    android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <TextView
+            android:id="@+id/tv_completion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="听音频对话，去填空！"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tv_completion"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#E0E0E0"/>
+
+        <ImageView
+            android:id="@+id/img_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:id="@+id/img_conment"
+            android:layout_width="match_parent"
+            android:layout_height="222dp"
+            android:layout_below="@+id/img_play"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"/>
+
+        <RelativeLayout
+            android:id="@+id/stemroot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/img_conment"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="16dp">
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/horlistviewroot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/stemroot"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="60dp"
+            android:orientation="horizontal">
+        </RelativeLayout>
+
+    </RelativeLayout>
+</cn.dajiahui.kidteacher.ui.homework.view.ScrollViewExtend>

@@ -553,6 +553,25 @@ public class RequestUtill {
         getHttpBuilder(context, "teacher/homework/detail").params(params).post(callback);
     }
 
+    /*获取作业详情*/
+    public void httpRequestHomeworkDetail(Context context, ResultCallback callback, String homeworkId, String user_id) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("homework_id", homeworkId);
+        params.put("user_id", user_id);
+        getHttpBuilder(context, "teacher/homework/student-answersheet").params(params).post(callback);
+    }
+
+    /*查看作业详情*/
+    public void httprequestHomeworkQuestions(Context context, ResultCallback callback, String homeworkId, String user_id) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("homework_id", homeworkId);
+        params.put("user_id", user_id);
+        getHttpBuilder(context, "teacher/homework/student-questions").params(params).post(callback);
+    }
+
+
     /**
      * 通知后台检查作业
      *

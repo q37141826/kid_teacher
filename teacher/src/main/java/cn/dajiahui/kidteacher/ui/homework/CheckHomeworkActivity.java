@@ -29,6 +29,7 @@ import cn.dajiahui.kidteacher.ui.homework.adapter.ApHomeworkReport;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokReportInfo;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokStudent;
 import cn.dajiahui.kidteacher.ui.homework.bean.HomeworkReport;
+import cn.dajiahui.kidteacher.ui.homework.homeworksdetails.HomeWorkDetailsActivity;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 import cn.dajiahui.kidteacher.util.Logger;
 
@@ -93,10 +94,15 @@ public class CheckHomeworkActivity extends FxActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                ToastUtil.showToast(context, "跳转到个人作业详情页面");
-//                String classId = listFinish.get(position).getId();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("classId", classId);
-//                DjhJumpUtil.getInstance().startBaseActivity(MyClassActivity.this, ClassInfoActivity.class, bundle, 0); // 跳转到个人作业详情页面
+                String userId = listFinish.get(position).getId();
+                String nickname = listFinish.get(position).getNickname();
+                Bundle bundle = new Bundle();
+                bundle.putString("userId", userId);
+                bundle.putString("homeworkId", homeworkId);
+                bundle.putString("nickname", nickname);
+                DjhJumpUtil.getInstance().startBaseActivity(CheckHomeworkActivity.this, HomeWorkDetailsActivity.class, bundle, 0); // 跳转到个人作业详情页面
+
+
             }
         });
     }
@@ -304,7 +310,6 @@ public class CheckHomeworkActivity extends FxActivity {
             }
         }
     };
-
 
 
     /*监听返回键*/

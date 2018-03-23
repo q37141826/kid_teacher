@@ -52,7 +52,9 @@ public class DjhJumpUtil extends JumpUtil {
     public final int activtiy_ChoiceHomeworkResult = 1006;//检查作业结果请求码
 
     public final int activtiy_myclassDetail = 1007;//我的班级详情请求码
-    public final int activtiy_Notice= 1008;//我的通知
+    public final int activtiy_Notice = 1008;//我的通知
+    public final int activity_todohomework = 7100;
+    public final int activity_answerCardComplete = 7200;
 
 
     private DjhJumpUtil() {
