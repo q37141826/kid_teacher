@@ -69,7 +69,7 @@
             android:background="@color/white"
             app:isLoadMore="true"
             app:overlay="false"
-            app:wave_color="@color/app_bg_a"
+            app:wave_color="@color/gray_line"
             app:wave_show="false">
 
             <com.fxtx.framework.widgets.listview.PinnedHeaderListView

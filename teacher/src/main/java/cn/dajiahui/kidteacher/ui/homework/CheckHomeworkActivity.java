@@ -15,6 +15,7 @@ import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.time.TimeUtil;
 import com.fxtx.framework.ui.FxActivity;
+import com.fxtx.framework.widgets.StatusBarCompat;
 import com.squareup.okhttp.Request;
 
 import java.io.Serializable;
@@ -74,6 +75,7 @@ public class CheckHomeworkActivity extends FxActivity {
         onRightText(R.string.task_homeworkdetails, Color.WHITE);
         showfxDialog();
         httpData(); // 取得作业报告
+        StatusBarCompat.compat(this, getResources().getColor(com.fxtx.framework.R.color.app_bg_b));
     }
 
     @Override
@@ -328,5 +330,11 @@ public class CheckHomeworkActivity extends FxActivity {
     public void onBackPressed() {
         setResult(RESULT_OK);
         finishActivity();
+    }
+
+    @Override
+    protected void onDestroy() {
+        StatusBarCompat.compat(this, getResources().getColor(com.fxtx.framework.R.color.app_bg));
+        super.onDestroy();
     }
 }
