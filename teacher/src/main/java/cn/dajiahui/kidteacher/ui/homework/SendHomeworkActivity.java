@@ -64,7 +64,7 @@ public class SendHomeworkActivity extends FxActivity {
         dataLayout = getView(R.id.data_layout);
         emptyLayout = getView(R.id.empty_layout);
         mListview = getView(R.id.listview);
-        final TextView mNext = getView(R.id.next);
+         mNext = getView(R.id.next);
         mNext.setOnClickListener(onClick);
         mImgSupplementary = getView(R.id.img_supplementary);
         mTvSupplementary = getView(R.id.tv_supplementary);

@@ -1,14 +1,11 @@
 package cn.dajiahui.kidteacher.http;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.util.Pair;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.http.request.OkHttpDownloadRequest;
 import com.fxtx.framework.http.request.OkHttpRequest;
-import com.fxtx.framework.image.util.ImageUtil;
 import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 
@@ -633,16 +630,19 @@ public class RequestUtill {
      * @param files
      */
     public void uploadUserIcon(Context context, ResultCallback callback, File files) {
-        Bitmap map = ImageUtil.uriToBitmap(Uri.fromFile(files), context);
-        map = ImageUtil.centerSquareScaleBitmap(map, 400);
-        File file = ImageUtil.bitmapToFile(map, UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg", -1);
-        if (file == null) {
+//        Bitmap map = ImageUtil.uriToBitmap(Uri.fromFile(files), context);
+//        map = ImageUtil.centerSquareScaleBitmap(map, 400);
+//        File file = ImageUtil.bitmapToFile(map, UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg", -1);
+
+//        File file =new File( UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg");
+//
+        if (files == null) {
             ToastUtil.showToast(context, "文件错误无法提交");
             callback.onError(null, null);
         } else {
             IdentityHashMap params = new IdentityHashMap<>();
             params.put("token", UserController.getInstance().getUser().getToken());
-            new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "uploader/image").files(new Pair<String, File>("file", file)).params(params).upload(callback);
+            new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "uploader/image").files(new Pair<String, File>("file", files)).params(params).upload(callback);
         }
     }
 

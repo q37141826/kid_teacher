@@ -18,10 +18,8 @@ import com.fxtx.framework.util.BaseUtil;
 import com.squareup.okhttp.Request;
 
 import cn.dajiahui.kidteacher.R;
-import cn.dajiahui.kidteacher.controller.UserController;
 import cn.dajiahui.kidteacher.http.RequestUtill;
-import cn.dajiahui.kidteacher.ui.login.bean.BeUser;
-import cn.dajiahui.kidteacher.util.TeacherTextWatcher;
+import cn.dajiahui.kidteacher.util.SpUtil;
 
 
 /**
@@ -44,8 +42,16 @@ public class ForgetPwdActivity extends FxActivity {
         edNewPwd = getView(R.id.edNewPwd);
         edPwdOk = getView(R.id.edPwdOk);
         btnCode.setClickable(false);
-        BeUser beUser = UserController.getInstance().getUser();
-        edLoginPhone.setText(beUser.getTelnum());
+
+        SpUtil spUtil = new SpUtil(context);
+        edLoginPhone.setText( spUtil.getUser().getTelnum());
+        edPhoneCode.requestFocus();
+
+        if (edLoginPhone.getText().toString().trim().length() == 11) {
+            btnCode.setBackgroundResource(R.color.white);
+            btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
+            btnCode.setClickable(true);
+        }
         edPhoneCode.requestFocus();
 
         getView(R.id.btn_forget).setOnClickListener(new View.OnClickListener() {
@@ -55,23 +61,23 @@ public class ForgetPwdActivity extends FxActivity {
             }
         });
 
-        edLoginPhone.addTextChangedListener(new TeacherTextWatcher() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isBtnCode) {
-                    if (edLoginPhone.getText().toString().trim().length() == 11) {
-                        btnCode.setBackgroundResource(R.color.white);
-                        btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
-                        btnCode.setClickable(true);
-                    } else {
-                        btnCode.setBackgroundResource(R.color.white);
-                        btnCode.setTextColor(getResources().getColor(R.color.gray_666666));
-                        btnCode.setClickable(false);
-                    }
-                }
-            }
-        });
+//        edLoginPhone.addTextChangedListener(new TeacherTextWatcher() {
+//            @SuppressLint("ResourceAsColor")
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (isBtnCode) {
+//                    if (edLoginPhone.getText().toString().trim().length() == 11) {
+//                        btnCode.setBackgroundResource(R.color.white);
+//                        btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
+//                        btnCode.setClickable(true);
+//                    } else {
+//                        btnCode.setBackgroundResource(R.color.white);
+//                        btnCode.setTextColor(getResources().getColor(R.color.gray_666666));
+//                        btnCode.setClickable(false);
+//                    }
+//                }
+//            }
+//        });
 
 
     }
