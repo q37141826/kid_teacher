@@ -75,6 +75,13 @@ public class ApContact extends SectionedBaseAdapter {
         ImageView userAvtor = holder.getView(R.id.round_imge_child);
         TextView userName =holder.getView(R.id.text_child_name);
 
+        TextView fillText = holder.getView(R.id.fill);
+        if(position == getCountForSection(section) -1 ) {
+            fillText.setVisibility(View.GONE);
+        } else {
+            fillText.setVisibility(View.VISIBLE);
+        }
+
         if (datas.get(section).getStudent_list().get(position).getAvatar()!=null) {
             GlideUtil.showRoundImage(context, datas.get(section).getStudent_list().get(position).getAvatar(), userAvtor, R.drawable.ico_default_user, true);
         }
