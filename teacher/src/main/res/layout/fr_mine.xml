@@ -9,7 +9,7 @@
         android:id="@+id/topView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/sp_blue_progressive"
         android:padding="10dp">
 
         <ImageView
@@ -28,7 +28,7 @@
             android:layout_alignTop="@+id/iv_edit"
             android:layout_toEndOf="@+id/iv_user"
             android:text="@string/user_name"
-            android:textColor="@color/gray_333333"
+            android:textColor="@color/white"
             android:textSize="15sp"/>
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/iv_user"
             android:text="魔耳英语国贸校区"
-            android:textColor="@color/black_tv_6"
+            android:textColor="@color/white"
             android:textSize="@dimen/text15"/>
 
         <ImageView

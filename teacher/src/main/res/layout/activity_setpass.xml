@@ -153,7 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/gray_DBDBDB"
+            android:background="@color/blue_dark"
             android:text="@string/sure"
             android:textColor="@color/white"/>
     </LinearLayout>

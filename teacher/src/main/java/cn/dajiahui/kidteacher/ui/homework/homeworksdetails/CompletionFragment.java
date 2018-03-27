@@ -55,6 +55,7 @@ public class CompletionFragment extends BaseHomeworkFragment implements CheckHom
     private List<String> myAnswerList = new ArrayList<>();//我的答案的集合
     private Bundle bundle;
 
+
     @Override
     protected View initinitLayout(LayoutInflater inflater) {
         return inflater.inflate(R.layout.fr_completion, null);
@@ -76,6 +77,10 @@ public class CompletionFragment extends BaseHomeworkFragment implements CheckHom
         if (inbasebean.getIs_answered().equals("1")) {
             String my_answer = inbasebean.getMy_answer();
             if (!my_answer.equals("")) {
+               /*兼容首位*/
+                if (my_answer.startsWith("۞")) {
+                    my_answer = my_answer.substring(1);
+                }
                 /*多个空*/
                 if (my_answer.contains("۞")) {
                     String[] strs = my_answer.split("۞");
@@ -86,17 +91,24 @@ public class CompletionFragment extends BaseHomeworkFragment implements CheckHom
                 } else {
                     myAnswerList.add(my_answer);
                 }
+            } else {
+                /*等于null*/
             }
         }
 
         /*解析正确答案（后台获取的正确答案）۞    分隔单词  然后自己拆分一个单词几个字母*/
         String standard_answer = inbasebean.getStandard_answer();
+
         String[] strs = standard_answer.split("۞");
 
        /*截取正确答案字符串  添加到mRightanswer集合*/
         for (int i = 0, len = strs.length; i < len; i++) {
             String split = strs[i].toString();
             standardAnswerList.add(split);
+            /*我的答案等于""*/
+            if (inbasebean.getMy_answer().equals("")) {
+                myAnswerList.add("");
+            }
         }
         if (myAnswerList.size() == standardAnswerList.size()) {
 

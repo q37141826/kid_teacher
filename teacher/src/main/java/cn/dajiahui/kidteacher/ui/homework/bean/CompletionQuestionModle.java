@@ -24,7 +24,7 @@ public class CompletionQuestionModle extends QuestionModle implements Serializab
     private String title;
     private String unit_id;
     //    private String is_answer = "";//是否作答
-    private String my_answer;//已经上传的作答答案
+    private String my_answer = "";//已经上传的作答答案
     private String is_right;//是否正确
     private String is_auto;//自动提交是1  不自动提交是0
 
@@ -32,7 +32,6 @@ public class CompletionQuestionModle extends QuestionModle implements Serializab
     private String isFocusable = "";//editext焦点标记  yes 有焦点  no无焦点
     private String isShowRightAnswer = "";//显示正确答案 yes 显示正确答案  no不显示正确答案
     private String textcolor = "";//设置字体和边框颜色
-
 
 
     private List<List<CompletionQuestionadapterItemModle>> showRightList = new ArrayList();
@@ -69,7 +68,6 @@ public class CompletionQuestionModle extends QuestionModle implements Serializab
     public void setIsFocusable(String isFocusable) {
         this.isFocusable = isFocusable;
     }
-
 
 
     public String getMy_answer() {

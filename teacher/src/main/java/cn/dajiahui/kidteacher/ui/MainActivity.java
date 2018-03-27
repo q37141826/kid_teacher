@@ -18,6 +18,7 @@ import com.fxtx.framework.ui.FxFragment;
 import com.fxtx.framework.ui.base.FxTabActivity;
 import com.fxtx.framework.ui.bean.BeTab;
 import com.fxtx.framework.util.ActivityUtil;
+import com.fxtx.framework.widgets.StatusBarCompat;
 import com.fxtx.framework.widgets.badge.BadgeRadioButton;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -124,17 +125,20 @@ public class MainActivity extends FxTabActivity {
                 if (frHomework == null)
                     frHomework = new FrHomework();//作业
                 switchContent(isFragment, frHomework);
+                StatusBarCompat.compat(this, getResources().getColor(com.fxtx.framework.R.color.app_bg));
                 break;
 
             case R.id.rediobtn_chat:
                 if (frChat == null)
                     frChat = new FrChat();
                 switchContent(isFragment, frChat);
+                StatusBarCompat.compat(this, getResources().getColor(com.fxtx.framework.R.color.app_bg));
                 break;
             case R.id.rediobtn_mine:
                 if (frMine == null)
                     frMine = new FrMine();
                 switchContent(isFragment, frMine);
+                StatusBarCompat.compat(this, getResources().getColor(com.fxtx.framework.R.color.app_bg_b));
                 break;
             default:
                 break;

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxFragment;
 import com.fxtx.framework.util.BaseUtil;
@@ -37,7 +38,6 @@ import cn.dajiahui.kidteacher.ui.homework.bean.Homework;
 import cn.dajiahui.kidteacher.ui.homework.view.ArbitrarilyDialog;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClass;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
-import cn.dajiahui.kidteacher.util.Logger;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -305,7 +305,7 @@ public class FrHomework extends FxFragment {
 
         @Override
         public void onResponse(String response) {
-//            Logger.d("作业返回数据：" + response);
+            Logger.d("作业返回数据：" + response);
             dismissfxDialog();
             httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
             httpData(); // 获取班级和状态列表
@@ -345,6 +345,7 @@ public class FrHomework extends FxFragment {
         @Override
         public void onResponse(String response) {
             dismissfxDialog();
+            Logger.d("callGetClassList    response ------"+response);
             HeadJson json = new HeadJson(response);
             if (json.getstatus() == 0) {
                     /* 解析作业列表信息 */
@@ -409,7 +410,7 @@ public class FrHomework extends FxFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Logger.d("FrHomework    onResume ");
+//        Logger.d("FrHomework    onResume ");
 
     }
 
@@ -424,7 +425,7 @@ public class FrHomework extends FxFragment {
             // TODO 刷新列表
         }
         if (requestCode == DjhJumpUtil.getInstance().activtiy_ChoiceHomework && resultCode == RESULT_OK) {//检查作业成功
-            Logger.d("检查作业返回结果1111111111111111");
+
             httpType = HTTP_TYPE_GET_HOMEWORK_LIST;
             mPageNum = 1;
             httpData();

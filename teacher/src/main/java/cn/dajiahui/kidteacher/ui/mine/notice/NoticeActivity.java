@@ -195,6 +195,5 @@ public class NoticeActivity extends FxActivity {
             mPageNum = 1;
             httpData();
         }
-
     }
 }
