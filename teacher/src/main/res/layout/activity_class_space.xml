@@ -26,15 +26,12 @@
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
             android:divider="@null"
-            android:dividerHeight="10dp"
             android:fadeScrollbars="false"
             android:footerDividersEnabled="true"
             android:headerDividersEnabled="true"
             android:overScrollMode="never"
             android:scrollbars="none"/>
-
         <TextView style="@style/text_null"/>
 
     </com.fxtx.framework.widgets.refresh.MaterialRefreshLayout>

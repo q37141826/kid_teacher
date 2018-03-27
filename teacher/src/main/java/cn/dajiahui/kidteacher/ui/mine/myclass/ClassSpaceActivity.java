@@ -22,7 +22,6 @@ import cn.dajiahui.kidteacher.ui.mine.adapter.ApClassSpace;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClassSpace;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeClassSpaceList;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
-import cn.dajiahui.kidteacher.util.Logger;
 
 /*
 * 班级空间
@@ -92,7 +91,7 @@ public class ClassSpaceActivity extends FxActivity {
         @Override
         public void onResponse(String response) {
 
-            Logger.d("班级空间 ：" + response);
+//            Logger.d("班级空间 ：" + response);
 
             dismissfxDialog();
             HeadJson json = new HeadJson(response);

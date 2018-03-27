@@ -64,7 +64,7 @@ public class SendHomeworkActivity extends FxActivity {
         dataLayout = getView(R.id.data_layout);
         emptyLayout = getView(R.id.empty_layout);
         mListview = getView(R.id.listview);
-         mNext = getView(R.id.next);
+        mNext = getView(R.id.next);
         mNext.setOnClickListener(onClick);
         mImgSupplementary = getView(R.id.img_supplementary);
         mTvSupplementary = getView(R.id.tv_supplementary);
@@ -89,10 +89,6 @@ public class SendHomeworkActivity extends FxActivity {
 //                Toast.makeText(SendHomeworkActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
 
 
     }
@@ -200,6 +196,8 @@ public class SendHomeworkActivity extends FxActivity {
 
                     dataLayout.setVisibility(View.VISIBLE);
                     emptyLayout.setVisibility(View.GONE);
+                } else {
+                    emptyLayout.setVisibility(View.VISIBLE);
                 }
 
 
@@ -227,9 +225,13 @@ public class SendHomeworkActivity extends FxActivity {
                 /* 解析Unit列表信息 */
                 List<BeUnit> temp = json.parsingListArray("data", new GsonType<List<BeUnit>>() {
                 });
-                unitInfoList.clear();
-                unitInfoList.addAll(temp);
-                apChooseUnit.notifyDataSetChanged();
+                if (temp != null) {
+                    unitInfoList.clear();
+                    unitInfoList.addAll(temp);
+                    apChooseUnit.notifyDataSetChanged();
+                } else {
+                    emptyLayout.setVisibility(View.VISIBLE);
+                }
 
             } else {
                 ToastUtil.showToast(context, json.getMsg());

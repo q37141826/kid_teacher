@@ -22,7 +22,7 @@ import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokStudent;
  */
 public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
 
-    private boolean isShowAccuracy = true; // 是否显示争取率与显示数字用同一个标志位
+    private boolean isShowAccuracy = true; // 是否显示正确率与显示数字用同一个标志位
 
     public ApHomeworkReport(Context context, List<BeHomewrokStudent> mDatas, boolean isShowAccuracy) {
         super(context, mDatas, R.layout.item_homeworkreport);
@@ -54,7 +54,8 @@ public class ApHomeworkReport extends CommonAdapter<BeHomewrokStudent> {
             tv_accuracy.setText("正确率：" + correctRateStr + " ");   // 正确率
             tv_accuracy.setVisibility(View.VISIBLE);
         } else {
-            tv_number.setVisibility(View.INVISIBLE);
+            tv_number.setVisibility(View.GONE);
+            tv_submittime.setVisibility(View.GONE);
         }
 
         tv_number.setText(String.valueOf(position + 1));

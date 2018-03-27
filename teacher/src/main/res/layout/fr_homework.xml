@@ -55,10 +55,9 @@
 
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_line"
+        android:background="@color/white_line"
         android:orientation="vertical">
 
         <com.fxtx.framework.widgets.refresh.MaterialRefreshLayout
@@ -66,7 +65,7 @@
             android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/white_line"
             app:isLoadMore="true"
             app:overlay="false"
             app:wave_color="@color/gray_line"

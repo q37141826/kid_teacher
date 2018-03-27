@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/gray_line"
+              android:background="@color/white_line"
               android:fitsSystemWindows="true"
               android:orientation="vertical">
 
@@ -12,52 +12,61 @@
         android:id="@+id/re_task_second"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginTop="@dimen/textpadding"
-
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/talk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_bg_white_classspace"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/ed_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@null"
                 android:cursorVisible="true"
                 android:gravity="top|left"
                 android:hint="聊聊今天发生了什么..."
                 android:minLines="4"
-                android:background="@null"
-                android:textCursorDrawable="@null"/>
+                android:textCursorDrawable="@null"
+                android:textSize="14sp"/>
         </LinearLayout>
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/textpadding"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="10dp">
 
         <GridView
             android:id="@+id/grildview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/talk"
+            android:background="@color/white"
             android:horizontalSpacing="5dp"
+            android:listSelector="#00000000"
             android:numColumns="3"
             android:overScrollMode="never"
-            android:verticalSpacing="5dp"
-            />
+            android:verticalSpacing="5dp"/>
+
     </RelativeLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="@dimen/textpadding"-->
+    <!--android:gravity="center_vertical">-->
+
+    <!--<GridView-->
+    <!--android:id="@+id/grildview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/white"-->
+    <!--android:horizontalSpacing="5dp"-->
+    <!--android:listSelector="#00000000"-->
+    <!--android:numColumns="3"-->
+    <!--android:overScrollMode="never"-->
+    <!--android:verticalSpacing="5dp"/>-->
+    <!--</RelativeLayout>-->
 
 
 </LinearLayout>

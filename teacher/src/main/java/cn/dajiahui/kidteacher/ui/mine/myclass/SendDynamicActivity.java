@@ -3,6 +3,7 @@ package cn.dajiahui.kidteacher.ui.mine.myclass;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.text.Editable;
@@ -52,6 +53,8 @@ public class SendDynamicActivity extends FxActivity {
     private String classId;
     private String mInpuText;
 
+    private List<File> upList = new ArrayList<>();//上传图片的集合
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +64,8 @@ public class SendDynamicActivity extends FxActivity {
             publishBtn = getView(com.fxtx.framework.R.id.tool_right);
             publishBtn.setText(R.string.mine_send);
             publishBtn.setVisibility(View.VISIBLE);
-            publishBtn.setTextColor(getResources().getColor(R.color.text_gray_df));
+//            publishBtn.setTextColor(getResources().getColor(R.color.white));
+            publishBtn.setTextColor(Color.argb(40, 255, 255, 255));   //文字透明度
             publishBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,8 +105,18 @@ public class SendDynamicActivity extends FxActivity {
         mInpuText = mInput.getText().toString();
 
         Logger.d("mPhotoUrl.toArray().toString():" + mPhotoUrl.toArray().toString());
-        httpSendDynamic();
 
+            /*图片和文字*/
+        if (upList.size() > 0) {
+            for (int i = 0; i < upList.size(); i++) {
+                httpUserIcon(upList.get(i));
+            }
+        } else {
+            if(mInpuText.length()>0){
+                /*单发文字*/
+                httpSendDynamic();
+            }
+        }
     }
 
     /*发布动态*/
@@ -131,12 +145,9 @@ public class SendDynamicActivity extends FxActivity {
             if (json.getstatus() == 0) {
                 setResult(1);
                 finishActivity();
-//                classSpacesList.clear();
-//                classSpacesList.add();
-
-//                apClassSpace.notifyDataSetChanged();
-
+                sendNum = 0;
             } else {
+                sendNum = 0;
                 ToastUtil.showToast(SendDynamicActivity.this, json.getMsg());
             }
 
@@ -156,7 +167,8 @@ public class SendDynamicActivity extends FxActivity {
                         Bitmap bmp = getImageThumbnail(path, 100, 100);
                         listphoto.add(new BeClassSpace(bmp));
                         File file = new File(path);
-                        httpUserIcon(file);
+                        upList.add(file);
+//                        httpUserIcon(file);
                     }
                     if (listphoto.size() >= Constant.Alum_send_dynamic) {
                         listphoto.remove(0);
@@ -200,9 +212,10 @@ public class SendDynamicActivity extends FxActivity {
 
     public void setPublishBtn() {
         if (havePhoto || haveText) {
-            publishBtn.setTextColor(getResources().getColor(R.color.text_deepgray)); // 置黑，可发布
+            publishBtn.setTextColor(getResources().getColor(R.color.white)); // 置白，可发布
         } else {
-            publishBtn.setTextColor(getResources().getColor(R.color.text_gray_df));  // 置灰，不能发布
+//            publishBtn.setTextColor(getResources().getColor(R.color.white));  // 置白，不能发布+30%透明度
+            publishBtn.setTextColor(Color.argb(40, 255, 255, 255));   //文字透明度
         }
     }
 
@@ -241,7 +254,8 @@ public class SendDynamicActivity extends FxActivity {
     }
 
 
-    /*修改头像*/
+    private int sendNum = 0;//发送服务器返回成功的标志
+
     public void httpUserIcon(File file) {
         showfxDialog(R.string.submiting);
         RequestUtill.getInstance().uploadUserIcon(context, new ResultCallback() {
@@ -256,14 +270,20 @@ public class SendDynamicActivity extends FxActivity {
             @Override
             public void onResponse(String response) {
                 Logger.d("图片上传成功！");
-                dismissfxDialog();
+//                dismissfxDialog();
 
                 HeadJson headJson = new HeadJson(response);
                 if (headJson.getstatus() == 0) {
                     String url = headJson.parsingObject(BeUpUserIcon.class).getUrl();
                     mPhotoUrl.add(url);
+                    sendNum++;
+                    if (sendNum == upList.size()) {
+                        httpSendDynamic();
+                        Logger.d("发布的成功的计数：" + sendNum);
+                    }
+
                 } else {
-                    ToastUtil.showToast(context, headJson.getMsg());
+//                    ToastUtil.showToast(context, headJson.getMsg());
                 }
             }
         }, file);

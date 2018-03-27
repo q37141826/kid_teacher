@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:text=""/>
+                android:text="qqqqq"/>
 
             <!-- 截止时间 -->
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_marginTop="5dp"
                 android:text=""
                 android:textSize="12dp"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
         </LinearLayout>
 
         <RelativeLayout

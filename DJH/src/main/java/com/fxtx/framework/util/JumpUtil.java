@@ -23,6 +23,7 @@ public class JumpUtil {
             intent.putExtras(extras);
         }
         context.startActivity(intent);
+
     }
 
     public void startBaseActivityForResult(Activity activity, Class classs,

@@ -654,7 +654,7 @@ public class RequestUtill {
 //        File file = ImageUtil.bitmapToFile(map, UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg", -1);
 
 //        File file =new File( UserController.getInstance().getUserImageFile(context) + System.currentTimeMillis() + ".jpg");
-//
+
         if (files == null) {
             ToastUtil.showToast(context, "文件错误无法提交");
             callback.onError(null, null);
