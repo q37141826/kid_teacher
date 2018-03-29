@@ -46,7 +46,7 @@ public class ApClassSpace extends CommonAdapter<BeClassSpaceList> {
         } else {
             cn.dajiahui.kidteacher.view.NoSlideGrildView grildview = viewHolder.getView(R.id.grildview);
 
-            ApClassSpacepicture apClassSpacepicture = new ApClassSpacepicture(this.context, item.getImg_url());
+            ApClassSpacepicture apClassSpacepicture = new ApClassSpacepicture(this.context, item.getThumbnail());
             grildview.setAdapter(apClassSpacepicture);
             /*图片item的点击事件*/
             grildview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,7 +54,6 @@ public class ApClassSpace extends CommonAdapter<BeClassSpaceList> {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Bundle bundle = new Bundle();
                     bundle.putString("IMG_URL", item.getImg_url().get(position));
-
                     int location[] = new int[2];
                     view.getLocationOnScreen(location);
                     bundle.putInt("locationX", location[0]);

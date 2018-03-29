@@ -20,6 +20,7 @@ import com.squareup.okhttp.Request;
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.util.SpUtil;
+import cn.dajiahui.kidteacher.util.TeacherTextWatcher;
 
 
 /**
@@ -61,23 +62,26 @@ public class ForgetPwdActivity extends FxActivity {
             }
         });
 
-//        edLoginPhone.addTextChangedListener(new TeacherTextWatcher() {
-//            @SuppressLint("ResourceAsColor")
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (isBtnCode) {
-//                    if (edLoginPhone.getText().toString().trim().length() == 11) {
-//                        btnCode.setBackgroundResource(R.color.white);
-//                        btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
-//                        btnCode.setClickable(true);
-//                    } else {
-//                        btnCode.setBackgroundResource(R.color.white);
-//                        btnCode.setTextColor(getResources().getColor(R.color.gray_666666));
-//                        btnCode.setClickable(false);
-//                    }
-//                }
-//            }
-//        });
+
+      edLoginPhone.addTextChangedListener(new TeacherTextWatcher() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isBtnCode) {
+                    if (edLoginPhone.getText().toString().trim().length() == 11) {
+                        btnCode.setBackgroundResource(R.color.white);
+                        btnCode.setTextColor(getResources().getColor(R.color.blue_1F6DED));
+                        btnCode.setClickable(true);
+                    } else {
+                        btnCode.setBackgroundResource(R.color.white);
+                        btnCode.setTextColor(getResources().getColor(R.color.gray_DCDBDB));
+                        btnCode.setClickable(false);
+                    }
+                }
+            }
+        });
+
+
 
 
     }

@@ -118,10 +118,10 @@ public class ShowPictureActivity extends BaseActivity {
         mImgShow.setTranslationX(mLeft);
         mImgShow.setTranslationY(mTop);
         mImgShow.animate().scaleX(1).scaleY(1).translationX(0).translationY(0).
-                setDuration(500).setInterpolator(new DecelerateInterpolator()).start();
+                setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(mBackground,"alpha",255,255);
         objectAnimator.setInterpolator(new DecelerateInterpolator());
-        objectAnimator.setDuration(500);
+        objectAnimator.setDuration(200);
         objectAnimator.start();
     }
 
@@ -130,10 +130,10 @@ public class ShowPictureActivity extends BaseActivity {
         mImgShow.setPivotY(0);
         mImgShow.animate().scaleX(mScaleX).scaleY(mScaleY).translationX(mLeft).translationY(mTop).
                 withEndAction(runnable).
-                setDuration(500).setInterpolator(new DecelerateInterpolator()).start();
+                setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(mBackground,"alpha",255,255);
         objectAnimator.setInterpolator(new DecelerateInterpolator());
-        objectAnimator.setDuration(500);
+        objectAnimator.setDuration(200);
         objectAnimator.start();
     }
 

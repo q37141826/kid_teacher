@@ -57,7 +57,7 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
     private ArrayList<Object> mDatalist;//所有数据的模型集合
     private String homeworkId;
     private String userId;
-
+    private int mItemPosition;
 
 
     @Override
@@ -65,6 +65,7 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
         super.onCreate(savedInstanceState);
         mViewpager.setNoScroll(false);//作业可以滑动
         Intent intent = getIntent();
+        mItemPosition = intent.getIntExtra("position", -1);
         homeworkId = getIntent().getExtras().getString("homeworkId");
         userId = getIntent().getExtras().getString("userId");
 
@@ -157,7 +158,10 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
                     HomeWorkAdapter homeWorkAdapter = new HomeWorkAdapter(getSupportFragmentManager(), mdata);
                     mViewpager.setAdapter(homeWorkAdapter);
                     mViewpager.setOnPageChangeListener(onPageChangeListener);
-
+                  /*跳转单个题型的题*/
+                    if (mItemPosition != -1) {
+                        mViewpager.setCurrentItem(mItemPosition);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -304,37 +308,42 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
                 case Constant.Judje:/*判断题*/
 
                     JudjeQuestionModle jude = (JudjeQuestionModle) mDatalist.get(position);
-                    JudgeFragment judgeFragment = (JudgeFragment) frMap.get(position);
-                    judgeFragment.submitHomework(jude);
-
+                    if (frMap.get(position) != null) {
+                        JudgeFragment judgeFragment = (JudgeFragment) frMap.get(position);
+                        judgeFragment.submitHomework(jude);
+                    }
                     break;
                 case Constant.Choice:/*选择题*/
 
                     ChoiceQuestionModle choice = (ChoiceQuestionModle) mDatalist.get(position);
-                    ChoiceFragment choiceFragment = (ChoiceFragment) frMap.get(position);
-                    choiceFragment.submitHomework(choice);
-
+                    if (frMap.get(position) != null) {
+                        ChoiceFragment choiceFragment = (ChoiceFragment) frMap.get(position);
+                        choiceFragment.submitHomework(choice);
+                    }
                     break;
                 case Constant.Sort:/*排序题*/
 
                     SortQuestionModle sort = (SortQuestionModle) mDatalist.get(position);
-                    SortFragment sortFragment = (SortFragment) frMap.get((currentposition));
-                    sortFragment.submitHomework(sort);
-
+                    if (frMap.get(position) != null) {
+                        SortFragment sortFragment = (SortFragment) frMap.get((currentposition));
+                        sortFragment.submitHomework(sort);
+                    }
                     break;
                 case Constant.Line:/*连线题*/
 
                     LineQuestionModle line = (LineQuestionModle) mDatalist.get(position);
-                    LineFragment linFragment = (LineFragment) frMap.get((currentposition));
-                    linFragment.submitHomework(line);
-
+                    if (frMap.get(position) != null) {
+                        LineFragment linFragment = (LineFragment) frMap.get((position));
+                        linFragment.submitHomework(line);
+                    }
                     break;
                 case Constant.Completion:/*填空*/
 
                     CompletionQuestionModle complete = (CompletionQuestionModle) mDatalist.get(position);
-                    CompletionFragment completionFragment = (CompletionFragment) frMap.get((currentposition));
-                    completionFragment.submitHomework(complete);
-
+                    if (frMap.get(position) != null) {
+                        CompletionFragment completionFragment = (CompletionFragment) frMap.get((position));
+                        completionFragment.submitHomework(complete);
+                    }
                     break;
 
                 default:

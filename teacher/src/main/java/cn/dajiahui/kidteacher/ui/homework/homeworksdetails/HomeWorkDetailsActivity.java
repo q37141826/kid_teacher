@@ -3,6 +3,7 @@ package cn.dajiahui.kidteacher.ui.homework.homeworksdetails;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RatingBar;
@@ -63,9 +64,7 @@ public class HomeWorkDetailsActivity extends FxActivity {
         mRbScore = getView(R.id.rb_score);
         mGrildview = getView(R.id.grildview);
         Button mBtnHomework = getView(R.id.btn_homework);
-
         apHomeWorkDetail = new ApHomeWorkDetail(HomeWorkDetailsActivity.this, mBeAnswerSheetList);
-
         mGrildview.setAdapter(apHomeWorkDetail);
 
         /*浏览作业*/
@@ -79,6 +78,22 @@ public class HomeWorkDetailsActivity extends FxActivity {
                 DjhJumpUtil.getInstance().startBaseActivity(HomeWorkDetailsActivity.this, DoHomeworkActivity.class, bundle, 0); // 跳转到个人作业详情页面
 
 
+            }
+        });
+
+    /*直接查看单个的做题情况*/
+        mGrildview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", position);
+                bundle.putString("userId", userId);
+                bundle.putString("homeworkId", homeworkId);
+                bundle.putString("nickname", nickname);
+                /*先跳转 在网络请请求获取数据*/
+                DjhJumpUtil.getInstance().startBaseActivity(HomeWorkDetailsActivity.this, DoHomeworkActivity.class, bundle, 0);
+                finishActivity();
             }
         });
     }

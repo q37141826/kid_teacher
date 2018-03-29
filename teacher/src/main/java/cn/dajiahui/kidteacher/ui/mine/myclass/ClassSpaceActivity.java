@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
@@ -91,7 +92,7 @@ public class ClassSpaceActivity extends FxActivity {
         @Override
         public void onResponse(String response) {
 
-//            Logger.d("班级空间 ：" + response);
+            Logger.d("班级空间 ：" + response);
 
             dismissfxDialog();
             HeadJson json = new HeadJson(response);
