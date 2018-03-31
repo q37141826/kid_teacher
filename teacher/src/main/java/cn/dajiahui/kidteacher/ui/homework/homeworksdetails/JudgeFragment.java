@@ -20,6 +20,8 @@ import cn.dajiahui.kidteacher.ui.homework.bean.JudjeQuestionModle;
 import cn.dajiahui.kidteacher.ui.homework.myinterface.CheckHomework;
 import cn.dajiahui.kidteacher.ui.homework.view.JudgeAnswerView;
 
+import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.DoHomeworkActivity.screenWidth;
+
 
 /**
  * 判断题
@@ -54,7 +56,7 @@ public class JudgeFragment extends BaseHomeworkFragment implements CheckHomework
         mAnswerViewList.clear();
         for (int i = 0; i < size; i++) {
             JudgeAnswerView judgeImagview = new JudgeAnswerView(getActivity(), inbasebean, i, submit, mAnswerViewList);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(200, 200);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
             if (i == 0) {
                 lp.addRule(RelativeLayout.LEFT_OF, R.id.centerline);
                 lp.rightMargin = 100;

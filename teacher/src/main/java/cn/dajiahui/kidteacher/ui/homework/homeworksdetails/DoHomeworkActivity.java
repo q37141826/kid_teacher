@@ -16,6 +16,7 @@ import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.fxtx.framework.ui.FxActivity;
+import com.fxtx.framework.util.BaseUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.Request;
@@ -58,6 +59,7 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
     private String homeworkId;
     private String userId;
     private int mItemPosition;
+    public static int screenWidth;//屏幕宽度
 
 
     @Override
@@ -87,6 +89,8 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
     /*初始化*/
     private void initialize() {
         mViewpager = getView(R.id.viewpager);
+        //获取屏幕宽度
+        screenWidth = BaseUtil.getWidthPixels(this);
     }
 
     @Override

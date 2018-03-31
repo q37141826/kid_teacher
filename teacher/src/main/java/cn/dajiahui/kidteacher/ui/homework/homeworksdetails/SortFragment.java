@@ -27,6 +27,7 @@ import cn.dajiahui.kidteacher.ui.homework.view.MoveImagview;
 import cn.dajiahui.kidteacher.view.FixedImagview;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.DoHomeworkActivity.screenWidth;
 
 
 /**
@@ -38,14 +39,20 @@ public class SortFragment extends BaseHomeworkFragment implements
         View.OnClickListener, CheckHomework, MoveLocation {
 
     private SortQuestionModle inbasebean;
-    private RelativeLayout relaroot;
+    private RelativeLayout relaroot, answerroot;//答案父布局
     private SubmitSortFragment submit;
+    private TextView tv_sort, tv_schedule;
+    private ImageView sort_img_play;//播放器按钮
+    private String media;
+    private List<String> mRightContentList;
+    private List<String> mMineContentList;
+    private String title;
 
     int mLeftTop = 0;
     int mTop = 0;
     int mRightTop = 0;
     /*正确答案视图*/
-    private List<MoveImagview> showRightViews = new ArrayList<>();
+//    private List<MoveImagview> showRightViews = new ArrayList<>();
     // 左邊視圖
     private List<MoveImagview> leftViews = new ArrayList<>();
     // 右边视图
@@ -67,10 +74,7 @@ public class SortFragment extends BaseHomeworkFragment implements
 
     private Map<Integer, BeLocation> sortMineAnswerMap = new HashMap<>();//我的答案（ isanswer=1）
     private Map<Integer, BeLocation> sortRightAnswerMap = new HashMap<>();//正确答案（ isanswer=1）
-    private TextView mRight;/*正确答案*/
-    private TextView mLeft;/*我的答案*/
-    private TextView tv_sort, tv_schedule;
-    private ImageView sort_img_play;//播放器按钮
+
 
     public static boolean isLinecheck = false;//江湖救急  后续更改
     private Map<Integer, BeLocation> mMineAnswerMap = new HashMap<>();//（isanswer=0）
@@ -92,7 +96,7 @@ public class SortFragment extends BaseHomeworkFragment implements
                         BeLocation beLocation = new BeLocation(pLeftX, pLeftY, leftViews.get(0).getRight(), leftViews.get(i).getBottom(), leftViews.get(0).getWidth(), leftViews.get(0).getHeight());
                         sortRightAnswerMap.put((i + 1), beLocation);
                         pointLeftList.add(beLocation);
-                        pLeftY = (pLeftY += 300);//左边所有点的y坐标
+                        pLeftY = (pLeftY += screenWidth / 4);//左边所有点的y坐标
                     }
                     Message msg1 = Message.obtain();
                     msg1.what = PREPARERIGHT;
@@ -109,7 +113,7 @@ public class SortFragment extends BaseHomeworkFragment implements
                         BeLocation beLocation = new BeLocation(pRightX, pRightY, rightViews.get(0).getRight(), rightViews.get(i).getBottom(), rightViews.get(0).getWidth(), rightViews.get(0).getHeight());
                         sortMineAnswerMap.put((i + 1), beLocation);
                         pointRightList.add(beLocation);
-                        pRightY = (pRightY += 300);//左边所有点的y坐标
+                        pRightY = (pRightY += screenWidth / 4);//左边所有点的y坐标
                         inbasebean.getInitSortMyanswerList().add("㊒");
                     }
                     Message msg2 = Message.obtain();
@@ -144,10 +148,6 @@ public class SortFragment extends BaseHomeworkFragment implements
             }
         }
     };
-    private String media;
-    private List<String> mRightContentList;
-    private List<String> mMineContentList;
-    private String title;
 
 
     @Override
@@ -162,31 +162,13 @@ public class SortFragment extends BaseHomeworkFragment implements
         tv_sort.setText(title);
         tv_schedule.setText(bundle.getString("currntQuestion"));
         if (inbasebean.getIs_answered().equals("1")) {
-            mRight.setText("正确答案");
-            mLeft.setText("我的答案");
+            showAnswer();
             getAnswerList();
         }
         /*添加右侧视图*/
         addGroupImage(inbasebean.getOptions().size(), relaroot);
        /*添加左侧图片*/
         addGroupMoviewImage(inbasebean.getOptions().size(), relaroot);
-
-
-//        /*添加正确答案  网络请求已经回答过题就添加正确答案视图*/
-//        if (inbasebean.getIs_answer().equals("1")) {
-//            addGroupRightImage(inbasebean.getOptions().size(), relaroot);
-//        }
-
-//        /*练习模块添加正确答案view  要隐藏*/
-//        if (DoHomeworkActivity.sourceFlag.equals("Practice")) {
-//            addGroupRightImage(inbasebean.getOptions().size(), relaroot);
-//            if (showRightViews.size() == inbasebean.getOptions().size()) {
-//            /*隐藏左右view*/
-//                for (int i = 0; i < showRightViews.size(); i++) {
-//                    showRightViews.get(i).setVisibility(View.INVISIBLE);
-//                }
-//            }
-//        }
 
 
         /*监听 relaroot 上的子视图绘制完成*/
@@ -231,11 +213,11 @@ public class SortFragment extends BaseHomeworkFragment implements
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
             lp.topMargin = mRightTop;
-            mRightTop += 300;
-            lp.rightMargin = 100;
+            mRightTop += screenWidth / 4;
+            lp.rightMargin = screenWidth / 6;
             fixedImagview.setLayoutParams(lp);
 
-            RelativeLayout.LayoutParams paramsT = new RelativeLayout.LayoutParams(150, 150);
+            RelativeLayout.LayoutParams paramsT = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             paramsT.addRule(RelativeLayout.CENTER_IN_PARENT);
             ImageView imageViewT = new ImageView(getActivity());
             imageViewT.setLayoutParams(paramsT);
@@ -261,35 +243,16 @@ public class SortFragment extends BaseHomeworkFragment implements
 
     private void addGroupMoviewImage(int size, RelativeLayout lin) {
 
-
         for (int i = 0; i < size; i++) {
             MoveImagview mMoveView = new MoveImagview(getActivity(), this, i, mRightContentList, inbasebean);
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
             lp.topMargin = mLeftTop;
-            mLeftTop += 300;
-            lp.leftMargin = 100;
+            mLeftTop += screenWidth / 4;
+            lp.leftMargin = screenWidth / 6;
             leftViews.add(mMoveView);
             mMoveView.setLayoutParams(lp);
             lin.addView(mMoveView); //动态添加图片
-        }
-    }
-
-    /*添加正确答案*/
-    private void addGroupRightImage(int size, RelativeLayout lin) {
-
-        for (int i = 0; i < size; i++) {
-            MoveImagview mShowRightView = new MoveImagview(getActivity(), i, inbasebean);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-            lp.topMargin = mTop;
-            mTop += 300;
-            lp.leftMargin = 100;
-
-            mShowRightView.setLayoutParams(lp);
-            showRightViews.add(mShowRightView);
-            lin.addView(mShowRightView); //动态添加图片
-
         }
     }
 
@@ -381,15 +344,17 @@ public class SortFragment extends BaseHomeworkFragment implements
     /*初始化*/
     private void initialize() {
         sort_img_play = getView(R.id.sort_img_play);
-        mRight = getView(R.id.mRight);
-        mLeft = getView(R.id.mLeft);
+//        mRight = getView(R.id.mRight);
+//        mLeft = getView(R.id.mLeft);
         tv_schedule = getView(R.id.tv_schedule);
         tv_sort = getView(R.id.tv_sort);
         relaroot = getView(R.id.relaroot);
+        answerroot = getView(R.id.answerroot);
         sort_img_play.setOnClickListener(this);
-        mLeft.setOnClickListener(this);
-        mRight.setOnClickListener(this);
+//        mLeft.setOnClickListener(this);
+//        mRight.setOnClickListener(this);
         sort_img_play.setBackground(animationDrawable);
+
 
     }
 
@@ -400,23 +365,23 @@ public class SortFragment extends BaseHomeworkFragment implements
 
         if (inbasebean != null) {
             /*条件换成后台的是否作答标记*/
-                if (inbasebean.getIs_answered().equals("0")) {
+            if (inbasebean.getIs_answered().equals("0")) {
 
                  /*获取复原的数据集合*/
-                    Map<Integer, BeLocation> sortAnswerMap = inbasebean.getSortAnswerMap();
-                    if (sortAnswerMap.size() > 0) {
+                Map<Integer, BeLocation> sortAnswerMap = inbasebean.getSortAnswerMap();
+                if (sortAnswerMap.size() > 0) {
                         /*自己答题 非网络请求*/
-                        for (int a = 0; a < leftViews.size(); a++) {
-                            BeLocation beLocation = sortAnswerMap.get(a);
-                            MoveImagview moveImagview = leftViews.get(a);
-                            moveImagview.refreshLocation(beLocation);
-                            mMineAnswerMap.put(a, beLocation);
+                    for (int a = 0; a < leftViews.size(); a++) {
+                        BeLocation beLocation = sortAnswerMap.get(a);
+                        MoveImagview moveImagview = leftViews.get(a);
+                        moveImagview.refreshLocation(beLocation);
+                        mMineAnswerMap.put(a, beLocation);
 
-                        }
-                        inbasebean.setAnswerflag("true");//答题标志
-                        submit.submitSoreFragment(inbasebean);//告诉活动每次滑动的数据
                     }
+                    inbasebean.setAnswerflag("true");//答题标志
+                    submit.submitSoreFragment(inbasebean);//告诉活动每次滑动的数据
                 }
+            }
         }
     }
 
@@ -470,6 +435,26 @@ public class SortFragment extends BaseHomeworkFragment implements
         isLinecheck = false;
     }
 
+    /*显示正确，我的答案文案*/
+    private void showAnswer() {
+        TextView mLeft = new TextView(getActivity());
+        mLeft.setText("正确答案");
+        mLeft.setTextColor(getResources().getColor(R.color.gray_9f938f));
+        RelativeLayout.LayoutParams lpLeft = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        lpLeft.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        lpLeft.leftMargin = screenWidth / 5;
+        answerroot.addView(mLeft);
+        mLeft.setLayoutParams(lpLeft);
+
+        TextView mRight = new TextView(getActivity());
+        mRight.setText("我的答案");
+        mRight.setTextColor(getResources().getColor(R.color.gray_9f938f));
+        RelativeLayout.LayoutParams lpRight = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        lpRight.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        lpRight.rightMargin = screenWidth / 5;
+        answerroot.addView(mRight);
+        mRight.setLayoutParams(lpRight);
+    }
 
     private void getAnswerList() {
         /*我的答案 start*/

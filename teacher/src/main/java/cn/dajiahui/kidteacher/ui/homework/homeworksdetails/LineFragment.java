@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,6 +28,9 @@ import cn.dajiahui.kidteacher.ui.homework.myinterface.CheckHomework;
 import cn.dajiahui.kidteacher.ui.homework.view.DrawView;
 import cn.dajiahui.kidteacher.ui.homework.view.LineImagePointView;
 import cn.dajiahui.kidteacher.ui.homework.view.Sublineinfo;
+
+import static cn.dajiahui.kidteacher.controller.Constant.lineView_margin;
+import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.DoHomeworkActivity.screenWidth;
 
 
 /**
@@ -55,7 +59,6 @@ public class LineFragment extends BaseHomeworkFragment implements
     private int RIGHT = 2;
     private int PREPARERIGHT = 3;//准备数据
     private int PREPMINEARERIGHT = 4;//准备数据
-//    private List<DrawPath> drawPathList = new ArrayList();//保存绘制路径的集合
 
     private Map<String, Point> ponitViewXY = new HashMap();//通过val获取point点的map（提供显示正确答案 和 自己的答案 用）
     private boolean calculation = false;//false 监听  测量连线题图片的左右第一个 坐标
@@ -77,6 +80,7 @@ public class LineFragment extends BaseHomeworkFragment implements
 
     private Map<String, LineImagePointView> showT_RMap = new HashMap<>();//用于显示判断划线的颜色
     private String title;
+    private LinearLayout mLinroot;
 
     @Override
     protected View initinitLayout(LayoutInflater inflater) {
@@ -102,16 +106,16 @@ public class LineFragment extends BaseHomeworkFragment implements
             if (direction == Dir.left) {
                 lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
                 lp.topMargin = mLeftTop;
-                mLeftTop += 300;
-                lp.leftMargin = 50;
+                mLeftTop += screenWidth / 4;
+                lp.leftMargin = lineView_margin;
                 leftViews.add(mView);
                 showT_RMap.put("" + (i + 1), mView);
 
             } else {
                 lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
                 lp.topMargin = mRightTop;
-                lp.rightMargin = 50;
-                mRightTop += 300;
+                lp.rightMargin = lineView_margin;
+                mRightTop += screenWidth / 4;
                 rightViews.add(mView);
                 showT_RMap.put("" + (i + 1 + size), mView);
             }
@@ -137,7 +141,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                 int pLeftY = pLeft.getY();
                 for (int i = 0; i < leftViews.size(); i++) {
                     ponitViewXY.put("" + (i + 1), new Point(pLeftX, pLeftY, "" + (i + 1)));
-                    pLeftY = pLeftY += 300;//左边所有点的y坐标
+                    pLeftY = pLeftY += screenWidth / 4;//左边所有点的y坐标
 
                 }
 
@@ -150,7 +154,7 @@ public class LineFragment extends BaseHomeworkFragment implements
 
                 for (int i = 0; i < rightViews.size(); i++) {
                     ponitViewXY.put("" + ((i + 1) + leftViews.size()), new Point(pRightX, pRightY, "" + ((i + 1) + leftViews.size())));
-                    pRightY = pRightY += 300;//左边所有点的y坐标
+                    pRightY = pRightY += screenWidth / 4;//左边所有点的y坐标
                     if (ponitViewXY.size() == (leftViews.size() * 2)) {
 
                         handler.sendEmptyMessage(PREPARERIGHT);
@@ -184,7 +188,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                     if (inbasebean.getIs_answered().equals("1")) {
                         mLeft.setText("正确答案");
 
-                            /*获取json解析的我的答案*///&& inbasebean.getMy_answer().length() > 0 && inbasebean.getMy_answer() != null
+                            /*获取json解析的我的答案*/
                         if (ponitViewXY.size() == (leftViews.size() * 2)) { // 要判断json传过来的数据是“”的情况
                             /*获取我的答案的 坐标点*/
                             for (int m = 0; m < mLeftAnswerList.size(); m++) {
@@ -196,6 +200,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                             /*显示正确答案*/
                             if (inbasebean.getIs_answered().equals("1")) {//DoHomeworkActivity.sourceFlag.equals("HomeWork") &&
                                 if (!mOnclickAnswer) {
+                                    mLinroot.setVisibility(View.VISIBLE);
                                     showRightAnswer();
                                 }
                             }
@@ -269,6 +274,7 @@ public class LineFragment extends BaseHomeworkFragment implements
         mRight.setOnClickListener(this);
         img_play.setOnClickListener(this);
         img_play.setBackground(animationDrawable);
+        mLinroot = getView(R.id.linroot);
     }
 
     /*删除线作业模块*/
@@ -496,11 +502,8 @@ public class LineFragment extends BaseHomeworkFragment implements
             /*保证我的答案的点的集合有值*/
             if (mMineRPonitList.size() > 0) {
 
-                mRight.setBackgroundResource(R.drawable.line_answer_bg_yellow_fbf12);
                 mLeft.setTextColor(getResources().getColor(R.color.black));
-
                 mRight.setTextColor(getResources().getColor(R.color.yellow_FEBF12));
-                mLeft.setBackgroundResource(R.drawable.line_answer_bg_gray_97938f);
 
                 inbasebean.getDrawPathList().clear();
                 /*划线父布局清空view*/
@@ -522,7 +525,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                             drawView = new DrawView(getActivity(), getResources().getColor(R.color.green_9DEAA6));
 
                              /*添加左边view的遮罩*/
-                            RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(200, 200);
+                            RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
                             paramsL.addRule(RelativeLayout.CENTER_IN_PARENT);
                             ImageView imageViewL = new ImageView(getActivity());
                             imageViewL.setLayoutParams(paramsL);
@@ -534,7 +537,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                             showT_RMap.get(mMineRPonitList.get(n).getVal()).pointview.refreshPonitColor();
                             mRemoveLeftList.add(showT_RMap.get(mMineRPonitList.get(n).getVal()));
                             /*添加右边view的遮罩*/
-                            RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(200, 200);
+                            RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
                             paramsR.addRule(RelativeLayout.CENTER_IN_PARENT);
                             ImageView imageViewR = new ImageView(getActivity());
                             imageViewR.setLayoutParams(paramsR);
@@ -549,20 +552,20 @@ public class LineFragment extends BaseHomeworkFragment implements
                             drawView = new DrawView(getActivity(), getResources().getColor(R.color.red));
 
                             /*添加遮罩*/
-                            RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(200, 200);
+                            RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
                             paramsL.addRule(RelativeLayout.CENTER_IN_PARENT);
                             ImageView imageViewL = new ImageView(getActivity());
                             imageViewL.setLayoutParams(paramsL);
                             imageViewL.setBackgroundResource(R.drawable.answer_false_bg);
                             mMaskRightListR.add(imageViewL);
                             showT_RMap.get(mMineRPonitList.get(n).getVal()).mContentView.addView(imageViewL);
-                                /*改变小点颜色 红色*/
+                            /*改变小点颜色 红色*/
                             showT_RMap.get(mMineRPonitList.get(n).getVal()).pointview.setcolor(getResources().getColor(R.color.red));
                             showT_RMap.get(mMineRPonitList.get(n).getVal()).pointview.refreshPonitColor();
                             mRemoveLeftList.add(showT_RMap.get(mMineRPonitList.get(n).getVal()));
 
                            /*添加右边view的遮罩*/
-                            RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(200, 200);
+                            RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
                             paramsR.addRule(RelativeLayout.CENTER_IN_PARENT);
                             ImageView imageViewR = new ImageView(getActivity());
                             imageViewR.setLayoutParams(paramsR);
@@ -600,10 +603,10 @@ public class LineFragment extends BaseHomeworkFragment implements
     /*显示正确答案*/
     private void showRightAnswer() {
         mOnclickAnswer = !mOnclickAnswer;
-        mRight.setBackgroundResource(R.drawable.line_answer_bg_gray_97938f);
+
         mRight.setTextColor(getResources().getColor(R.color.black));
 
-        mLeft.setBackgroundResource(R.drawable.line_answer_bg_yellow_fbf12);
+
         mLeft.setTextColor(getResources().getColor(R.color.yellow_FEBF12));
         inbasebean.getDrawPathList().clear();
         /*划线父布局清空view*/
@@ -624,7 +627,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                 leftViews.get(n).pointview.refreshPonitColor();
                 rightViews.get(n).pointview.refreshPonitColor();
 
-                RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(200, 200);
+                RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
                 paramsL.addRule(RelativeLayout.CENTER_IN_PARENT);
                 ImageView imageViewL = new ImageView(getActivity());
                 imageViewL.setLayoutParams(paramsL);
@@ -632,7 +635,7 @@ public class LineFragment extends BaseHomeworkFragment implements
                 mMaskRightListL.add(imageViewL);
                 leftViews.get(n).mContentView.addView(imageViewL);
 
-                RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(200, 200);
+                RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
                 paramsR.addRule(RelativeLayout.CENTER_IN_PARENT);
                 ImageView imageViewR = new ImageView(getActivity());
                 imageViewR.setLayoutParams(paramsR);
@@ -645,7 +648,6 @@ public class LineFragment extends BaseHomeworkFragment implements
 
 
         if (inbasebean.getIs_answered().equals("0")) {
-//            inbasebean.setDrawPathList(drawPathList);//
             submit.submitLineFragment(inbasebean);//告诉活动每次连线的数据
         }
 

@@ -21,6 +21,7 @@ import cn.dajiahui.kidteacher.ui.homework.bean.BeLocation;
 import cn.dajiahui.kidteacher.ui.homework.bean.SortQuestionModle;
 import cn.dajiahui.kidteacher.ui.homework.myinterface.MoveLocation;
 
+import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.DoHomeworkActivity.screenWidth;
 import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.SortFragment.isLinecheck;
 
 
@@ -146,7 +147,7 @@ public class MoveImagview extends RelativeLayout implements View.OnTouchListener
     /*添加视图*/
     private void addview() {
 
-        LayoutParams params = new LayoutParams(150, 150);
+        LayoutParams params = new LayoutParams(screenWidth / 5, screenWidth / 5);
         String content = inbasebean.getOptions().get(position).getContent();
 
         if (content.startsWith("h", 0) && content.startsWith("t", 1)) {
@@ -168,7 +169,7 @@ public class MoveImagview extends RelativeLayout implements View.OnTouchListener
                         .into(imageView);
 
                 /*正确答案 添加遮罩*/
-                LayoutParams paramsT = new LayoutParams(150, 150);
+                LayoutParams paramsT = new LayoutParams(screenWidth / 5, screenWidth / 5);
                 paramsT.addRule(RelativeLayout.CENTER_IN_PARENT);
                 ImageView imageViewT = new ImageView(context);
                 imageViewT.setLayoutParams(paramsT);

@@ -14,6 +14,8 @@ import java.util.Map;
 import cn.dajiahui.kidteacher.ui.homework.adapter.Dir;
 import cn.dajiahui.kidteacher.ui.homework.bean.DrawPath;
 
+import static cn.dajiahui.kidteacher.controller.Constant.lineWidth;
+
 
 /**
  * Created by lenovo on 2018/1/13.
@@ -40,7 +42,7 @@ public class DrawView extends View {
         super(context);
         this.context = context;
         this.mPaint = new Paint();
-
+        mPaint.setStrokeWidth(lineWidth);
     }
 
     /*翻页后回来后要绘制的坐标点*/
@@ -84,7 +86,7 @@ public class DrawView extends View {
     protected void onDraw(Canvas canvas) {
         mPaint.setAntiAlias(true);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(10);
+        mPaint.setStrokeWidth(lineWidth);
 
         if (path != null && mPaint != null) {
 //            mPaint.setColor(getResources().getColor(R.color.black));

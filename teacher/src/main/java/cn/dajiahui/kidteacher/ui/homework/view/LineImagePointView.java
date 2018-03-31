@@ -22,6 +22,10 @@ import cn.dajiahui.kidteacher.ui.homework.bean.BeLineRight;
 import cn.dajiahui.kidteacher.ui.homework.bean.LineQuestionModle;
 import cn.dajiahui.kidteacher.ui.homework.bean.Point;
 
+import static cn.dajiahui.kidteacher.controller.Constant.pointViewDiameter;
+import static cn.dajiahui.kidteacher.controller.Constant.pointViewDiameter_margin;
+import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.DoHomeworkActivity.screenWidth;
+
 
 /**
  * Created by lenovo on 2018/1/12.
@@ -75,11 +79,11 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
     public Point getPoint() {
         Point point = new Point();
         if (direction == Dir.left) {
-            point.setX(this.getLeft() + pointview.getLeft() + 15); // 小圆点直径的一半
+            point.setX(this.getLeft() + pointview.getLeft() + pointViewDiameter/2); // 小圆点直径的一半
         } else {
-            point.setX(getLeft() + 15);
+            point.setX(getLeft() + pointViewDiameter/2);
         }
-        point.setY(this.getTop() + pointview.getTop() + 15);
+        point.setY(this.getTop() + pointview.getTop() + pointViewDiameter/2);
         return point;
     }
 
@@ -97,7 +101,7 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
             this.setOnClickListener(this);
         }
         /*imageview和textview的大小*/
-        LayoutParams lp = new LayoutParams(200, 200);
+        LayoutParams lp = new LayoutParams(screenWidth/5, screenWidth/5);
 
         linRoot = new LinearLayout(context);
 
@@ -210,8 +214,8 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
     @SuppressLint("ResourceType")
     public void addPointRight() {
         pointview = new CricleTextView(context);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(30, 30);
-        lp.rightMargin = 15;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(pointViewDiameter, pointViewDiameter);
+        lp.rightMargin = pointViewDiameter_margin;
 //        pointview.setId(R.string.show_pointright);
         //设置居中显示：
         lp.gravity = Gravity.CENTER;
@@ -225,8 +229,8 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
     public void addPointLeft() {
 
         pointview = new CricleTextView(context);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(30, 30);
-        lp.leftMargin = 15;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(pointViewDiameter, pointViewDiameter);
+        lp.leftMargin = pointViewDiameter_margin;
         //设置居中显示：
         lp.gravity = Gravity.CENTER;
         pointview.setLayoutParams(lp);
