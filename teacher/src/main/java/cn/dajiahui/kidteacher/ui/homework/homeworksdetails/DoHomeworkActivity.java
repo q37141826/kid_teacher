@@ -44,10 +44,7 @@ import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 /*
 * 查看作业具体信息
 * */
-public class DoHomeworkActivity extends FxActivity implements JudgeFragment.SubmitJudgeFragment,
-        ChoiceFragment.SubmitChoiseFragment,
-        JudgeFragment.GetMediaPlayer, SortFragment.SubmitSortFragment, LineFragment.SubmitLineFragment,
-        CompletionFragment.SubmitCompletionFragment {
+public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.SubmitJudgeFragment,ChoiceFragment.SubmitChoiseFragment,JudgeFragment.GetMediaPlayer, SortFragment.SubmitSortFragment, LineFragment.SubmitLineFragment,CompletionFragment.SubmitCompletionFragment
 
     private cn.dajiahui.kidteacher.ui.homework.view.NoScrollViewPager mViewpager;
     private String subjectype = "";//当前题型
@@ -113,7 +110,7 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
 
         @Override
         public void onResponse(String response) {
-            Logger.d("作业返回json：" + response);
+//            Logger.d("作业返回json：" + response);
             dismissfxDialog();
             HeadJson headJson = new HeadJson(response);
             if (headJson.getstatus() == 0) {
@@ -128,27 +125,27 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
 
                         switch (mdata.get(i).getQuestion_cate_id()) {
                             case Constant.Judje:
-//                                Logger.d("判断：" + jsonArray.get(i).toString());
+                                Logger.d("判断：" + jsonArray.get(i).toString());
                                 JudjeQuestionModle judjeQuestionModle = new Gson().fromJson(jsonArray.get(i).toString(), JudjeQuestionModle.class);
                                 mDatalist.add(judjeQuestionModle);
                                 break;
                             case Constant.Choice:
                                 ChoiceQuestionModle choiceQuestionModle = new Gson().fromJson(jsonArray.get(i).toString(), ChoiceQuestionModle.class);
                                 mDatalist.add(choiceQuestionModle);
-//                                Logger.d("选择：" + jsonArray.get(i).toString());
+                                Logger.d("选择：" + jsonArray.get(i).toString());
                                 break;
                             case Constant.Sort:
-//                                Logger.d("排序：" + jsonArray.get(i).toString());
+                                Logger.d("排序：" + jsonArray.get(i).toString());
                                 SortQuestionModle sortQuestionModle = new Gson().fromJson(jsonArray.get(i).toString(), SortQuestionModle.class);
                                 mDatalist.add(sortQuestionModle);
                                 break;
                             case Constant.Line:
-//                                Logger.d("连线：" + jsonArray.get(i).toString());
+                                Logger.d("连线：" + jsonArray.get(i).toString());
                                 LineQuestionModle lineQuestionModle = new Gson().fromJson(jsonArray.get(i).toString(), LineQuestionModle.class);
                                 mDatalist.add(lineQuestionModle);
                                 break;
                             case Constant.Completion:
-//                                Logger.d("填空：" + jsonArray.get(i).toString());
+                                Logger.d("填空：" + jsonArray.get(i).toString());
                                 CompletionQuestionModle completionQuestionModle = new Gson().fromJson(jsonArray.get(i).toString(), CompletionQuestionModle.class);
                                 mDatalist.add(completionQuestionModle);
                                 break;
@@ -158,10 +155,10 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
                         }
                     }
                     Logger.d("mDatalist.size()" + mDatalist.size());
-//                    /*作业适配器*/
+                  /*作业适配器*/
                     HomeWorkAdapter homeWorkAdapter = new HomeWorkAdapter(getSupportFragmentManager(), mdata);
                     mViewpager.setAdapter(homeWorkAdapter);
-                    mViewpager.setOnPageChangeListener(onPageChangeListener);
+//                    mViewpager.setOnPageChangeListener(onPageChangeListener);
                   /*跳转单个题型的题*/
                     if (mItemPosition != -1) {
                         mViewpager.setCurrentItem(mItemPosition);
@@ -285,119 +282,119 @@ public class DoHomeworkActivity extends FxActivity implements JudgeFragment.Subm
 
     }
 
-    @Override
-    public void getMediaPlayer(MediaPlayer mediaPlayer) {
-        this.mediaPlayer = mediaPlayer;
-    }
-
-    /*viewpager滑动监听*/
-    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            currentposition = position;//当前题的页数
-
-
-            /*滑动停止音频*/
-            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                mediaPlayer.stop();
-            }
-
-            QuestionModle questionModle = (QuestionModle) mDatalist.get(position);
-
-            switch (questionModle.getQuestion_cate_id()) {
-                case Constant.Judje:/*判断题*/
-
-                    JudjeQuestionModle jude = (JudjeQuestionModle) mDatalist.get(position);
-                    if (frMap.get(position) != null) {
-                        JudgeFragment judgeFragment = (JudgeFragment) frMap.get(position);
-                        judgeFragment.submitHomework(jude);
-                    }
-                    break;
-                case Constant.Choice:/*选择题*/
-
-                    ChoiceQuestionModle choice = (ChoiceQuestionModle) mDatalist.get(position);
-                    if (frMap.get(position) != null) {
-                        ChoiceFragment choiceFragment = (ChoiceFragment) frMap.get(position);
-                        choiceFragment.submitHomework(choice);
-                    }
-                    break;
-                case Constant.Sort:/*排序题*/
-
-                    SortQuestionModle sort = (SortQuestionModle) mDatalist.get(position);
-                    if (frMap.get(position) != null) {
-                        SortFragment sortFragment = (SortFragment) frMap.get((currentposition));
-                        sortFragment.submitHomework(sort);
-                    }
-                    break;
-                case Constant.Line:/*连线题*/
-
-                    LineQuestionModle line = (LineQuestionModle) mDatalist.get(position);
-                    if (frMap.get(position) != null) {
-                        LineFragment linFragment = (LineFragment) frMap.get((position));
-                        linFragment.submitHomework(line);
-                    }
-                    break;
-                case Constant.Completion:/*填空*/
-
-                    CompletionQuestionModle complete = (CompletionQuestionModle) mDatalist.get(position);
-                    if (frMap.get(position) != null) {
-                        CompletionFragment completionFragment = (CompletionFragment) frMap.get((position));
-                        completionFragment.submitHomework(complete);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
-
-    /*判断题回调接口*/
-    @Override
-    public void submitJudgeFragment(JudjeQuestionModle questionModle) {
-//        int eachposition = questionModle.getEachposition();
-        mDatalist.set(currentposition, questionModle);
-
-    }
-
-    /*选择题回调接口*/
-    @Override
-    public void submitChoiceFragment(ChoiceQuestionModle questionModle) {
-
-        mDatalist.set(currentposition, questionModle);
-    }
-
-
-    /*排序题回调接口*/
-    @Override
-    public void submitSoreFragment(SortQuestionModle questionModle) {
-
-        mDatalist.set(currentposition, questionModle);
-    }
-
-    /*连线题回调接口*/
-    @Override
-    public void submitLineFragment(LineQuestionModle questionModle) {
-
-        mDatalist.set(currentposition, questionModle);
-    }
-
-    /*填空题回掉接口*/
-    @Override
-    public void submitCompletionFragment(CompletionQuestionModle questionModle) {
-
-        mDatalist.set(currentposition, questionModle);
-    }
+//    @Override
+//    public void getMediaPlayer(MediaPlayer mediaPlayer) {
+//        this.mediaPlayer = mediaPlayer;
+//    }
+//
+//    /*viewpager滑动监听*/
+//    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+//        @Override
+//        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//        }
+//
+//        @Override
+//        public void onPageSelected(int position) {
+//            currentposition = position;//当前题的页数
+//
+//
+//            /*滑动停止音频*/
+//            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+//                mediaPlayer.stop();
+//            }
+//
+//            QuestionModle questionModle = (QuestionModle) mDatalist.get(position);
+//
+//            switch (questionModle.getQuestion_cate_id()) {
+//                case Constant.Judje:/*判断题*/
+//
+////                    JudjeQuestionModle jude = (JudjeQuestionModle) mDatalist.get(position);
+////                    if (frMap.get(position) != null) {
+////                        JudgeFragment judgeFragment = (JudgeFragment) frMap.get(position);
+////                        judgeFragment.submitHomework(jude);
+////                    }
+//                    break;
+//                case Constant.Choice:/*选择题*/
+//
+////                    ChoiceQuestionModle choice = (ChoiceQuestionModle) mDatalist.get(position);
+////                    if (frMap.get(position) != null) {
+////                        ChoiceFragment choiceFragment = (ChoiceFragment) frMap.get(position);
+////                        choiceFragment.submitHomework(choice);
+////                    }
+//                    break;
+//                case Constant.Sort:/*排序题*/
+//
+//                    SortQuestionModle sort = (SortQuestionModle) mDatalist.get(position);
+////                    if (frMap.get(position) != null) {
+////                        SortFragment sortFragment = (SortFragment) frMap.get((currentposition));
+////                        sortFragment.submitHomework(sort);
+////                    }
+//                    break;
+//                case Constant.Line:/*连线题*/
+//
+////                    LineQuestionModle line = (LineQuestionModle) mDatalist.get(position);
+////                    if (frMap.get(position) != null) {
+////                        LineFragment linFragment = (LineFragment) frMap.get((position));
+////                        linFragment.submitHomework(line);
+////                    }
+//                    break;
+//                case Constant.Completion:/*填空*/
+//
+////                    CompletionQuestionModle complete = (CompletionQuestionModle) mDatalist.get(position);
+////                    if (frMap.get(position) != null) {
+////                        CompletionFragment completionFragment = (CompletionFragment) frMap.get((position));
+////                        completionFragment.submitHomework(complete);
+////                    }
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//
+//        }
+//
+//        @Override
+//        public void onPageScrollStateChanged(int state) {
+//
+//        }
+//    };
+//
+//    /*判断题回调接口*/
+//    @Override
+//    public void submitJudgeFragment(JudjeQuestionModle questionModle) {
+////        int eachposition = questionModle.getEachposition();
+//        mDatalist.set(currentposition, questionModle);
+//
+//    }
+//
+//    /*选择题回调接口*/
+//    @Override
+//    public void submitChoiceFragment(ChoiceQuestionModle questionModle) {
+//
+//        mDatalist.set(currentposition, questionModle);
+//    }
+//
+//
+//    /*排序题回调接口*/
+//    @Override
+//    public void submitSoreFragment(SortQuestionModle questionModle) {
+//
+//        mDatalist.set(currentposition, questionModle);
+//    }
+//
+//    /*连线题回调接口*/
+//    @Override
+//    public void submitLineFragment(LineQuestionModle questionModle) {
+//
+//        mDatalist.set(currentposition, questionModle);
+//    }
+//
+//    /*填空题回掉接口*/
+//    @Override
+//    public void submitCompletionFragment(CompletionQuestionModle questionModle) {
+//
+//        mDatalist.set(currentposition, questionModle);
+//    }
 
 
     @Override

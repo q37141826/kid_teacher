@@ -1,6 +1,7 @@
 package cn.dajiahui.kidteacher.ui.homework.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.fxtx.framework.util.BaseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ import static cn.dajiahui.kidteacher.ui.homework.homeworksdetails.DoHomeworkActi
  */
 
 
-public class LineImagePointView extends RelativeLayout implements View.OnClickListener {
+public class LineImagePointView extends RelativeLayout  {//implements View.OnClickListener
     private Context context;
     private ImageView imageViewL;
     private ImageView imageViewR;
@@ -49,6 +51,7 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
 
     private final LinearLayout linRoot;//imageview或者textview 和小点的父亲布局
     public RelativeLayout mContentView;//左边的view添加遮罩的父view
+    private final int screenWidth;
 
 
     @SuppressLint("ResourceType")
@@ -73,7 +76,7 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
         this.direction = direction;
     }
 
-    private final Sublineinfo sublineinfo;
+//    private final Sublineinfo sublineinfo;
     private Point point;
 
     public Point getPoint() {
@@ -88,18 +91,20 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
     }
 
     @SuppressLint("ResourceType")
-    public LineImagePointView(Context context, Sublineinfo sublineinfo, int cLeftposiion, LineQuestionModle inbasebean, Dir direction) {
+    public LineImagePointView(Context context,  int cLeftposiion, LineQuestionModle inbasebean, Dir direction) {//Sublineinfo sublineinfo,
         super(context);
-        this.sublineinfo = sublineinfo;
+//        this.sublineinfo = sublineinfo;
         this.context = context;
+        //获取屏幕宽度
+        screenWidth = BaseUtil.getWidthPixels((Activity) context);
         this.cLeftposiion = cLeftposiion;
         this.direction = direction;
         this.inbasebean = inbasebean;
         this.lefts = inbasebean.getOptions().getLeft();
         this.rights = inbasebean.getOptions().getRight();
-        if (inbasebean.getIs_answered().equals("0")) {
-            this.setOnClickListener(this);
-        }
+//        if (inbasebean.getIs_answered().equals("0")) {
+//            this.setOnClickListener(this);
+//        }
         /*imageview和textview的大小*/
         LayoutParams lp = new LayoutParams(screenWidth/5, screenWidth/5);
 
@@ -216,7 +221,6 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
         pointview = new CricleTextView(context);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(pointViewDiameter, pointViewDiameter);
         lp.rightMargin = pointViewDiameter_margin;
-//        pointview.setId(R.string.show_pointright);
         //设置居中显示：
         lp.gravity = Gravity.CENTER;
         pointview.setLayoutParams(lp);
@@ -239,14 +243,14 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
     }
 
 
-    @Override
-    public void onClick(View v) {
-        this.setBackgroundResource(R.drawable.btnline);
-        /*0 未作答  1 已经提交过了*/
-        if (inbasebean.getIs_answered().equals("0")) {
-            sublineinfo.submitlininfo(this);
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+////        this.setBackgroundResource(R.drawable.btnline);
+////        /*0 未作答  1 已经提交过了*/
+////        if (inbasebean.getIs_answered().equals("0")) {
+//////            sublineinfo.submitlininfo(this);
+////        }
+//    }
 
 
     @Override
@@ -266,6 +270,7 @@ public class LineImagePointView extends RelativeLayout implements View.OnClickLi
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
     }
+
 
 
 }

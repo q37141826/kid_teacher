@@ -14,17 +14,21 @@ import com.fxtx.framework.http.ErrorCode;
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.http.request.OkHttpDownloadRequest;
 import com.fxtx.framework.log.ToastUtil;
+import com.fxtx.framework.time.TimeUtil;
 import com.squareup.okhttp.Request;
 
 import java.io.File;
 
+import util.DjhSputils;
+
 /**
+ * 版本更新管理
  */
 
 public abstract class UpdateManager {
 
     private String soft_update_no = "已经是最新版本";
-    private String soft_update_title = "软件更新";
+    public String soft_update_title = "软件更新";
     private String soft_updating = "正在更新";
     private String soft_update_update_now = "更新";
     private String soft_update_finish = "退出应用";
@@ -100,6 +104,9 @@ public abstract class UpdateManager {
                 if (isMustUpdate) {
                     onUpdate.onUpdateCancel(1);
                 } else {
+                    /*保存更新的时间*/
+                    DjhSputils spUtil = new DjhSputils(mContext);
+                    spUtil.setCancleUpdateTime(TimeUtil.stampToString(String.valueOf(System.currentTimeMillis() / 1000), "yyyyMMdd"));
                     onUpdate.onUpdateCancel(2);
                 }
             }

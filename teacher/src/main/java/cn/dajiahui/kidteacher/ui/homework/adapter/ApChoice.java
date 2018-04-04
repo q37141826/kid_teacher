@@ -85,16 +85,11 @@ public class ApChoice extends BaseAdapter {
             }
 
             if (mPptions.get(position).getType().equals("2")) {//文字答案
-//                holder.tv_choice_text.setText(mPptions.get(position).getLabel());
                 holder.tv_answer.setText(mPptions.get(position).getContent());
 
             } else {
-//                holder.tv_choice_pic.setText();
-                Glide.with(context)
-                        .load(mPptions.get(position).getContent())
-                        .asBitmap()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(holder.img_answer);
+                Glide.with(context).load(mPptions.get(position).getContent()).asBitmap()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.img_answer);
 
             }
             posttionMap.put(position, new ShowAnswer(position, holder.img_rightchoice));
@@ -112,23 +107,35 @@ public class ApChoice extends BaseAdapter {
             holder.choice_root.setBackgroundResource(R.drawable.noselect_judge_image);
         }
 
-        if (inbasebean.getIs_answered().equals("1")) {
-            if (mPptions.get(position).getVal().equals(inbasebean.getMy_answer())) {
-                /*我的答案加黄色边框*/
-                holder.choice_root.setBackgroundResource(R.drawable.select_judge_image);
-//                /*判断自己的答案与参考答案是否相同  相同 当前view 加绿色对号  不相同就红色×*/
-                if (inbasebean.getMy_answer().equals(inbasebean.getStandard_answer())) {
-                    holder.img_rightchoice.setImageResource(R.drawable.answer_true);
-                } else {
-                    holder.img_rightchoice.setImageResource(R.drawable.answer_false);
-                    /*找出正确答案的item   把正确答案的item画个绿色对勾*/
-                }
-            } else {
-
+        /*添加遮罩 首先判断是否完成*/
+        if (inbasebean.getIs_complete().equals("1")) {
+            /*我的答案有 ㊒ 就认为是未作答 直接显示正确答案 */
+            if (inbasebean.getMy_answer().equals("㊒")) {
                 /*判断当前条目是是不是自己选的答案  是加绿色对号  不相同就红色× */
                 /*获取当前条目的答案*/
                 if (mPptions.get(position).getVal().equals(inbasebean.getStandard_answer())) {
                     holder.img_rightchoice.setImageResource(R.drawable.answer_true);
+                }
+
+            } else {
+
+                if (mPptions.get(position).getVal().equals(inbasebean.getMy_answer())) {
+                    /*我的答案加黄色边框*/
+                    holder.choice_root.setBackgroundResource(R.drawable.select_judge_image);
+                    /*判断自己的答案与参考答案是否相同  相同 当前view 加绿色对号  不相同就红色×*/
+                    if (inbasebean.getMy_answer().equals(inbasebean.getStandard_answer())) {
+                        holder.img_rightchoice.setImageResource(R.drawable.answer_true);
+                    } else {
+                        holder.img_rightchoice.setImageResource(R.drawable.answer_false);
+                        /*找出正确答案的item   把正确答案的item画个绿色对勾*/
+                    }
+                } else {
+
+                    /*判断当前条目是是不是自己选的答案  是加绿色对号  不相同就红色× */
+                    /*获取当前条目的答案*/
+                    if (mPptions.get(position).getVal().equals(inbasebean.getStandard_answer())) {
+                        holder.img_rightchoice.setImageResource(R.drawable.answer_true);
+                    }
                 }
             }
         }
@@ -136,47 +143,46 @@ public class ApChoice extends BaseAdapter {
     }
 
 
-    /*改变当前选择item的状态*/
-    public void changeState(Context context, ChoiceFragment.SubmitChoiseFragment submit, int pos, ChoiceQuestionModle inbasebean) {
-        selectorPosition = pos;
-        inbasebean.setAnswerflag("true");//学生作答标记
-        inbasebean.setMy_answer(mPptions.get(pos).getVal());//学生作答答案
-        inbasebean.setChoiceitemposition(pos);//保存选择题答案的索引（用于翻页回来后给选择的条目赋予背景颜色）
-
-        inbasebean.setChoiceanswer((pos + 1) + "");//因为pos是从0开始
-        /*回答正确*/
-        if (mPptions.get(pos).getVal().equals(inbasebean.getStandard_answer())) {
-            inbasebean.setIs_right("1");
-        } else {/*回答错误*/
-            inbasebean.setIs_right("0");
-        }
-        submit.submitChoiceFragment(inbasebean);
-        if (inbasebean.getIs_answered().equals("0")) {
-
-            notifyDataSetChanged();
-        }
-    }
+//    /*改变当前选择item的状态*/
+//    public void changeState(Context context, ChoiceFragment.SubmitChoiseFragment submit, int pos, ChoiceQuestionModle inbasebean) {
+//        selectorPosition = pos;
+//        inbasebean.setAnswerflag("true");//学生作答标记
+//        inbasebean.setMy_answer(mPptions.get(pos).getVal());//学生作答答案
+//        inbasebean.setChoiceitemposition(pos);//保存选择题答案的索引（用于翻页回来后给选择的条目赋予背景颜色）
+//
+//        /*回答正确*/
+//        if (mPptions.get(pos).getVal().equals(inbasebean.getStandard_answer())) {
+//            inbasebean.setIs_right("1");
+//        } else {/*回答错误*/
+//            inbasebean.setIs_right("0");
+//        }
+//        submit.submitChoiceFragment(inbasebean);
+//        if (inbasebean.getIs_answered().equals("0")) {
+//
+//            notifyDataSetChanged();
+//        }
+//    }
 
 
     @SuppressLint("ResourceAsColor")
-    public void changeitemState(int posi, ListView listView, ChoiceQuestionModle inbasebean) {
-
-        ViewHolder holder = null;
-        int visibleFirstPosi = listView.getFirstVisiblePosition();
-        int visibleLastPosi = listView.getLastVisiblePosition();
-        if (inbasebean.getIs_answered().equals("0")) {
-         /* item 学生作答正确  正确答案 画黄色背景    其余错误的答案画红色背景 */
-            if (posi >= visibleFirstPosi && posi <= visibleLastPosi) {
-                View view = listView.getChildAt(posi - visibleFirstPosi);
-                holder = (ViewHolder) view.getTag();
-
-                holder.choice_root.setBackgroundResource(R.drawable.select_judge_image);//给正确答案外边画个框框
-
-            } else {
-                holder.choice_root.setBackgroundResource(R.drawable.noselect_judge_image);//给正确答案外边画个框框
-            }
-        }
-    }
+//    public void changeitemState(int posi, ListView listView, ChoiceQuestionModle inbasebean) {
+//
+//        ViewHolder holder = null;
+//        int visibleFirstPosi = listView.getFirstVisiblePosition();
+//        int visibleLastPosi = listView.getLastVisiblePosition();
+//        if (inbasebean.getIs_answered().equals("0")) {
+//         /* item 学生作答正确  正确答案 画黄色背景    其余错误的答案画红色背景 */
+//            if (posi >= visibleFirstPosi && posi <= visibleLastPosi) {
+//                View view = listView.getChildAt(posi - visibleFirstPosi);
+//                holder = (ViewHolder) view.getTag();
+//
+//                holder.choice_root.setBackgroundResource(R.drawable.select_judge_image);//给正确答案外边画个框框
+//
+//            } else {
+//                holder.choice_root.setBackgroundResource(R.drawable.noselect_judge_image);//给正确答案外边画个框框
+//            }
+//        }
+//    }
 
     class ViewHolder {
         public ImageView img_answer;

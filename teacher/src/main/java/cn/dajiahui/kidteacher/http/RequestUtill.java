@@ -8,12 +8,15 @@ import com.fxtx.framework.http.request.OkHttpDownloadRequest;
 import com.fxtx.framework.http.request.OkHttpRequest;
 import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
+import com.fxtx.framework.util.BaseUtil;
+import com.umeng.socialize.sina.helper.MD5;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 
 import cn.dajiahui.kidteacher.BuildConfig;
+import cn.dajiahui.kidteacher.controller.Constant;
 import cn.dajiahui.kidteacher.controller.UserController;
 
 
@@ -94,18 +97,6 @@ public class RequestUtill {
         IdentityHashMap params = new IdentityHashMap<>();
         params.put("userId", userId);
         new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "attachment/uploadAttachment.json").files(new Pair<String, File>("file", files)).params(params).upload(callback);
-    }
-
-    /**
-     * 版本更新
-     *
-     * @return key:entity
-     */
-    public void httpUpdateApp(Context context, ResultCallback callback) {
-        IdentityHashMap params = new IdentityHashMap<>();
-        params.put("versionType", "0");
-        params.put("type", "1");
-//        getHttpBuilder(context, "version/update.json").params(params).post(callback);
     }
 
 
@@ -297,6 +288,7 @@ public class RequestUtill {
      */
     public void httpLogin(Context context, ResultCallback callback, String userName, String passowrd) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("username", userName);
         params.put("password", passowrd);
         getHttpBuilder(context, "teacher/public/login").params(params).post(callback);
@@ -311,6 +303,7 @@ public class RequestUtill {
      */
     public void sendPhoneCode(Context context, ResultCallback callback, String phone) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("telnum", phone);
         getHttpBuilder(context, "teacher/public/send-code").params(params).post(callback);
     }
@@ -321,6 +314,7 @@ public class RequestUtill {
      */
     public void httpLessonClass(Context context, ResultCallback callback, int pageSize, int pageNum) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("pageSize", String.valueOf(pageSize));
         params.put("page", String.valueOf(pageNum));
@@ -335,6 +329,7 @@ public class RequestUtill {
      */
     public void httpGetApplyStudents(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         getHttpBuilder(context, "teacher/classroom/get-apply-students").params(params).post(callback);
     }
@@ -349,6 +344,7 @@ public class RequestUtill {
      */
     public void httpAcceptApply(Context context, ResultCallback callback, String classId, String userId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
         params.put("user_id", userId);
@@ -365,6 +361,7 @@ public class RequestUtill {
      */
     public void httpDenyApply(Context context, ResultCallback callback, String classId, String userId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
         params.put("user_id", userId);
@@ -380,6 +377,7 @@ public class RequestUtill {
      */
     public void httpGetClassInfo(Context context, ResultCallback callback, String classId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
         getHttpBuilder(context, "teacher/classroom/detail").params(params).post(callback);
@@ -395,6 +393,7 @@ public class RequestUtill {
      */
     public void httpRemoveStudent(Context context, ResultCallback callback, String classId, String userId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
         params.put("user_id", userId);
@@ -411,6 +410,7 @@ public class RequestUtill {
      */
     public void httpGetWorkBookList(Context context, ResultCallback callback, int pageSize, int pageNum) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("pageSize", String.valueOf(pageSize));
         params.put("page", String.valueOf(pageNum));
@@ -426,6 +426,7 @@ public class RequestUtill {
      */
     public void httpSelectWorkBook(Context context, ResultCallback callback, String bookId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("book_id", bookId);
         getHttpBuilder(context, "teacher/book/select").params(params).post(callback);
@@ -439,6 +440,7 @@ public class RequestUtill {
      */
     public void httpGetWorkBook(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         getHttpBuilder(context, "teacher/book/history").params(params).post(callback);
     }
@@ -449,6 +451,7 @@ public class RequestUtill {
      */
     public void httpGetUnitList(Context context, ResultCallback callback, String bookId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("book_id", bookId);
         getHttpBuilder(context, "teacher/book/choose").params(params).post(callback);
@@ -466,6 +469,7 @@ public class RequestUtill {
      */
     public void httpGetHomeWorkClassList(Context context, ResultCallback callback, String bookId, String unitId, int pageSize, int pageNum) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("book_id", bookId);
         params.put("unit_id", unitId);
@@ -486,6 +490,7 @@ public class RequestUtill {
      */
     public void httpPublishHomework(Context context, ResultCallback callback, String classId, String bookId, String unitId, String endTime) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
         params.put("book_id", bookId);
@@ -507,6 +512,7 @@ public class RequestUtill {
      */
     public void httpGetHomeworkList(Context context, ResultCallback callback, String classId, String isChecked, int pageSize, int pageNum) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", classId);
         params.put("is_checked", isChecked);
@@ -523,6 +529,7 @@ public class RequestUtill {
      */
     public void httpGetClassAndStatus(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         getHttpBuilder(context, "teacher/homework/basic").params(params).post(callback);
     }
@@ -535,6 +542,7 @@ public class RequestUtill {
      */
     public void httpGetContactList(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         getHttpBuilder(context, "teacher/classroom/contact").params(params).post(callback);
     }
@@ -548,6 +556,7 @@ public class RequestUtill {
      */
     public void httpHomeworkReport(Context context, ResultCallback callback, String homeworkId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("homework_id", homeworkId);
         getHttpBuilder(context, "teacher/homework/detail").params(params).post(callback);
@@ -556,6 +565,7 @@ public class RequestUtill {
     /*获取作业详情*/
     public void httpRequestHomeworkDetail(Context context, ResultCallback callback, String homeworkId, String user_id) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("homework_id", homeworkId);
         params.put("user_id", user_id);
@@ -565,6 +575,7 @@ public class RequestUtill {
     /*查看作业详情*/
     public void httprequestHomeworkQuestions(Context context, ResultCallback callback, String homeworkId, String user_id) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("homework_id", homeworkId);
         params.put("user_id", user_id);
@@ -582,6 +593,7 @@ public class RequestUtill {
      */
     public void httpCheckHomework(Context context, ResultCallback callback, String homeworkId, int flag) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("homework_id", homeworkId);
         params.put("flag", String.valueOf(flag));
@@ -597,6 +609,7 @@ public class RequestUtill {
      */
     public void httpGetCheckHomeworkDetails(Context context, ResultCallback callback, String homeworkId) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("homework_id", homeworkId);
         getHttpBuilder(context, "teacher/homework/detail-next").params(params).post(callback);
@@ -605,6 +618,7 @@ public class RequestUtill {
     /*班级空间*/
     public void httpClassSpace(Context context, ResultCallback callback, String class_id, String pageSize, String page) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", class_id);
         params.put("pageSize", pageSize);
@@ -617,6 +631,7 @@ public class RequestUtill {
     public void httpSendDynamic(Context context, ResultCallback callback, String class_id, String content, ArrayList<String> img_url) {
         Logger.d("" + UserController.getInstance().getUser().getToken());
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("class_id", class_id);
         params.put("content", content);
@@ -629,6 +644,7 @@ public class RequestUtill {
     /*我的*/
     public void httpMine(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
 
         getHttpBuilder(context, "student/").params(params).post(callback);
@@ -637,6 +653,7 @@ public class RequestUtill {
     /*展示用户信息*/
     public void httpShowUserProfileInfo(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         getHttpBuilder(context, "teacher/member/index").params(params).post(callback);
     }
@@ -660,6 +677,7 @@ public class RequestUtill {
             callback.onError(null, null);
         } else {
             IdentityHashMap params = new IdentityHashMap<>();
+            publicParameters(params, context);
             params.put("token", UserController.getInstance().getUser().getToken());
             new OkHttpRequest.Builder().tag(context).url(getFileUrl() + "uploader/image").files(new Pair<String, File>("file", files)).params(params).upload(callback);
         }
@@ -668,6 +686,7 @@ public class RequestUtill {
     /*真正修改头像*/
     public void httpChangeUserInfo(Context context, ResultCallback callback, int type, String info) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         switch (type) {
             case 0://修改头像
@@ -690,6 +709,7 @@ public class RequestUtill {
     /*修改手机号*/
     public void httpModifyPhone(Context context, ResultCallback callback, String telnum, String telcode) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("telnum", telnum);
         params.put("telcode", telcode);
@@ -699,6 +719,7 @@ public class RequestUtill {
     /*修改密码*/
     public void httpModifyPwd(Context context, ResultCallback callback, String oldPassword, String new_password, String re_password) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("password", oldPassword);
         params.put("new_password", new_password);
@@ -711,6 +732,7 @@ public class RequestUtill {
     //忘记密码  提交信息接口
     public void changePwd(Context context, ResultCallback callback, String phone, String password, String pwdAgain, String telcode) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("telnum", phone);
         params.put("password", password);
         params.put("repassword", pwdAgain);
@@ -723,6 +745,7 @@ public class RequestUtill {
     /*摩尔通知*/
     public void httpNotice(Context context, ResultCallback callback, int pageSize, int page) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("pageSize", pageSize + "");
         params.put("page", page + "");
@@ -733,6 +756,7 @@ public class RequestUtill {
     /*已读通知*/
     public void httpNoticeRead(Context context, ResultCallback callback, String notice_id) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
         params.put("notice_id", notice_id);
         getHttpBuilder(context, "teacher/notice/read").params(params).post(callback);
@@ -741,6 +765,7 @@ public class RequestUtill {
     /*清空通知*/
     public void httpCleanNotice(Context context, ResultCallback callback) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
 
         getHttpBuilder(context, "teacher/notice/clear").params(params).post(callback);
@@ -750,11 +775,44 @@ public class RequestUtill {
     /*批量删除学员*/
     public void httpDeleteStudents(Context context, ResultCallback callback, String json) {
         IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
 
         params.put("json", json);
 
         getHttpBuilder(context, "teacher/classroom/delete-batch-show").params(params).post(callback);
+    }
+
+
+    /**
+     * 版本更新
+     *
+     * @return key:entity
+     */
+    public void httpUpdateApp(Context context, ResultCallback callback) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
+
+        getHttpBuilder(context, "site/check").params(params).post(callback);
+    }
+
+    /*公共参数*/
+    private void publicParameters(IdentityHashMap params, Context context) {
+        params.put("device", Constant.device);
+        params.put("os_version", Constant.os_version);
+        params.put("version_code", BaseUtil.getVersionName(context));
+        params.put("timeflag", getTimeStamp());
+        params.put("signature", cn.dajiahui.kidteacher.util.MD5.getMD5(getTimeStamp() + Constant.signKey));
+
+        Logger.d("params:" + params);
+    }
+
+    /*获取时间戳*/
+    public String getTimeStamp() {
+        long time = System.currentTimeMillis() / 1000;//获取系统时间的时间戳(秒数)
+        String str = String.valueOf(time);
+        return str;
+
     }
 
     /**

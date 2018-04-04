@@ -129,6 +129,11 @@ public class Constant {
     public static final String ac_urlFavorites = "urlFavorites";
     public static final String ac_Lesson = "lesson";
 
+    /*版本更新*/
+    public static final String device = "3";//公共参数
+    public static final String os_version = "Android" + android.os.Build.VERSION.RELEASE;
+    public static final String signKey = "dajiahuiv5@#$%123";
+
 
     /* 魔耳 检查作业*/
     public static final String Judje = "1";
@@ -147,4 +152,8 @@ public class Constant {
     public static final int lineWidth = 5;//作业，练习连线题线的宽度
     public static final int JudgeAnswerView_margin = 10;// 作业，练习选择JudgeAnswerView 的panding
     public static final int lineView_margin = 50;// 作业，练习连线题的答题的view的距离
+
+    public static final int SortAnswerView_margin = 10;// 作业，练习排序的view 的panding
+
+
 }

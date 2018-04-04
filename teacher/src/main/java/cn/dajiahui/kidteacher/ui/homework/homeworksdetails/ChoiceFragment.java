@@ -26,7 +26,7 @@ import cn.dajiahui.kidteacher.ui.homework.myinterface.CheckHomework;
  * 选择
  */
 
-public class ChoiceFragment extends BaseHomeworkFragment implements CheckHomework {
+public class ChoiceFragment extends BaseHomeworkFragment  {//implements CheckHomework
 
 
     private ListView mListview;
@@ -67,17 +67,18 @@ public class ChoiceFragment extends BaseHomeworkFragment implements CheckHomewor
         apChoice = new ApChoice(getActivity(), options, inbasebean);
 
 
-        /*listview的点击事件*/
-        mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (inbasebean.getIs_answered().equals("0")) {
-                    inbasebean.setChoiceitemposition(position);//保存选择题当前item的索引 用于 翻页回来后指定某个item选择状态
-                    /*刷新ui*/
-                    apChoice.changeState(getActivity(), submit, position, inbasebean);
-                }
-            }
-        });
+//        /*listview的点击事件*/
+//        mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                /*未完成是可以点击*/
+//                if (!inbasebean.getIs_complete().equals("1")) {
+//                    inbasebean.setChoiceitemposition(position);//保存选择题当前item的索引 用于 翻页回来后指定某个item选择状态
+//                    /*刷新ui*/
+//                    apChoice.changeState(getActivity(), submit, position, inbasebean);
+//                }
+//            }
+//        });
 
         /*设置适配器*/
         mListview.setAdapter(apChoice);
@@ -132,7 +133,7 @@ public class ChoiceFragment extends BaseHomeworkFragment implements CheckHomewor
     public void onAttach(Activity activity) {
         // TODO Auto-generated method stub
         super.onAttach(activity);
-        submit = (SubmitChoiseFragment) activity;
+//        submit = (SubmitChoiseFragment) activity;
 
     }
 
@@ -160,16 +161,16 @@ public class ChoiceFragment extends BaseHomeworkFragment implements CheckHomewor
     }
 
 
-    @Override
-    public void submitHomework(Object questionModle) {
-        if (questionModle != null) {
-            inbasebean = (ChoiceQuestionModle) questionModle;
-            if (inbasebean.getChoiceitemposition() >= 0) {
-                /*刷新翻页回来后 上次答题情况*/
-                apChoice.changeitemState(inbasebean.getChoiceitemposition(), mListview, inbasebean);
-            }
-        }
-    }
+//    @Override
+//    public void submitHomework(Object questionModle) {
+//        if (questionModle != null) {
+//            inbasebean = (ChoiceQuestionModle) questionModle;
+//            if (inbasebean.getChoiceitemposition() >= 0) {
+//                /*刷新翻页回来后 上次答题情况*/
+//                apChoice.changeitemState(inbasebean.getChoiceitemposition(), mListview, inbasebean);
+//            }
+//        }
+//    }
 
     public interface SubmitChoiseFragment {
         public void submitChoiceFragment(ChoiceQuestionModle questionModle);
