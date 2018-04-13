@@ -77,7 +77,6 @@ public class FrHomework extends FxFragment {
     private int selectClassPosition = 0;//选中班级的position
 
     @Override
-
     protected View initinitLayout(LayoutInflater inflater) {
         return inflater.inflate(R.layout.fr_homework, null);
     }
