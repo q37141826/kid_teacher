@@ -149,6 +149,10 @@ public class FrHomework extends FxFragment {
                     break;
 
                 case R.id.tv_class:
+
+                    httpType = HTTP_TYPE_GET_CLASS_STATUS;
+                    httpData(); // 获取班级和状态列表
+
                     /*动态设置textview右边 向上 1.向上 2.向下*/
                     setPictureDirection(R.drawable.up, 1);
 
@@ -314,10 +318,20 @@ public class FrHomework extends FxFragment {
                 BeClassAndStatus temp = json.parsingObject(BeClassAndStatus.class);
                 if (temp != null) {
                     if (temp.getClass_list().size() > 0) {
+                        classList.clear();
+                        BeClass classifno = new BeClass();
+                        classifno.setClass_name(getResources().getString(R.string.all_options));
+                        classList.add(classifno);
+
                         classList.addAll(temp.getClass_list());
                     }
 
                     if (temp.getHomework_status().size() > 0) {
+                        statusList.clear();
+                        BeHomeworkStatus statusInfo = new BeHomeworkStatus();
+                        statusInfo.setLabel(getResources().getString(R.string.all_options));
+                        statusList.add(statusInfo);
+
                         statusList.addAll(temp.getHomework_status());
                     }
                 }
