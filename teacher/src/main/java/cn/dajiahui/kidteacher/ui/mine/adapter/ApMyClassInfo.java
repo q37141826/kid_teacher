@@ -13,6 +13,7 @@ import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.json.HeadJson;
 import com.fxtx.framework.log.ToastUtil;
+import com.fxtx.framework.widgets.dialog.FxDialog;
 import com.squareup.okhttp.Request;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeStudents;
+import cn.dajiahui.kidteacher.ui.mine.setting.SettingActivity;
 
 /**
  * 我的班级
@@ -34,6 +36,7 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
     private ItemInfo selectItem;
     private String classId;
     private List<BeStudents> studentInfoList;
+    private Context context;
 
     private class ItemInfo {
         ViewHolder viewHolder;
@@ -43,6 +46,7 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
 
     public ApMyClassInfo(Context context, List<BeStudents> mDatas, Handler handler, String classId) {
         super(context, mDatas, R.layout.item_myclassinfo);
+        this.context = context;
         this.activityHandler = handler;
         this.classId = classId;
         this.studentInfoList = mDatas;
@@ -74,10 +78,25 @@ public class ApMyClassInfo extends CommonAdapter<BeStudents> {
     private View.OnClickListener onClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ItemInfo itemInfo = (ItemInfo) v.getTag();
-            selectItem = itemInfo;
-            activityHandler.sendEmptyMessage(MSG_SHOW_FXDIALOG);
-            httpData(itemInfo.item.getId());
+            final ItemInfo itemInfo = (ItemInfo) v.getTag();
+            FxDialog dialog = new FxDialog(context) {
+                @Override
+                public void onRightBtn(int flag) {
+                    selectItem = itemInfo;
+                    activityHandler.sendEmptyMessage(MSG_SHOW_FXDIALOG);
+                    httpData(itemInfo.item.getId());
+                }
+
+                @Override
+                public void onLeftBtn(int flag) {
+
+                }
+            };
+            dialog.setTitle(R.string.prompt);
+            dialog.setMessage(R.string.remove_student);
+            dialog.show();
+
+
         }
     };
 

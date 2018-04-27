@@ -803,8 +803,6 @@ public class RequestUtill {
         params.put("version_code", BaseUtil.getVersionName(context));
         params.put("timeflag", getTimeStamp());
         params.put("signature", cn.dajiahui.kidteacher.util.MD5.getMD5(getTimeStamp() + Constant.signKey));
-
-        Logger.d("params:" + params);
     }
 
     /*获取时间戳*/

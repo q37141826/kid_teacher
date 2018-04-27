@@ -90,16 +90,16 @@ public class ChooseClassActivity extends FxActivity {
 //                setResult(1);
 //                finishActivity();
                 //把点击的position传递到adapter里面去
-                if (classInfoList.get(position).getIs_pubed().equals("1")) {
-                    ToastUtil.showToast(context, "已经给这个班布置过了");
-                } else {
+//                if (classInfoList.get(position).getIs_pubed().equals("1")) {
+//                    ToastUtil.showToast(context, "已经给这个班布置过了");
+//                } else {
                     selectClass = classInfoList.get(position);
                     apchooseClass.changeState(position);
                     /*设置底部按钮颜色*/
                     if (!mChoosetime.getText().equals("")) {
                         mConfirm.setBackgroundColor(getResources().getColor(R.color.blue_dark));
                     }
-                }
+//                }
             }
         });
     }

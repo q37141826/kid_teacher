@@ -209,4 +209,6 @@
     <string name="e_waitaddclass">暂无学生加入班级</string>
     <string name="title_activity_my_works">MyWorksActivity</string>
 
+    <string name="remove_student">是否要移除学员？</string>
+
 </resources>
