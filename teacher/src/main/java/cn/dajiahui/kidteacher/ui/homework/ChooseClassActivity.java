@@ -93,12 +93,12 @@ public class ChooseClassActivity extends FxActivity {
 //                if (classInfoList.get(position).getIs_pubed().equals("1")) {
 //                    ToastUtil.showToast(context, "已经给这个班布置过了");
 //                } else {
-                    selectClass = classInfoList.get(position);
-                    apchooseClass.changeState(position);
-                    /*设置底部按钮颜色*/
-                    if (!mChoosetime.getText().equals("")) {
-                        mConfirm.setBackgroundColor(getResources().getColor(R.color.blue_dark));
-                    }
+                selectClass = classInfoList.get(position);
+                apchooseClass.changeState(position);
+                /*设置底部按钮颜色*/
+                if (!mChoosetime.getText().equals("") && selectClass != null) {
+                    mConfirm.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+                }
 //                }
             }
         });
@@ -130,7 +130,9 @@ public class ChooseClassActivity extends FxActivity {
                         customDatePicker.show(now);
                     } else {
                         customDatePicker.show(mChoosetime.getText().toString());
+
                     }
+
                     break;
 
                 case R.id.tv_cleartime:
@@ -157,6 +159,10 @@ public class ChooseClassActivity extends FxActivity {
             public void handle(String time) { // 回调接口，获得选中的时间
                 mChoosetime.setText(time);
                 mChoosetime.setTextColor((context.getResources().getColor(R.color.black_tv_6)));
+
+                if (!mChoosetime.getText().equals("") && selectClass != null) {
+                    mConfirm.setBackgroundColor(getResources().getColor(R.color.blue_dark));
+                }
             }
         }, now, "2200-12-31 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(true); // 显示时和分
