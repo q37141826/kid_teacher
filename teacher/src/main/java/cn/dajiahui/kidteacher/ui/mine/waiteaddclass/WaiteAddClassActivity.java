@@ -34,8 +34,8 @@ import cn.dajiahui.kidteacher.ui.mine.bean.BeWaiteAddStudent;
 import cn.dajiahui.kidteacher.util.Logger;
 
 /*
-* 待加入班级的学生
-* */
+ * 待加入班级的学生
+ * */
 public class WaiteAddClassActivity extends FxActivity {
 
     private final static int HTTP_TYPE_GET_APPLY_STUDENTS = 0;  // 取得申请学生列表
@@ -149,7 +149,7 @@ public class WaiteAddClassActivity extends FxActivity {
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 /*遍历 模型集合 找出true 就是选中的    false 就是未选中的*/
+                /*遍历 模型集合 找出true 就是选中的    false 就是未选中的*/
                 for (int i = 0; i < applyStudentInfoList.size(); i++) {
                     if (applyStudentInfoList.get(i).getBo() == true) {
                         mIdList.add(new BeDelateStudent(applyStudentInfoList.get(i).getUser_id(), applyStudentInfoList.get(i).getClass_id()));
@@ -200,10 +200,10 @@ public class WaiteAddClassActivity extends FxActivity {
     @Override
     public void httpData() {
         //网络请求
-        RequestUtill.getInstance().httpGetApplyStudents(context, callGetApplyStudents); // 取得申请入班学生列表
+        RequestUtill.getInstance().httpGetApplyStudents(context, callGetApplyStudents,mPageSize,mPageNum); // 取得申请入班学生列表
     }
 
-    /*删除我的作品*/
+    /*删除学习*/
     private void deleteStudents(String deleteJson) {
         RequestUtill.getInstance().httpDeleteStudents(WaiteAddClassActivity.this, callDeleteStudents, deleteJson);
     }
@@ -297,17 +297,17 @@ public class WaiteAddClassActivity extends FxActivity {
                 mIdList.clear();
                 delete_view.setVisibility(View.VISIBLE);
 
-              /*刷新整个Addapter*/
+                /*刷新整个Addapter*/
                 for (int i = 0; i < applyStudentInfoList.size(); i++) {
                     // 改变boolean
                     applyStudentInfoList.get(i).setBo(false);
 
                 }
-            /*设置非选择状态*/
+                /*设置非选择状态*/
                 allCheck.setChecked(false);
                 apWaiteAddclass.changeState(-1);
                 isShowCheckbox = !isShowCheckbox;
-            /*设置删除按钮颜色*/
+                /*设置删除按钮颜色*/
                 btn_delete.setBackgroundResource(R.color.gray);
             }
         } else {

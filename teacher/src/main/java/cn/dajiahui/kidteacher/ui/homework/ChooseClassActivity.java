@@ -50,6 +50,7 @@ public class ChooseClassActivity extends FxActivity {
     private BeHomewrokClass selectClass;
     private Button mConfirm;
 
+    private boolean mSend = false;//发布作业
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,16 +110,17 @@ public class ChooseClassActivity extends FxActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_confirm:
-                    if (selectClass == null) {
-                        ToastUtil.showToast(context, "请选择班级");
-                    } else if (mChoosetime.getText().toString().equals("")) {
-                        ToastUtil.showToast(context, "请选择截止时间");
-                    } else {
-                        httpType = HTTP_TYPE_PUBLISH;
-                        httpData();
-//                        finishActivity();
-                    }
+                    if (!mSend) {
 
+                        if (selectClass == null) {
+                            ToastUtil.showToast(context, "请选择班级");
+                        } else if (mChoosetime.getText().toString().equals("")) {
+                            ToastUtil.showToast(context, "请选择截止时间");
+                        } else {
+                            httpType = HTTP_TYPE_PUBLISH;
+                            httpData();
+                        }
+                    }
                     break;
 
                 case R.id.tv_choosetime:
@@ -235,6 +237,7 @@ public class ChooseClassActivity extends FxActivity {
             Logger.d("布置作业response" + response);
             HeadJson json = new HeadJson(response);
             if (json.getstatus() == 0) {
+                mSend = !mSend;
                 // 布置成功，返回首页作业页面
                 setResult(RESULT_OK);
                 finishActivity();

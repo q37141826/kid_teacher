@@ -38,6 +38,7 @@
     <!--首页文字start-->
     <string name="tab_task">作业</string>
     <string name="tab_chat">沟通</string>
+    <string name="tab_class">班级</string>
     <string name="tab_mine">我的</string>
     <!--首页文字end-->
 

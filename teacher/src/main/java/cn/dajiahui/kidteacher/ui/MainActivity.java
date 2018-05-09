@@ -42,11 +42,12 @@ import cn.dajiahui.kidteacher.ui.homework.FrHomework;
 import cn.dajiahui.kidteacher.ui.mine.FrMine;
 import cn.dajiahui.kidteacher.ui.mine.bean.BeAccess;
 import cn.dajiahui.kidteacher.ui.mine.personalinformation.UserDetailsActivity;
+import cn.dajiahui.kidteacher.ui.myclass.FrClass;
 
 public class MainActivity extends FxTabActivity {
     private RadioGroup radioGroup;
     public FrChat frChat;
-
+    public FrClass frClass;//班级
     public FrHomework frHomework;
     private FrMine frMine;
 
@@ -103,7 +104,7 @@ public class MainActivity extends FxTabActivity {
         BeAccess access = UserController.getInstance().getAccess();
 
 //        if (access.isMsn) {
-        BeTab tab3 = new BeTab(R.id.rediobtn_chat, "", getString(R.string.tab_chat), R.drawable.radio_chat, false);
+        BeTab tab3 = new BeTab(R.id.rediobtn_chat, "", getString(R.string.tab_class), R.drawable.radio_chat, false);
         chatRb = addRadioView(tab3, radioGroup);
 //        }
         BeTab tab4 = new BeTab(R.id.rediobtn_mine, "", getString(R.string.tab_mine), R.drawable.radio_mine, false);
@@ -120,14 +121,15 @@ public class MainActivity extends FxTabActivity {
 
     /**
      * 修改radionButton的文字颜色
+     *
      * @param buttonId
      */
     private void changeRadioButtonTextColor(int buttonId) {
-        ((RadioButton)findViewById(R.id.rediobtn_task)).setTextColor(this.getResources().getColor(R.color.text_gray));
-        ((RadioButton)findViewById(R.id.rediobtn_chat)).setTextColor(this.getResources().getColor(R.color.text_gray));
-        ((RadioButton)findViewById(R.id.rediobtn_mine)).setTextColor(this.getResources().getColor(R.color.text_gray));
+        ((RadioButton) findViewById(R.id.rediobtn_task)).setTextColor(this.getResources().getColor(R.color.text_gray));
+        ((RadioButton) findViewById(R.id.rediobtn_chat)).setTextColor(this.getResources().getColor(R.color.text_gray));
+        ((RadioButton) findViewById(R.id.rediobtn_mine)).setTextColor(this.getResources().getColor(R.color.text_gray));
 
-        ((RadioButton)findViewById(buttonId)).setTextColor(this.getResources().getColor(R.color.app_bg));
+        ((RadioButton) findViewById(buttonId)).setTextColor(this.getResources().getColor(R.color.app_bg));
     }
 
     @Override
@@ -144,9 +146,15 @@ public class MainActivity extends FxTabActivity {
                 break;
 
             case R.id.rediobtn_chat:
-                if (frChat == null)
-                    frChat = new FrChat();
-                switchContent(isFragment, frChat);
+//                if (frChat == null)
+//                    frChat = new FrChat();
+//                switchContent(isFragment, frChat);
+//
+                if (frClass == null)
+                    frClass = new FrClass();
+                switchContent(isFragment, frClass);
+
+
                 StatusBarCompat.compat(this, getResources().getColor(com.fxtx.framework.R.color.app_bg));
                 changeRadioButtonTextColor(checkedId);
 
@@ -258,7 +266,7 @@ public class MainActivity extends FxTabActivity {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals(Constant.broad_notice_action)) { // 收到通知 （魔耳通知）
+            if (intent.getAction().equals(Constant.broad_notice_action)) { // 收到通知 （魔耳通知）
 //                if (mineRb != null) {
 ////                    mineRb.setTextColor(Color.RED);
 ////                    mineRb.showTextBadge("2");

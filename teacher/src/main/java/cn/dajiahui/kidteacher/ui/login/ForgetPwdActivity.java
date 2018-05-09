@@ -19,6 +19,7 @@ import com.squareup.okhttp.Request;
 
 import cn.dajiahui.kidteacher.R;
 import cn.dajiahui.kidteacher.http.RequestUtill;
+import cn.dajiahui.kidteacher.ui.mine.setting.SetPassActivity;
 import cn.dajiahui.kidteacher.util.SpUtil;
 import cn.dajiahui.kidteacher.util.TeacherTextWatcher;
 
@@ -132,8 +133,16 @@ public class ForgetPwdActivity extends FxActivity {
             ToastUtil.showToast(context, R.string.inputnewpwd);
             return;
         }
+        if (newPwd.length() < 6 || newPwd.length() > 16) {
+            ToastUtil.showToast(context, R.string.correct_pwd);
+            return;
+        }
         if (StringUtil.isEmpty(pwdAgsin)) {
             ToastUtil.showToast(context, R.string.inputnewpwd);
+            return;
+        }
+        if (pwdAgsin.length() < 6 || pwdAgsin.length() > 16) {
+            ToastUtil.showToast(context, R.string.correct_pwd);
             return;
         }
         if (!StringUtil.sameStr(newPwd, pwdAgsin)) {

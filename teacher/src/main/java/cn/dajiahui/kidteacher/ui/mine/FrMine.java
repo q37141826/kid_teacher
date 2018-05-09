@@ -121,11 +121,11 @@ public class FrMine extends FxFragment {
 
                     break;
 
-                case R.id.tvMyclass:
+/*                case R.id.tvMyclass:
 
 //                    Toast.makeText(activity, "我的班级", Toast.LENGTH_SHORT).show();
                     DjhJumpUtil.getInstance().startBaseActivity(getContext(), MyClassActivity.class);
-                    break;
+                    break;*/
                 case R.id.tvWaitaddclass:
 //                    Toast.makeText(activity, "等待加入班级", Toast.LENGTH_SHORT).show();
                     DjhJumpUtil.getInstance().startBaseActivity(getContext(), WaiteAddClassActivity.class);
@@ -190,7 +190,7 @@ public class FrMine extends FxFragment {
         imUser = getView(R.id.iv_user);
         tv_userName = getView(R.id.tv_user_name);
         tv_campusName = getView(R.id.tv_campus_name);
-        getView(R.id.tvMyclass).setOnClickListener(onClick);
+//        getView(R.id.tvMyclass).setOnClickListener(onClick);
         getView(R.id.tvWaitaddclass).setOnClickListener(onClick);
         mWaitaddclassconut = getView(R.id.tv_waitaddclassconut);
         getView(R.id.tvNotice).setOnClickListener(onClick);
