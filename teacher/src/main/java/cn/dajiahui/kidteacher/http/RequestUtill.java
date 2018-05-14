@@ -740,7 +740,7 @@ public class RequestUtill {
         params.put("repassword", pwdAgain);
         params.put("telcode", telcode);
         Logger.d("params:" + params);
-        getHttpBuilder(context, "site/find-passwd").params(params).post(callback);
+        getHttpBuilder(context, "teacher/public/find-passwd").params(params).post(callback);
     }
 
 
