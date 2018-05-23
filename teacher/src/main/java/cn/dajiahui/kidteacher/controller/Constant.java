@@ -133,7 +133,7 @@ public class Constant {
     public static final String device = "3";//公共参数
     public static final String os_version = "Android" + android.os.Build.VERSION.RELEASE;
     public static final String signKey = "dajiahuiv5@#$%123";
-
+    public static  final  String Code="dajiahui-mover";//验证码秘钥
 
     /* 魔耳 检查作业*/
     public static final String Judje = "1";

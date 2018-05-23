@@ -19,6 +19,8 @@ import cn.dajiahui.kidteacher.BuildConfig;
 import cn.dajiahui.kidteacher.controller.Constant;
 import cn.dajiahui.kidteacher.controller.UserController;
 
+import static cn.dajiahui.kidteacher.controller.Constant.Code;
+
 
 /**
  * Created by z on 2016/1/20.
@@ -305,6 +307,7 @@ public class RequestUtill {
         IdentityHashMap params = new IdentityHashMap<>();
         publicParameters(params, context);
         params.put("telnum", phone);
+        params.put("code", cn.dajiahui.kidteacher.util.MD5.getMD5(phone + Code));
         getHttpBuilder(context, "teacher/public/send-code").params(params).post(callback);
     }
 
