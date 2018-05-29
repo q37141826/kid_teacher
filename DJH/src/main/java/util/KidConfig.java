@@ -32,19 +32,31 @@ public class KidConfig {
 
     // Const Config
     private String envConfig = Environment.getExternalStorageDirectory().getAbsolutePath();
-    private String pathRoot = this.envConfig + File.separator + "kid_student" + File.separator;
+    private String pathRoot = this.envConfig + File.separator + "kid_teacher" + File.separator;
 
     /*班级空间图片*/
     private String pathClassSpace = this.pathRoot + "ClassSpace" + File.separator;
+
+    /*发送作业存截取的图片的文件夹*/
+    private String pathSendHomework = this.pathRoot + "ClassSendHomework" + File.separator;
 
     public void init() {
         // App Init
         File folder = null;
 
-//        folder = new File(this.pathClassSpace);
-//        if (!folder.exists()) {
-//            folder.mkdir();
-//        }
+        folder = new File(this.pathRoot);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }   folder = new File(this.pathClassSpace);
+
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        folder = new File(this.pathSendHomework);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
 
     }
 
@@ -63,8 +75,11 @@ public class KidConfig {
 
     }
 
+    public String getPathClassSpace() {
+        return pathClassSpace;
+    }
 
-//    public String getPathClassSpace() {
-//        return pathClassSpace;
-//    }
+    public String getPathSendHomework() {
+        return pathSendHomework;
+    }
 }

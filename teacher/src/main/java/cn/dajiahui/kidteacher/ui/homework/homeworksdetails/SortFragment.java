@@ -69,7 +69,7 @@ public class SortFragment extends BaseHomeworkFragment implements View.OnClickLi
 
     private TextView tv_sort, tv_schedule;
     private ImageView sort_img_play;//播放器按钮
-    private String media;
+    private String mediaUrl;
     private List<String> mRightContentList;//正确答案的内容
     private List<String> mMineContentList;//我的答案的内容
     private String title;
@@ -155,6 +155,7 @@ public class SortFragment extends BaseHomeworkFragment implements View.OnClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialize();
+
         tv_sort.setText(title);
         tv_schedule.setText(bundle.getString("currntQuestion"));
         /*判断已经完成*/
@@ -254,13 +255,14 @@ public class SortFragment extends BaseHomeworkFragment implements View.OnClickLi
             lin.addView(mMoveView); //动态添加图片
         }
     }
+
     private Bundle bundle;
 
     @Override
     public void setArguments(Bundle bundle) {
         this.bundle = bundle;
         inbasebean = (SortQuestionModle) bundle.get("SortQuestionModle");
-        media = inbasebean.getMedia();
+        mediaUrl = inbasebean.getMedia();
         title = inbasebean.getTitle();
     }
 
@@ -284,7 +286,11 @@ public class SortFragment extends BaseHomeworkFragment implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.sort_img_play:
-                playMp3(media);
+                if (!mediaUrl.equals("")) {
+                    playMp3(mediaUrl);
+                } else {
+                    audioDialog.show();
+                }
                 break;
             default:
                 break;

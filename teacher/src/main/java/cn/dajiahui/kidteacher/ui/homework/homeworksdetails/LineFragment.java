@@ -67,12 +67,11 @@ public class LineFragment extends BaseHomeworkFragment implements
     private Map<Integer, Point> ponitViewXY = new HashMap();//通过val获取point点的map（提供显示正确答案 和 自己的答案 用）
     private boolean calculation = false;//false 监听  测量连线题图片的左右第一个 坐标
 
-    private String media;
+    private String mediaUrl;
 
     private Map<Integer, LineImagePointView> showT_RMap = new HashMap<>();//用于显示判断划线的颜色
     private String title;
     private LinearLayout mLinroot;//显示正确答案我的答案的父布局
-
 
 
     private List<ImageView> mMaskImageviewL = new ArrayList<>();//遮罩view大集合
@@ -94,7 +93,7 @@ public class LineFragment extends BaseHomeworkFragment implements
     public void setArguments(Bundle bundle) {
         this.bundle = bundle;
         inbasebean = (LineQuestionModle) bundle.get("LineQuestionModle");
-        media = inbasebean.getMedia();
+        mediaUrl = inbasebean.getMedia();
         title = inbasebean.getTitle();
     }
 
@@ -195,6 +194,7 @@ public class LineFragment extends BaseHomeworkFragment implements
         super.onViewCreated(view, savedInstanceState);
 
         initialize();
+
         tv_line.setText(title);
 
         tv_schedule.setText(bundle.getString("currntQuestion"));
@@ -419,7 +419,11 @@ public class LineFragment extends BaseHomeworkFragment implements
         switch (v.getId()) {
 
             case R.id.img_play:
-                playMp3(media);
+                if (!mediaUrl.equals("")) {
+                    playMp3(mediaUrl);
+                }else {
+                    audioDialog.show();
+                }
                 break;
             case R.id.mLeft:
                 if (!mOnclickAnswer) {
@@ -716,7 +720,7 @@ public class LineFragment extends BaseHomeworkFragment implements
         while (nameItr.hasNext()) {
             name = nameItr.next();
             try {
-                if(!jsonObj.getString(name).equals(""))
+                if (!jsonObj.getString(name).equals(""))
                     outMap.put(Integer.parseInt(name), Integer.parseInt(jsonObj.getString(name)));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -729,8 +733,10 @@ public class LineFragment extends BaseHomeworkFragment implements
     private void getAnswer() {
         /*我的答案start */
         String my_answer = inbasebean.getMy_answer();
-        //我的答案map
-        mMineAnswerMap = jsonToObject(my_answer);
+        if (!my_answer.equals("")) {
+            //我的答案map
+            mMineAnswerMap = jsonToObject(my_answer);
+        }
         String standard_answer = inbasebean.getStandard_answer();
         //参考答案map
         mStandardMap = jsonToObject(standard_answer);

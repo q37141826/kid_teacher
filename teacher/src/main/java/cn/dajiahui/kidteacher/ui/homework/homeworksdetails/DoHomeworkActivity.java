@@ -42,9 +42,9 @@ import cn.dajiahui.kidteacher.ui.homework.bean.SortQuestionModle;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 
 /*
-* 查看作业具体信息
-* */
-public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.SubmitJudgeFragment,ChoiceFragment.SubmitChoiseFragment,JudgeFragment.GetMediaPlayer, SortFragment.SubmitSortFragment, LineFragment.SubmitLineFragment,CompletionFragment.SubmitCompletionFragment
+ * 查看作业具体信息
+ * */
+public class DoHomeworkActivity extends FxActivity implements BaseHomeworkFragment.GetBaseHomeworkFragment {//implements JudgeFragment.SubmitJudgeFragment,ChoiceFragment.SubmitChoiseFragment,JudgeFragment.GetMediaPlayer, SortFragment.SubmitSortFragment, LineFragment.SubmitLineFragment,CompletionFragment.SubmitCompletionFragment
 
     private cn.dajiahui.kidteacher.ui.homework.view.NoScrollViewPager mViewpager;
     private String subjectype = "";//当前题型
@@ -57,7 +57,7 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
     private String userId;
     private int mItemPosition;
     public static int screenWidth;//屏幕宽度
-
+    private BaseHomeworkFragment baseHomeworkFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +120,7 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
                     List<QuestionModle> mdata = new Gson().fromJson(jsonArray.toString(), new TypeToken<List<QuestionModle>>() {
                     }.getType());
 
-                      /*解析json数据*/
+                    /*解析json数据*/
                     for (int i = 0; i < mdata.size(); i++) {
 
                         switch (mdata.get(i).getQuestion_cate_id()) {
@@ -155,11 +155,11 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
                         }
                     }
                     Logger.d("mDatalist.size()" + mDatalist.size());
-                  /*作业适配器*/
+                    /*作业适配器*/
                     HomeWorkAdapter homeWorkAdapter = new HomeWorkAdapter(getSupportFragmentManager(), mdata);
                     mViewpager.setAdapter(homeWorkAdapter);
-//                    mViewpager.setOnPageChangeListener(onPageChangeListener);
-                  /*跳转单个题型的题*/
+                    mViewpager.setOnPageChangeListener(onPageChangeListener);
+                    /*跳转单个题型的题*/
                     if (mItemPosition != -1) {
                         mViewpager.setCurrentItem(mItemPosition);
                     }
@@ -177,11 +177,11 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
     @Override
     public void onRightBtnClick(View view) {
 
-            /*答题状态*/
+        /*答题状态*/
         Bundle bundle = new Bundle();
         bundle.putString("userId", userId);
         bundle.putString("homeworkId", homeworkId);
-            /*跳转答题卡*/
+        /*跳转答题卡*/
         DjhJumpUtil.getInstance().startBaseActivityForResult(DoHomeworkActivity.this, AnswerCardCompleteActivity.class, bundle, DjhJumpUtil.getInstance().activity_answerCardComplete);
 
 
@@ -282,27 +282,31 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
 
     }
 
-//    @Override
-//    public void getMediaPlayer(MediaPlayer mediaPlayer) {
-//        this.mediaPlayer = mediaPlayer;
-//    }
-//
-//    /*viewpager滑动监听*/
-//    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-//        @Override
-//        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//        }
-//
-//        @Override
-//        public void onPageSelected(int position) {
+    @Override
+    public void getBaseHomeworkFragment(BaseHomeworkFragment baseHomeworkFragment) {
+
+        this.baseHomeworkFragment = baseHomeworkFragment;
+    }
+
+    /*viewpager滑动监听*/
+    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
 //            currentposition = position;//当前题的页数
-//
-//
+            if (baseHomeworkFragment != null) {
+                baseHomeworkFragment.stopAutio();
+                baseHomeworkFragment.stopAnimation();
+            }
+
 //            /*滑动停止音频*/
 //            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
 //                mediaPlayer.stop();
 //            }
-//
+
 //            QuestionModle questionModle = (QuestionModle) mDatalist.get(position);
 //
 //            switch (questionModle.getQuestion_cate_id()) {
@@ -310,7 +314,8 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
 //
 ////                    JudjeQuestionModle jude = (JudjeQuestionModle) mDatalist.get(position);
 ////                    if (frMap.get(position) != null) {
-////                        JudgeFragment judgeFragment = (JudgeFragment) frMap.get(position);
+//                    JudgeFragment judgeFragment = (JudgeFragment) frMap.get(position);
+//                    judgeFragment.mediaPlayer.stop();
 ////                        judgeFragment.submitHomework(jude);
 ////                    }
 //                    break;
@@ -318,15 +323,17 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
 //
 ////                    ChoiceQuestionModle choice = (ChoiceQuestionModle) mDatalist.get(position);
 ////                    if (frMap.get(position) != null) {
-////                        ChoiceFragment choiceFragment = (ChoiceFragment) frMap.get(position);
+//                    ChoiceFragment choiceFragment = (ChoiceFragment) frMap.get(position);
+//                    choiceFragment.mediaPlayer.stop();
 ////                        choiceFragment.submitHomework(choice);
 ////                    }
 //                    break;
 //                case Constant.Sort:/*排序题*/
 //
-//                    SortQuestionModle sort = (SortQuestionModle) mDatalist.get(position);
+////                    SortQuestionModle sort = (SortQuestionModle) mDatalist.get(position);
 ////                    if (frMap.get(position) != null) {
-////                        SortFragment sortFragment = (SortFragment) frMap.get((currentposition));
+//                    SortFragment sortFragment = (SortFragment) frMap.get((currentposition));
+//                    sortFragment.mediaPlayer.stop();
 ////                        sortFragment.submitHomework(sort);
 ////                    }
 //                    break;
@@ -334,7 +341,8 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
 //
 ////                    LineQuestionModle line = (LineQuestionModle) mDatalist.get(position);
 ////                    if (frMap.get(position) != null) {
-////                        LineFragment linFragment = (LineFragment) frMap.get((position));
+//                    LineFragment linFragment = (LineFragment) frMap.get((position));
+//                    linFragment.mediaPlayer.stop();
 ////                        linFragment.submitHomework(line);
 ////                    }
 //                    break;
@@ -342,7 +350,8 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
 //
 ////                    CompletionQuestionModle complete = (CompletionQuestionModle) mDatalist.get(position);
 ////                    if (frMap.get(position) != null) {
-////                        CompletionFragment completionFragment = (CompletionFragment) frMap.get((position));
+//                    CompletionFragment completionFragment = (CompletionFragment) frMap.get((position));
+//                    completionFragment.mediaPlayer.stop();
 ////                        completionFragment.submitHomework(complete);
 ////                    }
 //                    break;
@@ -350,14 +359,14 @@ public class DoHomeworkActivity extends FxActivity  {//implements JudgeFragment.
 //                default:
 //                    break;
 //            }
-//
-//        }
-//
-//        @Override
-//        public void onPageScrollStateChanged(int state) {
-//
-//        }
-//    };
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 //
 //    /*判断题回调接口*/
 //    @Override

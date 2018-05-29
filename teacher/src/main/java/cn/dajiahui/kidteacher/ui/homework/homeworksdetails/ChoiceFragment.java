@@ -26,7 +26,7 @@ import cn.dajiahui.kidteacher.ui.homework.myinterface.CheckHomework;
  * 选择
  */
 
-public class ChoiceFragment extends BaseHomeworkFragment  {//implements CheckHomework
+public class ChoiceFragment extends BaseHomeworkFragment {//implements CheckHomework
 
 
     private ListView mListview;
@@ -57,9 +57,10 @@ public class ChoiceFragment extends BaseHomeworkFragment  {//implements CheckHom
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initialize();
+
         tv_choice.setText(inbasebean.getTitle());
         tv_schedule.setText(bundle.getString("currntQuestion"));
-       /*加载内容图片*/
+        /*加载内容图片*/
         Glide.with(getActivity()).load(inbasebean.getQuestion_stem()).asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(img_conment);
 
@@ -121,7 +122,11 @@ public class ChoiceFragment extends BaseHomeworkFragment  {//implements CheckHom
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.img_play:
-                    playMp3(mediaUrl);
+                    if (!mediaUrl.equals("")) {
+                        playMp3(mediaUrl);
+                    }else {
+                        audioDialog.show();
+                    }
                     break;
                 default:
                     break;

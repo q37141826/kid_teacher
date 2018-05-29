@@ -64,6 +64,9 @@
     <string name="task_examined">已检查</string>
     <string name="all_options">全部</string>
     <string name="AnswerCard">答题卡</string>
+    <string name="Look">已选题</string>
+    <string name="no_audio">本题无音频</string>
+
     <!--作业end-->
 
 

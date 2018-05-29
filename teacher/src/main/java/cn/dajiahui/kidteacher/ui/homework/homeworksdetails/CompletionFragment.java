@@ -38,7 +38,7 @@ public class CompletionFragment extends BaseHomeworkFragment implements View.OnC
     private CompletionQuestionModle inbasebean;
     private SubmitCompletionFragment submit;
     private TextView tvcompletion, tv_schedule;
-    private ImageView imgplay;
+    private ImageView img_play;
     private ImageView imgconment;
     private RelativeLayout horlistviewroot, stemroot;
     /////////////////
@@ -152,8 +152,8 @@ public class CompletionFragment extends BaseHomeworkFragment implements View.OnC
             params.leftMargin = 80;
             /*适配文本框的位置*/
 //            if (inbasebean.getIs_complete().equals("1")) {
-            mTvTop += screenWidth/4;
-            mTop += screenWidth/4;
+            mTvTop += screenWidth / 4;
+            mTop += screenWidth / 4;
 //            } else {
 //                mTvTop += 200;
 //                mTop += 200;
@@ -181,7 +181,11 @@ public class CompletionFragment extends BaseHomeworkFragment implements View.OnC
 
         switch (v.getId()) {
             case R.id.img_play:
-                playMp3(mediaUrl);
+                if (!mediaUrl.equals("")) {
+                    playMp3(mediaUrl);
+                }else {
+                    audioDialog.show();
+                }
                 break;
             default:
                 break;
@@ -237,13 +241,13 @@ public class CompletionFragment extends BaseHomeworkFragment implements View.OnC
     /*初始化*/
     private void initialize() {
         tvcompletion = getView(R.id.tv_completion);
-        imgplay = getView(R.id.img_play);
+        img_play = getView(R.id.img_play);
         imgconment = getView(R.id.img_conment);
         tv_schedule = getView(R.id.tv_schedule);
         horlistviewroot = getView(R.id.horlistviewroot);
         stemroot = getView(R.id.stemroot);
-        imgplay.setOnClickListener(this);
-        imgplay.setBackground(animationDrawable);
+        img_play.setOnClickListener(this);
+        img_play.setBackground(animationDrawable);
         //获取屏幕宽度
         screenWidth = BaseUtil.getWidthPixels(getActivity());
     }
