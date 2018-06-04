@@ -16,6 +16,7 @@ import com.fxtx.framework.ui.FxActivity;
 import com.fxtx.framework.widgets.refresh.MaterialRefreshLayout;
 import com.squareup.okhttp.Request;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,8 @@ import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.homework.adapter.ApChooseClass;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeHomewrokClass;
 import cn.dajiahui.kidteacher.ui.homework.bean.ChooseClass;
+import cn.dajiahui.kidteacher.ui.homework.sendhomework.bean.BeHomeworkPreView;
+import cn.dajiahui.kidteacher.ui.homework.sendhomework.bean.BeSendHomeWorkPreview;
 import cn.dajiahui.kidteacher.ui.homework.view.CustomDatePicker;
 
 /**
@@ -51,6 +54,8 @@ public class ChooseClassActivity extends FxActivity {
     private Button mConfirm;
 
     private boolean mSend = false;//发布作业
+    private BeSendHomeWorkPreview beSendhomeworkquestion;
+    private List<BeHomeworkPreView> bePreViewList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,8 @@ public class ChooseClassActivity extends FxActivity {
         onBackText();
         bookId = getIntent().getStringExtra("bookId");
         unitId = getIntent().getStringExtra("unitId");
+        beSendhomeworkquestion = (BeSendHomeWorkPreview) getIntent().getExtras().getSerializable("SENDHOMEWORKQUESTION");
+        bePreViewList = beSendhomeworkquestion.getBePreViewList();
         showfxDialog();
         httpType = HTTP_TYPE_GET_CLASSES;
         httpData(); // 请求取得班级列表
@@ -180,7 +187,7 @@ public class ChooseClassActivity extends FxActivity {
                 break;
 
             case HTTP_TYPE_PUBLISH:
-                RequestUtill.getInstance().httpPublishHomework(context, callGetUnitList, selectClass.getId(), bookId, unitId, mChoosetime.getText().toString()); // 确认布置
+                RequestUtill.getInstance().httpPublishHomework(context, callGetUnitList, selectClass.getId(), bookId, unitId, mChoosetime.getText().toString(), bePreViewList); // 确认布置
                 break;
         }
     }

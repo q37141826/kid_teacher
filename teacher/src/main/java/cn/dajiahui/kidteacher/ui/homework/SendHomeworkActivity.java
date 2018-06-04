@@ -25,6 +25,7 @@ import cn.dajiahui.kidteacher.http.RequestUtill;
 import cn.dajiahui.kidteacher.ui.homework.adapter.ApChooseUnit;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeUnit;
 import cn.dajiahui.kidteacher.ui.homework.bean.BeWorkBook;
+import cn.dajiahui.kidteacher.ui.homework.sendhomework.SendHomeworkDetailsActivity;
 import cn.dajiahui.kidteacher.util.DjhJumpUtil;
 
 /**
@@ -69,9 +70,6 @@ public class SendHomeworkActivity extends FxActivity {
         mImgSupplementary = getView(R.id.img_supplementary);
         mTvSupplementary = getView(R.id.tv_supplementary);
 
-
-        mNext.setOnClickListener(onClick);
-
         apChooseUnit = new ApChooseUnit(this, unitInfoList);
         mListview.setAdapter(apChooseUnit);
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,7 +108,10 @@ public class SendHomeworkActivity extends FxActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("bookId", selectWorkBook.getId());
                         bundle.putString("unitId", selectUnit.getId());
-                        DjhJumpUtil.getInstance().startBaseActivityForResult(SendHomeworkActivity.this, ChooseClassActivity.class, bundle, DjhJumpUtil.getInstance().activtiy_ChooseClass); // 跳转到发布课本作业页面
+
+                        DjhJumpUtil.getInstance().startBaseActivityForResult(SendHomeworkActivity.this, SendHomeworkDetailsActivity.class, bundle, DjhJumpUtil.getInstance().activtiy_SendHomeWorkDetail); // 跳转到发布课本作业(详情的具体选择每个题)
+
+
                     } else {
 //                        Toast.makeText(SendHomeworkActivity.this, "请选择内容", Toast.LENGTH_SHORT).show();
                     }
@@ -149,7 +150,7 @@ public class SendHomeworkActivity extends FxActivity {
             }
         }
 
-        if (requestCode == DjhJumpUtil.getInstance().activtiy_ChooseClass && resultCode == RESULT_OK) { // 布置作业成功返回
+        if (requestCode == DjhJumpUtil.getInstance().activtiy_SendHomeWorkDetail && resultCode == RESULT_OK) { // 布置作业成功返回
             setResult(RESULT_OK);
             finishActivity();
         }

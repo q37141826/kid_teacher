@@ -41,6 +41,18 @@ public class QuestionModle implements Serializable {
     private String title;//标题
 
 
+    private Boolean sendItemFlag = false;//选题发送每一道题的标志
+
+    public void setSendItemFlag(Boolean sendItemFlag) {
+        this.sendItemFlag = sendItemFlag;
+    }
+
+    public Boolean getSendItemFlag() {
+        return sendItemFlag;
+    }
+
+
+
     /*Set Get 方法*/
     public String getAnswerflag() {
         return answerflag;
@@ -194,7 +206,6 @@ public class QuestionModle implements Serializable {
     public void setCurrentAnswerPosition(int currentAnswerPosition) {
         this.currentAnswerPosition = currentAnswerPosition;
     }
-
 
 
 }

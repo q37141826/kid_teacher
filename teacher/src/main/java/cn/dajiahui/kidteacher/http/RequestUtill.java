@@ -14,10 +14,15 @@ import com.umeng.socialize.sina.helper.MD5;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
+import java.util.List;
 
 import cn.dajiahui.kidteacher.BuildConfig;
 import cn.dajiahui.kidteacher.controller.Constant;
 import cn.dajiahui.kidteacher.controller.UserController;
+import cn.dajiahui.kidteacher.ui.homework.sendhomework.bean.BeHomeworkPreView;
+import util.KidConfig;
+
+import static cn.dajiahui.kidteacher.controller.Constant.Code;
 
 import static cn.dajiahui.kidteacher.controller.Constant.Code;
 
@@ -66,7 +71,8 @@ public class RequestUtill {
     //下载
     public void downImageFile(Context context, String url, String fileName, ResultCallback callback) {
         //文件名称 和文件地址
-        httpDownFile(context, url, callback, fileName, UserController.getInstance().getUserImageFile(context));
+//        httpDownFile(context, url, callback, fileName, UserController.getInstance().getUserImageFile(context));
+        httpDownFile(context, url, callback, fileName, KidConfig.getInstance().getPathClassSpace());
     }
 
     //下载资料文件
@@ -493,7 +499,7 @@ public class RequestUtill {
      * @param unitId
      * @param endTime
      */
-    public void httpPublishHomework(Context context, ResultCallback callback, String classId, String bookId, String unitId, String endTime) {
+    public void httpPublishHomework(Context context, ResultCallback callback, String classId, String bookId, String unitId, String endTime, List<BeHomeworkPreView> bePreViewList) {
         IdentityHashMap params = new IdentityHashMap<>();
         publicParameters(params, context);
         params.put("token", UserController.getInstance().getUser().getToken());
@@ -501,6 +507,10 @@ public class RequestUtill {
         params.put("book_id", bookId);
         params.put("unit_id", unitId);
         params.put("end_time", endTime);
+
+        for (int i = 0; i < bePreViewList.size(); i++) {
+            params.put("question_id[" + i + "]", bePreViewList.get(i).getQuestion_id());
+        }
         getHttpBuilder(context, "teacher/homework/pub").params(params).post(callback);
 
     }
@@ -585,6 +595,16 @@ public class RequestUtill {
         params.put("homework_id", homeworkId);
         params.put("user_id", user_id);
         getHttpBuilder(context, "teacher/homework/student-questions").params(params).post(callback);
+    }
+
+    /*查看作业详情*/
+    public void httpSelectQuestion(Context context, ResultCallback callback, String book_id, String unit_id) {
+        IdentityHashMap params = new IdentityHashMap<>();
+        publicParameters(params, context);
+        params.put("token", UserController.getInstance().getUser().getToken());
+        params.put("book_id", book_id);
+        params.put("unit_id", unit_id);
+        getHttpBuilder(context, "teacher/homework/select-questions").params(params).post(callback);
     }
 
 
