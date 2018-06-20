@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def BuildVersion = 'b180604'
+def BuildVersion = 'b180620'
 android {
     signingConfigs {
         config {
@@ -16,8 +16,8 @@ android {
         applicationId "cn.dajiahui.kidteacher"
         minSdkVersion 17
         targetSdkVersion 22
-        versionCode 6
-        versionName '1.0.6'
+        versionCode 7
+        versionName '1.0.7'
         signingConfig signingConfigs.config
         multiDexEnabled true
     }
