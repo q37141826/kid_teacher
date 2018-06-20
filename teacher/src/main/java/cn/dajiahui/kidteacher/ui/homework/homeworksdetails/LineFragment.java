@@ -32,6 +32,7 @@ import cn.dajiahui.kidteacher.ui.homework.myinterface.CheckHomework;
 import cn.dajiahui.kidteacher.ui.homework.view.DrawView;
 import cn.dajiahui.kidteacher.ui.homework.view.LineImagePointView;
 import cn.dajiahui.kidteacher.ui.homework.view.Sublineinfo;
+import cn.dajiahui.kidteacher.util.Logger;
 
 import static cn.dajiahui.kidteacher.controller.Constant.lineView_margin;
 import static cn.dajiahui.kidteacher.controller.Constant.pointViewDiameter_margin;
@@ -421,7 +422,7 @@ public class LineFragment extends BaseHomeworkFragment implements
             case R.id.img_play:
                 if (!mediaUrl.equals("")) {
                     playMp3(mediaUrl);
-                }else {
+                } else {
                     audioDialog.show();
                 }
                 break;
@@ -621,89 +622,91 @@ public class LineFragment extends BaseHomeworkFragment implements
     /*显示正确答案*/
 
     private void showRightAnswer() {
-        mOnclickAnswer = !mOnclickAnswer;
-        mRight.setTextColor(getResources().getColor(R.color.gray_9f938f));
-        mLeft.setTextColor(getResources().getColor(R.color.yellow_FEBF12));
-        inbasebean.getDrawPathList().clear();
-        /*划线父布局清空view*/
-        draw_root.removeAllViews();
+        if (this.isAdded()) {
+            mRight.setTextColor(getResources().getColor(R.color.gray_9f938f));
+            mLeft.setTextColor(getResources().getColor(R.color.yellow_FEBF12));
+            inbasebean.getDrawPathList().clear();
+            /*划线父布局清空view*/
+            draw_root.removeAllViews();
+            if (mStandardMap != null) {
+                for (int n = 1; n <= mStandardMap.size(); n++) {
 
-        if (mStandardMap != null) {
-            for (int n = 1; n <= mStandardMap.size(); n++) {
+                    for (View v : mMaskImageviewL) {
 
-                for (View v : mMaskImageviewL) {
+                        leftViews.get(n - 1).mContentView.removeView(v);
 
-                    leftViews.get(n - 1).mContentView.removeView(v);
+                        if (mMineAnswerMap != null) {
+                            for (int i = 1; i <= mMineAnswerMap.size(); i++) {
 
-                    if (mMineAnswerMap != null) {
-                        for (int i = 1; i <= mMineAnswerMap.size(); i++) {
-
-                            showT_RMap.get(mMineAnswerMap.get(i)).mContentView.removeView(v);
-                            showT_RMap.get(i).mContentView.removeView(v);
+                                showT_RMap.get(mMineAnswerMap.get(i)).mContentView.removeView(v);
+                                showT_RMap.get(i).mContentView.removeView(v);
+                            }
                         }
                     }
-                }
-                for (View v : mMaskImageviewR) {
+                    for (View v : mMaskImageviewR) {
 
-                    rightViews.get(n - 1).mContentView.removeView(v);
+                        rightViews.get(n - 1).mContentView.removeView(v);
 
-                    if (mMineAnswerMap != null) {
-                        for (int i = 1; i <= mMineAnswerMap.size(); i++) {
+                        if (mMineAnswerMap != null) {
+                            for (int i = 1; i <= mMineAnswerMap.size(); i++) {
 
-                            showT_RMap.get(mMineAnswerMap.get(i)).mContentView.removeView(v);
-                            showT_RMap.get(i).mContentView.removeView(v);
+                                showT_RMap.get(mMineAnswerMap.get(i)).mContentView.removeView(v);
+                                showT_RMap.get(i).mContentView.removeView(v);
+                            }
                         }
                     }
+
+
                 }
-
-
             }
+            mMaskImageviewL.clear();
+            mMaskImageviewR.clear();
+
+
+            if (mStandardMap != null)
+                for (int n = 1; n <= mStandardMap.size(); n++) {
+                    DrawPath drawPath = new DrawPath(ponitViewXY.get(n), ponitViewXY.get(mStandardMap.get(n)));
+                    DrawView drawView = new DrawView(getActivity(), getResources().getColor(R.color.green_9DEAA6));
+                    drawView.DrawViewOnback(drawPath);
+                    inbasebean.getDrawPathList().add(drawPath);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, selectview_root.getMeasuredHeight());
+                    draw_root.addView(drawView, params);
+
+                    leftViews.get(n - 1).pointview.setcolor(getResources().getColor(R.color.green_9DEAA6));
+                    rightViews.get(n - 1).pointview.setcolor(getResources().getColor(R.color.green_9DEAA6));
+                    leftViews.get(n - 1).pointview.refreshPonitColor();
+                    rightViews.get(n - 1).pointview.refreshPonitColor();
+                    RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
+                    paramsL.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+
+                    ImageView imageViewL = new ImageView(getActivity());
+                    imageViewL.setLayoutParams(paramsL);
+                    imageViewL.setBackgroundResource(R.drawable.answer_true_bg);
+                    /*添加遮罩到正确答案集合左边*/
+
+
+                    leftViews.get(n - 1).mContentView.addView(imageViewL);
+                    mMaskImageviewL.add(imageViewL);
+
+
+                    RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
+                    paramsR.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+
+                    ImageView imageViewR = new ImageView(getActivity());
+                    imageViewR.setLayoutParams(paramsR);
+                    imageViewR.setBackgroundResource(R.drawable.answer_true_bg);
+
+
+                    rightViews.get(n - 1).mContentView.addView(imageViewR);
+                    mMaskImageviewR.add(imageViewR);
+
+
+                }
         }
-        mMaskImageviewL.clear();
-        mMaskImageviewR.clear();
-
-
-        if (mStandardMap != null)
-            for (int n = 1; n <= mStandardMap.size(); n++) {
-                DrawPath drawPath = new DrawPath(ponitViewXY.get(n), ponitViewXY.get(mStandardMap.get(n)));
-                DrawView drawView = new DrawView(getActivity(), getResources().getColor(R.color.green_9DEAA6));
-                drawView.DrawViewOnback(drawPath);
-                inbasebean.getDrawPathList().add(drawPath);
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, selectview_root.getMeasuredHeight());
-                draw_root.addView(drawView, params);
-
-                leftViews.get(n - 1).pointview.setcolor(getResources().getColor(R.color.green_9DEAA6));
-                rightViews.get(n - 1).pointview.setcolor(getResources().getColor(R.color.green_9DEAA6));
-                leftViews.get(n - 1).pointview.refreshPonitColor();
-                rightViews.get(n - 1).pointview.refreshPonitColor();
-                RelativeLayout.LayoutParams paramsL = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
-                paramsL.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-
-                ImageView imageViewL = new ImageView(getActivity());
-                imageViewL.setLayoutParams(paramsL);
-                imageViewL.setBackgroundResource(R.drawable.answer_true_bg);
-                /*添加遮罩到正确答案集合左边*/
-
-
-                leftViews.get(n - 1).mContentView.addView(imageViewL);
-                mMaskImageviewL.add(imageViewL);
-
-
-                RelativeLayout.LayoutParams paramsR = new RelativeLayout.LayoutParams(screenWidth / 5, screenWidth / 5);
-                paramsR.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-
-                ImageView imageViewR = new ImageView(getActivity());
-                imageViewR.setLayoutParams(paramsR);
-                imageViewR.setBackgroundResource(R.drawable.answer_true_bg);
-
-
-                rightViews.get(n - 1).mContentView.addView(imageViewR);
-                mMaskImageviewR.add(imageViewR);
-
-
-            }
+        mOnclickAnswer = !mOnclickAnswer;
+        Logger.d("------------------1");
     }
 
     /*json转map*/
