@@ -13,6 +13,7 @@ import com.fxtx.framework.adapter.ViewHolder;
 import com.fxtx.framework.http.callback.ResultCallback;
 import com.fxtx.framework.image.util.GlideUtil;
 import com.fxtx.framework.json.HeadJson;
+import com.fxtx.framework.log.Logger;
 import com.fxtx.framework.log.ToastUtil;
 import com.squareup.okhttp.Request;
 
@@ -76,7 +77,16 @@ public class ApWaiteAddclass extends CommonAdapter<BeWaiteAddStudent> {
         tv_disagree.setOnClickListener(onClick);
 
         tv_studentname.setText(item.getNickname());
-        tv_applyaddclass.setText("申请加入" + item.getClass_name());
+
+        Logger.d("item.getClass_name().length():" + item.getClass_name().length());
+
+        if (item.getClass_name().length() > 15) {
+            String substring = item.getClass_name().substring(0, 10);
+            tv_applyaddclass.setText("申请加入" + substring+"...");
+        } else {
+
+            tv_applyaddclass.setText("申请加入" + item.getClass_name());
+        }
 
         if (item.getStatus().equals("0")) {
             // 已同意
